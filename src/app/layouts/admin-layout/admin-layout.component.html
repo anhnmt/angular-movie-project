@@ -1,0 +1,61 @@
+<nz-layout class="app-layout">
+  <nz-sider
+    [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null"
+    class="menu-sidebar"
+    nzBreakpoint="md"
+    nzCollapsible
+    nzWidth="256px"
+  >
+    <div class="sidebar-logo">
+      <a href="https://ng.ant.design/" target="_blank">
+        <img alt="logo" src="https://ng.ant.design/assets/img/logo.svg"/>
+        <h1>Angular Base Project</h1>
+      </a>
+    </div>
+    <ul
+      [nzInlineCollapsed]="isCollapsed"
+      nz-menu
+      nzMode="inline"
+      nzTheme="dark"
+    >
+      <li [routerLinkActiveOptions]="{exact: true}" nz-menu-item routerLinkActive="active">
+        <i nz-icon nzType="dashboard"></i>
+        <span>
+          <a [routerLink]="['/dashboard']"> Bảng điều khiển</a>
+        </span>
+      </li>
+      <li [routerLinkActiveOptions]="{exact: true}" nz-menu-item routerLinkActive="active">
+        <i nz-icon nzType="user"></i>
+        <span>
+          <a [routerLink]="['/dashboard', 'users']">Người dùng</a>
+        </span>
+      </li>
+      <li nz-submenu nzIcon="form" nzTitle="Form">
+        <ul>
+          <li nz-menu-item>
+            <a>Basic Form</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <div class="app-header">
+        <span (click)="toggleCollapsed()" class="header-trigger">
+          <i
+            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+            class="trigger"
+            nz-icon
+          ></i>
+        </span>
+      </div>
+    </nz-header>
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>
