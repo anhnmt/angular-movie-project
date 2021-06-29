@@ -1,34 +1,14 @@
-<div class="container-fluid p-0 h-100">
-  <div class="row no-gutters h-100">
-    <div class="col-lg-4 d-none d-lg-flex" style="background-image:url('assets/images/others/login-1.jpg')">
-      <div class="d-flex h-100 p-h-40 p-v-15 flex-column justify-content-between">
-        <div>
-          <img alt="" src="assets/images/logo/logo-white.png">
-        </div>
-        <div>
-          <h1 class="text-white m-b-20 font-weight-normal">Exploring Enlink</h1>
-          <p class="text-white font-size-16 lh-2 w-80 opacity-08">Climb leg rub face on everything give attitude nap all
-            day for under the bed. Chase mice attack feet but rub face on everything hopped up.</p>
-        </div>
-        <div class="d-flex justify-content-between">
-          <span class="text-white">© 2019 ThemeNate</span>
-          <ul class="list-inline">
-            <li class="list-inline-item">
-              <a class="text-white text-link" href="">Legal</a>
-            </li>
-            <li class="list-inline-item">
-              <a class="text-white text-link" href="">Privacy</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-8 bg-white">
-      <div class="container h-100">
-        <div class="row no-gutters h-100 align-items-center">
-          <div class="col-md-8 col-lg-7 col-xl-6 mx-auto">
-            <h2>Sign In</h2>
-            <p class="m-b-30">Enter your credential to get access</p>
+<div class="container-fluid p-h-0 p-v-20 h-100 bg" style="background-image: url('assets/images/others/login-3.png')">
+  <div class="d-flex flex-column justify-content-between h-100">
+    <div class="d-none d-md-block"></div>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-7 col-lg-5 m-h-auto">
+          <nz-card class="m-b-100 shadow-lg">
+            <div class="d-flex align-items-center justify-content-between m-b-30">
+              <img alt="" class="img-fluid" src="assets/images/logo/logo.png">
+              <h2 class="m-b-0">Sign In</h2>
+            </div>
             <form (ngSubmit)="submitForm()" [formGroup]="loginForm" class="login-form" nz-form nzLayout="vertical">
               <nz-form-item>
                 <nz-form-label nzFor="userName" nzRequired>Username</nz-form-label>
@@ -38,9 +18,9 @@
                   </nz-input-group>
                 </nz-form-control>
               </nz-form-item>
-              <nz-form-item>
+              <nz-form-item class="relative">
                 <nz-form-label nzFor="password" nzRequired>Password</nz-form-label>
-                <a [routerLink]="['/authentication/reset-password-1']" class="font-size-13 p-t-10 text-muted"
+                <a [routerLink]="['/auth/reset-password']" class="float-right font-size-13 text-muted"
                    style="position:absolute; right: 0">Forget Password?</a>
                 <nz-form-control nzErrorTip="Please input your Password!">
                   <nz-input-group [nzPrefix]="prefixLock">
@@ -51,7 +31,7 @@
               <nz-form-item>
                 <nz-form-control>
                   <div class="d-flex align-items-center justify-content-between">
-                    <span class="font-size-13 text-muted">Don't have an account? <a [routerLink]="['/authentication/sign-up-1']"
+                    <span class="font-size-13 text-muted">Don't have an account? <a [routerLink]="['/auth/sign-up']"
                                                                                     class="small"> Signup</a></span>
                     <button [nzType]="'primary'" class="login-form-button" nz-button>Sign In</button>
                   </div>
@@ -60,9 +40,20 @@
             </form>
             <ng-template #prefixUser><i nz-icon nzType="user"></i></ng-template>
             <ng-template #prefixLock><i nz-icon nzType="lock"></i></ng-template>
-          </div>
+          </nz-card>
         </div>
       </div>
+    </div>
+    <div class="d-none d-md-flex p-h-40 justify-content-between">
+      <span class="">© 2019 ThemeNate</span>
+      <ul class="list-inline">
+        <li class="list-inline-item">
+          <a class="text-dark text-link" href="">Legal</a>
+        </li>
+        <li class="list-inline-item">
+          <a class="text-dark text-link" href="">Privacy</a>
+        </li>
+      </ul>
     </div>
   </div>
 </div>

@@ -4,7 +4,7 @@ import {formatDate} from '@angular/common';
 @Injectable()
 export class TableService {
 
-  deepCopy(object: any | any[]) {
+  deepCopy(object: any | any[]): any {
     return JSON.parse(JSON.stringify(object));
   }
 
@@ -13,17 +13,17 @@ export class TableService {
    * @param sortAttribute {key: property of the object, value: 'ascend' or 'descend'}
    * @param inputData
    */
-  sort(sortAttribute: { key: string, value: string }, inputData: any[]) {
+  sort(sortAttribute: { key: string, value: string }, inputData: any[]): any {
     const dataArr = this.deepCopy(inputData);
     if (sortAttribute.key === '' || sortAttribute.value === null) {
       return dataArr;
     }
 
-    let outputDataList = dataArr.sort((a, b) => {
+    return dataArr.sort((a, b) => {
       const isAsc = sortAttribute.value === 'ascend';
       switch (sortAttribute.key) {
         case sortAttribute.key:
-          return this.compare(
+          return TableService.compare(
             typeof a[sortAttribute.key] !== 'string' ? a[sortAttribute.key] : a[sortAttribute.key].toUpperCase(),
             typeof b[sortAttribute.key] !== 'string' ? b[sortAttribute.key] : b[sortAttribute.key].toUpperCase(), isAsc
           );
@@ -31,7 +31,6 @@ export class TableService {
           return 0;
       }
     });
-    return outputDataList;
   }
 
   /**
@@ -39,15 +38,15 @@ export class TableService {
    * @param input
    * @param inputData
    */
-  search(input: any, inputData: any[]) {
+  search(input: any, inputData: any[]): any[] {
     const searchText = (item) => {
-      for (let key in item) {
+      for (const key in item) {
         if (item[key] == null) {
           continue;
         }
 
-        if (typeof item[key] == 'number' && item[key] != 0) {
-          let date = formatDate(item[key], 'yyyy-MM-dd HH:mm:ss', 'en');
+        if (typeof item[key] === 'number' && item[key] !== 0) {
+          const date = formatDate(item[key], 'yyyy-MM-dd HH:mm:ss', 'en');
           if (date.indexOf(input.toString()) !== -1) {
             return true;
           }
@@ -78,7 +77,7 @@ export class TableService {
    * @param b
    * @param isAsc
    */
-  private compare(a, b, isAsc: boolean) {
+  private static compare(a, b, isAsc: boolean): any {
     // null value is - (dash)
     if (!a) {
       a = '-';
