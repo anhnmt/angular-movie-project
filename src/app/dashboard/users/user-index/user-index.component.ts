@@ -131,7 +131,6 @@ export class UserIndexComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
   }
 
   search(): void {

@@ -4,6 +4,37 @@ import {formatDate} from '@angular/common';
 @Injectable()
 export class TableService {
 
+  /**
+   * if isAsc is true
+   * a > b    = 1
+   * a === b  = 0
+   * a < b    = -1
+   *
+   * if isAsc is false
+   * a > b    = -1
+   * a === b  = 0
+   * a < b    = 1
+   *
+   * @param a
+   * @param b
+   * @param isAsc
+   */
+  private static compare(a, b, isAsc: boolean): any {
+    // null value is - (dash)
+    if (!a) {
+      a = '-';
+    }
+    if (!b) {
+      b = '-';
+    }
+
+    if (a === b) {
+      return 0;
+    }
+
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+  }
+
   deepCopy(object: any | any[]): any {
     return JSON.parse(JSON.stringify(object));
   }
@@ -60,37 +91,6 @@ export class TableService {
     };
     inputData = inputData.filter(value => searchText(value));
     return inputData;
-  }
-
-  /**
-   * if isAsc is true
-   * a > b    = 1
-   * a === b  = 0
-   * a < b    = -1
-   *
-   * if isAsc is false
-   * a > b    = -1
-   * a === b  = 0
-   * a < b    = 1
-   *
-   * @param a
-   * @param b
-   * @param isAsc
-   */
-  private static compare(a, b, isAsc: boolean): any {
-    // null value is - (dash)
-    if (!a) {
-      a = '-';
-    }
-    if (!b) {
-      b = '-';
-    }
-
-    if (a === b) {
-      return 0;
-    }
-
-    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 }
 

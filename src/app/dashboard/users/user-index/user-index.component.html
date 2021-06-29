@@ -4,14 +4,17 @@
       <div class="d-md-flex">
         <div class="m-b-10 m-r-20">
           <nz-input-group [nzPrefix]="prefixTemplate">
-            <input type="text" nz-input placeholder="Search Project" [(ngModel)]="searchInput" (ngModelChange)="search()">
+            <input (ngModelChange)="search()" [(ngModel)]="searchInput" nz-input placeholder="Search Project"
+                   type="text">
           </nz-input-group>
           <ng-template #prefixTemplate>
-            <i nz-icon nzType="search" class="opacity-05"></i>
+            <i class="opacity-05" nz-icon nzType="search"></i>
           </ng-template>
         </div>
         <div class="m-b-10 m-r-20 d-flex align-items-center">
-          <nz-select style="min-width: 220px;" class="w-100" nzPlaceHolder="Category" [(ngModel)]="selectedCategory" (ngModelChange)="categoryChange($event)">
+          <nz-select (ngModelChange)="categoryChange($event)" [(ngModel)]="selectedCategory" class="w-100"
+                     nzPlaceHolder="Category"
+                     style="min-width: 220px;">
             <nz-option nzLabel="All" nzValue="All"></nz-option>
             <nz-option nzLabel="Home Decoration" nzValue="Home Decoration"></nz-option>
             <nz-option nzLabel="Eletronic" nzValue="Eletronic"></nz-option>
@@ -19,7 +22,9 @@
           </nz-select>
         </div>
         <div class="m-b-10 m-r-20 d-flex align-items-center">
-          <nz-select style="min-width: 220px;" class="w-100" nzPlaceHolder="Status" [(ngModel)]="selectedStatus" (ngModelChange)="statusChange($event)">
+          <nz-select (ngModelChange)="statusChange($event)" [(ngModel)]="selectedStatus" class="w-100"
+                     nzPlaceHolder="Status"
+                     style="min-width: 220px;">
             <nz-option nzLabel="All" nzValue="All"></nz-option>
             <nz-option nzLabel="In Stock" nzValue="in stock"></nz-option>
             <nz-option nzLabel="Out Of Stock" nzValue="out of stock"></nz-option>
@@ -27,10 +32,17 @@
         </div>
       </div>
     </div>
+<!--    <div class="col-lg-4 text-right">-->
+<!--      <a nz-button nzType="primary">-->
+<!--        <i nz-icon nzType="plus-circle" theme="outline"></i>-->
+<!--        <span>Add Product</span>-->
+<!--      </a>-->
+<!--    </div>-->
+
     <div class="col-lg-4 text-right">
       <a nz-button nzType="primary">
         <i nz-icon nzType="plus-circle" theme="outline"></i>
-        <span>Add Product</span>
+        <span>Export</span>
       </a>
     </div>
   </div>
@@ -45,7 +57,7 @@
       <td>#{{item.id}}</td>
       <td>
         <div class="d-flex align-items-center">
-          <nz-avatar nzShape="square" [nzSize]="60" nzIcon="picture" [nzSrc]="item.avatar"></nz-avatar>
+          <nz-avatar [nzSize]="60" [nzSrc]="item.avatar" nzIcon="picture" nzShape="square"></nz-avatar>
           <span class="m-l-10">{{item.name}}</span>
         </div>
       </td>
@@ -60,10 +72,10 @@
         <span class="text-capitalize">{{item.status}}</span>
       </td>
       <td class="text-md-right">
-        <a class="m-r-5" nz-button nzType="default" nzShape="circle" nz-tooltip nzTooltipTitle="Edit" >
+        <a class="m-r-5" nz-button nz-tooltip nzShape="circle" nzTooltipTitle="Edit" nzType="default">
           <i nz-icon nzType="edit" theme="outline"></i>
         </a>
-        <button nz-button nzType="default" nzShape="circle" nz-tooltip nzTooltipTitle="Delete">
+        <button nz-button nz-tooltip nzShape="circle" nzTooltipTitle="Delete" nzType="default">
           <i nz-icon nzType="delete" theme="outline"></i>
         </button>
       </td>

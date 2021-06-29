@@ -45,7 +45,8 @@
           <!-- Third Level -->
           <ul *ngIf="subItem.submenu.length > 0" class="ant-menu ant-menu-inline ant-menu-sub dropdown-menu">
             <li *ngFor="let subItem of subItem.submenu"
-                [ngClass]="subItem.submenu.length > 0?'ant-menu-submenu ant-menu-submenu-inline':'ant-menu-item'" [routerLinkActiveOptions]="{exact: true}"
+                [ngClass]="subItem.submenu.length > 0?'ant-menu-submenu ant-menu-submenu-inline':'ant-menu-item'"
+                [routerLinkActiveOptions]="{exact: true}"
                 routerLinkActive="ant-menu-item-selected">
               <a *ngIf="subItem.submenu.length > 0" class="ant-menu-submenu-title p-l-50" href="javascript:void(0);">
                 <i *ngIf="subItem.iconType == 'nzIcon'" [nzType]="subItem.icon" [theme]="subItem.iconTheme" nz-icon></i>
