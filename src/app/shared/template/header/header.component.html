@@ -74,11 +74,11 @@
         </nz-dropdown-menu>
       </li>
       <li>
-                <span [nzDropdownMenu]="profile" [nzPlacement]="'bottomRight'" [nzTrigger]="'click'"
-                      class="p-h-10 pointer"
-                      nz-dropdown>
-                    <nz-avatar [nzIcon]="'user'" nzSrc="assets/images/avatars/thumb-3.jpg"></nz-avatar>
-                </span>
+        <span [nzDropdownMenu]="profile" [nzPlacement]="'bottomRight'" [nzTrigger]="'click'"
+              class="p-h-10 pointer"
+              nz-dropdown>
+            <nz-avatar [nzIcon]="'user'" nzSrc="assets/images/avatars/thumb-3.jpg"></nz-avatar>
+        </span>
         <nz-dropdown-menu #profile="nzDropdownMenu">
           <ul class="p-b-15 p-t-20" nz-menu>
             <li class="p-h-20 p-b-15 m-b-10 border-bottom">
@@ -93,28 +93,9 @@
             <li nz-menu-item>
               <a class="p-v-5 d-flex align-items-center justify-content-between">
                 <div>
-                  <i class="opacity-04 font-size-16" nz-icon nzType="user" theme="outline"></i>
-                  <span class="m-l-10">Edit Profile</span>
-                </div>
-                <i class="font-size-10" nz-icon nzType="right" theme="outline"></i>
-              </a>
-            </li>
-            <li nz-menu-item>
-              <a class="p-v-5 d-flex align-items-center justify-content-between">
-                <div>
                   <i class="opacity-04 font-size-16" nz-icon nzType="lock" theme="outline"></i>
                   <span class="m-l-10">Account Setting</span>
                 </div>
-                <i class="font-size-10" nz-icon nzType="right" theme="outline"></i>
-              </a>
-            </li>
-            <li nz-menu-item>
-              <a class="p-v-5 d-flex align-items-center justify-content-between">
-                <div>
-                  <i class="opacity-04 font-size-16" nz-icon nzType="project" theme="outline"></i>
-                  <span class="m-l-10">Projects</span>
-                </div>
-                <i class="font-size-10" nz-icon nzType="right" theme="outline"></i>
               </a>
             </li>
             <li nz-menu-item>
@@ -123,7 +104,6 @@
                   <i class="opacity-04 font-size-16" nz-icon nzType="logout" theme="outline"></i>
                   <span class="m-l-10">Logout</span>
                 </div>
-                <i class="font-size-10" nz-icon nzType="right" theme="outline"></i>
               </a>
             </li>
           </ul>

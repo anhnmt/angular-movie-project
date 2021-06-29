@@ -1,29 +1,20 @@
-import { Platform } from '@angular/cdk/platform';
-import { DOCUMENT } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  Inject,
-  Input,
-  OnDestroy,
-  OnInit,
-  ViewEncapsulation
-} from '@angular/core';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import {Platform} from '@angular/cdk/platform';
+import {DOCUMENT} from '@angular/common';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 // import sdk from '@stackblitz/sdk';
-import { VERSION } from 'ng-zorro-antd/version'
-import { Observable, Subject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
-import { CodeBoxService, DemoCode } from './codebox.service';
+import {Observable, Subject} from 'rxjs';
+import {takeUntil, tap} from 'rxjs/operators';
+import {CodeBoxService, DemoCode} from './codebox.service';
+
 // import { stackBlitzConfiguration } from './stack-blitz';
 
 @Component({
-  selector       : 'nz-code-box',
-  encapsulation  : ViewEncapsulation.None,
+  selector: 'nz-code-box',
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl    : './codebox.component.html',
-  styleUrls      : [ './codebox.component.less' ]
+  templateUrl: './codebox.component.html',
+  styleUrls: ['./codebox.component.less']
 })
 export class NzCodeBoxComponent implements OnInit, OnDestroy {
   highlightCode: string;
@@ -47,6 +38,14 @@ export class NzCodeBoxComponent implements OnInit, OnDestroy {
   @Input() nzComponentName = '';
   @Input() nzSelector = '';
   @Input() nzGenerateCommand = '';
+
+  // tslint:disable-next-line:no-any
+  constructor(@Inject(DOCUMENT) private dom: any,
+              private sanitizer: DomSanitizer,
+              private cdr: ChangeDetectorRef,
+              private codeBoxService: CodeBoxService,
+              private platform: Platform) {
+  }
 
   @Input()
   set nzIframeSource(value: string) {
@@ -116,13 +115,6 @@ export class NzCodeBoxComponent implements OnInit, OnDestroy {
     return promise;
   }
 
-  expandCode(expanded: boolean): void {
-    this.nzExpanded = expanded;
-    if (expanded) {
-      this.getDemoCode().subscribe();
-    }
-  }
-
   // openOnStackBlitz(): void {
   //   setTimeout(() => {
   //     this.openStackBlitzLoading = !this.codeLoaded;
@@ -135,16 +127,15 @@ export class NzCodeBoxComponent implements OnInit, OnDestroy {
   //   });
   // }
 
-  check(): void {
-    this.cdr.markForCheck();
+  expandCode(expanded: boolean): void {
+    this.nzExpanded = expanded;
+    if (expanded) {
+      this.getDemoCode().subscribe();
+    }
   }
 
-  // tslint:disable-next-line:no-any
-  constructor(@Inject(DOCUMENT) private dom: any,
-              private sanitizer: DomSanitizer,
-              private cdr: ChangeDetectorRef,
-              private codeBoxService: CodeBoxService,
-              private platform: Platform) {
+  check(): void {
+    this.cdr.markForCheck();
   }
 
   ngOnInit(): void {

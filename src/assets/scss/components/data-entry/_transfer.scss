@@ -1,47 +1,47 @@
 .ant-transfer {
-    color: $body-color;
-    margin: 0;
-    padding: 0;
-    position: relative;
-}    
+  color: $body-color;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
 
 .ant-transfer-list {
-    width: $transfer-width;
-    height: $transfer-height;
-    border: 1px solid $border-color;
-    border-radius: $border-radius;
+  width: $transfer-width;
+  height: $transfer-height;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
 }
 
 .ant-transfer-list-content-item {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    padding: 12px 15px;
-    min-height: 40px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding: 12px 15px;
+  min-height: 40px;
 
-    &:not(.ant-transfer-list-content-item-disabled) {
-        &:hover {
-            cursor: pointer;
-            background-color: rgba($transfer-theme-color, 0.1);
-            
-            .ant-checkbox-wrapper {
-                color: $transfer-theme-color;
+  &:not(.ant-transfer-list-content-item-disabled) {
+    &:hover {
+      cursor: pointer;
+      background-color: rgba($transfer-theme-color, 0.1);
 
-                .ant-checkbox-input + .ant-checkbox-inner {
-                    border-color: $transfer-theme-color;
-                }
-            }
+      .ant-checkbox-wrapper {
+        color: $transfer-theme-color;
+
+        .ant-checkbox-input + .ant-checkbox-inner {
+          border-color: $transfer-theme-color;
         }
+      }
     }
+  }
 }
 
 .ant-transfer-list-header {
-    padding: 12px 15px;
-    border-radius: $border-radius $border-radius 0 0;
-    background: $white;
-    color: $body-color;
-    border-bottom: 1px solid $border-color;
-    width: 100%;
+  padding: 12px 15px;
+  border-radius: $border-radius $border-radius 0 0;
+  background: $white;
+  color: $body-color;
+  border-bottom: 1px solid $border-color;
+  width: 100%;
 }
 
 // .ant-transfer-list {
@@ -67,7 +67,7 @@
 // .ant-transfer-list-footer {
 //     border-top: 1px solid $border-color;
 //     background-color: $white
-// }    
+// }
 
 // .ant-transfer-list-with-footer {
 //     padding-bottom: 45px;
@@ -94,7 +94,7 @@
 //         &:hover {
 //             cursor: pointer;
 //             background-color: rgba($transfer-theme-color, 0.1);
-            
+
 //             .ant-checkbox-wrapper {
 //                 color: $transfer-theme-color;
 
