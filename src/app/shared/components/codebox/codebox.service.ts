@@ -1,7 +1,7 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from '@angular/core';
-import { Observable, of, ReplaySubject } from 'rxjs';
-import { tap } from "rxjs/operators";
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable, of, ReplaySubject} from 'rxjs';
+import {tap} from 'rxjs/operators';
 
 export interface DemoCode {
   rawCode: string;
@@ -18,7 +18,8 @@ export class CodeBoxService {
   language$ = new ReplaySubject<string>(1);
   theme$ = new ReplaySubject<string>(1);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   getCode(componentId: string): Observable<DemoCode> {
     if (this.codeMap.has(componentId)) {
@@ -26,11 +27,11 @@ export class CodeBoxService {
     } else {
       const path = componentId.startsWith('components-') ? componentId.split('components-')[1] : componentId;
       return this.http.get<DemoCode>(`./assets/codes/${path}.json`, {
-        responseType: "json"
+        responseType: 'json'
       })
-      .pipe(tap(data => {
-        this.codeMap.set(componentId, data);
-      }))
+        .pipe(tap(data => {
+          this.codeMap.set(componentId, data);
+        }));
     }
   }
 

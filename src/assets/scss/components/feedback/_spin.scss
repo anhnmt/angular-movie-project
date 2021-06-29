@@ -1,25 +1,25 @@
 .ant-spin {
-    font-size: $font-size-base;
-    color: $loading-color;
-}   
+  font-size: $font-size-base;
+  color: $loading-color;
+}
 
 .ant-spin-dot {
-    i {
-        background-color: $loading-color;
-    }
+  i {
+    background-color: $loading-color;
+  }
 }
 
 .ant-spin-nested-loading {
 
-    >div {
+  > div {
 
-        >.ant-spin {
+    > .ant-spin {
 
-            .ant-spin-dot {
-                position: absolute;
-                left: 50%;
-                margin: -20px;
-            }
-        }
+      .ant-spin-dot {
+        position: absolute;
+        left: 50%;
+        margin: -20px;
+      }
     }
+  }
 }

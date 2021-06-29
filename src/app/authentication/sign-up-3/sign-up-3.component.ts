@@ -1,44 +1,44 @@
-import { Component } from '@angular/core'
-import { FormBuilder, FormControl, FormGroup,  Validators } from '@angular/forms';
+import {Component} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 
 @Component({
-    templateUrl: './sign-up-3.component.html'
+  templateUrl: './sign-up-3.component.html'
 })
 
 export class SignUp3Component {
 
-    signUpForm: FormGroup;
+  signUpForm: FormGroup;
 
-    submitForm(): void {
-        for (const i in this.signUpForm.controls) {
-            this.signUpForm.controls[ i ].markAsDirty();
-            this.signUpForm.controls[ i ].updateValueAndValidity();
-        }
-    }
+  constructor(private fb: FormBuilder) {
+  }
 
-    updateConfirmValidator(): void {
-        Promise.resolve().then(() => this.signUpForm.controls.checkPassword.updateValueAndValidity());
+  submitForm(): void {
+    for (const i in this.signUpForm.controls) {
+      this.signUpForm.controls[i].markAsDirty();
+      this.signUpForm.controls[i].updateValueAndValidity();
     }
+  }
 
-    confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
-        if (!control.value) {
-            return { required: true };
-        } else if (control.value !== this.signUpForm.controls.password.value) {
-            return { confirm: true, error: true };
-        }
-    }
+  updateConfirmValidator(): void {
+    Promise.resolve().then(() => this.signUpForm.controls.checkPassword.updateValueAndValidity());
+  }
 
-    constructor(private fb: FormBuilder) {
+  confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
+    if (!control.value) {
+      return {required: true};
+    } else if (control.value !== this.signUpForm.controls.password.value) {
+      return {confirm: true, error: true};
     }
+  };
 
-    ngOnInit(): void {
-        this.signUpForm = this.fb.group({
-            userName         : [ null, [ Validators.required ] ],
-            email            : [ null, [ Validators.required ] ],
-            password         : [ null, [ Validators.required ] ],
-            checkPassword    : [ null, [ Validators.required, this.confirmationValidator ] ],
-            agree            : [ false ]
-        });
-    }
-}    
+  ngOnInit(): void {
+    this.signUpForm = this.fb.group({
+      userName: [null, [Validators.required]],
+      email: [null, [Validators.required]],
+      password: [null, [Validators.required]],
+      checkPassword: [null, [Validators.required, this.confirmationValidator]],
+      agree: [false]
+    });
+  }
+}

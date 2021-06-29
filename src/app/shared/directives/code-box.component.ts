@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
-import { NzMessageService } from 'ng-zorro-antd';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {NzMessageService} from 'ng-zorro-antd';
 
 @Component({
-    selector: 'codebox',
-    encapsulation: ViewEncapsulation.None,
-    template: `
+  selector: 'codebox',
+  encapsulation: ViewEncapsulation.None,
+  template: `
         <div class="p-t-20 m-t-20 off-gutter-x border top p-h-25">
             <div class="text-right">
                 <span class="code-action">
@@ -28,8 +28,8 @@ import { NzMessageService } from 'ng-zorro-antd';
             </section>
         </div>
     `,
-    styles: [
-        `
+  styles: [
+    `
         .code-action a {
             cursor: pointer;
             color: #999999;
@@ -50,35 +50,33 @@ import { NzMessageService } from 'ng-zorro-antd';
             display: block;
         }
         `
-    ]
-})   
+  ]
+})
 
 export class CodeBoxComponent implements OnInit {
 
-    constructor(private message: NzMessageService) {
-    }
+  @Input() codeContent: string | null = null;
+  @Input() nzExpanded = false;
+  copyCodeAction: string = 'Copy Code';
 
-    @Input() codeContent: string | null = null;
+  constructor(private message: NzMessageService) {
+  }
 
-    @Input() nzExpanded = false;
+  copyCode(val: string) {
+    let selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = val;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
+    this.message.success('Copied');
+  }
 
-    copyCodeAction: string = "Copy Code";
-
-    copyCode(val: string){
-        let selBox = document.createElement('textarea');
-        selBox.style.position = 'fixed';
-        selBox.style.left = '0';
-        selBox.style.top = '0';
-        selBox.style.opacity = '0';
-        selBox.value = val;
-        document.body.appendChild(selBox);
-        selBox.focus();
-        selBox.select();
-        document.execCommand('copy');
-        document.body.removeChild(selBox);
-        this.message.success('Copied');
-    }
-    
-    ngOnInit() {
-    }
-}    
+  ngOnInit() {
+  }
+}
