@@ -15,6 +15,10 @@ const routes: Routes = [
       {
         path: 'create',
         component: UserCreateComponent,
+        data: {
+          title: 'Dashboard ',
+          headerDisplay: 'none'
+        },
       }
     ]
   }

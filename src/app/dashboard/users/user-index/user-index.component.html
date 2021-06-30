@@ -32,17 +32,11 @@
         </div>
       </div>
     </div>
-<!--    <div class="col-lg-4 text-right">-->
-<!--      <a nz-button nzType="primary">-->
-<!--        <i nz-icon nzType="plus-circle" theme="outline"></i>-->
-<!--        <span>Add Product</span>-->
-<!--      </a>-->
-<!--    </div>-->
 
     <div class="col-lg-4 text-right">
-      <a nz-button nzType="primary">
+      <a [routerLink]="['/dashboard', 'users', 'create']" nz-button nzType="primary">
         <i nz-icon nzType="plus-circle" theme="outline"></i>
-        <span>Export</span>
+        <span>Thêm người dùng</span>
       </a>
     </div>
   </div>
@@ -83,3 +77,5 @@
     </tbody>
   </nz-table>
 </nz-card>
+
+<router-outlet></router-outlet>

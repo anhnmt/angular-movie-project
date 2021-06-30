@@ -15,6 +15,9 @@ import {NzBadgeModule} from 'ng-zorro-antd/badge';
 import {FormsModule} from '@angular/forms';
 import {TableService} from '../../shared/services/table.service';
 import {NzIconModule} from 'ng-zorro-antd/icon';
+import {NzFormModule} from 'ng-zorro-antd/form';
+import {NzDrawerModule} from 'ng-zorro-antd/drawer';
+import {NzDatePickerModule} from 'ng-zorro-antd/date-picker';
 
 
 @NgModule({
@@ -31,7 +34,10 @@ import {NzIconModule} from 'ng-zorro-antd/icon';
     NzCardModule,
     NzBadgeModule,
     FormsModule,
-    NzIconModule
+    NzIconModule,
+    NzFormModule,
+    NzDrawerModule,
+    NzDatePickerModule
   ],
   providers: [
     TableService
