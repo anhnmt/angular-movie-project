@@ -66,10 +66,14 @@
         <span class="text-capitalize">{{item.status}}</span>
       </td>
       <td class="text-md-right">
-        <a class="m-r-5" nz-button nz-tooltip nzShape="circle" nzTooltipTitle="Edit" nzType="default">
+        <a [routerLink]="['/dashboard', 'users', '1', 'edit']" class="m-r-5" nz-button nz-tooltip nzShape="circle" nzTooltipTitle="Edit" nzType="default">
           <i nz-icon nzType="edit" theme="outline"></i>
         </a>
-        <button nz-button nz-tooltip nzShape="circle" nzTooltipTitle="Delete" nzType="default">
+        <button nz-button nz-tooltip nzShape="circle" nzTooltipTitle="Delete" nzType="default" nz-popconfirm
+                nzPopconfirmTitle="Are you sure delete this task?"
+                nzPopconfirmPlacement="bottom"
+                (nzOnConfirm)="confirm()"
+                (nzOnCancel)="confirm()">
           <i nz-icon nzType="delete" theme="outline"></i>
         </button>
       </td>

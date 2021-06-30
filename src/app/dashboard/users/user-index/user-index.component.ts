@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {TableService} from '../../../shared/services/table.service';
+import {NzMessageService} from 'ng-zorro-antd/message';
 
 interface DataItem {
   id: number;
@@ -126,7 +127,10 @@ export class UserIndexComponent implements OnInit {
     },
   ];
 
-  constructor(private tableSvc: TableService) {
+  constructor(
+    private tableSvc: TableService,
+    private nzMessageService: NzMessageService
+  ) {
     this.displayData = this.productsList;
   }
 
@@ -146,5 +150,9 @@ export class UserIndexComponent implements OnInit {
   statusChange(value: string): void {
     const data = this.productsList;
     value !== 'All' ? this.displayData = data.filter(elm => elm.status === value) : this.displayData = data;
+  }
+
+  confirm(): void {
+    this.nzMessageService.info('click confirm');
   }
 }
