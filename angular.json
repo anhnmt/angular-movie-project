@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "enlink": {
+    "angular-base-project": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/web",
+            "outputPath": "dist/angular-base-project",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -47,9 +47,10 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "namedChunks": false,
+              "namedChunks": true,
+              "aot":true,
               "extractLicenses": true,
-              "vendorChunk": false,
+              "vendorChunk": true,
               "buildOptimizer": true,
               "budgets": [
                 {
@@ -69,18 +70,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "enlink:build"
+            "browserTarget": "angular-base-project:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "enlink:build:production"
+              "browserTarget": "angular-base-project:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "enlink:build"
+            "browserTarget": "angular-base-project:build"
           }
         },
         "test": {
@@ -117,16 +118,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "enlink:serve"
+            "devServerTarget": "angular-base-project:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "enlink:serve:production"
+              "devServerTarget": "angular-base-project:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "enlink"
+  "defaultProject": "angular-base-project"
 }

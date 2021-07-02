@@ -25,8 +25,7 @@ COPY . .
 # if you have libraries in your workspace that the angular app relies on, build them here
 
 # build your application
-#RUN yarn build:prod
-RUN npm run build --prod
+RUN yarn build:prod
 
 # STAGE 2
 # Deploy APP
@@ -35,7 +34,7 @@ RUN npm run build --prod
 # We are using nginx:alpine as the base image of our deployment image
 FROM nginx:alpine
 
-COPY --from=builder /app/dist/web /usr/share/nginx/html
+COPY --from=builder /app/dist/angular-base-project /usr/share/nginx/html
 
 # Expose port 80
 EXPOSE 80
