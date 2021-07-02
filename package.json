@@ -10,9 +10,13 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "docker.build": "cross-var docker image build -t $npm_package_name:$npm_package_version .",
-    "docker.run": "cross-var docker run --name $npm_package_name -d -p 80:80 $npm_package_name:$npm_package_version",
-    "demo": "cross-var echo \"Hello $npm_package_name\""
+    "docker.build": "cross-var docker build -t localhost:5000/$npm_package_name:$npm_package_version . ",
+    "docker.push": "cross-var docker push localhost:5000/$npm_package_name:$npm_package_version",
+    "docker.run": "cross-var docker run --name $npm_package_name -d -p 80:80 localhost:5000/$npm_package_name:$npm_package_version",
+    "docker.deploy": "npm run docker.build && npm run docker.run",
+    "docker.compose": "docker-compose up --build -d",
+    "docker.local": "npm run docker.build && npm run docker.push",
+    "docker.server": "cross-var docker build -t 68.183.224.212:5000/$npm_package_name:$npm_package_version . && cross-var docker push 68.183.224.212:5000/$npm_package_name:$npm_package_version"
   },
   "private": true,
   "dependencies": {

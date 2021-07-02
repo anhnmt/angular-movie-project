@@ -1,10 +1,19 @@
 version: '3'
 services:
-  angular-base-project:
-    image: 68.183.224.212:5000/angular-base-project:1.0
-    build:
-      context: .
-      dockerfile: Dockerfile
+  frontend:
+    image: localhost:5000/angular-base-project:latest
+    # It will look for a Dockerfile in the project root and build it
+    build: "."
     container_name: angular-base-project
+    # Connects the conf file of the container to the conf file in our folder
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
-      - 8800:80
+      - 80:80
+    # If the container goes down, it will restart
+    restart: "always"
+    # Connects the API to a common base-project bridge
+    networks:
+      - "base-project"
+networks:
+  base-project:
