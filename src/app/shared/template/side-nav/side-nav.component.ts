@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ROUTES} from './side-nav-routes.config';
 import {ThemeConstantService} from '../../services/theme-constant.service';
 
@@ -7,7 +7,7 @@ import {ThemeConstantService} from '../../services/theme-constant.service';
   templateUrl: './side-nav.component.html'
 })
 
-export class SideNavComponent {
+export class SideNavComponent implements OnInit {
 
   public menuItems: any[];
   isFolded: boolean;

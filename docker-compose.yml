@@ -1,0 +1,10 @@
+version: '3'
+services:
+  angular-base-project:
+    image: 68.183.224.212:5000/angular-base-project:1.0
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: angular-base-project
+    ports:
+      - 8800:80

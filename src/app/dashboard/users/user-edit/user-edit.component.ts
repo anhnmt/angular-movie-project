@@ -2,11 +2,11 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-user-create',
-  templateUrl: './user-create.component.html',
-  styleUrls: ['./user-create.component.css']
+  selector: 'app-user-edit',
+  templateUrl: './user-edit.component.html',
+  styleUrls: ['./user-edit.component.css']
 })
-export class UserCreateComponent implements OnInit, AfterViewInit {
+export class UserEditComponent implements OnInit, AfterViewInit {
   visible = false;
 
   constructor(

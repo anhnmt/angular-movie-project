@@ -11,28 +11,27 @@ export const ROUTES: SideNavInterface[] = [
   },
   {
     path: '',
-    title: 'Multi Level Menu',
+    title: 'Người dùng',
     iconType: 'nzIcon',
     iconTheme: 'outline',
-    icon: 'appstore',
+    icon: 'user',
     submenu: [
       {
-        path: '',
-        title: 'Level 1',
+        path: '/dashboard/users',
+        title: 'Danh sách người dùng',
         iconType: '',
         icon: '',
         iconTheme: '',
-        submenu: [
-          {
-            path: '',
-            title: 'Level 2',
-            iconType: 'nzIcon',
-            iconTheme: 'outline',
-            icon: '',
-            submenu: []
-          }
-        ]
+        submenu: []
+      },
+      {
+        path: '/dashboard/users/create',
+        title: 'Thêm người dùng',
+        iconType: '',
+        icon: '',
+        iconTheme: '',
+        submenu: []
       }
     ]
-  }
+  },
 ];
