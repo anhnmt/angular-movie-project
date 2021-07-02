@@ -8,26 +8,24 @@ ENV NODE_ENV production
 # Set the working directory
 WORKDIR /app
 
-# Add the source code to app
-COPY . .
+COPY package.json yarn.lock ./
 
 #!/bin/sh
-
-# install yarn
-#RUN npm install -g yarn
 
 # Install all the dependencies
 RUN yarn global add @angular/cli@latest
 
 RUN yarn install
 
+ENV PATH="./node_modules/.bin:$PATH"
+
+# Add the source code to app
+COPY . .
+
 # if you have libraries in your workspace that the angular app relies on, build them here
 
-#RUN ng build library-name --prod
-
 # build your application
-#RUN yarn build-prod
-RUN npm run build --prod
+RUN yarn build:prod
 
 # STAGE 2
 # Deploy APP
@@ -36,8 +34,7 @@ RUN npm run build --prod
 # We are using nginx:alpine as the base image of our deployment image
 FROM nginx:alpine
 
-COPY --from=builder /app/dist/web /usr/share/nginx/html
-COPY --from=builder /app/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/dist/angular-base-project /usr/share/nginx/html
 
 # Expose port 80
 EXPOSE 80
