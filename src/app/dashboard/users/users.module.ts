@@ -12,7 +12,7 @@ import {NzSelectModule} from 'ng-zorro-antd/select';
 import {NzInputModule} from 'ng-zorro-antd/input';
 import {NzCardModule} from 'ng-zorro-antd/card';
 import {NzBadgeModule} from 'ng-zorro-antd/badge';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TableService} from '../../shared/services/table.service';
 import {NzIconModule} from 'ng-zorro-antd/icon';
 import {NzFormModule} from 'ng-zorro-antd/form';
@@ -25,24 +25,25 @@ import {UserService} from '../../shared/services/user.service';
 
 @NgModule({
   declarations: [UserIndexComponent, UserCreateComponent, UserEditComponent],
-  imports: [
-    CommonModule,
-    UsersRoutingModule,
-    NzButtonModule,
-    NzToolTipModule,
-    NzTableModule,
-    NzAvatarModule,
-    NzSelectModule,
-    NzInputModule,
-    NzCardModule,
-    NzBadgeModule,
-    FormsModule,
-    NzIconModule,
-    NzFormModule,
-    NzDrawerModule,
-    NzDatePickerModule,
-    NzPopconfirmModule
-  ],
+    imports: [
+        CommonModule,
+        UsersRoutingModule,
+        NzButtonModule,
+        NzToolTipModule,
+        NzTableModule,
+        NzAvatarModule,
+        NzSelectModule,
+        NzInputModule,
+        NzCardModule,
+        NzBadgeModule,
+        FormsModule,
+        NzIconModule,
+        NzFormModule,
+        NzDrawerModule,
+        NzDatePickerModule,
+        NzPopconfirmModule,
+        ReactiveFormsModule
+    ],
   providers: [
     TableService,
     NzMessageService,

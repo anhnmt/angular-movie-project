@@ -11,25 +11,6 @@
             <i class="opacity-05" nz-icon nzType="search"></i>
           </ng-template>
         </div>
-<!--        <div class="m-b-10 m-r-20 d-flex align-items-center">-->
-<!--          <nz-select (ngModelChange)="categoryChange($event)" [(ngModel)]="selectedCategory" class="w-100"-->
-<!--                     nzPlaceHolder="Category"-->
-<!--                     style="min-width: 220px;">-->
-<!--            <nz-option nzLabel="All" nzValue="All"></nz-option>-->
-<!--            <nz-option nzLabel="Home Decoration" nzValue="Home Decoration"></nz-option>-->
-<!--            <nz-option nzLabel="Eletronic" nzValue="Eletronic"></nz-option>-->
-<!--            <nz-option nzLabel="Jewellery" nzValue="Jewellery"></nz-option>-->
-<!--          </nz-select>-->
-<!--        </div>-->
-<!--        <div class="m-b-10 m-r-20 d-flex align-items-center">-->
-<!--          <nz-select (ngModelChange)="statusChange($event)" [(ngModel)]="selectedStatus" class="w-100"-->
-<!--                     nzPlaceHolder="Status"-->
-<!--                     style="min-width: 220px;">-->
-<!--            <nz-option nzLabel="All" nzValue="All"></nz-option>-->
-<!--            <nz-option nzLabel="In Stock" nzValue="in stock"></nz-option>-->
-<!--            <nz-option nzLabel="Out Of Stock" nzValue="out of stock"></nz-option>-->
-<!--          </nz-select>-->
-<!--        </div>-->
       </div>
     </div>
 
@@ -54,13 +35,15 @@
       <td>
         <nz-badge *ngIf="item.gender == '1'" nzStatus="success"></nz-badge>
         <nz-badge *ngIf="item.gender == '0'" nzStatus="error"></nz-badge>
-        <span class="text-capitalize">{{item.gender ? 'Nam': 'Nữ'}}</span>
+        <span class="text-capitalize">{{item.gender ? 'Nam' : 'Nữ'}}</span>
       </td>
       <td class="text-md-right">
-        <a [routerLink]="['/dashboard', 'users', item.user_id, 'edit']" class="m-r-5" nz-button nz-tooltip nzShape="circle"
+        <a [routerLink]="['/dashboard', 'users', item.user_id, 'edit']" class="m-r-5" nz-button nz-tooltip
+           nzShape="circle"
            nzTooltipTitle="Sửa" nzType="default">
           <i nz-icon nzType="edit" theme="outline"></i>
         </a>
+
         <button (nzOnConfirm)="delete(item.user_id)" nz-button nz-popconfirm nz-tooltip nzPopconfirmPlacement="bottom"
                 nzPopconfirmTitle="Xác nhận xoá người dùng?"
                 nzShape="circle"
