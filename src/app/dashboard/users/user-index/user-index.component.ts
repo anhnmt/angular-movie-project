@@ -10,9 +10,6 @@ import {User} from '../../../shared/interfaces/user.type';
   styleUrls: ['./user-index.component.css']
 })
 export class UserIndexComponent implements OnInit {
-
-  selectedCategory: string;
-  selectedStatus: string;
   searchInput: string | number;
   displayData = [];
 
@@ -56,21 +53,9 @@ export class UserIndexComponent implements OnInit {
     this.displayData = this.tableSvc.search(this.searchInput, data);
   }
 
-  // categoryChange(value: string): void {
-  //   const data = this.users;
-  //   value !== 'All' ? this.displayData = data.filter(elm => elm.category === value) : this.displayData = data;
-  // }
-  //
-  // statusChange(value: string): void {
-  //   const data = this.users;
-  //   value !== 'All' ? this.displayData = data.filter(elm => elm.status === value) : this.displayData = data;
-  // }
-
-  confirm(): void {
-    this.nzMessageService.info('click confirm');
-  }
-
   list(): void {
+    this.users = [];
+
     this.userService.getAllUsers().subscribe((response) => {
       this.users = response.data;
       console.log(this.users);
@@ -81,8 +66,8 @@ export class UserIndexComponent implements OnInit {
 
   delete(userId: number): void {
     this.userService.deleteUserByUserId(userId).subscribe(() => {
-      this.nzMessageService.success('Xóa Thành Công');
       this.list();
+      this.nzMessageService.success('Xóa Thành Công');
     });
   }
 }

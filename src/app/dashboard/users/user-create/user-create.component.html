@@ -7,80 +7,39 @@
   [nzWidth]="720"
   nzTitle="Thêm mới người dùng"
 >
-  <form nz-form>
-    <div nz-row nzGutter="8">
-      <div nz-col nzSpan="12">
-        <nz-form-item>
-          <nz-form-label>Name</nz-form-label>
-          <nz-form-control>
-            <input nz-input placeholder="please enter user name"/>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-      <div nz-col nzSpan="12">
-        <nz-form-item>
-          <nz-form-label>Url</nz-form-label>
-          <nz-form-control>
-            <nz-input-group nzAddOnAfter=".com" nzAddOnBefore="http://">
-              <input nz-input placeholder="please enter url" type="text"/>
-            </nz-input-group>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-    </div>
-    <div nz-row nzGutter="8">
-      <div nz-col nzSpan="12">
-        <nz-form-item>
-          <nz-form-label>Owner</nz-form-label>
-          <nz-form-control>
-            <nz-select nzPlaceHolder="Please select an owner"></nz-select>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-      <div nz-col nzSpan="12">
-        <nz-form-item>
-          <nz-form-label>Type</nz-form-label>
-          <nz-form-control>
-            <nz-select nzPlaceHolder="Please choose the type"></nz-select>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-    </div>
-    <div nz-row nzGutter="8">
-      <div nz-col nzSpan="12">
-        <nz-form-item>
-          <nz-form-label>Approver</nz-form-label>
-          <nz-form-control>
-            <nz-select nzPlaceHolder="Please choose the approver"></nz-select>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-      <div nz-col nzSpan="12">
-        <nz-form-item>
-          <nz-form-label>DateTime</nz-form-label>
-          <nz-form-control>
-            <nz-range-picker></nz-range-picker>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-    </div>
-    <div nz-row nzGutter="8">
-      <div nz-col nzSpan="24">
-        <nz-form-item>
-          <nz-form-label>Description</nz-form-label>
-          <nz-form-control>
-            <textarea [nzAutosize]="{ minRows: 4, maxRows: 4 }" nz-input
-                      placeholder="please enter url description"></textarea>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-    </div>
+  <form (ngSubmit)="submitForm()" [formGroup]="validateForm" [nzLayout]="'vertical'" nz-form>
+    <nz-form-item>
+      <nz-form-label nzRequired>Tên người dùng</nz-form-label>
+      <nz-form-control nzErrorTip="Vui lòng nhập tên người dùng">
+        <input formControlName="name" nz-input placeholder="Nhập tên người dùng"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzRequired>Tài khoản</nz-form-label>
+      <nz-form-control nzErrorTip="Vui lòng nhập tài khoản">
+        <input formControlName="username" nz-input placeholder="Nhập tài khoản"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label>Giới tính</nz-form-label>
+      <nz-form-control>
+        <nz-select nzPlaceHolder="Chọn giới tính"></nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label>Quyền</nz-form-label>
+      <nz-form-control>
+        <nz-select nzPlaceHolder="Chọn quyền"></nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <button [hidden]="true" nz-button nzType="primary">Submit</button>
   </form>
 
   <ng-template #footerTpl>
     <div style="float: right">
-      <button (click)="close()" nz-button style="margin-right: 8px;">Cancel</button>
-      <button (click)="close()" nz-button nzType="primary">Submit</button>
+      <button (click)="close()" nz-button style="margin-right: 8px;">Huỷ</button>
+      <button (click)="submitForm()" nz-button nzType="primary">Thêm</button>
     </div>
   </ng-template>
 </nz-drawer>
