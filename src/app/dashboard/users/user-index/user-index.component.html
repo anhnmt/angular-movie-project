@@ -58,13 +58,13 @@
       </td>
       <td class="text-md-right">
         <a [routerLink]="['/dashboard', 'users', item.user_id, 'edit']" class="m-r-5" nz-button nz-tooltip nzShape="circle"
-           nzTooltipTitle="Edit" nzType="default">
+           nzTooltipTitle="Sửa" nzType="default">
           <i nz-icon nzType="edit" theme="outline"></i>
         </a>
-        <button (nzOnCancel)="confirm()" (nzOnConfirm)="confirm()" nz-button nz-popconfirm nz-tooltip nzPopconfirmPlacement="bottom"
-                nzPopconfirmTitle="Are you sure delete this task?"
+        <button (nzOnConfirm)="delete(item.user_id)" nz-button nz-popconfirm nz-tooltip nzPopconfirmPlacement="bottom"
+                nzPopconfirmTitle="Xác nhận xoá người dùng?"
                 nzShape="circle"
-                nzTooltipTitle="Delete"
+                nzTooltipTitle="Xoá"
                 nzType="default">
           <i nz-icon nzType="delete" theme="outline"></i>
         </button>

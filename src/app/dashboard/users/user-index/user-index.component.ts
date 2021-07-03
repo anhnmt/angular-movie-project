@@ -48,12 +48,7 @@ export class UserIndexComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.getAllUsers().subscribe((response) => {
-      this.users = response.data;
-      console.log(this.users);
-
-      this.displayData = this.users;
-    });
+    this.list();
   }
 
   search(): void {
@@ -73,5 +68,21 @@ export class UserIndexComponent implements OnInit {
 
   confirm(): void {
     this.nzMessageService.info('click confirm');
+  }
+
+  list(): void {
+    this.userService.getAllUsers().subscribe((response) => {
+      this.users = response.data;
+      console.log(this.users);
+
+      this.displayData = this.users;
+    });
+  }
+
+  delete(userId: number): void {
+    this.userService.deleteUserByUserId(userId).subscribe(() => {
+      this.nzMessageService.success('Xóa Thành Công');
+      this.list();
+    });
   }
 }

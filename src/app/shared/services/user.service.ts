@@ -18,8 +18,11 @@ export class UserService {
   }
 
   getUserByUserId(userId: number): Observable<any> {
-    console.log('User Id: ' + userId);
     return this.http.get(`${this.baseUrl}/${userId}`);
+  }
+
+  deleteUserByUserId(userId: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${userId}`);
   }
 
 }
