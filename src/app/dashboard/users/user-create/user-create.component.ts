@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {User} from '../../../shared/interfaces/user.type';
 import {Subject} from 'rxjs';
+import {SharedService} from '../../../shared/services/shared.service';
 
 @Component({
   selector: 'app-user-create',
@@ -22,6 +23,7 @@ export class UserCreateComponent implements OnInit, AfterViewInit, OnDestroy {
     private readonly userService: UserService,
     private formBuilder: FormBuilder,
     private nzMessageService: NzMessageService,
+    private sharedService: SharedService,
   ) {
   }
 
@@ -35,11 +37,7 @@ export class UserCreateComponent implements OnInit, AfterViewInit, OnDestroy {
     this.visible = false;
 
     setTimeout(
-      () => {
-        this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-          this.router.navigate(['/dashboard', 'users']);
-        });
-      },
+      () => this.router.navigate(['/dashboard', 'users']),
       100
     );
   }
@@ -71,6 +69,7 @@ export class UserCreateComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.userService.createUser(this.validateForm.value).subscribe((success) => {
       this.close();
+      this.sharedService.emitChange();
       this.nzMessageService.success('Thêm Thành Công');
     }, (error) => {
       this.nzMessageService.error(error.message);
