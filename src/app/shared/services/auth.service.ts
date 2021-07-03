@@ -8,7 +8,7 @@ import {User} from '../interfaces/user.type';
 const USER_AUTH_API_URL = '/api-url';
 
 @Injectable()
-export class AuthenticationService {
+export class AuthService {
   public currentUser: Observable<User>;
   private currentUserSubject: BehaviorSubject<User>;
 
