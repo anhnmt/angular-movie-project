@@ -1,11 +1,12 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {distinctUntilChanged, takeUntil} from 'rxjs/operators';
+import {takeUntil} from 'rxjs/operators';
 import {User} from '../../../shared/interfaces/user.type';
 import {Subject} from 'rxjs';
 import {UserService} from '../../../shared/services/user.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {NzMessageService} from 'ng-zorro-antd/message';
+import {SharedService} from '../../../shared/services/shared.service';
 
 @Component({
   selector: 'app-user-edit',
@@ -24,6 +25,7 @@ export class UserEditComponent implements OnInit, AfterViewInit, OnDestroy {
     private readonly userService: UserService,
     private formBuilder: FormBuilder,
     private nzMessageService: NzMessageService,
+    private sharedService: SharedService,
   ) {
   }
 
@@ -37,25 +39,28 @@ export class UserEditComponent implements OnInit, AfterViewInit, OnDestroy {
     this.visible = false;
 
     setTimeout(
-      () => {
-        this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-          this.router.navigate(['/dashboard', 'users']);
-        });
-      },
+      () => this.router.navigate(['/dashboard', 'users']),
       100
     );
   }
 
   ngOnInit(): void {
-    this.route.params.pipe(
-      takeUntil(this.onDestroy$),
-      distinctUntilChanged()
-    ).subscribe(() => {
-      this.user = this.route.snapshot.data.user.data;
+    this.validateForm = this.formBuilder.group({
+      name: [null, [Validators.required]],
+      username: [null, [Validators.required]]
+    });
 
-      this.validateForm = this.formBuilder.group({
-        name: [this.user.name, [Validators.required]],
-        username: [this.user.username, [Validators.required]]
+    this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe((params: any) => {
+      console.log(params);
+      const {userId} = params;
+      this.userService.getUserByUserId(userId).subscribe((success) => {
+        console.log(success);
+        this.user = success.data;
+
+        this.validateForm.patchValue({
+          name: this.user.name,
+          username: this.user.username
+        });
       });
     });
   }
@@ -80,6 +85,7 @@ export class UserEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.userService.updateUserByUserId(this.user.user_id, this.validateForm.value).subscribe((success) => {
       this.close();
+      this.sharedService.emitChange();
       this.nzMessageService.success('Cập nhật Thành Công');
     }, (error) => {
       this.nzMessageService.error(error.message);

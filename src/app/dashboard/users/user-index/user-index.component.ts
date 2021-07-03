@@ -3,6 +3,7 @@ import {TableService} from '../../../shared/services/table.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {UserService} from '../../../shared/services/user.service';
 import {User} from '../../../shared/interfaces/user.type';
+import {SharedService} from '../../../shared/services/shared.service';
 
 @Component({
   selector: 'app-user-index',
@@ -41,7 +42,11 @@ export class UserIndexComponent implements OnInit {
     private tableSvc: TableService,
     private nzMessageService: NzMessageService,
     private userService: UserService,
+    private sharedService: SharedService,
   ) {
+    this.sharedService.changeEmitted$.subscribe(() => {
+      this.list();
+    });
   }
 
   ngOnInit(): void {

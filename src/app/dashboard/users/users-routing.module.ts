@@ -29,9 +29,6 @@ const routes: Routes = [
           title: 'Dashboard ',
           headerDisplay: 'none'
         },
-        resolve: {
-          user: UserResolver
-        }
       }
     ]
   }
