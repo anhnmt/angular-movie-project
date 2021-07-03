@@ -1,16 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {TableService} from '../../../shared/services/table.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
-
-interface DataItem {
-  id: number;
-  name: string;
-  category: string;
-  price: number;
-  quantity: number;
-  status: string;
-}
-
+import {UserService} from '../../../shared/services/user.service';
+import {User} from '../../../shared/interfaces/user.type';
 
 @Component({
   selector: 'app-user-index',
@@ -21,136 +13,63 @@ export class UserIndexComponent implements OnInit {
 
   selectedCategory: string;
   selectedStatus: string;
-  searchInput: any;
+  searchInput: string | number;
   displayData = [];
+
+  users: User[] = [];
 
   orderColumn = [
     {
       title: 'ID',
-      compare: (a: DataItem, b: DataItem) => a.id - b.id,
+      compare: (a: User, b: User) => a.user_id - b.user_id,
     },
     {
-      title: 'Product',
-      compare: (a: DataItem, b: DataItem) => a.name.localeCompare(b.name)
+      title: 'Tên người dùng',
+      compare: (a: User, b: User) => a.name.localeCompare(b.name)
     },
     {
-      title: 'Category',
-      compare: (a: DataItem, b: DataItem) => a.category.localeCompare(b.category)
+      title: 'Username',
+      compare: (a: User, b: User) => a.username.localeCompare(b.username)
     },
     {
-      title: 'Price',
-      compare: (a: DataItem, b: DataItem) => a.price - b.price,
-    },
-    {
-      title: 'Stock',
-      compare: (a: DataItem, b: DataItem) => a.quantity - b.quantity,
-    },
-    {
-      title: 'Status',
-      compare: (a: DataItem, b: DataItem) => a.name.localeCompare(b.name)
+      title: 'Giới tính',
+      compare: (a: User, b: User) => a.gender - b.gender,
     },
     {
       title: ''
     }
   ];
 
-  productsList = [
-    {
-      id: 31,
-      name: 'Gray Sofa',
-      avatar: 'assets/images/others/thumb-9.jpg',
-      category: 'Home Decoration',
-      price: 912,
-      quantity: 23,
-      status: 'in stock',
-      checked: false
-    },
-    {
-      id: 32,
-      name: 'Beat Headphone',
-      avatar: 'assets/images/others/thumb-10.jpg',
-      category: 'Eletronic',
-      price: 137,
-      quantity: 56,
-      status: 'in stock',
-      checked: false
-    },
-    {
-      id: 33,
-      name: 'Wooden Rhino',
-      avatar: 'assets/images/others/thumb-11.jpg',
-      category: 'Home Decoration',
-      price: 912,
-      quantity: 12,
-      status: 'in stock',
-      checked: false
-    },
-    {
-      id: 34,
-      name: 'Red Chair',
-      avatar: 'assets/images/others/thumb-12.jpg',
-      category: 'Home Decoration',
-      price: 128,
-      quantity: 0,
-      status: 'out of stock',
-      checked: false
-    },
-    {
-      id: 35,
-      name: 'Wristband',
-      avatar: 'assets/images/others/thumb-13.jpg',
-      category: 'Eletronic',
-      price: 776,
-      quantity: 0,
-      status: 'out of stock',
-      checked: false
-    },
-    {
-      id: 36,
-      name: 'Charging Cable',
-      avatar: 'assets/images/others/thumb-14.jpg',
-      category: 'Eletronic',
-      price: 119,
-      quantity: 37,
-      status: 'in stock',
-      checked: false
-    },
-    {
-      id: 37,
-      name: 'Three Legs',
-      avatar: 'assets/images/others/thumb-15.jpg',
-      category: 'Home Decoration',
-      price: 199,
-      quantity: 17,
-      status: 'in stock',
-      checked: false
-    },
-  ];
-
   constructor(
     private tableSvc: TableService,
-    private nzMessageService: NzMessageService
+    private nzMessageService: NzMessageService,
+    private userService: UserService,
   ) {
-    this.displayData = this.productsList;
   }
 
   ngOnInit(): void {
+    this.userService.getAllUsers().subscribe((response) => {
+      this.users = response.data;
+      console.log(this.users);
+
+      this.displayData = this.users;
+    });
   }
 
   search(): void {
-    const data = this.productsList;
+    const data = this.users;
     this.displayData = this.tableSvc.search(this.searchInput, data);
   }
 
-  categoryChange(value: string): void {
-    const data = this.productsList;
-    value !== 'All' ? this.displayData = data.filter(elm => elm.category === value) : this.displayData = data;
-  }
-
-  statusChange(value: string): void {
-    const data = this.productsList;
-    value !== 'All' ? this.displayData = data.filter(elm => elm.status === value) : this.displayData = data;
-  }
+  // categoryChange(value: string): void {
+  //   const data = this.users;
+  //   value !== 'All' ? this.displayData = data.filter(elm => elm.category === value) : this.displayData = data;
+  // }
+  //
+  // statusChange(value: string): void {
+  //   const data = this.users;
+  //   value !== 'All' ? this.displayData = data.filter(elm => elm.status === value) : this.displayData = data;
+  // }
 
   confirm(): void {
     this.nzMessageService.info('click confirm');

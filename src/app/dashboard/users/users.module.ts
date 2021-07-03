@@ -18,10 +18,10 @@ import {NzIconModule} from 'ng-zorro-antd/icon';
 import {NzFormModule} from 'ng-zorro-antd/form';
 import {NzDrawerModule} from 'ng-zorro-antd/drawer';
 import {NzDatePickerModule} from 'ng-zorro-antd/date-picker';
-import { UserEditComponent } from './user-edit/user-edit.component';
+import {UserEditComponent} from './user-edit/user-edit.component';
 import {NzPopconfirmModule} from 'ng-zorro-antd/popconfirm';
 import {NzMessageService} from 'ng-zorro-antd/message';
-
+import {UserService} from '../../shared/services/user.service';
 
 @NgModule({
   declarations: [UserIndexComponent, UserCreateComponent, UserEditComponent],
@@ -45,7 +45,8 @@ import {NzMessageService} from 'ng-zorro-antd/message';
   ],
   providers: [
     TableService,
-    NzMessageService
+    NzMessageService,
+    UserService
   ]
 })
 export class UsersModule {
