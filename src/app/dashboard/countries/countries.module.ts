@@ -46,8 +46,7 @@ import { CountryEditComponent } from './country-edit/country-edit.component';
   ],
   providers: [
     TableService,
-    NzMessageService,
-    UserService
+    NzMessageService
   ]
 })
 export class CountriesModule {

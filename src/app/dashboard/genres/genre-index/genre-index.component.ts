@@ -3,36 +3,36 @@ import {TableService} from '../../../shared/services/table.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {UserService} from '../../../shared/services/user.service';
 import {SharedService} from '../../../shared/services/shared.service';
-import {Country} from '../../../shared/interfaces/country';
-import {CountryService} from '../../../shared/services/country.service';
+import {Genre} from '../../../shared/interfaces/genre';
+import {GenreService} from '../../../shared/services/genre.service';
 
 @Component({
-  selector: 'app-country-index',
-  templateUrl: './country-index.component.html',
-  styleUrls: ['./country-index.component.css']
+  selector: 'app-genre-index',
+  templateUrl: './genre-index.component.html',
+  styleUrls: ['./genre-index.component.css']
 })
-export class CountryIndexComponent implements OnInit {
+export class GenreIndexComponent implements OnInit {
   searchInput: string | number;
   displayData = [];
 
-  countries: Country[] = [];
+  genres: Genre[] = [];
 
   orderColumn = [
     {
       title: 'ID',
-      compare: (a: Country, b: Country) => a.country_id - b.country_id,
+      compare: (a: Genre, b: Genre) => a.genre_id - b.genre_id,
     },
     {
-      title: 'Quốc gia',
-      compare: (a: Country, b: Country) => a.name.localeCompare(b.name)
+      title: 'Thể loại',
+      compare: (a: Genre, b: Genre) => a.name.localeCompare(b.name)
     },
     {
       title: 'Đường dẫn',
-      compare: (a: Country, b: Country) => a.slug.localeCompare(b.slug)
+      compare: (a: Genre, b: Genre) => a.slug.localeCompare(b.slug)
     },
     {
       title: 'Trạng thái',
-      compare: (a: Country, b: Country) => a.status - b.status,
+      compare: (a: Genre, b: Genre) => a.status - b.status,
     },
     {
       title: ''
@@ -42,7 +42,7 @@ export class CountryIndexComponent implements OnInit {
   constructor(
     private tableSvc: TableService,
     private nzMessageService: NzMessageService,
-    private countryService: CountryService,
+    private genreService: GenreService,
     private sharedService: SharedService,
   ) {
     this.sharedService.changeEmitted$.subscribe(() => {
@@ -55,23 +55,23 @@ export class CountryIndexComponent implements OnInit {
   }
 
   search(): void {
-    const data = this.countries;
+    const data = this.genres;
     this.displayData = this.tableSvc.search(this.searchInput, data);
   }
 
   list(): void {
-    this.countries = [];
+    this.genres = [];
 
-    this.countryService.getAllCountries().subscribe((response) => {
-      this.countries = response.data;
-      console.log(this.countries);
+    this.genreService.getAllGenres().subscribe((response) => {
+      this.genres = response.data;
+      console.log(this.genres);
 
-      this.displayData = this.countries;
+      this.displayData = this.genres;
     });
   }
 
-  delete(countryId: number): void {
-    this.countryService.deleteCountryByCountryId(countryId).subscribe(() => {
+  delete(genreId: number): void {
+    this.genreService.deleteGenreByGenreId(genreId).subscribe(() => {
       this.list();
       this.nzMessageService.success('Xóa Thành Công');
     });
