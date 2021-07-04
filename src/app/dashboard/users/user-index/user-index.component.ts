@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {TableService} from '../../../shared/services/table.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {UserService} from '../../../shared/services/user.service';
-import {User} from '../../../shared/interfaces/user.type';
+import {User} from '../../../shared/interfaces/user';
 import {SharedService} from '../../../shared/services/shared.service';
 
 @Component({

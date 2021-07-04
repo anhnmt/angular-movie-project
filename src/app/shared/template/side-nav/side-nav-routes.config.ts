@@ -42,7 +42,7 @@ export const ROUTES: SideNavInterface[] = [
     icon: 'profile',
     submenu: [
       {
-        path: ['/dashboard', 'countries'],
+        path: ['/dashboard', 'genres'],
         title: 'Danh sách',
         iconType: '',
         icon: '',
@@ -50,7 +50,7 @@ export const ROUTES: SideNavInterface[] = [
         submenu: []
       },
       {
-        path: ['/dashboard', 'countries', 'create'],
+        path: ['/dashboard', 'genres', 'create'],
         title: 'Thêm mới',
         iconType: '',
         icon: '',
