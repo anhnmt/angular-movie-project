@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {takeUntil} from 'rxjs/operators';
-import {User} from '../../../shared/interfaces/user.type';
+import {User} from '../../../shared/interfaces/user';
 import {Subject} from 'rxjs';
 import {UserService} from '../../../shared/services/user.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
