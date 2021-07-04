@@ -3,7 +3,6 @@ import {RouterModule, Routes} from '@angular/router';
 import {UserIndexComponent} from './user-index/user-index.component';
 import {UserCreateComponent} from './user-create/user-create.component';
 import {UserEditComponent} from './user-edit/user-edit.component';
-import {UserResolver} from '../../shared/securities/user.resolver';
 
 const routes: Routes = [
   {

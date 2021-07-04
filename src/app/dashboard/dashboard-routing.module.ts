@@ -22,6 +22,13 @@ const routes: Routes = [
     data: {
       title: 'User '
     }
+  },
+  {
+    path: 'movies',
+    loadChildren: () => import('./movies/movies.module').then(m => m.MoviesModule),
+    data: {
+      title: 'Movie '
+    }
   }
 ];
 
