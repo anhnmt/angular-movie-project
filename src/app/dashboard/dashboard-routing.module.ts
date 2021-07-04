@@ -22,6 +22,27 @@ const routes: Routes = [
     data: {
       title: 'User '
     }
+  },
+  {
+    path: 'movies',
+    loadChildren: () => import('./movies/movies.module').then(m => m.MoviesModule),
+    data: {
+      title: 'Movie '
+    }
+  },
+  {
+    path: 'countries',
+    loadChildren: () => import('./countries/countries.module').then(m => m.CountriesModule),
+    data: {
+      title: 'Country '
+    }
+  },
+  {
+    path: 'genres',
+    loadChildren: () => import('./genres/genres.module').then(m => m.GenresModule),
+    data: {
+      title: 'Genre '
+    }
   }
 ];
 
