@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from '../../../shared/interfaces/user';
 import {TableService} from '../../../shared/services/table.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {UserService} from '../../../shared/services/user.service';
@@ -73,7 +72,7 @@ export class CountryIndexComponent implements OnInit {
   }
 
   delete(countryId: number): void {
-    this.userService.deleteUserByUserId(countryId).subscribe(() => {
+    this.countryService.deleteCountryByCountryId(countryId).subscribe(() => {
       this.list();
       this.nzMessageService.success('Xóa Thành Công');
     });

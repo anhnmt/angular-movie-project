@@ -14,7 +14,6 @@ import {SharedService} from '../../../shared/services/shared.service';
 })
 export class UserCreateComponent implements OnInit, AfterViewInit, OnDestroy {
   visible = false;
-  user: User;
   validateForm: FormGroup;
   private onDestroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -55,11 +54,9 @@ export class UserCreateComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   submitForm(): void {
-    for (const i in this.validateForm.controls) {
-      if (this.validateForm.hasOwnProperty(i)) {
-        this.validateForm.controls[i].markAsDirty();
-        this.validateForm.controls[i].updateValueAndValidity();
-      }
+    for (const key of Object.keys(this.validateForm.controls)) {
+      this.validateForm.controls[key].markAsDirty();
+      this.validateForm.controls[key].updateValueAndValidity();
     }
 
     // stop here if form is invalid

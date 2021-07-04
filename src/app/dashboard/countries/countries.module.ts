@@ -20,9 +20,10 @@ import {NzPopconfirmModule} from 'ng-zorro-antd/popconfirm';
 import {TableService} from '../../shared/services/table.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {UserService} from '../../shared/services/user.service';
+import { CountryCreateComponent } from './country-create/country-create.component';
 
 @NgModule({
-  declarations: [CountryIndexComponent],
+  declarations: [CountryIndexComponent, CountryCreateComponent],
   imports: [
     CommonModule,
     CountriesRoutingModule,
