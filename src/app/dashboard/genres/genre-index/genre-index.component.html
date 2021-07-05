@@ -15,9 +15,9 @@
     </div>
 
     <div class="col-lg-4 text-right">
-      <a [routerLink]="['/dashboard', 'countries', 'create']" nz-button nzType="primary">
+      <a [routerLink]="['/dashboard', 'genres', 'create']" nz-button nzType="primary">
         <i nz-icon nzType="plus-circle" theme="outline"></i>
-        <span>Thêm quốc gia</span>
+        <span>Thêm thể loại</span>
       </a>
     </div>
   </div>
@@ -29,23 +29,22 @@
     </thead>
     <tbody>
     <tr *ngFor="let item of listTable.data; let i=index">
-      <td>#{{item.country_id}}</td>
+      <td>#{{item.genre_id}}</td>
       <td>{{item.name}}</td>
       <td>{{item.slug}}</td>
       <td>
-        <nz-badge *ngIf="item.status == '1'" nzStatus="success"></nz-badge>
-        <nz-badge *ngIf="item.status == '0'" nzStatus="error"></nz-badge>
-        <span class="text-capitalize">{{item.status === 1 ? 'Hoạt động' : 'Nháp'}}</span>
+          <nz-badge [nzStatus]="mapDefaultStatus(item.status)?.badge"></nz-badge>
+        <span class="text-capitalize">{{ mapDefaultStatus(item.status)?.label }}</span>
       </td>
       <td class="text-md-right">
-        <a [routerLink]="['/dashboard', 'countries', item.country_id, 'edit']" class="m-r-5" nz-button nz-tooltip
+        <a [routerLink]="['/dashboard', 'genres', item.genre_id, 'edit']" class="m-r-5" nz-button nz-tooltip
            nzShape="circle"
            nzTooltipTitle="Sửa" nzType="default">
           <i nz-icon nzType="edit" theme="outline"></i>
         </a>
 
-        <button (nzOnConfirm)="delete(item.country_id)" nz-button nz-popconfirm nz-tooltip nzPopconfirmPlacement="bottom"
-                nzPopconfirmTitle="Xác nhận xoá quốc gia?"
+        <button (nzOnConfirm)="delete(item.genre_id)" nz-button nz-popconfirm nz-tooltip nzPopconfirmPlacement="bottom"
+                nzPopconfirmTitle="Xác nhận xoá thể loại?"
                 nzShape="circle"
                 nzTooltipTitle="Xoá"
                 nzType="default">

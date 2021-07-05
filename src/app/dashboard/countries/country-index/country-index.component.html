@@ -33,9 +33,8 @@
       <td>{{item.name}}</td>
       <td>{{item.slug}}</td>
       <td>
-        <nz-badge *ngIf="item.status == '1'" nzStatus="success"></nz-badge>
-        <nz-badge *ngIf="item.status == '0'" nzStatus="error"></nz-badge>
-        <span class="text-capitalize">{{item.status === 1 ? 'Hoạt động' : 'Nháp'}}</span>
+        <nz-badge [nzStatus]="mapDefaultStatus(item.status)?.badge"></nz-badge>
+        <span class="text-capitalize">{{ mapDefaultStatus(item.status)?.label }}</span>
       </td>
       <td class="text-md-right">
         <a [routerLink]="['/dashboard', 'countries', item.country_id, 'edit']" class="m-r-5" nz-button nz-tooltip

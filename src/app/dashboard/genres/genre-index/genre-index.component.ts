@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {TableService} from '../../../shared/services/table.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {UserService} from '../../../shared/services/user.service';
 import {SharedService} from '../../../shared/services/shared.service';
 import {Genre} from '../../../shared/interfaces/genre';
 import {GenreService} from '../../../shared/services/genre.service';
+import {StatusUtils} from '../../../shared/utils/statusUtils';
 
 @Component({
   selector: 'app-genre-index',
@@ -12,6 +12,8 @@ import {GenreService} from '../../../shared/services/genre.service';
   styleUrls: ['./genre-index.component.css']
 })
 export class GenreIndexComponent implements OnInit {
+  mapDefaultStatus = StatusUtils.mapDefaultStatus;
+
   searchInput: string | number;
   displayData = [];
 

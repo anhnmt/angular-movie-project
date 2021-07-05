@@ -5,7 +5,7 @@
   [nzMaskClosable]="false"
   [nzVisible]="visible"
   [nzWidth]="720"
-  nzTitle="Thêm mới quốc gia"
+  nzTitle="Cập nhật quốc gia"
 >
   <form (ngSubmit)="submitForm()" [formGroup]="validateForm" [nzLayout]="'vertical'" nz-form>
     <nz-form-item>
@@ -21,7 +21,7 @@
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-      <nz-form-label nzRequired>Trạng thái</nz-form-label>
+      <nz-form-label>Trạng thái</nz-form-label>
       <nz-form-control nzErrorTip="Vui lòng chọn trạng thái">
         <nz-select formControlName="status" nzPlaceHolder="Chọn trạng thái">
           <nz-option nzCustomContent *ngFor="let option of status" [nzValue]="option.value" [nzLabel]="option.label">
