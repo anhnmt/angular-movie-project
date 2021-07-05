@@ -82,9 +82,26 @@ export const ROUTES: SideNavInterface[] = [
         iconTheme: '',
         submenu: []
       },
+    ]
+  },
+  {
+    path: '',
+    title: 'Kiểu phim',
+    iconType: 'nzIcon',
+    iconTheme: 'outline',
+    icon: 'number',
+    submenu: [
       {
         path: ['/dashboard', 'movies', 'types'],
-        title: 'Kiểu phim',
+        title: 'Danh sách',
+        iconType: '',
+        icon: '',
+        iconTheme: '',
+        submenu: []
+      },
+      {
+        path: ['/dashboard', 'movies', 'types', 'create'],
+        title: 'Thêm mới',
         iconType: '',
         icon: '',
         iconTheme: '',
