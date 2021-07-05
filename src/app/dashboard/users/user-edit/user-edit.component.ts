@@ -27,6 +27,27 @@ export class UserEditComponent implements OnInit, AfterViewInit, OnDestroy {
     private nzMessageService: NzMessageService,
     private sharedService: SharedService,
   ) {
+    this.validateForm = this.formBuilder.group({
+      name: [null, [Validators.required]],
+      username: [null, [Validators.required]]
+    });
+
+    this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe((params: any) => {
+      console.log(params);
+      const {userId} = params;
+      this.userService.getUserByUserId(userId).subscribe((success) => {
+        console.log(success);
+        this.user = success.data;
+
+        this.validateForm.patchValue({
+          name: this.user.name,
+          username: this.user.username
+        });
+      }, (error) => {
+        this.close();
+        this.nzMessageService.error(error.error.message);
+      });
+    });
   }
 
   ngAfterViewInit(): void {
@@ -45,24 +66,6 @@ export class UserEditComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.validateForm = this.formBuilder.group({
-      name: [null, [Validators.required]],
-      username: [null, [Validators.required]]
-    });
-
-    this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe((params: any) => {
-      console.log(params);
-      const {userId} = params;
-      this.userService.getUserByUserId(userId).subscribe((success) => {
-        console.log(success);
-        this.user = success.data;
-
-        this.validateForm.patchValue({
-          name: this.user.name,
-          username: this.user.username
-        });
-      });
-    });
   }
 
   ngOnDestroy(): void {
@@ -82,8 +85,8 @@ export class UserEditComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     this.userService.updateUserByUserId(this.user.user_id, this.validateForm.value).subscribe((success) => {
-      this.close();
       this.sharedService.emitChange();
+      this.close();
       this.nzMessageService.success('Cập nhật Thành Công');
     }, (error) => {
       this.nzMessageService.error(error.message);

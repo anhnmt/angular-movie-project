@@ -25,6 +25,13 @@ export class GenreCreateComponent implements OnInit, AfterViewInit, OnDestroy {
     private nzMessageService: NzMessageService,
     private sharedService: SharedService,
   ) {
+    const selectedStatus = this.status[0].value || null;
+
+    this.validateForm = this.formBuilder.group({
+      name: [null, [Validators.required]],
+      slug: [null, [Validators.required]],
+      status: [selectedStatus, [Validators.required]],
+    });
   }
 
   ngAfterViewInit(): void {
@@ -43,13 +50,6 @@ export class GenreCreateComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const selectedStatus = this.status[0].value || null;
-
-    this.validateForm = this.formBuilder.group({
-      name: [null, [Validators.required]],
-      slug: [null, [Validators.required]],
-      status: [selectedStatus, [Validators.required]],
-    });
   }
 
   ngOnDestroy(): void {
@@ -71,8 +71,8 @@ export class GenreCreateComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log(this.validateForm.value);
 
     this.genreService.createGenre(this.validateForm.value).subscribe((success) => {
-      this.close();
       this.sharedService.emitChange();
+      this.close();
       this.nzMessageService.success('Thêm Thành Công');
     }, (error) => {
       this.nzMessageService.error(error.message);

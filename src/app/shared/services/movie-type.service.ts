@@ -18,8 +18,8 @@ export class MovieTypeService {
     return this.http.get(`${this.baseUrl}`);
   }
 
-  getMovieTypeByMovieTypeId(countryId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${countryId}`);
+  getMovieTypeByMovieTypeId(movieTypeId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/${movieTypeId}`);
   }
 
   createMovieType(body: MovieType): Observable<any> {
@@ -30,8 +30,8 @@ export class MovieTypeService {
     });
   }
 
-  updateMovieTypeByMovieTypeId(countryId: number, body: MovieType): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${countryId}`, {
+  updateMovieTypeByMovieTypeId(movieTypeId: number, body: MovieType): Observable<any> {
+    return this.http.put(`${this.baseUrl}/${movieTypeId}`, {
         name: body.name,
         slug: body.slug,
         status: body.status
@@ -39,7 +39,7 @@ export class MovieTypeService {
     );
   }
 
-  deleteMovieTypeByMovieTypeId(countryId: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${countryId}`);
+  deleteMovieTypeByMovieTypeId(movieTypeId: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${movieTypeId}`);
   }
 }

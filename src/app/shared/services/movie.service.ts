@@ -2,27 +2,27 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
-import {Genre} from '../interfaces/genre';
+import {Movie} from '../interfaces/movie';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GenreService {
+export class MovieService {
 
-  private baseUrl = environment.api + '/genres';
+  private baseUrl = environment.api + '/movies';
 
   constructor(private http: HttpClient) {
   }
 
-  getAllGenres(): Observable<any> {
+  getAllMovies(): Observable<any> {
     return this.http.get(`${this.baseUrl}`);
   }
 
-  getGenreByGenreId(movieId: number): Observable<any> {
+  getMovieByMovieId(movieId: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${movieId}`);
   }
 
-  createGenre(body: Genre): Observable<any> {
+  createMovie(body: Movie): Observable<any> {
     return this.http.post(`${this.baseUrl}`, {
       name: body.name,
       slug: body.slug,
@@ -30,7 +30,7 @@ export class GenreService {
     });
   }
 
-  updateGenreByGenreId(movieId: number, body: Genre): Observable<any> {
+  updateMovieByMovieId(movieId: number, body: Movie): Observable<any> {
     return this.http.put(`${this.baseUrl}/${movieId}`, {
         name: body.name,
         slug: body.slug,
@@ -39,7 +39,7 @@ export class GenreService {
     );
   }
 
-  deleteGenreByGenreId(movieId: number): Observable<any> {
+  deleteMovieByMovieId(movieId: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/${movieId}`);
   }
 }

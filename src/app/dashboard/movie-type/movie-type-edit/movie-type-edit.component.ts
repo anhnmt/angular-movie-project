@@ -29,24 +29,6 @@ export class MovieTypeEditComponent implements OnInit, AfterViewInit, OnDestroy 
     private nzMessageService: NzMessageService,
     private sharedService: SharedService,
   ) {
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.visible = true;
-    }, 1);
-  }
-
-  close(): void {
-    this.visible = false;
-
-    setTimeout(
-      () => this.router.navigate(['/dashboard', 'movies', 'types']),
-      100
-    );
-  }
-
-  ngOnInit(): void {
     const selectedStatus = this.status[0].value || null;
 
     this.validateForm = this.formBuilder.group({
@@ -67,8 +49,29 @@ export class MovieTypeEditComponent implements OnInit, AfterViewInit, OnDestroy 
           slug: this.movieType.slug,
           status: this.movieType.status
         });
+      }, (error) => {
+        this.close();
+        this.nzMessageService.error(error.error.message);
       });
     });
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.visible = true;
+    }, 1);
+  }
+
+  close(): void {
+    this.visible = false;
+
+    setTimeout(
+      () => this.router.navigate(['/dashboard', 'movies', 'types']),
+      100
+    );
+  }
+
+  ngOnInit(): void {
   }
 
   ngOnDestroy(): void {

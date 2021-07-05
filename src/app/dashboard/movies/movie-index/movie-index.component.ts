@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {StatusUtils} from '../../../shared/utils/statusUtils';
-import {Genre} from '../../../shared/interfaces/genre';
+import {Movie} from '../../../shared/interfaces/movie';
 import {TableService} from '../../../shared/services/table.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {GenreService} from '../../../shared/services/genre.service';
 import {SharedService} from '../../../shared/services/shared.service';
+import {MovieService} from '../../../shared/services/movie.service';
 
 @Component({
   selector: 'app-movie-index',
@@ -17,28 +17,28 @@ export class MovieIndexComponent implements OnInit {
   searchInput: string | number;
   displayData = [];
 
-  genres: Genre[] = [];
+  movies: Movie[] = [];
 
   orderColumn = [
     {
       title: 'ID',
-      compare: (a: Genre, b: Genre) => a.genre_id - b.genre_id,
+      compare: (a: Movie, b: Movie) => a.movie_id - b.movie_id,
     },
     {
       title: 'Tên phim',
-      compare: (a: Genre, b: Genre) => a.name.localeCompare(b.name)
+      compare: (a: Movie, b: Movie) => a.name.localeCompare(b.name)
     },
     {
       title: 'Mô tả',
-      compare: (a: Genre, b: Genre) => a.slug.localeCompare(b.slug)
+      compare: (a: Movie, b: Movie) => a.slug.localeCompare(b.slug)
     },
     {
       title: 'Trạng thái',
-      compare: (a: Genre, b: Genre) => a.status - b.status,
+      compare: (a: Movie, b: Movie) => a.status - b.status,
     },
     {
       title: 'Kiểu phim',
-      compare: (a: Genre, b: Genre) => a.status - b.status,
+      compare: (a: Movie, b: Movie) => a.status - b.status,
     },
     {
       title: ''
@@ -48,7 +48,7 @@ export class MovieIndexComponent implements OnInit {
   constructor(
     private tableSvc: TableService,
     private nzMessageService: NzMessageService,
-    private genreService: GenreService,
+    private movieService: MovieService,
     private sharedService: SharedService,
   ) {
     this.sharedService.changeEmitted$.subscribe(() => {
@@ -61,23 +61,23 @@ export class MovieIndexComponent implements OnInit {
   }
 
   search(): void {
-    const data = this.genres;
+    const data = this.movies;
     this.displayData = this.tableSvc.search(this.searchInput, data);
   }
 
   list(): void {
-    this.genres = [];
+    this.movies = [];
 
-    this.genreService.getAllGenres().subscribe((response) => {
-      this.genres = response.data;
-      console.log(this.genres);
+    this.movieService.getAllMovies().subscribe((response) => {
+      this.movies = response.data;
+      console.log(this.movies);
 
-      this.displayData = this.genres;
+      this.displayData = this.movies;
     });
   }
 
-  delete(genreId: number): void {
-    this.genreService.deleteGenreByGenreId(genreId).subscribe(() => {
+  delete(movieId: number): void {
+    this.movieService.deleteMovieByMovieId(movieId).subscribe(() => {
       this.list();
       this.nzMessageService.success('Xóa Thành Công');
     });
