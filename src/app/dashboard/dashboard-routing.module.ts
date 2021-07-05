@@ -31,6 +31,13 @@ const routes: Routes = [
     }
   },
   {
+    path: 'movies/types',
+    loadChildren: () => import('./movie-type/movie-type.module').then(m => m.MovieTypeModule),
+    data: {
+      title: 'Movie '
+    }
+  },
+  {
     path: 'countries',
     loadChildren: () => import('./countries/countries.module').then(m => m.CountriesModule),
     data: {

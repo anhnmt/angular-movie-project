@@ -15,9 +15,9 @@
     </div>
 
     <div class="col-lg-4 text-right">
-      <a [routerLink]="['/dashboard', 'movies', 'create']" nz-button nzType="primary">
+      <a [routerLink]="['/dashboard', 'movies', 'types', 'create']" nz-button nzType="primary">
         <i nz-icon nzType="plus-circle" theme="outline"></i>
-        <span>Thêm mới phim</span>
+        <span>Thêm kiểu phim</span>
       </a>
     </div>
   </div>
@@ -37,13 +37,13 @@
         <span class="text-capitalize">{{ mapDefaultStatus(item.status)?.label }}</span>
       </td>
       <td class="text-md-right">
-        <a [routerLink]="['/dashboard', 'movies', item.genre_id, 'edit']" class="m-r-5" nz-button nz-tooltip
+        <a [routerLink]="['/dashboard', 'movies', 'types', item.movie_type_id, 'edit']" class="m-r-5" nz-button nz-tooltip
            nzShape="circle"
            nzTooltipTitle="Sửa" nzType="default">
           <i nz-icon nzType="edit" theme="outline"></i>
         </a>
 
-        <button (nzOnConfirm)="delete(item.genre_id)" nz-button nz-popconfirm nz-tooltip nzPopconfirmPlacement="bottom"
+        <button (nzOnConfirm)="delete(item.movie_type_id)" nz-button nz-popconfirm nz-tooltip nzPopconfirmPlacement="bottom"
                 nzPopconfirmTitle="Xác nhận xoá?"
                 nzShape="circle"
                 nzTooltipTitle="Xoá"
