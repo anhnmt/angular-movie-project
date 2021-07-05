@@ -5,6 +5,7 @@ import {UserService} from '../../../shared/services/user.service';
 import {SharedService} from '../../../shared/services/shared.service';
 import {Country} from '../../../shared/interfaces/country';
 import {CountryService} from '../../../shared/services/country.service';
+import {StatusUtils} from '../../../shared/utils/statusUtils';
 
 @Component({
   selector: 'app-country-index',
@@ -12,6 +13,8 @@ import {CountryService} from '../../../shared/services/country.service';
   styleUrls: ['./country-index.component.css']
 })
 export class CountryIndexComponent implements OnInit {
+  mapDefaultStatus = StatusUtils.mapDefaultStatus;
+
   searchInput: string | number;
   displayData = [];
 
@@ -23,7 +26,7 @@ export class CountryIndexComponent implements OnInit {
       compare: (a: Country, b: Country) => a.country_id - b.country_id,
     },
     {
-      title: 'Tên quốc gia',
+      title: 'Quốc gia',
       compare: (a: Country, b: Country) => a.name.localeCompare(b.name)
     },
     {
@@ -42,7 +45,6 @@ export class CountryIndexComponent implements OnInit {
   constructor(
     private tableSvc: TableService,
     private nzMessageService: NzMessageService,
-    private userService: UserService,
     private countryService: CountryService,
     private sharedService: SharedService,
   ) {

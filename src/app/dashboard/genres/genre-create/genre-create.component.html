@@ -5,13 +5,13 @@
   [nzMaskClosable]="false"
   [nzVisible]="visible"
   [nzWidth]="720"
-  nzTitle="Cập nhật quốc gia"
+  nzTitle="Thêm mới thể loại"
 >
   <form (ngSubmit)="submitForm()" [formGroup]="validateForm" [nzLayout]="'vertical'" nz-form>
     <nz-form-item>
-      <nz-form-label nzRequired>Tên quốc gia</nz-form-label>
-      <nz-form-control nzErrorTip="Vui lòng nhập tên quốc gia">
-        <input formControlName="name" nz-input placeholder="Nhập tên quốc gia"/>
+      <nz-form-label nzRequired>Thể loại</nz-form-label>
+      <nz-form-control nzErrorTip="Vui lòng nhập thể loại">
+        <input formControlName="name" nz-input placeholder="Nhập thể loại"/>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
@@ -37,7 +37,7 @@
   <ng-template #footerTpl>
     <div style="float: right">
       <button (click)="close()" nz-button style="margin-right: 8px;">Huỷ</button>
-      <button (click)="submitForm()" nz-button nzType="primary">Cập nhật</button>
+      <button (click)="submitForm()" nz-button nzType="primary">Thêm</button>
     </div>
   </ng-template>
 </nz-drawer>

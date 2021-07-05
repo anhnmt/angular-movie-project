@@ -7,4 +7,9 @@ export class StatusUtils {
       {label: 'Bản nháp', value: 2, badge: 'warning'}
     ];
   }
+
+  static mapDefaultStatus(status: number): Status {
+    const lists = StatusUtils.getDefaultStatus();
+    return lists.find(obj => obj.value === status) || null;
+  }
 }
