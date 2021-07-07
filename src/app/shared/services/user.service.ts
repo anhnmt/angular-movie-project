@@ -3,6 +3,8 @@ import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from '../interfaces/user';
+import {DefaultResponse} from '../interfaces/defaultResponse';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,32 +13,37 @@ export class UserService {
 
   private baseUrl = environment.api + '/users';
 
-  constructor(private http: HttpClient) {
+  constructor(private httpClient: HttpClient) {
   }
 
-  getAllUsers(): Observable<any> {
-    return this.http.get(`${this.baseUrl}`);
+  getAllUsers(): Observable<DefaultResponse<User[]>> {
+    return this.httpClient
+      .get<DefaultResponse<User[]>>(`${this.baseUrl}`);
   }
 
-  getUserByUserId(userId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${userId}`);
+  getUserByUserId(userId: number): Observable<DefaultResponse<User>> {
+    return this.httpClient
+      .get<DefaultResponse<User>>(`${this.baseUrl}/${userId}`);
   }
 
-  createUser(body: User): Observable<any> {
-    return this.http.post(`${this.baseUrl}`, body);
+  createUser(body: User): Observable<DefaultResponse<User>> {
+    return this.httpClient
+      .post<DefaultResponse<User>>(`${this.baseUrl}`, body);
   }
 
-  updateUserByUserId(userId: number, body: User): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${userId}`, {
-        name: body.name,
-        username: body.username,
-        gender: body.gender
-      }
-    );
+  updateUserByUserId(userId: number, body: User): Observable<DefaultResponse<User>> {
+    return this.httpClient
+      .put<DefaultResponse<User>>(`${this.baseUrl}/${userId}`, {
+          name: body.name,
+          username: body.username,
+          gender: body.gender
+        }
+      );
   }
 
-  deleteUserByUserId(userId: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${userId}`);
+  deleteUserByUserId(userId: number): Observable<DefaultResponse<User>> {
+    return this.httpClient
+      .delete<DefaultResponse<User>>(`${this.baseUrl}/${userId}`);
   }
 
 }

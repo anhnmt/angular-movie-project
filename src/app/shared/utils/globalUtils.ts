@@ -1,3 +1,6 @@
+import {Status} from '../interfaces/status';
+import {MovieType} from '../interfaces/movie-type';
+
 export class GlobalUtils {
 
   // Returns a function, that, as long as it continues to be invoked, will not
@@ -29,5 +32,9 @@ export class GlobalUtils {
       // setTimeout returns a truthy value (it differs in web vs Node)
       timeout = setTimeout(later, wait);
     };
-  };
+  }
+
+  static mapMovieType(movieTypes: MovieType[], movieTypeId: number): MovieType {
+    return movieTypes.find(obj => obj.movie_type_id === movieTypeId) || null;
+  }
 }
