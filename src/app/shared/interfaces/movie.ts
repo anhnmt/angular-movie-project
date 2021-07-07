@@ -1,9 +1,11 @@
+import {MovieType} from './movie-type';
+
 export interface Movie {
   movie_id: number;
   name: string;
   slug: string;
   description?: string;
-  movie_type: number;
+  movie_type: MovieType;
   trailer?: string;
   imdb_id?: string;
   rating?: string;

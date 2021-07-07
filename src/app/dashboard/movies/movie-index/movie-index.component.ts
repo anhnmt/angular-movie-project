@@ -5,6 +5,7 @@ import {TableService} from '../../../shared/services/table.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {SharedService} from '../../../shared/services/shared.service';
 import {MovieService} from '../../../shared/services/movie.service';
+import {MovieTypeService} from '../../../shared/services/movie-type.service';
 
 @Component({
   selector: 'app-movie-index',
@@ -13,12 +14,10 @@ import {MovieService} from '../../../shared/services/movie.service';
 })
 export class MovieIndexComponent implements OnInit {
   mapDefaultStatus = StatusUtils.mapDefaultStatus;
-
+  mapMovieType = null;
   searchInput: string | number;
   displayData = [];
-
   movies: Movie[] = [];
-
   orderColumn = [
     {
       title: 'ID',
@@ -29,12 +28,12 @@ export class MovieIndexComponent implements OnInit {
       compare: (a: Movie, b: Movie) => a.name.localeCompare(b.name)
     },
     {
-      title: 'Mô tả',
+      title: 'Đường dẫn',
       compare: (a: Movie, b: Movie) => a.slug.localeCompare(b.slug)
     },
     {
       title: 'Kiểu phim',
-      compare: (a: Movie, b: Movie) => a.status - b.status,
+      compare: (a: Movie, b: Movie) => a.movie_type?.movie_type_id - b.movie_type?.movie_type_id,
     },
     {
       title: 'Trạng thái',
@@ -49,6 +48,7 @@ export class MovieIndexComponent implements OnInit {
     private tableSvc: TableService,
     private nzMessageService: NzMessageService,
     private movieService: MovieService,
+    private movieTypeService: MovieTypeService,
     private sharedService: SharedService,
   ) {
     this.sharedService.changeEmitted$.subscribe(() => {
@@ -68,12 +68,12 @@ export class MovieIndexComponent implements OnInit {
   list(): void {
     this.movies = [];
 
-    this.movieService.getAllMovies().subscribe((response) => {
-      this.movies = response.data;
-      console.log(this.movies);
+    this.movieService.getAllMovies()
+      .subscribe((movies) => {
+        this.movies = movies.data;
 
-      this.displayData = this.movies;
-    });
+        this.displayData = this.movies;
+      });
   }
 
   delete(movieId: number): void {

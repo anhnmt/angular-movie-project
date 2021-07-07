@@ -32,7 +32,7 @@
       <td>#{{item.movie_id}}</td>
       <td>{{item.name}}</td>
       <td>{{item.slug}}</td>
-      <td>{{item.movie_type}}</td>
+      <td>{{ item.movie_type?.name }}</td>
       <td>
         <nz-badge [nzStatus]="mapDefaultStatus(item.status)?.badge"></nz-badge>
         <span class="text-capitalize">{{ mapDefaultStatus(item.status)?.label }}</span>
