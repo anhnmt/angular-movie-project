@@ -17,6 +17,7 @@ import {FullLayoutComponent} from './layouts/full-layout/full-layout.component';
 
 import {NgChartjsModule} from 'ng-chartjs';
 import {ThemeConstantService} from './shared/services/theme-constant.service';
+import { StoreModule } from '@ngrx/store';
 
 registerLocaleData(en);
 
@@ -33,7 +34,8 @@ registerLocaleData(en);
     NzBreadCrumbModule,
     TemplateModule,
     SharedModule,
-    NgChartjsModule
+    NgChartjsModule,
+    StoreModule.forRoot({}, {})
   ],
   providers: [
     {

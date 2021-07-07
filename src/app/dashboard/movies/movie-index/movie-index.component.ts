@@ -33,11 +33,11 @@ export class MovieIndexComponent implements OnInit {
       compare: (a: Movie, b: Movie) => a.slug.localeCompare(b.slug)
     },
     {
-      title: 'Trạng thái',
+      title: 'Kiểu phim',
       compare: (a: Movie, b: Movie) => a.status - b.status,
     },
     {
-      title: 'Kiểu phim',
+      title: 'Trạng thái',
       compare: (a: Movie, b: Movie) => a.status - b.status,
     },
     {
