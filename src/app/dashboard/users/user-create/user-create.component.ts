@@ -24,6 +24,10 @@ export class UserCreateComponent implements OnInit, AfterViewInit, OnDestroy {
     private nzMessageService: NzMessageService,
     private sharedService: SharedService,
   ) {
+    this.validateForm = this.formBuilder.group({
+      name: [null, [Validators.required]],
+      username: [null, [Validators.required]]
+    });
   }
 
   ngAfterViewInit(): void {
@@ -42,10 +46,6 @@ export class UserCreateComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.validateForm = this.formBuilder.group({
-      name: [null, [Validators.required]],
-      username: [null, [Validators.required]]
-    });
   }
 
   ngOnDestroy(): void {
@@ -65,8 +65,8 @@ export class UserCreateComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     this.userService.createUser(this.validateForm.value).subscribe((success) => {
-      this.close();
       this.sharedService.emitChange();
+      this.close();
       this.nzMessageService.success('Thêm Thành Công');
     }, (error) => {
       this.nzMessageService.error(error.message);

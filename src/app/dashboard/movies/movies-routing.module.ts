@@ -1,6 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {MovieIndexComponent} from './movie-index/movie-index.component';
+import {MovieCreateComponent} from './movie-create/movie-create.component';
+import {MovieEditComponent} from './movie-edit/movie-edit.component';
 
 const routes: Routes = [
   {
@@ -10,6 +12,24 @@ const routes: Routes = [
       title: 'Dashboard ',
       headerDisplay: 'none'
     },
+    children: [
+      {
+        path: 'create',
+        component: MovieCreateComponent,
+        data: {
+          title: 'Dashboard ',
+          headerDisplay: 'none'
+        },
+      },
+      {
+        path: ':movieId/edit',
+        component: MovieEditComponent,
+        data: {
+          title: 'Dashboard ',
+          headerDisplay: 'none'
+        },
+      },
+    ]
   }
 ];
 

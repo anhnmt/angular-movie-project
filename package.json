@@ -1,6 +1,8 @@
 {
   "name": "angular-base-project",
   "version": "1.0.0",
+  "docker_local": "localhost:5000",
+  "docker_server": "68.183.224.212:5000",
   "scripts": {
     "ng": "ng",
     "serve": "ng serve",
@@ -11,13 +13,13 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "docker.build": "cross-var docker build -t localhost:5000/$npm_package_name:$npm_package_version . ",
-    "docker.push": "cross-var docker push localhost:5000/$npm_package_name:$npm_package_version",
-    "docker.run": "cross-var docker run --name $npm_package_name -d -p 80:80 localhost:5000/$npm_package_name:$npm_package_version",
+    "docker.build": "cross-var docker build -t $npm_package_docker_local/$npm_package_name:$npm_package_version . ",
+    "docker.push": "cross-var docker push $npm_package_docker_local/$npm_package_name:$npm_package_version",
+    "docker.run": "cross-var docker run --name $npm_package_name -d -p 80:80 $npm_package_docker_local/$npm_package_name:$npm_package_version",
     "docker.deploy": "npm run docker.build && npm run docker.run",
     "docker.compose": "docker-compose up --build -d",
     "docker.local": "npm run docker.build && npm run docker.push",
-    "docker.server": "cross-var docker build -t 68.183.224.212:5000/$npm_package_name:$npm_package_version . && cross-var docker push 68.183.224.212:5000/$npm_package_name:$npm_package_version"
+    "docker.server": "cross-var docker build -t $npm_package_docker_server/$npm_package_name:$npm_package_version . && cross-var docker push $npm_package_docker_server/$npm_package_name:$npm_package_version"
   },
   "private": true,
   "dependencies": {
@@ -45,7 +47,8 @@
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "webpack-bundle-analyzer": "^4.3.0",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.2",
+    "@ngrx/store": "^11.1.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1100.6",

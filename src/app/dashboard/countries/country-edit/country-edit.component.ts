@@ -29,24 +29,6 @@ export class CountryEditComponent implements OnInit, AfterViewInit, OnDestroy {
     private nzMessageService: NzMessageService,
     private sharedService: SharedService,
   ) {
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.visible = true;
-    }, 1);
-  }
-
-  close(): void {
-    this.visible = false;
-
-    setTimeout(
-      () => this.router.navigate(['/dashboard', 'countries']),
-      100
-    );
-  }
-
-  ngOnInit(): void {
     const selectedStatus = this.status[0].value || null;
 
     this.validateForm = this.formBuilder.group({
@@ -67,8 +49,29 @@ export class CountryEditComponent implements OnInit, AfterViewInit, OnDestroy {
           slug: this.country.slug,
           status: this.country.status
         });
+      }, (error) => {
+        this.close();
+        this.nzMessageService.error(error.error.message);
       });
     });
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.visible = true;
+    }, 1);
+  }
+
+  close(): void {
+    this.visible = false;
+
+    setTimeout(
+      () => this.router.navigate(['/dashboard', 'countries']),
+      100
+    );
+  }
+
+  ngOnInit(): void {
   }
 
   ngOnDestroy(): void {
@@ -90,8 +93,8 @@ export class CountryEditComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log(this.validateForm.value);
 
     this.countryService.updateCountryByCountryId(this.country.country_id, this.validateForm.value).subscribe((success) => {
-      this.close();
       this.sharedService.emitChange();
+      this.close();
       this.nzMessageService.success('Cập nhật Thành Công');
     }, (error) => {
       this.nzMessageService.error(error.message);
