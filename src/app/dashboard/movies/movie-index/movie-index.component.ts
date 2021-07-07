@@ -14,7 +14,6 @@ import {MovieTypeService} from '../../../shared/services/movie-type.service';
 })
 export class MovieIndexComponent implements OnInit {
   mapDefaultStatus = StatusUtils.mapDefaultStatus;
-  mapMovieType = null;
   searchInput: string | number;
   displayData = [];
   movies: Movie[] = [];
@@ -37,7 +36,7 @@ export class MovieIndexComponent implements OnInit {
     },
     {
       title: 'Trạng thái',
-      compare: (a: Movie, b: Movie) => a.status - b.status,
+      compare: (a: Movie, b: Movie) => a.status?.value - b.status?.value,
     },
     {
       title: ''
@@ -48,7 +47,6 @@ export class MovieIndexComponent implements OnInit {
     private tableSvc: TableService,
     private nzMessageService: NzMessageService,
     private movieService: MovieService,
-    private movieTypeService: MovieTypeService,
     private sharedService: SharedService,
   ) {
     this.sharedService.changeEmitted$.subscribe(() => {

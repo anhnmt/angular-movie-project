@@ -30,7 +30,8 @@ export class MovieService {
       .post<DefaultResponse<Movie>>(`${this.baseUrl}`, {
         name: body.name,
         slug: body.slug,
-        status: body.status
+        movie_type_id: body.movie_type?.movie_type_id,
+        status: body.status?.value
       });
   }
 

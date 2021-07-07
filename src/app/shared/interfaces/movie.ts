@@ -1,4 +1,5 @@
 import {MovieType} from './movie-type';
+import {Status} from './status';
 
 export interface Movie {
   movie_id: number;
@@ -13,7 +14,7 @@ export interface Movie {
   runtime?: string;
   seo_title?: string;
   seo_keywords?: string;
-  status: number;
+  status: Status;
   created_at?: string;
   updated_at?: string;
 }

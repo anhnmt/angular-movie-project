@@ -4,14 +4,14 @@
   [nzFooter]="footerTpl"
   [nzMaskClosable]="false"
   [nzVisible]="visible"
-  [nzWidth]="720"
+  [nzWidth]="'80%'"
   nzTitle="Cập nhật phim"
 >
   <form (ngSubmit)="submitForm()" [formGroup]="validateForm" [nzLayout]="'vertical'" nz-form>
     <nz-form-item>
-      <nz-form-label nzRequired>Thể loại</nz-form-label>
-      <nz-form-control nzErrorTip="Vui lòng nhập thể loại">
-        <input formControlName="name" nz-input placeholder="Nhập thể loại"/>
+      <nz-form-label nzRequired>Tên phim</nz-form-label>
+      <nz-form-control nzErrorTip="Vui lòng nhập tên phim">
+        <input formControlName="name" nz-input placeholder="Nhập tên phim"/>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
@@ -24,8 +24,9 @@
       <nz-form-label>Trạng thái</nz-form-label>
       <nz-form-control nzErrorTip="Vui lòng chọn trạng thái">
         <nz-select formControlName="status" nzPlaceHolder="Chọn trạng thái">
-          <nz-option nzCustomContent *ngFor="let option of status" [nzValue]="option.value" [nzLabel]="option.label">
-            <nz-badge *ngIf="option.badge" [nzStatus]="option.badge"></nz-badge> {{ option.label }}
+          <nz-option *ngFor="let option of status" [nzLabel]="option.label" [nzValue]="option.value" nzCustomContent>
+            <nz-badge *ngIf="option.badge" [nzStatus]="option.badge"></nz-badge>
+            {{ option.label }}
           </nz-option>
         </nz-select>
       </nz-form-control>

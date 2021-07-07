@@ -6,6 +6,8 @@ import {Router} from '@angular/router';
 import {MovieService} from '../../../shared/services/movie.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {SharedService} from '../../../shared/services/shared.service';
+import {MovieTypeService} from '../../../shared/services/movie-type.service';
+import {MovieType} from '../../../shared/interfaces/movie-type';
 
 @Component({
   selector: 'app-movie-create',
@@ -15,6 +17,7 @@ import {SharedService} from '../../../shared/services/shared.service';
 export class MovieCreateComponent implements OnInit, AfterViewInit, OnDestroy {
   visible = false;
   status = StatusUtils.getDefaultStatus();
+  movieTypes: MovieType[] = [];
   validateForm: FormGroup;
   private onDestroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -24,14 +27,27 @@ export class MovieCreateComponent implements OnInit, AfterViewInit, OnDestroy {
     private formBuilder: FormBuilder,
     private nzMessageService: NzMessageService,
     private sharedService: SharedService,
+    private movieTypeService: MovieTypeService,
   ) {
-    const selectedStatus = this.status[0].value || null;
+    const selectedStatus = this.status[0] || null;
 
     this.validateForm = this.formBuilder.group({
       name: [null, [Validators.required]],
       slug: [null, [Validators.required]],
+      movie_type: [null, [Validators.required]],
       status: [selectedStatus, [Validators.required]],
     });
+
+    this.movieTypeService.getAllMovieTypes()
+      .subscribe((movieTypes => {
+          this.movieTypes = movieTypes.data;
+
+          const selectedMovieTypes = this.movieTypes[0] || null;
+          this.validateForm.patchValue({
+            movie_type: selectedMovieTypes
+          });
+        })
+      );
   }
 
   ngAfterViewInit(): void {
@@ -68,12 +84,14 @@ export class MovieCreateComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
+    console.log(this.validateForm.value);
+
     this.movieService.createMovie(this.validateForm.value).subscribe((success) => {
       this.sharedService.emitChange();
       this.close();
       this.nzMessageService.success('Thêm Thành Công');
     }, (error) => {
-      this.nzMessageService.error(error.message);
+      this.nzMessageService.error(error.error?.message);
     });
   }
 }
