@@ -48,7 +48,7 @@
   <ng-template #footerTpl>
     <div style="float: right">
       <button (click)="close()" nz-button style="margin-right: 8px;">Huỷ</button>
-      <button (click)="submitForm()" nz-button nzType="primary">Thêm</button>
+      <button (click)="submitForm()" nz-button nzType="primary" [nzLoading]="isLoading">Thêm</button>
     </div>
   </ng-template>
 </nz-drawer>

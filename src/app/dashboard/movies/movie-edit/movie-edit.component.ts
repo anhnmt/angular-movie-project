@@ -10,6 +10,7 @@ import {takeUntil} from 'rxjs/operators';
 import {MovieType} from '../../../shared/interfaces/movie-type';
 import {MovieTypeService} from '../../../shared/services/movie-type.service';
 import {GlobalUtils} from '../../../shared/utils/globalUtils';
+import {HelperUtils} from '../../../shared/utils/helperUtils';
 
 @Component({
   selector: 'app-movie-edit',
@@ -17,6 +18,8 @@ import {GlobalUtils} from '../../../shared/utils/globalUtils';
   styleUrls: ['./movie-edit.component.css']
 })
 export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  isLoading = false;
   visible = false;
   movie: Movie;
   status = GlobalUtils.getDefaultStatus();
@@ -43,7 +46,6 @@ export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe((params: any) => {
-      console.log(params);
       const {movieId} = params;
 
       forkJoin([
@@ -54,10 +56,13 @@ export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
           this.movie = movie.data;
           this.movieTypes = movieTypes.data;
 
+          const defaultMovieType = this.movieTypes[0] || null;
+          const selectedMovieType = GlobalUtils.mapMovieType(this.movieTypes, this.movie.movie_type?.movie_type_id);
+
           this.validateForm.patchValue({
             name: this.movie.name,
             slug: this.movie.slug,
-            movie_type: this.movie.movie_type,
+            movie_type: selectedMovieType || defaultMovieType,
             status: this.movie.status
           });
         }, (error) => {
@@ -70,6 +75,8 @@ export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.visible = true;
+
+      HelperUtils.formChangedTitleToSlug(this.validateForm);
     }, 1);
   }
 
@@ -91,17 +98,15 @@ export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   submitForm(): void {
-    for (const key of Object.keys(this.validateForm.controls)) {
-      this.validateForm.controls[key].markAsDirty();
-      this.validateForm.controls[key].updateValueAndValidity();
-    }
+    this.isLoading = true;
+
+    HelperUtils.formValidator(this.validateForm);
 
     // stop here if form is invalid
     if (this.validateForm.invalid) {
+      this.isLoading = false;
       return;
     }
-
-    console.log(this.validateForm.value);
 
     this.movieService.updateMovieByMovieId(this.movie.movie_id, this.validateForm.value).subscribe((success) => {
       this.sharedService.emitChange();
@@ -109,6 +114,7 @@ export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
       this.nzMessageService.success('Cập nhật Thành Công');
     }, (error) => {
       this.nzMessageService.error(error.message);
+      this.isLoading = false;
     });
   }
 }

@@ -40,6 +40,7 @@ export class MovieService {
       .put<DefaultResponse<Movie>>(`${this.baseUrl}/${movieId}`, {
           name: body.name,
           slug: body.slug,
+          movie_type_id: body.movie_type?.movie_type_id,
           status: body.status
         }
       );

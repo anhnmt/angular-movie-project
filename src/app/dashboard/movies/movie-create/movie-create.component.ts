@@ -8,6 +8,7 @@ import {SharedService} from '../../../shared/services/shared.service';
 import {MovieTypeService} from '../../../shared/services/movie-type.service';
 import {MovieType} from '../../../shared/interfaces/movie-type';
 import {GlobalUtils} from '../../../shared/utils/globalUtils';
+import {HelperUtils} from '../../../shared/utils/helperUtils';
 
 @Component({
   selector: 'app-movie-create',
@@ -15,10 +16,13 @@ import {GlobalUtils} from '../../../shared/utils/globalUtils';
   styleUrls: ['./movie-create.component.css']
 })
 export class MovieCreateComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  isLoading = false;
   visible = false;
   status = GlobalUtils.getDefaultStatus();
   movieTypes: MovieType[] = [];
   validateForm: FormGroup;
+
   private onDestroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
@@ -42,9 +46,9 @@ export class MovieCreateComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe((movieTypes => {
           this.movieTypes = movieTypes.data;
 
-          const selectedMovieTypes = this.movieTypes[0] || null;
+          const defaultMovieType = this.movieTypes[0] || null;
           this.validateForm.patchValue({
-            movie_type: selectedMovieTypes
+            movie_type: defaultMovieType
           });
         })
       );
@@ -53,6 +57,8 @@ export class MovieCreateComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.visible = true;
+
+      HelperUtils.formChangedTitleToSlug(this.validateForm);
     }, 1);
   }
 
@@ -74,17 +80,15 @@ export class MovieCreateComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   submitForm(): void {
-    for (const key of Object.keys(this.validateForm.controls)) {
-      this.validateForm.controls[key].markAsDirty();
-      this.validateForm.controls[key].updateValueAndValidity();
-    }
+    this.isLoading = true;
+
+    HelperUtils.formValidator(this.validateForm);
 
     // stop here if form is invalid
     if (this.validateForm.invalid) {
+      this.isLoading = false;
       return;
     }
-
-    console.log(this.validateForm.value);
 
     this.movieService.createMovie(this.validateForm.value).subscribe((success) => {
       this.sharedService.emitChange();
@@ -92,6 +96,7 @@ export class MovieCreateComponent implements OnInit, AfterViewInit, OnDestroy {
       this.nzMessageService.success('Thêm Thành Công');
     }, (error) => {
       this.nzMessageService.error(error.error?.message);
+      this.isLoading = false;
     });
   }
 }
