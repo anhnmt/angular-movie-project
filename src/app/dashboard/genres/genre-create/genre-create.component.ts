@@ -1,11 +1,11 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
-import {StatusUtils} from '../../../shared/utils/statusUtils';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {Router} from '@angular/router';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {SharedService} from '../../../shared/services/shared.service';
 import {GenreService} from '../../../shared/services/genre.service';
+import {GlobalUtils} from '../../../shared/utils/globalUtils';
 
 @Component({
   selector: 'app-genre-create',
@@ -14,7 +14,7 @@ import {GenreService} from '../../../shared/services/genre.service';
 })
 export class GenreCreateComponent implements OnInit, AfterViewInit, OnDestroy {
   visible = false;
-  status = StatusUtils.getDefaultStatus();
+  status = GlobalUtils.getDefaultStatus();
   validateForm: FormGroup;
   private onDestroy$: Subject<boolean> = new Subject<boolean>();
 

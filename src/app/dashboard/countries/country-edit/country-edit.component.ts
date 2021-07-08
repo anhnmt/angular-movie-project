@@ -1,5 +1,4 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
-import {StatusUtils} from '../../../shared/utils/statusUtils';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -8,6 +7,7 @@ import {NzMessageService} from 'ng-zorro-antd/message';
 import {SharedService} from '../../../shared/services/shared.service';
 import {takeUntil} from 'rxjs/operators';
 import {Country} from '../../../shared/interfaces/country';
+import {GlobalUtils} from '../../../shared/utils/globalUtils';
 
 @Component({
   selector: 'app-country-edit',
@@ -17,7 +17,7 @@ import {Country} from '../../../shared/interfaces/country';
 export class CountryEditComponent implements OnInit, AfterViewInit, OnDestroy {
   visible = false;
   country: Country;
-  status = StatusUtils.getDefaultStatus();
+  status = GlobalUtils.getDefaultStatus();
   validateForm: FormGroup;
   private onDestroy$: Subject<boolean> = new Subject<boolean>();
 

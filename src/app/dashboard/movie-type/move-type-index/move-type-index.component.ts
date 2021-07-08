@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {StatusUtils} from '../../../shared/utils/statusUtils';
 import {MovieType} from '../../../shared/interfaces/movie-type';
 import {TableService} from '../../../shared/services/table.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {MovieTypeService} from '../../../shared/services/movie-type.service';
 import {SharedService} from '../../../shared/services/shared.service';
+import {GlobalUtils} from '../../../shared/utils/globalUtils';
 
 @Component({
   selector: 'app-move-type-index',
@@ -12,7 +12,7 @@ import {SharedService} from '../../../shared/services/shared.service';
   styleUrls: ['./move-type-index.component.css']
 })
 export class MoveTypeIndexComponent implements OnInit {
-  mapDefaultStatus = StatusUtils.mapDefaultStatus;
+  mapDefaultStatus = GlobalUtils.mapDefaultStatus;
 
   searchInput: string | number;
   displayData = [];

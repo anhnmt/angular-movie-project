@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {SharedService} from '../../../shared/services/shared.service';
 import {CountryService} from '../../../shared/services/country.service';
-import {StatusUtils} from '../../../shared/utils/statusUtils';
+import {GlobalUtils} from '../../../shared/utils/globalUtils';
 
 @Component({
   selector: 'app-country-create',
@@ -14,7 +14,7 @@ import {StatusUtils} from '../../../shared/utils/statusUtils';
 })
 export class CountryCreateComponent implements OnInit, AfterViewInit, OnDestroy {
   visible = false;
-  status = StatusUtils.getDefaultStatus();
+  status = GlobalUtils.getDefaultStatus();
   validateForm: FormGroup;
   private onDestroy$: Subject<boolean> = new Subject<boolean>();
 

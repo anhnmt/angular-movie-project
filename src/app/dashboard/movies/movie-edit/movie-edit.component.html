@@ -21,6 +21,16 @@
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
+      <nz-form-label>Kiểu phim</nz-form-label>
+      <nz-form-control nzErrorTip="Vui lòng chọn kiểu phim">
+        <nz-select formControlName="movie_type" nzPlaceHolder="Chọn kiểu phim">
+          <nz-option *ngFor="let option of movieTypes" [nzLabel]="option.name" [nzValue]="option" nzCustomContent>
+            {{ option.name }}
+          </nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
       <nz-form-label>Trạng thái</nz-form-label>
       <nz-form-control nzErrorTip="Vui lòng chọn trạng thái">
         <nz-select formControlName="status" nzPlaceHolder="Chọn trạng thái">

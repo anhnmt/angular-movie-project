@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {StatusUtils} from '../../../shared/utils/statusUtils';
 import {Movie} from '../../../shared/interfaces/movie';
 import {TableService} from '../../../shared/services/table.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {SharedService} from '../../../shared/services/shared.service';
 import {MovieService} from '../../../shared/services/movie.service';
-import {MovieTypeService} from '../../../shared/services/movie-type.service';
+import {GlobalUtils} from '../../../shared/utils/globalUtils';
 
 @Component({
   selector: 'app-movie-index',
@@ -13,7 +12,7 @@ import {MovieTypeService} from '../../../shared/services/movie-type.service';
   styleUrls: ['./movie-index.component.css']
 })
 export class MovieIndexComponent implements OnInit {
-  mapDefaultStatus = StatusUtils.mapDefaultStatus;
+  mapDefaultStatus = GlobalUtils.mapDefaultStatus;
   searchInput: string | number;
   displayData = [];
   movies: Movie[] = [];
