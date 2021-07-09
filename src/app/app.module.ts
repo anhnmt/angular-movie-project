@@ -12,20 +12,22 @@ import {TemplateModule} from './shared/template/template.module';
 import {SharedModule} from './shared/shared.module';
 
 import {AppComponent} from './app.component';
-import {CommonLayoutComponent} from './layouts/common-layout/common-layout.component';
+import {DashboardLayoutComponent} from './layouts/dashboard-layout/dashboard-layout.component';
 import {FullLayoutComponent} from './layouts/full-layout/full-layout.component';
 
 import {NgChartjsModule} from 'ng-chartjs';
 import {ThemeConstantService} from './shared/services/theme-constant.service';
 import { StoreModule } from '@ngrx/store';
+import { ClientLayoutComponent } from './layouts/client-layout/client-layout.component';
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
-    CommonLayoutComponent,
-    FullLayoutComponent
+    DashboardLayoutComponent,
+    FullLayoutComponent,
+    ClientLayoutComponent
   ],
   imports: [
     BrowserModule,

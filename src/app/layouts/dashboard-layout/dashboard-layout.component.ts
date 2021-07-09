@@ -7,10 +7,10 @@ import {ThemeConstantService} from '../../shared/services/theme-constant.service
 
 @Component({
   selector: 'app-common-layout',
-  templateUrl: './common-layout.component.html',
+  templateUrl: './dashboard-layout.component.html',
 })
 
-export class CommonLayoutComponent implements OnInit {
+export class DashboardLayoutComponent implements OnInit {
 
   breadcrumbs$: Observable<IBreadcrumb[]>;
   contentHeaderDisplay: string;
