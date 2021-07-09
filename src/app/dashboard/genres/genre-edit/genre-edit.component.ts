@@ -8,6 +8,7 @@ import {takeUntil} from 'rxjs/operators';
 import {Genre} from '../../../shared/interfaces/genre';
 import {GenreService} from '../../../shared/services/genre.service';
 import {GlobalUtils} from '../../../shared/utils/globalUtils';
+import {HelperUtils} from '../../../shared/utils/helperUtils';
 
 @Component({
   selector: 'app-genre-edit',
@@ -15,6 +16,8 @@ import {GlobalUtils} from '../../../shared/utils/globalUtils';
   styleUrls: ['./genre-edit.component.css']
 })
 export class GenreEditComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  isLoading = false;
   visible = false;
   genre: Genre;
   status = GlobalUtils.getDefaultStatus();
@@ -59,6 +62,8 @@ export class GenreEditComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.visible = true;
+
+      HelperUtils.formChangedTitleToSlug(this.validateForm);
     }, 1);
   }
 
@@ -80,24 +85,24 @@ export class GenreEditComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   submitForm(): void {
-    for (const key of Object.keys(this.validateForm.controls)) {
-      this.validateForm.controls[key].markAsDirty();
-      this.validateForm.controls[key].updateValueAndValidity();
-    }
+    this.isLoading = true;
+
+    HelperUtils.formValidator(this.validateForm);
 
     // stop here if form is invalid
     if (this.validateForm.invalid) {
+      this.isLoading = false;
       return;
     }
 
-    console.log(this.validateForm.value);
-
-    this.genreService.updateGenreByGenreId(this.genre.genre_id, this.validateForm.value).subscribe((success) => {
-      this.sharedService.emitChange();
-      this.close();
-      this.nzMessageService.success('Cập nhật Thành Công');
-    }, (error) => {
-      this.nzMessageService.error(error.message);
-    });
+    this.genreService.updateGenreByGenreId(this.genre.genre_id, this.validateForm.value)
+      .subscribe((success) => {
+        this.sharedService.emitChange();
+        this.close();
+        this.nzMessageService.success('Cập nhật Thành Công');
+      }, (error) => {
+        this.nzMessageService.error(error.message);
+        this.isLoading = false;
+      });
   }
 }

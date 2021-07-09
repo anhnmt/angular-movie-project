@@ -6,6 +6,7 @@ import {MovieTypeService} from '../../../shared/services/movie-type.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {SharedService} from '../../../shared/services/shared.service';
 import {GlobalUtils} from '../../../shared/utils/globalUtils';
+import {HelperUtils} from '../../../shared/utils/helperUtils';
 
 @Component({
   selector: 'app-movie-type-create',
@@ -13,6 +14,8 @@ import {GlobalUtils} from '../../../shared/utils/globalUtils';
   styleUrls: ['./movie-type-create.component.css']
 })
 export class MovieTypeCreateComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  isLoading = false;
   visible = false;
   status = GlobalUtils.getDefaultStatus();
   validateForm: FormGroup;
@@ -37,6 +40,8 @@ export class MovieTypeCreateComponent implements OnInit, AfterViewInit, OnDestro
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.visible = true;
+
+      HelperUtils.formChangedTitleToSlug(this.validateForm);
     }, 1);
   }
 
@@ -58,17 +63,15 @@ export class MovieTypeCreateComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   submitForm(): void {
-    for (const key of Object.keys(this.validateForm.controls)) {
-      this.validateForm.controls[key].markAsDirty();
-      this.validateForm.controls[key].updateValueAndValidity();
-    }
+    this.isLoading = true;
+
+    HelperUtils.formValidator(this.validateForm);
 
     // stop here if form is invalid
     if (this.validateForm.invalid) {
+      this.isLoading = false;
       return;
     }
-
-    console.log(this.validateForm.value);
 
     this.movieTypeService.createMovieType(this.validateForm.value).subscribe((success) => {
       this.sharedService.emitChange();
@@ -76,6 +79,7 @@ export class MovieTypeCreateComponent implements OnInit, AfterViewInit, OnDestro
       this.nzMessageService.success('Thêm Thành Công');
     }, (error) => {
       this.nzMessageService.error(error.message);
+      this.isLoading = false;
     });
   }
 }

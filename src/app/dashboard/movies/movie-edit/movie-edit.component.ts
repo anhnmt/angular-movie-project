@@ -45,31 +45,33 @@ export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
       status: [selectedStatus, [Validators.required]],
     });
 
-    this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe((params: any) => {
-      const {movieId} = params;
+    this.route.params
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((params: any) => {
+        const {movieId} = params;
 
-      forkJoin([
-        this.movieService.getMovieByMovieId(movieId),
-        this.movieTypeService.getAllMovieTypes()
-      ])
-        .subscribe(([movie, movieTypes]) => {
-          this.movie = movie.data;
-          this.movieTypes = movieTypes.data;
+        forkJoin([
+          this.movieService.getMovieByMovieId(movieId),
+          this.movieTypeService.getAllMovieTypes()
+        ])
+          .subscribe(([movie, movieTypes]) => {
+            this.movie = movie.data;
+            this.movieTypes = movieTypes.data;
 
-          const defaultMovieType = this.movieTypes[0] || null;
-          const selectedMovieType = GlobalUtils.mapMovieType(this.movieTypes, this.movie.movie_type?.movie_type_id);
+            const defaultMovieType = this.movieTypes[0] || null;
+            const selectedMovieType = GlobalUtils.mapMovieType(this.movieTypes, this.movie.movie_type?.movie_type_id);
 
-          this.validateForm.patchValue({
-            name: this.movie.name,
-            slug: this.movie.slug,
-            movie_type: selectedMovieType || defaultMovieType,
-            status: this.movie.status
+            this.validateForm.patchValue({
+              name: this.movie.name,
+              slug: this.movie.slug,
+              movie_type: selectedMovieType || defaultMovieType,
+              status: this.movie.status
+            });
+          }, (error) => {
+            this.close();
+            this.nzMessageService.error(error.error.message);
           });
-        }, (error) => {
-          this.close();
-          this.nzMessageService.error(error.error.message);
-        });
-    });
+      });
   }
 
   ngAfterViewInit(): void {
@@ -108,7 +110,8 @@ export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
-    this.movieService.updateMovieByMovieId(this.movie.movie_id, this.validateForm.value).subscribe((success) => {
+    this.movieService.updateMovieByMovieId(this.movie.movie_id, this.validateForm.value)
+      .subscribe((success) => {
       this.sharedService.emitChange();
       this.close();
       this.nzMessageService.success('Cập nhật Thành Công');

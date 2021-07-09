@@ -8,6 +8,7 @@ import {SharedService} from '../../../shared/services/shared.service';
 import {takeUntil} from 'rxjs/operators';
 import {Country} from '../../../shared/interfaces/country';
 import {GlobalUtils} from '../../../shared/utils/globalUtils';
+import {HelperUtils} from '../../../shared/utils/helperUtils';
 
 @Component({
   selector: 'app-country-edit',
@@ -15,6 +16,8 @@ import {GlobalUtils} from '../../../shared/utils/globalUtils';
   styleUrls: ['./country-edit.component.css']
 })
 export class CountryEditComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  isLoading = false;
   visible = false;
   country: Country;
   status = GlobalUtils.getDefaultStatus();
@@ -59,6 +62,8 @@ export class CountryEditComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.visible = true;
+
+      HelperUtils.formChangedTitleToSlug(this.validateForm);
     }, 1);
   }
 
@@ -80,17 +85,15 @@ export class CountryEditComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   submitForm(): void {
-    for (const key of Object.keys(this.validateForm.controls)) {
-      this.validateForm.controls[key].markAsDirty();
-      this.validateForm.controls[key].updateValueAndValidity();
-    }
+    this.isLoading = true;
+
+    HelperUtils.formValidator(this.validateForm);
 
     // stop here if form is invalid
     if (this.validateForm.invalid) {
+      this.isLoading = false;
       return;
     }
-
-    console.log(this.validateForm.value);
 
     this.countryService.updateCountryByCountryId(this.country.country_id, this.validateForm.value).subscribe((success) => {
       this.sharedService.emitChange();
@@ -98,6 +101,7 @@ export class CountryEditComponent implements OnInit, AfterViewInit, OnDestroy {
       this.nzMessageService.success('Cập nhật Thành Công');
     }, (error) => {
       this.nzMessageService.error(error.message);
+      this.isLoading = false;
     });
   }
 }
