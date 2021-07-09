@@ -3,12 +3,18 @@ import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 
 import {FullLayoutComponent} from './layouts/full-layout/full-layout.component';
 import {DashboardLayoutComponent} from './layouts/dashboard-layout/dashboard-layout.component';
+import {ClientLayoutComponent} from './layouts/client-layout/client-layout.component';
 
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: '/dashboard/home',
-    pathMatch: 'full',
+    component: ClientLayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./client/client.module').then(m => m.ClientModule),
+      }
+    ]
   },
   {
     path: '',
