@@ -1,5 +1,4 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
-import {StatusUtils} from '../../../shared/utils/statusUtils';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -8,6 +7,7 @@ import {SharedService} from '../../../shared/services/shared.service';
 import {takeUntil} from 'rxjs/operators';
 import {Genre} from '../../../shared/interfaces/genre';
 import {GenreService} from '../../../shared/services/genre.service';
+import {GlobalUtils} from '../../../shared/utils/globalUtils';
 
 @Component({
   selector: 'app-genre-edit',
@@ -17,7 +17,7 @@ import {GenreService} from '../../../shared/services/genre.service';
 export class GenreEditComponent implements OnInit, AfterViewInit, OnDestroy {
   visible = false;
   genre: Genre;
-  status = StatusUtils.getDefaultStatus();
+  status = GlobalUtils.getDefaultStatus();
   validateForm: FormGroup;
   private onDestroy$: Subject<boolean> = new Subject<boolean>();
 

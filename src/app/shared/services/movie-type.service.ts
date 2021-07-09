@@ -3,43 +3,50 @@ import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {MovieType} from '../interfaces/movie-type';
+import {DefaultResponse} from '../interfaces/defaultResponse';
+import {map} from 'rxjs/operators';
+import {Genre} from '../interfaces/genre';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MovieTypeService {
-
   private baseUrl = environment.api + '/movies/types';
 
-  constructor(private http: HttpClient) {
+  constructor(private httpClient: HttpClient) {
   }
 
-  getAllMovieTypes(): Observable<any> {
-    return this.http.get(`${this.baseUrl}`);
+  getAllMovieTypes(): Observable<DefaultResponse<MovieType[]>> {
+    return this.httpClient
+      .get<DefaultResponse<MovieType[]>>(`${this.baseUrl}`);
   }
 
-  getMovieTypeByMovieTypeId(movieTypeId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${movieTypeId}`);
+  getMovieTypeByMovieTypeId(movieTypeId: number | string): Observable<DefaultResponse<MovieType>> {
+    return this.httpClient
+      .get<DefaultResponse<MovieType>>(`${this.baseUrl}/${movieTypeId}`);
   }
 
-  createMovieType(body: MovieType): Observable<any> {
-    return this.http.post(`${this.baseUrl}`, {
-      name: body.name,
-      slug: body.slug,
-      status: body.status
-    });
-  }
-
-  updateMovieTypeByMovieTypeId(movieTypeId: number, body: MovieType): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${movieTypeId}`, {
+  createMovieType(body: MovieType): Observable<DefaultResponse<MovieType>> {
+    return this.httpClient
+      .post<DefaultResponse<MovieType>>(`${this.baseUrl}`, {
         name: body.name,
         slug: body.slug,
         status: body.status
-      }
-    );
+      });
   }
 
-  deleteMovieTypeByMovieTypeId(movieTypeId: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${movieTypeId}`);
+  updateMovieTypeByMovieTypeId(movieTypeId: number, body: MovieType): Observable<DefaultResponse<MovieType>> {
+    return this.httpClient
+      .put<DefaultResponse<MovieType>>(`${this.baseUrl}/${movieTypeId}`, {
+          name: body.name,
+          slug: body.slug,
+          status: body.status
+        }
+      );
+  }
+
+  deleteMovieTypeByMovieTypeId(movieTypeId: number): Observable<DefaultResponse<MovieType>> {
+    return this.httpClient
+      .delete<DefaultResponse<MovieType>>(`${this.baseUrl}/${movieTypeId}`);
   }
 }

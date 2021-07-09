@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {TableService} from '../../../shared/services/table.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {UserService} from '../../../shared/services/user.service';
 import {SharedService} from '../../../shared/services/shared.service';
 import {Country} from '../../../shared/interfaces/country';
 import {CountryService} from '../../../shared/services/country.service';
-import {StatusUtils} from '../../../shared/utils/statusUtils';
+import {GlobalUtils} from '../../../shared/utils/globalUtils';
 
 @Component({
   selector: 'app-country-index',
@@ -13,7 +12,7 @@ import {StatusUtils} from '../../../shared/utils/statusUtils';
   styleUrls: ['./country-index.component.css']
 })
 export class CountryIndexComponent implements OnInit {
-  mapDefaultStatus = StatusUtils.mapDefaultStatus;
+  mapDefaultStatus = GlobalUtils.mapDefaultStatus;
 
   searchInput: string | number;
   displayData = [];

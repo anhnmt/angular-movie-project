@@ -1,33 +1,22 @@
+import {Status} from '../interfaces/status';
+import {MovieType} from '../interfaces/movie-type';
+
 export class GlobalUtils {
 
-  // Returns a function, that, as long as it continues to be invoked, will not
-  // be triggered. The function will be called after it stops being called for
-  // `wait` milliseconds.
-  static debounce = (func, wait) => {
-    let timeout;
+  static mapMovieType(movieTypes: MovieType[], movieTypeId: number): MovieType {
+    return movieTypes.find(obj => obj.movie_type_id === movieTypeId) || null;
+  }
 
-    // This is the function that is returned and will be executed many times
-    // We spread (...args) to capture any number of parameters we want to pass
-    return function executedFunction(...args): void {
+  static getDefaultStatus(): Status[] {
+    return [
+      {label: 'Hoạt động', value: 1, badge: 'success'},
+      {label: 'Bản nháp', value: 2, badge: 'warning'}
+    ];
+  }
 
-      // The callback function to be executed after
-      // the debounce time has elapsed
-      const later = () => {
-        // null timeout to indicate the debounce ended
-        timeout = null;
+  static mapDefaultStatus(status: number): Status {
+    const lists = GlobalUtils.getDefaultStatus();
+    return lists.find(obj => obj.value === status) || null;
+  }
 
-        // Execute the callback
-        func(...args);
-      };
-      // This will reset the waiting every function execution.
-      // This is the step that prevents the function from
-      // being executed because it will never reach the
-      // inside of the previous setTimeout
-      clearTimeout(timeout);
-
-      // Restart the debounce waiting period.
-      // setTimeout returns a truthy value (it differs in web vs Node)
-      timeout = setTimeout(later, wait);
-    };
-  };
 }

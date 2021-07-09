@@ -4,7 +4,7 @@ import {NzMessageService} from 'ng-zorro-antd/message';
 import {SharedService} from '../../../shared/services/shared.service';
 import {Genre} from '../../../shared/interfaces/genre';
 import {GenreService} from '../../../shared/services/genre.service';
-import {StatusUtils} from '../../../shared/utils/statusUtils';
+import {GlobalUtils} from '../../../shared/utils/globalUtils';
 
 @Component({
   selector: 'app-genre-index',
@@ -12,7 +12,7 @@ import {StatusUtils} from '../../../shared/utils/statusUtils';
   styleUrls: ['./genre-index.component.css']
 })
 export class GenreIndexComponent implements OnInit {
-  mapDefaultStatus = StatusUtils.mapDefaultStatus;
+  mapDefaultStatus = GlobalUtils.mapDefaultStatus;
 
   searchInput: string | number;
   displayData = [];

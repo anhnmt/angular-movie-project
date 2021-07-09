@@ -1,10 +1,13 @@
 export class StringUtils {
-  static convertToTitleCase = (str) => {
-    return str.replace(/(^|\s)\S/g, (t) => t.toUpperCase());
-  };
+  static convertToTitleCase(str: string): string {
+    return str?.trim().replace(/(^|\s)\S/g, (t) => t.toUpperCase()) || null;
+  }
 
-  static convertToSlug = (str) => {
-    str = String(str).toString();
+  static convertToSlug(str: string): string {
+    if (str == null || str === '') {
+      return str;
+    }
+
     str = str.replace(/^\s+|\s+$/g, ''); // trim
     str = str.toLowerCase();
 
@@ -129,11 +132,12 @@ export class StringUtils {
         str = str.replace(new RegExp(s, 'g'), swap);
       });
     });
+
     return str
       .replace(/[^a-z0-9 -]/g, '') // remove invalid chars
       .replace(/\s+/g, '-') // collapse whitespace and replace by -
       .replace(/-+/g, '-') // collapse dashes
       .replace(/^-+/, '') // trim - from start of text
       .replace(/-+$/, '');
-  };
+  }
 }

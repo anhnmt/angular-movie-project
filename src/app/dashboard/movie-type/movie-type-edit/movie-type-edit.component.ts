@@ -1,6 +1,5 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {MovieType} from '../../../shared/interfaces/movie-type';
-import {StatusUtils} from '../../../shared/utils/statusUtils';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -8,6 +7,7 @@ import {MovieTypeService} from '../../../shared/services/movie-type.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {SharedService} from '../../../shared/services/shared.service';
 import {takeUntil} from 'rxjs/operators';
+import {GlobalUtils} from '../../../shared/utils/globalUtils';
 
 @Component({
   selector: 'app-movie-type-edit',
@@ -17,7 +17,7 @@ import {takeUntil} from 'rxjs/operators';
 export class MovieTypeEditComponent implements OnInit, AfterViewInit, OnDestroy {
   visible = false;
   movieType: MovieType;
-  status = StatusUtils.getDefaultStatus();
+  status = GlobalUtils.getDefaultStatus();
   validateForm: FormGroup;
   private onDestroy$: Subject<boolean> = new Subject<boolean>();
 
