@@ -1,1 +1,1247 @@
-<p>search works!</p>
+<div class="main-content">
+  <div class="support-func ml-auto"><a href="#" class="icon-support"></a></div>
+  <div class="container search-result">
+    <form id="filterForm" method="GET" action="/tim-kiem-phim">
+      <input type="hidden" name="keyword" value="">
+      <div class="filter row">
+        <h5 class="col-12">Tìm kiếm:</h5>
+        <div class="col-md-4 col-12">
+          <div class="custom-select">
+
+            <select name="category_id">
+              <option value="0">Thể loại</option>
+              <option value="">Tất cả</option>
+
+              <option value="99">Gameshow</option>
+              <option value="101">Phiêu lưu</option>
+              <option value="102">Siêu anh hùng</option>
+              <option value="108">Bom tấn</option>
+              <option value="109">Phim chiếu rạp</option>
+              <option value="111">TV Shows</option>
+              <option value="112">Phim TVB</option>
+              <option value="113">Anime</option>
+              <option value="115">LGBTQ+</option>
+              <option value="117">Phim Châu Á Kinh Điển</option>
+              <option value="82">Phim mới</option>
+              <option value="75">Không Thể Bỏ Lỡ</option>
+              <option value="80">Phim lẻ</option>
+              <option value="81">Phim bộ</option>
+              <option value="56">Hành động</option>
+              <option value="52">Kịch tính, hồi hộp</option>
+              <option value="100">Tâm lý</option>
+              <option value="93">Cổ trang</option>
+              <option value="51">Hài hước</option>
+              <option value="54">Viễn tây</option>
+              <option value="46">Kinh dị</option>
+              <option value="58">Lịch sử</option>
+              <option value="59">Tình cảm, lãng mạn</option>
+              <option value="61">Hoạt hình</option>
+              <option value="63">Hình sự</option>
+              <option value="64">Chiến tranh</option>
+              <option value="65">Tài liệu</option>
+              <option value="66">Thần thoại</option>
+              <option value="68">Viễn tưởng</option>
+              <option value="69">Âm nhạc - Thể thao</option>
+              <option value="70">Kiếm hiệp, võ thuật</option>
+              <option value="73">Thảm họa</option>
+              <option value="79">Clip ngắn</option>
+              <option value="90">Phim 18+</option>
+            </select>
+            <div class="select-selected">Thể loại</div><div class="select-items select-hide"><div>Tất cả</div><div>Gameshow</div><div>Phiêu lưu</div><div>Siêu anh hùng</div><div>Bom tấn</div><div>Phim chiếu rạp</div><div>TV Shows</div><div>Phim TVB</div><div>Anime</div><div>LGBTQ+</div><div>Phim Châu Á Kinh Điển</div><div>Phim mới</div><div>Không Thể Bỏ Lỡ</div><div>Phim lẻ</div><div>Phim bộ</div><div>Hành động</div><div>Kịch tính, hồi hộp</div><div>Tâm lý</div><div>Cổ trang</div><div>Hài hước</div><div>Viễn tây</div><div>Kinh dị</div><div>Lịch sử</div><div>Tình cảm, lãng mạn</div><div>Hoạt hình</div><div>Hình sự</div><div>Chiến tranh</div><div>Tài liệu</div><div>Thần thoại</div><div>Viễn tưởng</div><div>Âm nhạc - Thể thao</div><div>Kiếm hiệp, võ thuật</div><div>Thảm họa</div><div>Clip ngắn</div><div>Phim 18+</div></div></div>
+        </div>
+
+        <div class="col-md-4 col-12">
+          <div class="custom-select">
+            <select name="country_id">
+              <option value="0">Quốc gia</option>
+              <option value="">Tất cả</option>
+
+              <option value="254">Ấn Độ</option>
+              <option value="242">Anh</option>
+              <option value="256">Canada</option>
+              <option value="246">Châu Á</option>
+              <option value="257">Đài Loan</option>
+              <option value="248">Đức</option>
+              <option value="252">Hàn Quốc</option>
+              <option value="250">Hồng Kông</option>
+              <option value="241">Mỹ</option>
+              <option value="251">Nga</option>
+              <option value="249">Nhật Bản</option>
+              <option value="244">Pháp</option>
+              <option value="255">Philippines</option>
+              <option value="245">Quốc gia khác</option>
+              <option value="253">Thái Lan</option>
+              <option value="247">Trung Quốc</option>
+              <option value="258">Úc</option>
+              <option value="243">Việt Nam</option>
+
+            </select>
+            <div class="select-selected">Quốc gia</div><div class="select-items select-hide"><div>Tất cả</div><div>Ấn Độ</div><div>Anh</div><div>Canada</div><div>Châu Á</div><div>Đài Loan</div><div>Đức</div><div>Hàn Quốc</div><div>Hồng Kông</div><div>Mỹ</div><div>Nga</div><div>Nhật Bản</div><div>Pháp</div><div>Philippines</div><div>Quốc gia khác</div><div>Thái Lan</div><div>Trung Quốc</div><div>Úc</div><div>Việt Nam</div></div></div>
+        </div>
+
+
+        <div class="col-md-4 col-12">
+          <div class="custom-select">
+            <select id="selectYear" name="year">
+              <option value="0">Năm sản xuất</option>
+              <option value="">Tất cả</option>
+              <option value="2021">2021</option>
+              <option value="2020">2020</option>
+              <option value="2019">2019</option>
+              <option value="2018">2018</option>
+              <option value="2017">2017</option>
+              <option value="2016">2016</option>
+              <option value="2015">2015</option>
+              <option value="2014">2014</option>
+              <option value="2013">2013</option>
+              <option value="2012">2012</option>
+              <option value="2011">2011</option>
+              <option value="2010">2010</option>
+              <option value="2009">2009</option>
+              <option value="2008">2008</option>
+              <option value="2007">2007</option>
+              <option value="2006">2006</option>
+              <option value="2005">2005</option>
+              <option value="2004">2004</option>
+              <option value="2003">2003</option>
+              <option value="2002">2002</option>
+              <option value="2001">2001</option>
+              <option value="2000">2000</option>
+              <option value="1999">1999</option>
+              <option value="1998">1998</option>
+              <option value="1997">1997</option>
+              <option value="1996">1996</option>
+              <option value="1995">1995</option>
+              <option value="1994">1994</option>
+              <option value="1993">1993</option>
+              <option value="1992">1992</option>
+              <option value="1991">1991</option>
+              <option value="1990">1990</option>
+              <option value="1989">1989</option>
+              <option value="1988">1988</option>
+              <option value="1987">1987</option>
+              <option value="1986">1986</option>
+              <option value="1985">1985</option>
+              <option value="1984">1984</option>
+              <option value="1983">1983</option>
+              <option value="1982">1982</option>
+              <option value="1981">1981</option>
+              <option value="1980">1980</option>
+              <option value="1979">1979</option>
+              <option value="1978">1978</option>
+              <option value="1977">1977</option>
+              <option value="1976">1976</option>
+              <option value="1975">1975</option>
+              <option value="1974">1974</option>
+              <option value="1973">1973</option>
+              <option value="1972">1972</option>
+              <option value="1971">1971</option>
+              <option value="1970">1970</option>
+              <option value="1969">1969</option>
+              <option value="1968">1968</option>
+              <option value="1967">1967</option>
+              <option value="1966">1966</option>
+              <option value="1965">1965</option>
+              <option value="1964">1964</option>
+              <option value="1963">1963</option>
+              <option value="1962">1962</option>
+              <option value="1961">1961</option>
+              <option value="1960">1960</option>
+              <option value="1959">1959</option>
+              <option value="1958">1958</option>
+              <option value="1957">1957</option>
+              <option value="1956">1956</option>
+              <option value="1955">1955</option>
+              <option value="1954">1954</option>
+              <option value="1953">1953</option>
+              <option value="1952">1952</option>
+              <option value="1951">1951</option>
+              <option value="1950">1950</option>
+            </select>
+            <div class="select-selected">Năm sản xuất</div><div class="select-items select-hide"><div>Tất cả</div><div>2021</div><div>2020</div><div>2019</div><div>2018</div><div>2017</div><div>2016</div><div>2015</div><div>2014</div><div>2013</div><div>2012</div><div>2011</div><div>2010</div><div>2009</div><div>2008</div><div>2007</div><div>2006</div><div>2005</div><div>2004</div><div>2003</div><div>2002</div><div>2001</div><div>2000</div><div>1999</div><div>1998</div><div>1997</div><div>1996</div><div>1995</div><div>1994</div><div>1993</div><div>1992</div><div>1991</div><div>1990</div><div>1989</div><div>1988</div><div>1987</div><div>1986</div><div>1985</div><div>1984</div><div>1983</div><div>1982</div><div>1981</div><div>1980</div><div>1979</div><div>1978</div><div>1977</div><div>1976</div><div>1975</div><div>1974</div><div>1973</div><div>1972</div><div>1971</div><div>1970</div><div>1969</div><div>1968</div><div>1967</div><div>1966</div><div>1965</div><div>1964</div><div>1963</div><div>1962</div><div>1961</div><div>1960</div><div>1959</div><div>1958</div><div>1957</div><div>1956</div><div>1955</div><div>1954</div><div>1953</div><div>1952</div><div>1951</div><div>1950</div></div></div>
+        </div>
+      </div>
+    </form>
+    <div class="result">
+      <h4>Có <span>8553</span> kết quả tìm kiếm <span></span></h4>
+      <div class="list-vod row category-tabs-item">
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/khong-thay-ac-quy-2157">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/147535/conversions/5ecdf057f03ed_see_no_evil_d-190_274.jpg" alt="See No Evil (2006)"></div>
+            </div>
+            <p>Không Thấy Ác Quỷ</p>
+            <p class="subtitle">See No Evil (2006)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/co-hang-xom-2159">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/121401/conversions/2159_the-girl-next-door-2004_photo_portrait-190_274.jpg" alt="The Girl Next Door (2004)"></div>
+            </div>
+            <p>Cô Hàng Xóm</p>
+            <p class="subtitle">The Girl Next Door (2004)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/mua-ca-so-thu-2087">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/149427/conversions/5f1ffcc3ec678_we-bought-a-zoo-final-190_274.jpg" alt="We Bought A Zoo (2011)"></div>
+            </div>
+            <p>Mua Cả Sở Thú</p>
+            <p class="subtitle">We Bought A Zoo (2011)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/do-vo-2088">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/121270/conversions/2088_broken-2012_photo_portrait-190_274.jpg" alt="Broken (2012)"></div>
+            </div>
+            <p>Đổ Vỡ</p>
+            <p class="subtitle">Broken (2012)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/ngon-doi-mau-2102">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/121283/conversions/2102_the-hills-run-red-2009_photo_portrait-190_274.jpg" alt="The Hills Run Red (2009)"></div>
+            </div>
+            <p>Ngọn Đồi Máu</p>
+            <p class="subtitle">The Hills Run Red (2009)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/ninja-khai-huyen-2111">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/121355/conversions/2111_ninja-apocalypse-2014_photo_portrait-190_274.jpg" alt="Ninja Apocalypse (2014)"></div>
+            </div>
+            <p>Ninja Khải Huyền</p>
+            <p class="subtitle">Ninja Apocalypse (2014)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/chuyen-tinh-thoi-chien-2116">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/150598/conversions/5f3650649ca8f_Suite_Francaise-02-190_274.jpg" alt="Suite Francaise (2014)"></div>
+            </div>
+            <p>Chuyện Tình Thời Chiến</p>
+            <p class="subtitle">Suite Francaise (2014)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/toi-la-ai-2139">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/152143/conversions/5f4cc1e6c7ebf_Who_Am_I-190_274.jpg" alt="Who Am I (2015)"></div>
+            </div>
+            <p>Tôi Là Ai</p>
+            <p class="subtitle">Who Am I (2015)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/chi-rieng-minh-em-2011-2123">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/149666/conversions/5f27bedf3ab34_always_2011-02-190_274.jpg" alt="Always (Only You) (2011)"></div>
+            </div>
+            <p>Chỉ Riêng Mình Em</p>
+            <p class="subtitle">Always (Only You) (2011)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/sniper-reloaded-2011-2083">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/121248/conversions/2083_sniper-reloaded-2011_photo_portrait-190_274.jpg" alt="Sniper: Reloaded (2011)"></div>
+            </div>
+            <p></p>
+            <p class="subtitle">Sniper: Reloaded (2011)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/hon-ma-luc-nua-dem-2456">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/147455/conversions/5ecdd9c371879_23_59_d-190_274.jpg" alt="23:59 (2011)"></div>
+            </div>
+            <p>Hồn Ma Lúc Nửa Đêm</p>
+            <p class="subtitle">23:59 (2011)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/nac-danh-2457">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/156078/conversions/5f8fb1a9896c9_anonymous-s-190_274.jpg" alt="Anonymous (2011)"></div>
+            </div>
+            <p>Nặc Danh</p>
+            <p class="subtitle">Anonymous (2011)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/kiem-khach-bi-an-2460">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/157954/conversions/5fc772e9ce873_the-sword-identity-d-190_274.jpg" alt="The Sword Identity (2011)"></div>
+            </div>
+            <p>Kiếm Khách Bí Ẩn</p>
+            <p class="subtitle">The Sword Identity (2011)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/nao-ta-cung-nhay-2-2472">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/121982/conversions/2472_any-body-can-dance-2-2015_photo_portrait-190_274.jpg" alt="Any Body Can Dance 2 (2015)"></div>
+            </div>
+            <p>Nào Ta Cùng Nhảy 2</p>
+            <p class="subtitle">Any Body Can Dance 2 (2015)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/quy-ba-diep-vien-2496">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/150617/conversions/5f366108169ca_spy-02-190_274.jpg" alt="Spy (2015)"></div>
+            </div>
+            <p>Quý Bà Điệp Viên</p>
+            <p class="subtitle">Spy (2015)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/than-chu-2501">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/122037/conversions/2501_the-client-2011_photo_portrait-190_274.jpg" alt="The Client (2011)"></div>
+            </div>
+            <p>Thân Chủ</p>
+            <p class="subtitle">The Client (2011)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/tau-apollo-18-2503">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/152328/conversions/5f506d5934be7_apollo_18_d-190_274.jpg" alt="Apollo 18 (2011)"></div>
+            </div>
+            <p>Tàu Apollo 18</p>
+            <p class="subtitle">Apollo 18 (2011)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/mere-brother-ki-dulhan-2011-2505">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/122046/conversions/2505_mere-brother-ki-dulhan-2011_photo_portrait-190_274.jpg" alt="Mere Brother Ki Dulhan (2011)"></div>
+            </div>
+            <p></p>
+            <p class="subtitle">Mere Brother Ki Dulhan (2011)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/shark-night-2011-2508">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/122086/conversions/2508_shark-night-2011_photo_portrait-190_274.jpg" alt="Shark Night (2011)"></div>
+            </div>
+            <p></p>
+            <p class="subtitle">Shark Night (2011)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/swat-unit-887-2015-2509">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/122050/conversions/2509_swat-unit-887-2015_photo_portrait-190_274.jpg" alt="SWAT: Unit 887 (2015)"></div>
+            </div>
+            <p></p>
+            <p class="subtitle">SWAT: Unit 887 (2015)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/su-lua-chon-cua-quy-2516">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/122091/conversions/2516_the-chosen-2015_photo_portrait-190_274.jpg" alt="The Chosen (2015)"></div>
+            </div>
+            <p>Sự Lựa Chọn Của Quỷ</p>
+            <p class="subtitle">The Chosen (2015)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/loosies-2011-2396">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/121844/conversions/2396_loosies-2011_photo_portrait-190_274.jpg" alt="Loosies (2011)"></div>
+            </div>
+            <p></p>
+            <p class="subtitle">Loosies (2011)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/lo-mo-2418">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/147503/conversions/5ecde8d62ab8f_hostel_d-190_274.jpg" alt="Hostel (2005)"></div>
+            </div>
+            <p>Lò Mổ</p>
+            <p class="subtitle">Hostel (2005)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/giac-quan-hoan-hao-2533">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/155039/conversions/5f7412d81939a_perfect-sense-d-190_274.jpg" alt="Perfect Sense (2011)"></div>
+            </div>
+            <p>Giác Quan Hoàn Hảo</p>
+            <p class="subtitle">Perfect Sense (2011)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/arthur-va-merlin-2544">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/148728/conversions/5f067dbdf0a37_arthur_and_merlin_d-190_274.jpg" alt="Arthur &amp; Merlin (2015)"></div>
+            </div>
+            <p>Arthur và Merlin</p>
+            <p class="subtitle">Arthur &amp; Merlin (2015)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/baahubali-the-beginning-2015-2475">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/121990/conversions/2475_baahubali-the-beginning-2015_photo_portrait-190_274.jpg" alt="Baahubali: The Beginning (2015)"></div>
+            </div>
+            <p></p>
+            <p class="subtitle">Baahubali: The Beginning (2015)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/the-gioi-khung-long-2476">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/122063/conversions/2476_jurassic-world-2015_photo_portrait-190_274.jpg" alt="Jurassic World (2015)"></div>
+            </div>
+            <p>Thế Giới Khủng Long</p>
+            <p class="subtitle">Jurassic World (2015)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/bo-tu-sieu-dang-2477">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/122013/conversions/2477_fantastic-four-2015_photo_portrait-190_274.jpg" alt="Fantastic Four (2015)"></div>
+            </div>
+            <p>Bộ Tứ Siêu Đẳng</p>
+            <p class="subtitle">Fantastic Four (2015)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/dai-hi-lam-mon-2434">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/121913/conversions/2434_the-wonderful-wedding-2015_photo_portrait-190_274.jpg" alt="The Wonderful Wedding (2015)"></div>
+            </div>
+            <p>Đại Hỉ Lâm Môn</p>
+            <p class="subtitle">The Wonderful Wedding (2015)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/machine-gun-preacher-2011-2427">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/122000/conversions/2427_machine-gun-preacher-2011_photo_portrait-190_274.jpg" alt="Machine Gun Preacher (2011)"></div>
+            </div>
+            <p></p>
+            <p class="subtitle">Machine Gun Preacher (2011)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/bon-cap-do-doi-dau-4904">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/153726/conversions/5f686acd6a549_The-fourth-Kind-d-190_274.jpg" alt="The Fourth Kind (2009)"></div>
+            </div>
+            <p>Bốn Cấp Độ Đối Đầu</p>
+            <p class="subtitle">The Fourth Kind (2009)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/sat-thu-tho-may-2-tai-xuat-4920">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/126788/conversions/4920_mechanic-resurrection-2016_photo_portrait-190_274.jpg" alt="Mechanic: Resurrection (2016)"></div>
+            </div>
+            <p>Sát Thủ "Thợ Máy" 2: Tái Xuất</p>
+            <p class="subtitle">Mechanic: Resurrection (2016)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/dam-cuoi-o-hy-lap-4928">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/153742/conversions/5f687237b42de_My-Big-Fat-d-190_274.jpg" alt="My Big Fat Greek Wedding (2002)"></div>
+            </div>
+            <p>Đám Cưới Ở Hy Lạp</p>
+            <p class="subtitle">My Big Fat Greek Wedding (2002)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/buoi-chieu-xui-xeo-4930">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/126834/conversions/4930_dog-day-afternoon-1975_photo_portrait-190_274.jpg" alt="Dog Day Afternoon (1975)"></div>
+            </div>
+            <p>Buổi Chiều Xui Xẻo</p>
+            <p class="subtitle">Dog Day Afternoon (1975)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/dua-be-mat-tich-4934">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/126791/conversions/4934_gone-baby-gone-2007_photo_portrait-190_274.jpg" alt="Gone Baby Gone (2007)"></div>
+            </div>
+            <p>Đứa Bé Mất Tích</p>
+            <p class="subtitle">Gone Baby Gone (2007)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/sat-nhan-trong-bong-toi-4942">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/150758/conversions/5f3a589eae95b_dont_breath-02-190_274.jpg" alt="Don't Breathe (2016)"></div>
+            </div>
+            <p>Sát Nhân Trong Bóng Tối</p>
+            <p class="subtitle">Don't Breathe (2016)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/linh-hon-cua-may-3-nhung-giot-nuoc-mat-4944">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/148602/conversions/5f0546b097a00_ghost_in_the_shell_arise_border_3_ghost_tears_d-190_274.jpg" alt="Ghost in the Shell Arise: Border 3 – Ghost Tears (2014)"></div>
+            </div>
+            <p>Linh Hồn Của Máy 3: Những Giọt Nước Mắt</p>
+            <p class="subtitle">Ghost in the Shell Arise: Border 3 – Ghost Tears (2014)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/chuyen-than-tien-o-new-york-4952">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/151024/conversions/5f3ccee43810a_enchanted-01-190_274.jpg" alt="Enchanted (2007)"></div>
+            </div>
+            <p>Chuyện Thần Tiên Ở New York</p>
+            <p class="subtitle">Enchanted (2007)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/beyond-a-reasonable-doubt-2009-4985">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/126892/conversions/4985_beyond-a-reasonable-doubt-2009_photo_portrait-190_274.jpg" alt="Beyond a Reasonable Doubt (2009)"></div>
+            </div>
+            <p></p>
+            <p class="subtitle">Beyond a Reasonable Doubt (2009)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/hon-so-tu-than-4998">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/155072/conversions/5f743237e9678_knowing-d-190_274.jpg" alt="Knowing (2009)"></div>
+            </div>
+            <p>Hỗn Số Tử Thần</p>
+            <p class="subtitle">Knowing (2009)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/sieu-te-hai-5001">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/151524/conversions/5f449839ae865_superbad_d-190_274.jpg" alt="Superbad (2007)"></div>
+            </div>
+            <p>Siêu Tệ Hại</p>
+            <p class="subtitle">Superbad (2007)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/vuot-dai-ngan-ha-5005">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/150407/conversions/5f33985a17122_Across_-the_Universe-02-190_274.jpg" alt="Across the Universe (2007)"></div>
+            </div>
+            <p>Vượt Dải Ngân Hà</p>
+            <p class="subtitle">Across the Universe (2007)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/hon-ma-tro-lai-5006">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/127006/conversions/5006_the-remains-2016_photo_portrait-190_274.jpg" alt="The Remains (2016)"></div>
+            </div>
+            <p>Hồn Ma Trở Lại</p>
+            <p class="subtitle">The Remains (2016)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/ai-muu-hai-tho-roger-4858">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/126672/conversions/4858_who-framed-roger-rabbit-1988_photo_portrait-190_274.jpg" alt="Who Framed Roger Rabbit (1988)"></div>
+            </div>
+            <p>Ai Mưu Hại Thỏ Roger</p>
+            <p class="subtitle">Who Framed Roger Rabbit (1988)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/su-that-che-giau-4862">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/126674/conversions/4862_contact-1997_photo_portrait-190_274.jpg" alt="Contact (1997)"></div>
+            </div>
+            <p>Sự Thật Che Giấu</p>
+            <p class="subtitle">Contact (1997)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/tinh-cuong-say-4872">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/152738/conversions/5f588f78bfbee_Punch_Drunk_Love_s-190_274.jpg" alt="Punch-Drunk Love (2002)"></div>
+            </div>
+            <p>Tình Cuồng Say</p>
+            <p class="subtitle">Punch-Drunk Love (2002)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/nhan-chung-bat-dac-di-4886">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/156292/conversions/5f9643b432a34_did-you-hear-d-190_274.jpg" alt="Did You Hear About the Morgans? (2009)"></div>
+            </div>
+            <p>Nhân Chứng Bất Đắc Dĩ</p>
+            <p class="subtitle">Did You Hear About the Morgans? (2009)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/fantastic-mr-fox-2009-4899">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/126739/conversions/4899_fantastic-mr-fox-2009_photo_portrait-190_274.jpg" alt="Fantastic Mr. Fox (2009)"></div>
+            </div>
+            <p></p>
+            <p class="subtitle">Fantastic Mr. Fox (2009)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/sup-do-4961">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/126845/conversions/4961_falling-down-1993_photo_portrait-190_274.jpg" alt="Falling Down (1993)"></div>
+            </div>
+            <p>Sụp Đổ</p>
+            <p class="subtitle">Falling Down (1993)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/cong-chua-ngu-trong-rung-4971">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/126858/conversions/4971_king-of-thorn-2009_photo_portrait-190_274.jpg" alt="King of Thorn (2009)"></div>
+            </div>
+            <p>Công Chúa Ngủ Trong Rừng</p>
+            <p class="subtitle">King of Thorn (2009)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/binh-doan-ma-tran-4975">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/151103/conversions/5f3d02eabdd32_aimatrix-190_274.jpg" alt="The Animatrix (2003)"></div>
+            </div>
+            <p>Binh Đoàn Ma Trận</p>
+            <p class="subtitle">The Animatrix (2003)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/vuot-nguc-alcatraz-4832">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/126591/conversions/4832_escape-from-alcatraz-1979_photo_portrait-190_274.jpg" alt="Escape from Alcatraz (1979)"></div>
+            </div>
+            <p>Vượt Ngục Alcatraz</p>
+            <p class="subtitle">Escape from Alcatraz (1979)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/in-bruges-2008-4850">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/126689/conversions/4850_in-bruges-2008_photo_portrait-190_274.jpg" alt="In Bruges (2008)"></div>
+            </div>
+            <p></p>
+            <p class="subtitle">In Bruges (2008)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/vu-am-sat-jesse-james-cua-coward-robert-ford-5012">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/150727/conversions/5f3a2e99697cd_The_Assassination_of_Jesse_James_by_the_Coward_Robert_Ford-02-190_274.jpg" alt="The Assassination of Jesse James by the Coward Robert Ford (2007)"></div>
+            </div>
+            <p>Vụ Ám Sát Jesse James Của Coward Robert Ford</p>
+            <p class="subtitle">The Assassination of Jesse James by the Coward Robert Ford (2007)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/nghe-si-choi-dan-5028">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/126985/conversions/5028_once-2007_photo_portrait-190_274.jpg" alt="Once (2007)"></div>
+            </div>
+            <p>Nghệ Sĩ Chơi Đàn</p>
+            <p class="subtitle">Once (2007)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/bat-ma-nhat-kieu-thai-4795">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/155686/conversions/5f857bf54ea65_haunting-in-japan-d-190_274.jpg" alt="Haunting in Japan (2016)"></div>
+            </div>
+            <p>Bắt Ma Nhật Kiểu Thái</p>
+            <p class="subtitle">Haunting in Japan (2016)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/huyet-chien-5236">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/127373/conversions/5236_call-of-heroes-2016_photo_portrait-190_274.jpg" alt="Call of Heroes (2016)"></div>
+            </div>
+            <p>Huyết Chiến</p>
+            <p class="subtitle">Call of Heroes (2016)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/nhoc-ti-cua-tieu-thu-jones-5237">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/156927/conversions/5fa22db83f2ee_Bridget-Jones-s-Baby-d-190_274.jpg" alt="Bridget Jones's Baby (2016)"></div>
+            </div>
+            <p>Nhóc Tì Của Tiểu Thư Jones</p>
+            <p class="subtitle">Bridget Jones's Baby (2016)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/the-air-i-breathe-2007-5241">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/127380/conversions/5241_the-air-i-breathe-2007_photo_portrait-190_274.jpg" alt="The Air I Breathe (2007)"></div>
+            </div>
+            <p></p>
+            <p class="subtitle">The Air I Breathe (2007)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/cah-2010-5257">
+            <div class="img-4-6">
+              <div class="inline"><img src="https://static.247phim.com/127457/conversions/5257_cah-2010_photo_portrait-190_274.jpg" alt="Ca$h (2010)"></div>
+            </div>
+            <p></p>
+            <p class="subtitle">Ca$h (2010)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3"></a>
+            <a href="#" class="view"></a>
+          </div>
+        </div>
+      </div>
+      <nav class="navigation">
+        <ul class="pagination justify-content-center">
+
+          <li class="page-item disabled" aria-disabled="true" aria-label="« Trang sau">
+            <span class="page-link" aria-hidden="true">‹</span>
+          </li>
+
+
+
+
+
+          <li class="page-item active" aria-current="page"><span class="page-link">1</span></li>
+          <li class="page-item"><a class="page-link" href="https://247phim.com/tim-kiem-phim/?year=&amp;country_id=&amp;category_id=&amp;page=2">2</a></li>
+          <li class="page-item"><a class="page-link" href="https://247phim.com/tim-kiem-phim/?year=&amp;country_id=&amp;category_id=&amp;page=3">3</a></li>
+          <li class="page-item"><a class="page-link" href="https://247phim.com/tim-kiem-phim/?year=&amp;country_id=&amp;category_id=&amp;page=4">4</a></li>
+          <li class="page-item"><a class="page-link" href="https://247phim.com/tim-kiem-phim/?year=&amp;country_id=&amp;category_id=&amp;page=5">5</a></li>
+          <li class="page-item"><a class="page-link" href="https://247phim.com/tim-kiem-phim/?year=&amp;country_id=&amp;category_id=&amp;page=6">6</a></li>
+          <li class="page-item"><a class="page-link" href="https://247phim.com/tim-kiem-phim/?year=&amp;country_id=&amp;category_id=&amp;page=7">7</a></li>
+          <li class="page-item"><a class="page-link" href="https://247phim.com/tim-kiem-phim/?year=&amp;country_id=&amp;category_id=&amp;page=8">8</a></li>
+
+          <li class="page-item disabled" aria-disabled="true"><span class="page-link">...</span></li>
+
+
+
+
+
+          <li class="page-item"><a class="page-link" href="https://247phim.com/tim-kiem-phim/?year=&amp;country_id=&amp;category_id=&amp;page=142">142</a></li>
+          <li class="page-item"><a class="page-link" href="https://247phim.com/tim-kiem-phim/?year=&amp;country_id=&amp;category_id=&amp;page=143">143</a></li>
+
+
+          <li class="page-item">
+            <a class="page-link" href="https://247phim.com/tim-kiem-phim/?year=&amp;country_id=&amp;category_id=&amp;page=2" rel="next" aria-label="Trang trước »">›</a>
+          </li>
+        </ul>
+      </nav>
+
+
+    </div>
+    <div class="panel-vod">
+      <div class="title-cate"><span>Danh sách đề xuất</span></div>
+      <div class="list-vod row category-tabs-item">
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/ho-so-trinh-sat-phan-2-11028">
+            <div class="img-4-6">
+              <div class="inline">
+                <img src="https://static.247phim.com/138093/conversions/11028_detective-investigation-files-2_photo_portrait-190_274.jpg" alt="Detective Investigation Files (1996)">
+                <span class="ribbon">
+                                                                                                                                                                                                                                             40/40
+                                                                                    </span>
+              </div>
+            </div>
+            <p>Hồ Sơ Trinh Sát (Phần 2)</p>
+            <p class="subtitle">Detective Investigation Files (1996)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3">1</a>
+            <a href="#" class="view">218.1 K</a>
+          </div>
+        </div>
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/toi-la-nhen-day-co-sao-khong-21927">
+            <div class="img-4-6">
+              <div class="inline">
+                <img src="https://static.247phim.com/160912/conversions/6049cfc79254a_21e17ba115e4dd814cb1de44ac484533-190_274.jpg" alt="So I Am A Spider, So What? (2021)">
+                <span class="ribbon">
+                                                                                                                                                                                                                                             23/23
+                                                                                    </span>
+              </div>
+            </div>
+            <p>Tôi Là Nhện Đấy, Có Sao Không?</p>
+            <p class="subtitle">So I Am A Spider, So What? (2021)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3">2</a>
+            <a href="#" class="view">3.6 K</a>
+          </div>
+        </div>
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/doraemon-doi-ban-than-phan-2-22239">
+            <div class="img-4-6">
+              <div class="inline">
+                <img src="https://static.247phim.com/161718/conversions/607e91fbba187_stand-by-me-2-d-190_274.jpg" alt="Stand By Me Doraemon 2 (2021)">
+              </div>
+            </div>
+            <p>Doraemon: Đôi Bạn Thân (Phần 2)</p>
+            <p class="subtitle">Stand By Me Doraemon 2 (2021)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3">11</a>
+            <a href="#" class="view">15.7 K</a>
+          </div>
+        </div>
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/tay-xa-thu-22250">
+            <div class="img-4-6">
+              <div class="inline">
+                <img src="https://static.247phim.com/161758/conversions/608282adc82b7_the-marksman-d-190_274.jpg" alt="The Marksman (2021)">
+              </div>
+            </div>
+            <p>Tay Xạ Thủ</p>
+            <p class="subtitle">The Marksman (2021)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3">3</a>
+            <a href="#" class="view">28.8 K</a>
+          </div>
+        </div>
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/tai-xe-sat-thu-22272">
+            <div class="img-4-6">
+              <div class="inline">
+                <img src="https://static.247phim.com/161819/conversions/60890680b6c75_taxi-190_274.jpg" alt="Taxi Driver (2021)">
+                <span class="ribbon">
+                                                                                                                                                                                                                                             16/16
+                                                                                    </span>
+              </div>
+            </div>
+            <p>Tài Xế Sát Thủ</p>
+            <p class="subtitle">Taxi Driver (2021)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3">2</a>
+            <a href="#" class="view">12.6 K</a>
+          </div>
+        </div>
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/the-gioi-ngam-mumbai-22283">
+            <div class="img-4-6">
+              <div class="inline">
+                <img src="https://static.247phim.com/161837/conversions/608ba885e5db1_mumbai-copy-190_274.jpg" alt="Mumbai Saga (2021)">
+              </div>
+            </div>
+            <p>Thế Giới Ngầm Mumbai</p>
+            <p class="subtitle">Mumbai Saga (2021)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3">1</a>
+            <a href="#" class="view">8.8 K</a>
+          </div>
+        </div>
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/phong-than-bang-quyet-chien-van-tien-tran-22344">
+            <div class="img-4-6">
+              <div class="inline">
+                <img src="https://static.247phim.com/161946/conversions/6094e654ea6f0_phongthan-d-190_274.jpg" alt="The First Myth: Clash of Gods (2021)">
+              </div>
+            </div>
+            <p>Phong Thần Bảng: Quyết Chiến Vạn Tiên Trận</p>
+            <p class="subtitle">The First Myth: Clash of Gods (2021)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3">2</a>
+            <a href="#" class="view">9.1 K</a>
+          </div>
+        </div>
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/an-quy-22435">
+            <div class="img-4-6">
+              <div class="inline">
+                <img src="https://static.247phim.com/162085/conversions/60adfb3b84eb7_MV5BYzljZGEyNjYtM2Q0NC00NWFlLWE3NDktYmZjNjg0NDFlNDc4XkEyXkFqcGdeQXVyNDU5MTU4ODU%40._V1_-190_274.jpg" alt="The Unholy (2021)">
+              </div>
+            </div>
+            <p>Ấn Quỷ</p>
+            <p class="subtitle">The Unholy (2021)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3">2</a>
+            <a href="#" class="view">6.2 K</a>
+          </div>
+        </div>
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/con-thinh-no-chet-nguoi-22462">
+            <div class="img-4-6">
+              <div class="inline">
+                <img src="https://static.247phim.com/162132/conversions/60b5b92a74928_js-02_jdie-190_274.jpg" alt="Wrath Of Man (2021)">
+              </div>
+            </div>
+            <p>Cơn Thịnh Nộ Chết Người</p>
+            <p class="subtitle">Wrath Of Man (2021)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3">18</a>
+            <a href="#" class="view">32.2 K</a>
+          </div>
+        </div>
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/sas-bao-dong-do-22474">
+            <div class="img-4-6">
+              <div class="inline">
+                <img src="https://static.247phim.com/162155/conversions/60b82b4c67e38_bm-190_274.jpg" alt="SAS: Red Notice (2021)">
+              </div>
+            </div>
+            <p>SAS: Báo Động Đỏ</p>
+            <p class="subtitle">SAS: Red Notice (2021)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3">0</a>
+            <a href="#" class="view">6.2 K</a>
+          </div>
+        </div>
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/cuoc-chien-thuong-luu-phan-3-22493">
+            <div class="img-4-6">
+              <div class="inline">
+                <img src="https://static.247phim.com/162177/conversions/60bacbea4913e_3333-190_274.jpg" alt="The Penthouse 3: War in Life (2021)">
+                <span class="ribbon">
+                                                                                                                                                                                                                                             6/11
+                                                                                    </span>
+              </div>
+            </div>
+            <p>Cuộc Chiến Thượng Lưu (Phần 3)</p>
+            <p class="subtitle">The Penthouse 3: War in Life (2021)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3">2</a>
+            <a href="#" class="view">11.5 K</a>
+          </div>
+        </div>
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/am-anh-kinh-hoang-ma-xui-quy-khien-phan-3-22495">
+            <div class="img-4-6">
+              <div class="inline">
+                <img src="https://static.247phim.com/162184/conversions/60bd9f3e8c5b4_tc-190_274.jpg" alt="The Conjuring: The Devil Made Me Do It (2021)">
+              </div>
+            </div>
+            <p>Ám Ảnh Kinh Hoàng: Ma Xui Quỷ Khiến (Phần 3)</p>
+            <p class="subtitle">The Conjuring: The Devil Made Me Do It (2021)</p>
+          </a>
+          <div class="func">
+            <a href="#" class="like mr-3">3</a>
+            <a href="#" class="view">17.9 K</a>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
