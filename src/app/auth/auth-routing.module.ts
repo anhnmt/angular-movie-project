@@ -8,6 +8,11 @@ import {Error2Component} from './error-2/error-2.component';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: '/auth/login',
+    pathMatch: 'full',
+  },
+  {
     path: 'login',
     component: LoginComponent,
     data: {

@@ -2,26 +2,39 @@ import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 
 import {FullLayoutComponent} from './layouts/full-layout/full-layout.component';
-import {CommonLayoutComponent} from './layouts/common-layout/common-layout.component';
-
-import {FULL_LAYOUT_ROUTES} from './shared/routes/full-layout.routes';
-import {COMMON_LAYOUT_ROUTES} from './shared/routes/common-layout.routes';
+import {DashboardLayoutComponent} from './layouts/dashboard-layout/dashboard-layout.component';
+import {ClientLayoutComponent} from './layouts/client-layout/client-layout.component';
 
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: '/dashboard/home',
-    pathMatch: 'full',
+    component: ClientLayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./client/client.module').then(m => m.ClientModule),
+      }
+    ]
   },
   {
     path: '',
-    component: CommonLayoutComponent,
-    children: COMMON_LAYOUT_ROUTES
+    component: DashboardLayoutComponent,
+    children: [
+      {
+        path: 'dashboard',
+        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
+      }
+    ]
   },
   {
     path: '',
     component: FullLayoutComponent,
-    children: FULL_LAYOUT_ROUTES
+    children: [
+      {
+        path: 'auth',
+        loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+      }
+    ]
   }
 ];
 
