@@ -6,7 +6,7 @@ export interface Movie {
   name: string;
   slug: string;
   description?: string;
-  movie_type: MovieType;
+  movie_type_id: number;
   trailer?: string;
   imdb_id?: string;
   rating?: string;
@@ -17,4 +17,6 @@ export interface Movie {
   status: Status;
   created_at?: string;
   updated_at?: string;
+  country_ids?: number[];
+  genre_ids?: number[];
 }

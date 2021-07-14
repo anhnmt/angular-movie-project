@@ -31,7 +31,7 @@ export class MovieIndexComponent implements OnInit {
     },
     {
       title: 'Kiểu phim',
-      compare: (a: Movie, b: Movie) => a.movie_type?.movie_type_id - b.movie_type?.movie_type_id,
+      compare: (a: Movie, b: Movie) => a.movie_type_id - b.movie_type_id,
     },
     {
       title: 'Trạng thái',

@@ -11,6 +11,10 @@ import {MovieType} from '../../../shared/interfaces/movie-type';
 import {MovieTypeService} from '../../../shared/services/movie-type.service';
 import {GlobalUtils} from '../../../shared/utils/globalUtils';
 import {HelperUtils} from '../../../shared/utils/helperUtils';
+import {Country} from '../../../shared/interfaces/country';
+import {Genre} from '../../../shared/interfaces/genre';
+import {CountryService} from '../../../shared/services/country.service';
+import {GenreService} from '../../../shared/services/genre.service';
 
 @Component({
   selector: 'app-movie-edit',
@@ -21,9 +25,13 @@ export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
   isLoading = false;
   visible = false;
-  movie: Movie;
   status = GlobalUtils.getDefaultStatus();
+  movie: Movie;
   movieTypes: MovieType[] = [];
+  countries: Country[] = [];
+  genres: Genre[] = [];
+  selectedCountries: Country[] = [];
+  selectedGenres: Genre[] = [];
   validateForm: FormGroup;
   private onDestroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -35,13 +43,17 @@ export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
     private nzMessageService: NzMessageService,
     private sharedService: SharedService,
     private movieTypeService: MovieTypeService,
+    private countryService: CountryService,
+    private genreService: GenreService,
   ) {
-    const selectedStatus = this.status[0].value || null;
+    const selectedStatus = this.status[0]?.value || null;
 
     this.validateForm = this.formBuilder.group({
       name: [null, [Validators.required]],
       slug: [null, [Validators.required]],
-      movie_type: [null, [Validators.required]],
+      movie_type_id: [null, [Validators.required]],
+      country_ids: [null],
+      genre_ids: [null],
       status: [selectedStatus, [Validators.required]],
     });
 
@@ -51,20 +63,30 @@ export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
         const {movieId} = params;
 
         forkJoin([
+          this.movieTypeService.getAllMovieTypes(),
+          this.countryService.getAllCountries(),
+          this.genreService.getAllGenres(),
           this.movieService.getMovieByMovieId(movieId),
-          this.movieTypeService.getAllMovieTypes()
+          this.movieService.getAllCountriesByMovieId(movieId),
+          this.movieService.getAllGenresByMovieId(movieId),
         ])
-          .subscribe(([movie, movieTypes]) => {
-            this.movie = movie.data;
+          .subscribe(([movieTypes, countries, genres, movie, selectedCountries, selectedGenres]) => {
             this.movieTypes = movieTypes.data;
+            this.countries = countries.data;
+            this.genres = genres.data;
+            this.movie = movie.data;
+            this.selectedCountries = selectedCountries.data.map((item: any) => item.country_id);
+            this.selectedGenres = selectedGenres.data.map((item: any) => item.genre_id);
 
-            const defaultMovieType = this.movieTypes[0] || null;
-            const selectedMovieType = GlobalUtils.mapMovieType(this.movieTypes, this.movie.movie_type?.movie_type_id);
+            const defaultMovieType = this.movieTypes[0]?.movie_type_id || null;
+            const selectedMovieType = GlobalUtils.mapMovieType(this.movieTypes, this.movie.movie_type_id)?.movie_type_id;
 
             this.validateForm.patchValue({
               name: this.movie.name,
               slug: this.movie.slug,
-              movie_type: selectedMovieType || defaultMovieType,
+              movie_type_id: selectedMovieType || defaultMovieType,
+              country_ids: this.selectedCountries,
+              genre_ids: this.selectedGenres,
               status: this.movie.status
             });
           }, (error) => {
@@ -110,14 +132,16 @@ export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
+    // console.log(this.validateForm.value);
+
     this.movieService.updateMovieByMovieId(this.movie.movie_id, this.validateForm.value)
-      .subscribe((success) => {
-      this.sharedService.emitChange();
-      this.close();
-      this.nzMessageService.success('Cập nhật Thành Công');
-    }, (error) => {
-      this.nzMessageService.error(error.message);
-      this.isLoading = false;
-    });
+      .subscribe(() => {
+        this.sharedService.emitChange();
+        this.close();
+        this.nzMessageService.success('Cập nhật Thành Công');
+      }, (error) => {
+        this.nzMessageService.error(error.message);
+        this.isLoading = false;
+      });
   }
 }

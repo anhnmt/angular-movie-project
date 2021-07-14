@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Subject} from 'rxjs';
+import {forkJoin, Subject} from 'rxjs';
 import {Router} from '@angular/router';
 import {MovieService} from '../../../shared/services/movie.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
@@ -9,6 +9,10 @@ import {MovieTypeService} from '../../../shared/services/movie-type.service';
 import {MovieType} from '../../../shared/interfaces/movie-type';
 import {GlobalUtils} from '../../../shared/utils/globalUtils';
 import {HelperUtils} from '../../../shared/utils/helperUtils';
+import {GenreService} from '../../../shared/services/genre.service';
+import {CountryService} from '../../../shared/services/country.service';
+import {Country} from '../../../shared/interfaces/country';
+import {Genre} from '../../../shared/interfaces/genre';
 
 @Component({
   selector: 'app-movie-create',
@@ -21,6 +25,8 @@ export class MovieCreateComponent implements OnInit, AfterViewInit, OnDestroy {
   visible = false;
   status = GlobalUtils.getDefaultStatus();
   movieTypes: MovieType[] = [];
+  countries: Country[] = [];
+  genres: Genre[] = [];
   validateForm: FormGroup;
 
   private onDestroy$: Subject<boolean> = new Subject<boolean>();
@@ -32,26 +38,35 @@ export class MovieCreateComponent implements OnInit, AfterViewInit, OnDestroy {
     private nzMessageService: NzMessageService,
     private sharedService: SharedService,
     private movieTypeService: MovieTypeService,
+    private countryService: CountryService,
+    private genreService: GenreService,
   ) {
-    const selectedStatus = this.status[0] || null;
+    const selectedStatus = this.status[0]?.value || null;
 
     this.validateForm = this.formBuilder.group({
       name: [null, [Validators.required]],
       slug: [null, [Validators.required]],
-      movie_type: [null, [Validators.required]],
+      movie_type_id: [null, [Validators.required]],
+      country_ids: [null],
+      genre_ids: [null],
       status: [selectedStatus, [Validators.required]],
     });
 
-    this.movieTypeService.getAllMovieTypes()
-      .subscribe((movieTypes => {
-          this.movieTypes = movieTypes.data;
+    forkJoin([
+      this.movieTypeService.getAllMovieTypes(),
+      this.countryService.getAllCountries(),
+      this.genreService.getAllGenres()
+    ])
+      .subscribe(([movieTypes, countries, genres]) => {
+        this.movieTypes = movieTypes.data;
+        this.countries = countries.data;
+        this.genres = genres.data;
 
-          const defaultMovieType = this.movieTypes[0] || null;
-          this.validateForm.patchValue({
-            movie_type: defaultMovieType
-          });
-        })
-      );
+        const defaultMovieType = this.movieTypes[0]?.movie_type_id || null;
+        this.validateForm.patchValue({
+          movie_type_id: defaultMovieType
+        });
+      });
   }
 
   ngAfterViewInit(): void {
@@ -90,7 +105,9 @@ export class MovieCreateComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
-    this.movieService.createMovie(this.validateForm.value).subscribe((success) => {
+    // console.log(this.validateForm.value);
+
+    this.movieService.createMovie(this.validateForm.value).subscribe(() => {
       this.sharedService.emitChange();
       this.close();
       this.nzMessageService.success('Thêm Thành Công');

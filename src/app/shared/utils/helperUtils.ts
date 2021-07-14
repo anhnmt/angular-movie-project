@@ -6,7 +6,7 @@ export class HelperUtils {
   static formChangedTitleToSlug(validateForm: FormGroup): void {
     validateForm.get('name').valueChanges
       .pipe(
-        debounceTime(350),
+        debounceTime(500),
         distinctUntilChanged()
       ).subscribe((value: string) => {
       validateForm.patchValue({
@@ -17,7 +17,7 @@ export class HelperUtils {
 
     validateForm.get('slug').valueChanges
       .pipe(
-        debounceTime(350),
+        debounceTime(500),
         distinctUntilChanged()
       ).subscribe((value: string) => {
       validateForm.patchValue({

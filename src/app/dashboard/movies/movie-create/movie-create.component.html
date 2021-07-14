@@ -14,27 +14,58 @@
         <input formControlName="name" nz-input placeholder="Nhập tên phim"/>
       </nz-form-control>
     </nz-form-item>
+
     <nz-form-item>
       <nz-form-label nzRequired>Đường dẫn</nz-form-label>
       <nz-form-control nzErrorTip="Vui lòng nhập đường dẫn">
         <input formControlName="slug" nz-input placeholder="Nhập đường dẫn"/>
       </nz-form-control>
     </nz-form-item>
+
     <nz-form-item>
       <nz-form-label>Kiểu phim</nz-form-label>
       <nz-form-control nzErrorTip="Vui lòng chọn kiểu phim">
-        <nz-select formControlName="movie_type" nzPlaceHolder="Chọn kiểu phim">
-          <nz-option *ngFor="let option of movieTypes" [nzLabel]="option.name" [nzValue]="option" nzCustomContent>
+        <nz-select formControlName="movie_type_id" nzPlaceHolder="Chọn kiểu phim">
+          <nz-option *ngFor="let option of movieTypes" [nzLabel]="option.name" [nzValue]="option.movie_type_id" nzCustomContent>
             {{ option.name }}
           </nz-option>
         </nz-select>
       </nz-form-control>
     </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label>Quốc gia</nz-form-label>
+      <nz-form-control nzErrorTip="Vui lòng chọn quốc gia">
+        <nz-select
+          [nzTokenSeparators]="[',']" formControlName="country_ids"
+          nzMode="multiple"
+          nzPlaceHolder="Chọn quốc gia"
+          nzAllowClear
+        >
+          <nz-option *ngFor="let option of countries" [nzLabel]="option.name" [nzValue]="option.country_id"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label>Thể loại</nz-form-label>
+      <nz-form-control nzErrorTip="Vui lòng chọn thể loại">
+        <nz-select
+          [nzTokenSeparators]="[',']" formControlName="genre_ids"
+          nzMode="multiple"
+          nzPlaceHolder="Chọn thể loại"
+          nzAllowClear
+        >
+          <nz-option *ngFor="let option of genres" [nzLabel]="option.name" [nzValue]="option.genre_id"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
     <nz-form-item>
       <nz-form-label>Trạng thái</nz-form-label>
       <nz-form-control nzErrorTip="Vui lòng chọn trạng thái">
         <nz-select formControlName="status" nzPlaceHolder="Chọn trạng thái">
-          <nz-option *ngFor="let option of status" [nzLabel]="option.label" [nzValue]="option" nzCustomContent>
+          <nz-option *ngFor="let option of status" [nzLabel]="option.label" [nzValue]="option.value" nzCustomContent>
             <nz-badge *ngIf="option.badge" [nzStatus]="option.badge"></nz-badge>
             {{ option.label }}
           </nz-option>
@@ -48,7 +79,7 @@
   <ng-template #footerTpl>
     <div style="float: right">
       <button (click)="close()" nz-button style="margin-right: 8px;">Huỷ</button>
-      <button (click)="submitForm()" nz-button nzType="primary" [nzLoading]="isLoading">Thêm</button>
+      <button (click)="submitForm()" [nzLoading]="isLoading" nz-button nzType="primary">Thêm</button>
     </div>
   </ng-template>
 </nz-drawer>
