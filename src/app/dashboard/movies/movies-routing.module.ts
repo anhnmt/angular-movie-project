@@ -29,6 +29,14 @@ const routes: Routes = [
           headerDisplay: 'none'
         },
       },
+      {
+        path: ':movieId/episodes',
+        loadChildren: () => import('../movie-episode/movie-episode.module').then(m => m.MovieEpisodeModule),
+        data: {
+          title: 'Dashboard ',
+          headerDisplay: 'none'
+        },
+      },
     ]
   }
 ];

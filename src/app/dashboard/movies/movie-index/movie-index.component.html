@@ -38,17 +38,23 @@
         <span class="text-capitalize">{{ mapDefaultStatus(item.status)?.label }}</span>
       </td>
       <td class="text-md-right">
-        <a [routerLink]="['/dashboard', 'movies', item.movie_id, 'edit']" class="m-r-5" nz-button nz-tooltip
+        <a [routerLink]="['/dashboard', 'movies', item.movie_id, 'episodes']" class="m-r-5" nz-button nz-tooltip
            nzShape="circle"
-           nzTooltipTitle="Sửa" nzType="default">
+           nzTooltipTitle="Tập phim" nzType="default">
+          <i nz-icon nzType="unordered-list" theme="outline"></i>
+        </a>
+
+        <a [routerLink]="['/dashboard', 'movies', item.movie_id, 'edit']" class="m-r-5" nz-button nz-tooltip
+           nzGhost nzShape="circle"
+           nzTooltipTitle="Sửa" nzType="primary">
           <i nz-icon nzType="edit" theme="outline"></i>
         </a>
 
-        <button (nzOnConfirm)="delete(item.movie_id)" nz-button nz-popconfirm nz-tooltip nzPopconfirmPlacement="bottom"
+        <button (nzOnConfirm)="delete(item.movie_id)" nz-button nz-popconfirm nz-tooltip nzDanger
+                nzGhost nzPopconfirmPlacement="bottom"
                 nzPopconfirmTitle="Xác nhận xoá?"
                 nzShape="circle"
-                nzTooltipTitle="Xoá"
-                nzType="default">
+                nzTooltipTitle="Xoá" nzType="default">
           <i nz-icon nzType="delete" theme="outline"></i>
         </button>
       </td>

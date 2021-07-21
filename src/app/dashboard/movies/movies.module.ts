@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
 import {MoviesRoutingModule} from './movies-routing.module';
-import { MovieIndexComponent } from './movie-index/movie-index.component';
+import {MovieIndexComponent} from './movie-index/movie-index.component';
 import {NzButtonModule} from 'ng-zorro-antd/button';
 import {NzToolTipModule} from 'ng-zorro-antd/tooltip';
 import {NzTableModule} from 'ng-zorro-antd/table';
@@ -19,8 +19,9 @@ import {NzDatePickerModule} from 'ng-zorro-antd/date-picker';
 import {NzPopconfirmModule} from 'ng-zorro-antd/popconfirm';
 import {TableService} from '../../shared/services/table.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import { MovieCreateComponent } from './movie-create/movie-create.component';
-import { MovieEditComponent } from './movie-edit/movie-edit.component';
+import {MovieCreateComponent} from './movie-create/movie-create.component';
+import {MovieEditComponent} from './movie-edit/movie-edit.component';
+import {NzDropDownModule} from 'ng-zorro-antd/dropdown';
 
 @NgModule({
   declarations: [MovieIndexComponent, MovieCreateComponent, MovieEditComponent],
@@ -41,7 +42,8 @@ import { MovieEditComponent } from './movie-edit/movie-edit.component';
     NzDrawerModule,
     NzDatePickerModule,
     NzPopconfirmModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NzDropDownModule
   ],
   providers: [
     TableService,
