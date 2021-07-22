@@ -1,25 +1,66 @@
 <nz-drawer
   (nzOnClose)="close()"
-  [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom': '53px' }"
+  [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto' }"
   [nzMaskClosable]="false"
   [nzVisible]="visible"
-  [nzWidth]="'40%'"
+  [nzWidth]="'50%'"
   nzTitle="Danh sách tập phim"
 >
-  <nz-table #nzTable [nzData]="listOfDisplayData" nzTableLayout="fixed">
+  <div class="row m-b-10">
+    <div class="col-lg-8">
+      <div class="d-md-flex">
+        <div class="m-r-20">
+          <nz-input-group [nzPrefix]="prefixTemplate">
+            <input nz-input placeholder="Search Project" type="text">
+          </nz-input-group>
+          <ng-template #prefixTemplate>
+            <i class="opacity-05" nz-icon nzType="search"></i>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 text-right">
+      <a [routerLink]="['/dashboard', 'movies', this.movieId, 'episodes', 'create']" nz-button nzType="primary">
+        <i nz-icon nzType="plus-circle" theme="outline"></i>
+        <span>Thêm tập phim</span>
+      </a>
+    </div>
+  </div>
+
+  <nz-table #nzTable [nzData]="displayData">
     <thead>
     <tr>
-      <th>Name</th>
-      <th>Age</th>
-      <th></th>
+      <th *ngFor="let column of orderColumn" [nzSortFn]="column.compare">{{ column.title }}</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let data of nzTable.data">
+    <tr *ngFor="let data of nzTable.data; let i=index">
+      <td>#{{ data.episode_id }}</td>
       <td>{{ data.name }}</td>
-      <td>{{ data.age }}</td>
-      <td>{{ data.address }}</td>
+      <td>
+        <nz-badge [nzStatus]="mapDefaultStatus(data.status)?.badge"></nz-badge>
+        <span class="text-capitalize">{{ mapDefaultStatus(data.status)?.label }}</span>
+      </td>
+
+      <td class="text-md-right">
+        <a [routerLink]="['/dashboard', 'movies', 'edit']" class="m-r-5" nz-button nz-tooltip
+           nzShape="circle"
+           nzTooltipTitle="Sửa" nzType="default">
+          <i nz-icon nzType="edit" theme="outline"></i>
+        </a>
+
+        <button nz-button nz-popconfirm nz-tooltip
+                nzPopconfirmPlacement="bottom"
+                nzPopconfirmTitle="Xác nhận xoá?"
+                nzShape="circle"
+                nzTooltipTitle="Xoá" nzType="default">
+          <i nz-icon nzType="delete" theme="outline"></i>
+        </button>
+      </td>
     </tr>
     </tbody>
   </nz-table>
+
+  <router-outlet></router-outlet>
 </nz-drawer>

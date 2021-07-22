@@ -1,12 +1,11 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
-import {Router} from '@angular/router';
-
-interface DataItem {
-  name: string;
-  age: number;
-  address: string;
-}
+import {ActivatedRoute, Router} from '@angular/router';
+import {SharedService} from '../../../shared/services/shared.service';
+import {MovieEpisodeService} from '../../../shared/services/movie-episode.service';
+import {MovieEpisode} from '../../../shared/interfaces/movie-episode';
+import {takeUntil} from 'rxjs/operators';
+import {GlobalUtils} from '../../../shared/utils/globalUtils';
 
 @Component({
   selector: 'app-movie-episode-index',
@@ -15,38 +14,63 @@ interface DataItem {
 })
 export class MovieEpisodeIndexComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  mapDefaultStatus = GlobalUtils.mapDefaultStatus;
   isLoading = false;
   visible = false;
-  searchValue = '';
-  listOfData: DataItem[] = [
+  movieId: number;
+  displayData = [];
+  movieEpisodes: MovieEpisode[] = [];
+  orderColumn = [
     {
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park'
+      title: 'ID',
+      compare: (a: MovieEpisode, b: MovieEpisode) => a.episode_id - b.episode_id,
     },
     {
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
+      title: 'Tập phim',
+      compare: (a: MovieEpisode, b: MovieEpisode) => a.name.localeCompare(b.name)
     },
     {
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park'
+      title: 'Trạng thái',
+      compare: (a: MovieEpisode, b: MovieEpisode) => a.status?.value - b.status?.value,
     },
     {
-      name: 'Jim Red',
-      age: 32,
-      address: 'London No. 2 Lake Park'
+      title: ''
     }
   ];
-  listOfDisplayData = [...this.listOfData];
 
   private onDestroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private router: Router,
+    private readonly route: ActivatedRoute,
+    private sharedService: SharedService,
+    private movieEpisodeService: MovieEpisodeService,
   ) {
+    this.route.params
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((params: any) => {
+        const {movieId} = params;
+        this.movieId = movieId;
+      });
+
+    this.sharedService.changeEmitted$.subscribe(() => {
+      this.list();
+    });
+  }
+
+  ngOnInit(): void {
+    this.list();
+  }
+
+  list(): void {
+    this.movieEpisodes = [];
+
+    this.movieEpisodeService.getAllMovieEpisodesByMovieId(this.movieId)
+      .subscribe((movies) => {
+        this.movieEpisodes = movies.data;
+
+        this.displayData = [...this.movieEpisodes];
+      });
   }
 
   ngAfterViewInit(): void {
@@ -62,9 +86,6 @@ export class MovieEpisodeIndexComponent implements OnInit, AfterViewInit, OnDest
       () => this.router.navigate(['/dashboard', 'movies']),
       100
     );
-  }
-
-  ngOnInit(): void {
   }
 
   ngOnDestroy(): void {

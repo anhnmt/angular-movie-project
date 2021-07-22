@@ -1,8 +1,8 @@
 <nz-card>
-  <div class="row m-b-30">
+  <div class="row m-b-10">
     <div class="col-lg-8">
       <div class="d-md-flex">
-        <div class="m-b-10 m-r-20">
+        <div class="m-r-20">
           <nz-input-group [nzPrefix]="prefixTemplate">
             <input (ngModelChange)="search()" [(ngModel)]="searchInput" nz-input placeholder="Search Project"
                    type="text">
@@ -45,13 +45,13 @@
         </a>
 
         <a [routerLink]="['/dashboard', 'movies', item.movie_id, 'edit']" class="m-r-5" nz-button nz-tooltip
-           nzGhost nzShape="circle"
-           nzTooltipTitle="Sửa" nzType="primary">
+           nzShape="circle"
+           nzTooltipTitle="Sửa" nzType="default">
           <i nz-icon nzType="edit" theme="outline"></i>
         </a>
 
-        <button (nzOnConfirm)="delete(item.movie_id)" nz-button nz-popconfirm nz-tooltip nzDanger
-                nzGhost nzPopconfirmPlacement="bottom"
+        <button (nzOnConfirm)="delete(item.movie_id)" nz-button nz-popconfirm nz-tooltip
+                nzPopconfirmPlacement="bottom"
                 nzPopconfirmTitle="Xác nhận xoá?"
                 nzShape="circle"
                 nzTooltipTitle="Xoá" nzType="default">

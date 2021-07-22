@@ -3,7 +3,7 @@ import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Movie} from '../interfaces/movie';
-import {DefaultResponse} from '../interfaces/defaultResponse';
+import {DefaultResponse} from '../interfaces/default-response';
 import {Country} from '../interfaces/country';
 import {Genre} from '../interfaces/genre';
 

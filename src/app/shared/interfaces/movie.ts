@@ -1,4 +1,3 @@
-import {MovieType} from './movie-type';
 import {Status} from './status';
 
 export interface Movie {
