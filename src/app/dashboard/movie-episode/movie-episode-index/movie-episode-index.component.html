@@ -3,7 +3,7 @@
   [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto' }"
   [nzMaskClosable]="false"
   [nzVisible]="visible"
-  [nzWidth]="'50%'"
+  [nzWidth]="'60%'"
   nzTitle="Danh sách tập phim"
 >
   <div class="row m-b-10">
@@ -44,7 +44,7 @@
       </td>
 
       <td class="text-md-right">
-        <a [routerLink]="['/dashboard', 'movies', 'edit']" class="m-r-5" nz-button nz-tooltip
+        <a [routerLink]="['/dashboard', 'movies', this.movieId, 'episodes', data.episode_id, 'edit']" class="m-r-5" nz-button nz-tooltip
            nzShape="circle"
            nzTooltipTitle="Sửa" nzType="default">
           <i nz-icon nzType="edit" theme="outline"></i>

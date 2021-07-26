@@ -42,7 +42,7 @@ export class MovieEpisodeIndexComponent implements OnInit, AfterViewInit, OnDest
 
   constructor(
     private router: Router,
-    private readonly route: ActivatedRoute,
+    private route: ActivatedRoute,
     private sharedService: SharedService,
     private movieEpisodeService: MovieEpisodeService,
   ) {

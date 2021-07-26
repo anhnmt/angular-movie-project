@@ -1,8 +1,7 @@
 {
   "name": "angular-base-project",
   "version": "1.0.0",
-  "docker_local": "localhost:5000",
-  "docker_server": "198.13.57.211:5000",
+  "docker_local": "docker.pkg.github.com/xdorro/docker-registry",
   "scripts": {
     "ng": "ng",
     "serve": "ng serve",
@@ -18,8 +17,7 @@
     "docker.run": "cross-var docker run --name $npm_package_name -d -p 80:80 $npm_package_docker_local/$npm_package_name:$npm_package_version",
     "docker.deploy": "npm run docker.build && npm run docker.run",
     "docker.compose": "docker-compose up --build -d",
-    "docker.local": "npm run docker.build && npm run docker.push",
-    "docker.server": "cross-var docker tag $npm_package_docker_local/$npm_package_name:$npm_package_version $npm_package_docker_server/$npm_package_name:$npm_package_version && cross-var docker push $npm_package_docker_server/$npm_package_name:$npm_package_version"
+    "docker.local": "npm run docker.build && npm run docker.push"
   },
   "private": true,
   "dependencies": {

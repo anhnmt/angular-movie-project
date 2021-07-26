@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, Renderer2, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {distinctUntilChanged, filter, map, startWith} from 'rxjs/operators';
@@ -8,6 +8,7 @@ import {ThemeConstantService} from '../../shared/services/theme-constant.service
 @Component({
   selector: 'app-common-layout',
   templateUrl: './dashboard-layout.component.html',
+  encapsulation: ViewEncapsulation.None
 })
 
 export class DashboardLayoutComponent implements OnInit {
@@ -19,7 +20,16 @@ export class DashboardLayoutComponent implements OnInit {
   isExpand: boolean;
   selectedHeaderColor: string;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private themeService: ThemeConstantService) {
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private themeService: ThemeConstantService,
+    private elementRef: ElementRef,
+    private renderer: Renderer2,
+  ) {
+    this.renderer.setStyle(this.elementRef.nativeElement.ownerDocument.body, 'backgroundColor', '#f9fbfd');
+    this.renderer.setStyle(this.elementRef.nativeElement.ownerDocument.body, 'color', '#53535f');
+
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
       map(() => {
