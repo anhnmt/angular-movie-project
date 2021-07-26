@@ -19,4 +19,9 @@ export class MovieEpisodeService {
     return this.httpClient
       .get<DefaultResponse<MovieEpisode[]>>(`${this.baseUrl}/${movieId}/episodes`);
   }
+
+  getMovieEpisodeDetailsByMovieIdAndEpisodeId(movieId: number, episodeId: number): Observable<DefaultResponse<MovieEpisode>> {
+    return this.httpClient
+      .get<DefaultResponse<MovieEpisode>>(`${this.baseUrl}/${movieId}/episodes/${episodeId}`);
+  }
 }

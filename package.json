@@ -1,7 +1,7 @@
 {
   "name": "angular-base-project",
   "version": "1.0.0",
-  "docker_local": "docker.pkg.github.com/xdorro/docker-registry",
+  "docker_local": "ghcr.io/xdorro",
   "scripts": {
     "ng": "ng",
     "serve": "ng serve",
