@@ -4,8 +4,6 @@ import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {MovieType} from '../interfaces/movie-type';
 import {DefaultResponse} from '../interfaces/default-response';
-import {map} from 'rxjs/operators';
-import {Genre} from '../interfaces/genre';
 
 @Injectable({
   providedIn: 'root'

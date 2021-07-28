@@ -29,6 +29,28 @@
     <button [hidden]="true" nz-button nzType="primary">Submit</button>
   </form>
 
+  <div class="row m-b-10">
+    <div class="col-lg-8">
+      <div class="d-md-flex">
+        <div class="m-r-20">
+          <nz-input-group [nzPrefix]="prefixTemplate">
+            <input nz-input placeholder="Search Project" type="text">
+          </nz-input-group>
+          <ng-template #prefixTemplate>
+            <i class="opacity-05" nz-icon nzType="search"></i>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 text-right">
+      <a nz-button nzType="primary">
+        <i nz-icon nzType="plus-circle" theme="outline"></i>
+        <span>Thêm server phim</span>
+      </a>
+    </div>
+  </div>
+
   <nz-table #basicTable [nzData]="episodeDetails">
     <thead>
     <tr>
@@ -71,7 +93,8 @@
         <td>
           <nz-form-control nzErrorTip="Vui lòng chọn trạng thái">
             <nz-select [(ngModel)]="editCache[data.episode_detail_id].data.status" nzPlaceHolder="Chọn trạng thái">
-              <nz-option *ngFor="let option of status" [nzLabel]="option.label" [nzValue]="option.value" nzCustomContent>
+              <nz-option *ngFor="let option of status" [nzLabel]="option.label" [nzValue]="option.value"
+                         nzCustomContent>
                 <nz-badge *ngIf="option.badge" [nzStatus]="option.badge"></nz-badge>
                 {{ option.label }}
               </nz-option>

@@ -6,6 +6,7 @@ import {MovieEpisodeService} from '../../../shared/services/movie-episode.servic
 import {MovieEpisode} from '../../../shared/interfaces/movie-episode';
 import {takeUntil} from 'rxjs/operators';
 import {GlobalUtils} from '../../../shared/utils/globalUtils';
+import {NzMessageService} from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-movie-episode-index',
@@ -45,6 +46,7 @@ export class MovieEpisodeIndexComponent implements OnInit, AfterViewInit, OnDest
     private route: ActivatedRoute,
     private sharedService: SharedService,
     private movieEpisodeService: MovieEpisodeService,
+    private nzMessageService: NzMessageService,
   ) {
     this.route.params
       .pipe(takeUntil(this.onDestroy$))
@@ -65,7 +67,7 @@ export class MovieEpisodeIndexComponent implements OnInit, AfterViewInit, OnDest
   list(): void {
     this.movieEpisodes = [];
 
-    this.movieEpisodeService.getAllMovieEpisodesByMovieId(this.movieId)
+    this.movieEpisodeService.getAllMovieEpisodes(this.movieId)
       .subscribe((movies) => {
         this.movieEpisodes = movies.data;
 
@@ -91,5 +93,12 @@ export class MovieEpisodeIndexComponent implements OnInit, AfterViewInit, OnDest
   ngOnDestroy(): void {
     this.onDestroy$.next(true);
     this.onDestroy$.complete();
+  }
+
+  delete(genreId: number): void {
+    this.movieEpisodeService.deleteMovieEpisodeDetails(this.movieId, genreId).subscribe(() => {
+      this.list();
+      this.nzMessageService.success('Xóa Thành Công');
+    });
   }
 }

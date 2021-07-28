@@ -3,7 +3,6 @@ import {Router} from '@angular/router';
 import {UserService} from '../../../shared/services/user.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {User} from '../../../shared/interfaces/user';
 import {Subject} from 'rxjs';
 import {SharedService} from '../../../shared/services/shared.service';
 
@@ -64,7 +63,7 @@ export class UserCreateComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
-    this.userService.createUser(this.validateForm.value).subscribe((success) => {
+    this.userService.createUser(this.validateForm.value).subscribe(() => {
       this.sharedService.emitChange();
       this.close();
       this.nzMessageService.success('Thêm Thành Công');

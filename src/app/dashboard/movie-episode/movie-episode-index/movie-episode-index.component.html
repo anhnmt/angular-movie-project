@@ -44,13 +44,14 @@
       </td>
 
       <td class="text-md-right">
-        <a [routerLink]="['/dashboard', 'movies', this.movieId, 'episodes', data.episode_id, 'edit']" class="m-r-5" nz-button nz-tooltip
+        <a [routerLink]="['/dashboard', 'movies', this.movieId, 'episodes', data.episode_id, 'edit']" class="m-r-5"
+           nz-button nz-tooltip
            nzShape="circle"
            nzTooltipTitle="Sửa" nzType="default">
           <i nz-icon nzType="edit" theme="outline"></i>
         </a>
 
-        <button nz-button nz-popconfirm nz-tooltip
+        <button (nzOnConfirm)="delete(data.episode_id)" nz-button nz-popconfirm nz-tooltip
                 nzPopconfirmPlacement="bottom"
                 nzPopconfirmTitle="Xác nhận xoá?"
                 nzShape="circle"

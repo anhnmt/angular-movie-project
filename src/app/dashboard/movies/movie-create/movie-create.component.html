@@ -26,7 +26,8 @@
       <nz-form-label nzRequired>Kiểu phim</nz-form-label>
       <nz-form-control nzErrorTip="Vui lòng chọn kiểu phim">
         <nz-select formControlName="movie_type_id" nzPlaceHolder="Chọn kiểu phim">
-          <nz-option *ngFor="let option of movieTypes" [nzLabel]="option.name" [nzValue]="option.movie_type_id" nzCustomContent>
+          <nz-option *ngFor="let option of movieTypes" [nzLabel]="option.name" [nzValue]="option.movie_type_id"
+                     nzCustomContent>
             {{ option.name }}
           </nz-option>
         </nz-select>
@@ -38,9 +39,9 @@
       <nz-form-control nzErrorTip="Vui lòng chọn quốc gia">
         <nz-select
           [nzTokenSeparators]="[',']" formControlName="country_ids"
+          nzAllowClear
           nzMode="multiple"
           nzPlaceHolder="Chọn quốc gia"
-          nzAllowClear
         >
           <nz-option *ngFor="let option of countries" [nzLabel]="option.name" [nzValue]="option.country_id"></nz-option>
         </nz-select>
@@ -52,9 +53,9 @@
       <nz-form-control nzErrorTip="Vui lòng chọn thể loại">
         <nz-select
           [nzTokenSeparators]="[',']" formControlName="genre_ids"
+          nzAllowClear
           nzMode="multiple"
           nzPlaceHolder="Chọn thể loại"
-          nzAllowClear
         >
           <nz-option *ngFor="let option of genres" [nzLabel]="option.name" [nzValue]="option.genre_id"></nz-option>
         </nz-select>

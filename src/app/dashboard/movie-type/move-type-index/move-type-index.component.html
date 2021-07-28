@@ -37,13 +37,15 @@
         <span class="text-capitalize">{{ mapDefaultStatus(item.status)?.label }}</span>
       </td>
       <td class="text-md-right">
-        <a [routerLink]="['/dashboard', 'movies', 'types', item.movie_type_id, 'edit']" class="m-r-5" nz-button nz-tooltip
+        <a [routerLink]="['/dashboard', 'movies', 'types', item.movie_type_id, 'edit']" class="m-r-5" nz-button
+           nz-tooltip
            nzShape="circle"
            nzTooltipTitle="Sửa" nzType="default">
           <i nz-icon nzType="edit" theme="outline"></i>
         </a>
 
-        <button (nzOnConfirm)="delete(item.movie_type_id)" nz-button nz-popconfirm nz-tooltip nzPopconfirmPlacement="bottom"
+        <button (nzOnConfirm)="delete(item.movie_type_id)" nz-button nz-popconfirm nz-tooltip
+                nzPopconfirmPlacement="bottom"
                 nzPopconfirmTitle="Xác nhận xoá?"
                 nzShape="circle"
                 nzTooltipTitle="Xoá"

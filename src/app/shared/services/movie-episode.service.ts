@@ -15,13 +15,36 @@ export class MovieEpisodeService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getAllMovieEpisodesByMovieId(movieId: number): Observable<DefaultResponse<MovieEpisode[]>> {
+  getAllMovieEpisodes(movieId: number): Observable<DefaultResponse<MovieEpisode[]>> {
     return this.httpClient
       .get<DefaultResponse<MovieEpisode[]>>(`${this.baseUrl}/${movieId}/episodes`);
   }
 
-  getMovieEpisodeDetailsByMovieIdAndEpisodeId(movieId: number, episodeId: number): Observable<DefaultResponse<MovieEpisode>> {
+  getMovieEpisodeDetails(movieId: number, episodeId: number): Observable<DefaultResponse<MovieEpisode>> {
     return this.httpClient
       .get<DefaultResponse<MovieEpisode>>(`${this.baseUrl}/${movieId}/episodes/${episodeId}`);
+  }
+
+  createMovieEpisodeDetails(movieId: number, episodeId: number, body: MovieEpisode): Observable<DefaultResponse<MovieEpisode>> {
+    return this.httpClient
+      .post<DefaultResponse<MovieEpisode>>(`${this.baseUrl}/${movieId}/episodes/${episodeId}`, {
+        name: body.name,
+        status: body.status,
+        episode_details: body.episode_details
+      });
+  }
+
+  updateMovieEpisodeDetails(movieId: number, episodeId: number, body: MovieEpisode): Observable<DefaultResponse<MovieEpisode>> {
+    return this.httpClient
+      .put<DefaultResponse<MovieEpisode>>(`${this.baseUrl}/${movieId}/episodes/${episodeId}`, {
+        name: body.name,
+        status: body.status,
+        episode_details: body.episode_details
+      });
+  }
+
+  deleteMovieEpisodeDetails(movieId: number, episodeId: number): Observable<DefaultResponse<MovieEpisode>> {
+    return this.httpClient
+      .delete<DefaultResponse<MovieEpisode>>(`${this.baseUrl}/${movieId}/episodes/${episodeId}`);
   }
 }

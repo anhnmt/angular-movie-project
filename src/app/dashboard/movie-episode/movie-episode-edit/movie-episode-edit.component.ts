@@ -76,7 +76,7 @@ export class MovieEpisodeEditComponent implements OnInit, AfterViewInit, OnDestr
         const {episodeId} = params;
         this.episodeId = episodeId;
 
-        this.movieEpisodeService.getMovieEpisodeDetailsByMovieIdAndEpisodeId(this.movieId, this.episodeId)
+        this.movieEpisodeService.getMovieEpisodeDetails(this.movieId, this.episodeId)
           .subscribe((movieEpisode) => {
             this.movieEpisode = movieEpisode.data;
             this.episodeDetails = this.movieEpisode.episode_details;
@@ -153,6 +153,8 @@ export class MovieEpisodeEditComponent implements OnInit, AfterViewInit, OnDestr
       this.isLoading = false;
       return;
     }
+
+    console.log(this.episodeDetails);
 
     // this.genreService.updateGenreByGenreId(this.genre.genre_id, this.validateForm.value)
     //   .subscribe((success) => {
