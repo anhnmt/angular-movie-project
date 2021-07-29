@@ -1,10 +1,11 @@
-import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {NzModalRef} from 'ng-zorro-antd/modal';
 import {GlobalUtils} from '../../../shared/utils/globalUtils';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {HelperUtils} from '../../../shared/utils/helperUtils';
-import {EpisodeDetailService} from '../../../shared/services/episode-detail.service';
+import {EpisodeService} from '../../../shared/services/episode.service';
+import {NzMessageService} from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-episode-detail-create',
@@ -12,6 +13,7 @@ import {EpisodeDetailService} from '../../../shared/services/episode-detail.serv
   styleUrls: ['./episode-detail-create.component.css']
 })
 export class EpisodeDetailCreateComponent implements OnInit, AfterViewInit, OnDestroy {
+  @Input() episodeId: number;
 
   isLoading = false;
   visible = false;
@@ -23,7 +25,8 @@ export class EpisodeDetailCreateComponent implements OnInit, AfterViewInit, OnDe
   constructor(
     private formBuilder: FormBuilder,
     private modalRef: NzModalRef,
-    private episodeDetailService: EpisodeDetailService,
+    private episodeService: EpisodeService,
+    private nzMessageService: NzMessageService,
   ) {
     const selectedStatus = this.status[0]?.value || null;
 
@@ -42,7 +45,7 @@ export class EpisodeDetailCreateComponent implements OnInit, AfterViewInit, OnDe
     setTimeout(() => {
       this.visible = true;
 
-      HelperUtils.formChangedTitleToSlug(this.validateForm);
+      HelperUtils.formChangedTitle(this.validateForm);
     }, 1);
   }
 
@@ -66,16 +69,15 @@ export class EpisodeDetailCreateComponent implements OnInit, AfterViewInit, OnDe
       return;
     }
 
-// console.log(this.validateForm.value);
+    console.log(this.validateForm.value);
 
-    // this.movieService.createMovie(this.validateForm.value).subscribe(() => {
-    //   this.sharedService.emitChange();
-    //   this.close();
-    //   this.nzMessageService.success('Thêm Thành Công');
-    // }, (error) => {
-    //   this.nzMessageService.error(error.error?.message);
-    //   this.isLoading = false;
-    // });
+    this.episodeService.createEpisodeDetail(this.episodeId, this.validateForm.value).subscribe(() => {
+      this.close();
+      this.nzMessageService.success('Thêm Thành Công');
+    }, (error) => {
+      this.nzMessageService.error(error.error?.message);
+      this.isLoading = false;
+    });
   }
 
 }

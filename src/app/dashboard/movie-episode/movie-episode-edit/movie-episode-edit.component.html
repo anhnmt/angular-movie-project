@@ -72,7 +72,7 @@
           <i nz-icon nzType="edit" theme="outline"></i>
         </button>
 
-        <button nz-button nz-popconfirm nz-tooltip
+        <button (nzOnConfirm)="delete(data.episode_detail_id)" nz-button nz-popconfirm nz-tooltip
                 nzPopconfirmPlacement="bottom"
                 nzPopconfirmTitle="Xác nhận xoá?"
                 nzShape="circle"

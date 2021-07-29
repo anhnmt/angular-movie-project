@@ -7,6 +7,7 @@ import {MovieEpisode} from '../../../shared/interfaces/movie-episode';
 import {takeUntil} from 'rxjs/operators';
 import {GlobalUtils} from '../../../shared/utils/globalUtils';
 import {NzMessageService} from 'ng-zorro-antd/message';
+import {EpisodeService} from '../../../shared/services/episode.service';
 
 @Component({
   selector: 'app-movie-episode-index',
@@ -46,6 +47,7 @@ export class MovieEpisodeIndexComponent implements OnInit, AfterViewInit, OnDest
     private route: ActivatedRoute,
     private sharedService: SharedService,
     private movieEpisodeService: MovieEpisodeService,
+    private episodeService: EpisodeService,
     private nzMessageService: NzMessageService,
   ) {
     this.route.params
@@ -96,7 +98,7 @@ export class MovieEpisodeIndexComponent implements OnInit, AfterViewInit, OnDest
   }
 
   delete(episodeId: number): void {
-    this.movieEpisodeService.deleteMovieEpisode(this.movieId, episodeId).subscribe(() => {
+    this.episodeService.deleteEpisode(episodeId).subscribe(() => {
       this.list();
       this.nzMessageService.success('Xóa Thành Công');
     });

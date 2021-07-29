@@ -12,6 +12,8 @@ import {NzMessageService} from 'ng-zorro-antd/message';
 import {NzModalService} from 'ng-zorro-antd/modal';
 import {EpisodeDetailEditComponent} from '../../../components/episode-details/episode-detail-edit/episode-detail-edit.component';
 import {EpisodeDetailCreateComponent} from '../../../components/episode-details/episode-detail-create/episode-detail-create.component';
+import {EpisodeService} from '../../../shared/services/episode.service';
+import {SharedService} from '../../../shared/services/shared.service';
 
 @Component({
   selector: 'app-movie-episode-edit',
@@ -29,7 +31,6 @@ export class MovieEpisodeEditComponent implements OnInit, AfterViewInit, OnDestr
   validateForm: FormGroup;
   movieEpisode: MovieEpisode;
   episodeDetails: EpisodeDetail[] = [];
-  editCache: { [key: number]: { edit: boolean; data: EpisodeDetail } } = {};
 
   orderColumn = [
     {
@@ -56,8 +57,10 @@ export class MovieEpisodeEditComponent implements OnInit, AfterViewInit, OnDestr
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private movieEpisodeService: MovieEpisodeService,
+    private episodeService: EpisodeService,
     private nzMessageService: NzMessageService,
-    private modalService: NzModalService
+    private modalService: NzModalService,
+    private sharedService: SharedService,
   ) {
     const selectedStatus = this.status[0].value || null;
 
@@ -80,19 +83,21 @@ export class MovieEpisodeEditComponent implements OnInit, AfterViewInit, OnDestr
         const {episodeId} = params;
         this.episodeId = episodeId;
 
-        this.movieEpisodeService.getMovieEpisode(this.movieId, this.episodeId)
-          .subscribe((movieEpisode) => {
-            this.movieEpisode = movieEpisode.data;
-            this.episodeDetails = this.movieEpisode.episode_details;
+        this.list();
+      });
+  }
 
-            console.log(this.episodeDetails);
+  list(): void {
+    this.episodeService.getEpisodeDetail(this.episodeId)
+      .subscribe((movieEpisode) => {
+        this.movieEpisode = movieEpisode.data;
+        this.episodeDetails = this.movieEpisode.episode_details;
 
-            this.validateForm.patchValue({
-              name: this.movieEpisode.name,
-              status: this.movieEpisode.status,
-              episode_details: this.episodeDetails,
-            });
-          });
+        this.validateForm.patchValue({
+          name: this.movieEpisode.name,
+          status: this.movieEpisode.status,
+          episode_details: this.episodeDetails,
+        });
       });
   }
 
@@ -102,6 +107,8 @@ export class MovieEpisodeEditComponent implements OnInit, AfterViewInit, OnDestr
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.visible = true;
+
+      HelperUtils.formChangedTitle(this.validateForm);
     }, 1);
   }
 
@@ -125,18 +132,31 @@ export class MovieEpisodeEditComponent implements OnInit, AfterViewInit, OnDestr
       nzContent: EpisodeDetailCreateComponent,
       nzMaskClosable: false,
       nzClosable: false,
+      nzComponentParams: {
+        episodeId: this.episodeId,
+      },
     });
+
+    this.modalService.afterAllClose.subscribe(() => this.list());
   }
 
   edit(episodeDetailId: number): void {
-    console.log(episodeDetailId);
-
     this.modalService.create({
       nzTitle: 'Sửa server phim',
       nzContent: EpisodeDetailEditComponent,
       nzComponentParams: {
+        episodeId: this.episodeId,
         episodeDetailId,
       },
+    });
+
+    this.modalService.afterAllClose.subscribe(() => this.list());
+  }
+
+  delete(episodeDetailId: number): void {
+    this.episodeService.deleteEpisodeDetail(this.episodeId, episodeDetailId).subscribe(() => {
+      this.list();
+      this.nzMessageService.success('Xóa Thành Công');
     });
   }
 
@@ -151,17 +171,15 @@ export class MovieEpisodeEditComponent implements OnInit, AfterViewInit, OnDestr
       return;
     }
 
-    console.log(this.episodeDetails);
-
-    // this.genreService.updateGenreByGenreId(this.genre.genre_id, this.validateForm.value)
-    //   .subscribe((success) => {
-    //     this.sharedService.emitChange();
-    //     this.close();
-    this.nzMessageService.success('Cập nhật Thành Công');
-    //   }, (error) => {
-    //     this.nzMessageService.error(error.message);
-    this.isLoading = false;
-    //   });
+    this.episodeService.updateEpisode(this.episodeId, this.validateForm.value)
+      .subscribe(() => {
+        this.sharedService.emitChange();
+        this.close();
+        this.nzMessageService.success('Cập nhật Thành Công');
+      }, (error) => {
+        this.nzMessageService.error(error.message);
+        this.isLoading = false;
+      });
   }
 
 }

@@ -11,6 +11,7 @@ import {HelperUtils} from '../../../shared/utils/helperUtils';
   styleUrls: ['./episode-detail-edit.component.css']
 })
 export class EpisodeDetailEditComponent implements OnInit, AfterViewInit, OnDestroy {
+  @Input() episodeId: number;
   @Input() episodeDetailId: number;
 
   isLoading = false;

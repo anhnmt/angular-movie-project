@@ -3,6 +3,18 @@ import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {StringUtils} from './stringUtils';
 
 export class HelperUtils {
+  static formChangedTitle(validateForm: FormGroup): void {
+    validateForm.get('name').valueChanges
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged()
+      ).subscribe((value: string) => {
+      validateForm.patchValue({
+        name: StringUtils.convertToTitleCase(value),
+      });
+    });
+  }
+
   static formChangedTitleToSlug(validateForm: FormGroup): void {
     validateForm.get('name').valueChanges
       .pipe(
