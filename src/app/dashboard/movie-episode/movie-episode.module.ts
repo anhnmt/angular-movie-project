@@ -16,6 +16,7 @@ import {NzInputModule} from 'ng-zorro-antd/input';
 import {ReactiveFormsModule} from '@angular/forms';
 import {NzFormModule} from 'ng-zorro-antd/form';
 import {NzSelectModule} from 'ng-zorro-antd/select';
+import {NzModalService} from 'ng-zorro-antd/modal';
 
 
 @NgModule({
@@ -33,7 +34,10 @@ import {NzSelectModule} from 'ng-zorro-antd/select';
     NzInputModule,
     ReactiveFormsModule,
     NzFormModule,
-    NzSelectModule
+    NzSelectModule,
+  ],
+  providers: [
+    NzModalService
   ]
 })
 export class MovieEpisodeModule {

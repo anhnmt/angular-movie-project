@@ -9,8 +9,8 @@ const routes: Routes = [
     path: '',
     component: MovieEpisodeIndexComponent,
     data: {
-      title: 'Dashboard ',
-      headerDisplay: 'none'
+      title: 'Danh sách phim',
+      // headerDisplay: 'none'
     },
     children: [
       {

@@ -9,6 +9,9 @@ import {MovieEpisodeService} from '../../../shared/services/movie-episode.servic
 import {MovieEpisode} from '../../../shared/interfaces/movie-episode';
 import {EpisodeDetail} from '../../../shared/interfaces/episode-detail';
 import {NzMessageService} from 'ng-zorro-antd/message';
+import {NzModalService} from 'ng-zorro-antd/modal';
+import {EpisodeDetailEditComponent} from '../../../components/episode-details/episode-detail-edit/episode-detail-edit.component';
+import {EpisodeDetailCreateComponent} from '../../../components/episode-details/episode-detail-create/episode-detail-create.component';
 
 @Component({
   selector: 'app-movie-episode-edit',
@@ -54,6 +57,7 @@ export class MovieEpisodeEditComponent implements OnInit, AfterViewInit, OnDestr
     private formBuilder: FormBuilder,
     private movieEpisodeService: MovieEpisodeService,
     private nzMessageService: NzMessageService,
+    private modalService: NzModalService
   ) {
     const selectedStatus = this.status[0].value || null;
 
@@ -76,11 +80,10 @@ export class MovieEpisodeEditComponent implements OnInit, AfterViewInit, OnDestr
         const {episodeId} = params;
         this.episodeId = episodeId;
 
-        this.movieEpisodeService.getMovieEpisodeDetails(this.movieId, this.episodeId)
+        this.movieEpisodeService.getMovieEpisode(this.movieId, this.episodeId)
           .subscribe((movieEpisode) => {
             this.movieEpisode = movieEpisode.data;
             this.episodeDetails = this.movieEpisode.episode_details;
-            this.updateEditCache();
 
             console.log(this.episodeDetails);
 
@@ -116,30 +119,24 @@ export class MovieEpisodeEditComponent implements OnInit, AfterViewInit, OnDestr
     this.onDestroy$.complete();
   }
 
-  startEdit(id: number): void {
-    this.editCache[id].edit = true;
+  create(): void {
+    this.modalService.create({
+      nzTitle: 'Thêm server phim',
+      nzContent: EpisodeDetailCreateComponent,
+      nzMaskClosable: false,
+      nzClosable: false,
+    });
   }
 
-  cancelEdit(id: number): void {
-    const index = this.episodeDetails.findIndex(item => item.episode_detail_id === id);
-    this.editCache[id] = {
-      data: {...this.episodeDetails[index]},
-      edit: false
-    };
-  }
+  edit(episodeDetailId: number): void {
+    console.log(episodeDetailId);
 
-  saveEdit(id: number): void {
-    const index = this.episodeDetails.findIndex(item => item.episode_detail_id === id);
-    Object.assign(this.episodeDetails[index], this.editCache[id].data);
-    this.editCache[id].edit = false;
-  }
-
-  updateEditCache(): void {
-    this.episodeDetails.forEach(item => {
-      this.editCache[item.episode_detail_id] = {
-        edit: false,
-        data: {...item}
-      };
+    this.modalService.create({
+      nzTitle: 'Sửa server phim',
+      nzContent: EpisodeDetailEditComponent,
+      nzComponentParams: {
+        episodeDetailId,
+      },
     });
   }
 

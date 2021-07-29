@@ -19,6 +19,15 @@ import {NgChartjsModule} from 'ng-chartjs';
 import {ThemeConstantService} from './shared/services/theme-constant.service';
 import {StoreModule} from '@ngrx/store';
 import {ClientLayoutComponent} from './layouts/client-layout/client-layout.component';
+import {EpisodeDetailCreateComponent} from './components/episode-details/episode-detail-create/episode-detail-create.component';
+import {EpisodeDetailEditComponent} from './components/episode-details/episode-detail-edit/episode-detail-edit.component';
+import {NzButtonModule} from 'ng-zorro-antd/button';
+import {NzFormModule} from 'ng-zorro-antd/form';
+import {NzInputModule} from 'ng-zorro-antd/input';
+import {NzSelectModule} from 'ng-zorro-antd/select';
+import {ReactiveFormsModule} from '@angular/forms';
+import {NzBadgeModule} from 'ng-zorro-antd/badge';
+import {NzModalModule} from 'ng-zorro-antd/modal';
 
 registerLocaleData(en);
 
@@ -27,7 +36,9 @@ registerLocaleData(en);
     AppComponent,
     DashboardLayoutComponent,
     FullLayoutComponent,
-    ClientLayoutComponent
+    ClientLayoutComponent,
+    EpisodeDetailCreateComponent,
+    EpisodeDetailEditComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +48,14 @@ registerLocaleData(en);
     TemplateModule,
     SharedModule,
     NgChartjsModule,
-    StoreModule.forRoot({}, {})
+    StoreModule.forRoot({}, {}),
+    NzButtonModule,
+    NzFormModule,
+    NzInputModule,
+    NzSelectModule,
+    ReactiveFormsModule,
+    NzBadgeModule,
+    NzModalModule
   ],
   providers: [
     {

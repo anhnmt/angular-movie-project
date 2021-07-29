@@ -77,7 +77,7 @@ export class DashboardLayoutComponent implements OnInit {
       path += 'dashboard';
     }
 
-    const nextUrl = path && path !== '/dashboard' ? `${url}${path}` : url;
+    const nextUrl = path ? `${url}${path}` : url;
     const breadcrumb = {
       label,
       url: nextUrl

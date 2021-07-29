@@ -95,8 +95,8 @@ export class MovieEpisodeIndexComponent implements OnInit, AfterViewInit, OnDest
     this.onDestroy$.complete();
   }
 
-  delete(genreId: number): void {
-    this.movieEpisodeService.deleteMovieEpisodeDetails(this.movieId, genreId).subscribe(() => {
+  delete(episodeId: number): void {
+    this.movieEpisodeService.deleteMovieEpisode(this.movieId, episodeId).subscribe(() => {
       this.list();
       this.nzMessageService.success('Xóa Thành Công');
     });
