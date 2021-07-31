@@ -4,7 +4,6 @@ import {Component, OnInit} from '@angular/core';
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: [
-    '../../../assets/client.scss',
     './search.component.css',
   ]
 })

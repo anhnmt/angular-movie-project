@@ -1,4 +1,6 @@
 import {Component, ElementRef, OnInit, Renderer2, ViewEncapsulation} from '@angular/core';
+import {Country} from '../../shared/interfaces/country';
+import {Genre} from '../../shared/interfaces/genre';
 
 @Component({
   selector: 'app-client-layout',
@@ -9,6 +11,9 @@ import {Component, ElementRef, OnInit, Renderer2, ViewEncapsulation} from '@angu
   encapsulation: ViewEncapsulation.None
 })
 export class ClientLayoutComponent implements OnInit {
+
+  countries: Country[] = [];
+  genres: Genre[] = [];
 
   constructor(
     private elementRef: ElementRef,
