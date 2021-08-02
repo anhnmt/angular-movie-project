@@ -22,6 +22,7 @@ import {NzMessageService} from 'ng-zorro-antd/message';
 import {MovieCreateComponent} from './movie-create/movie-create.component';
 import {MovieEditComponent} from './movie-edit/movie-edit.component';
 import {NzDropDownModule} from 'ng-zorro-antd/dropdown';
+import {NzUploadModule} from 'ng-zorro-antd/upload';
 
 @NgModule({
   declarations: [MovieIndexComponent, MovieCreateComponent, MovieEditComponent],
@@ -43,7 +44,8 @@ import {NzDropDownModule} from 'ng-zorro-antd/dropdown';
     NzDatePickerModule,
     NzPopconfirmModule,
     ReactiveFormsModule,
-    NzDropDownModule
+    NzDropDownModule,
+    NzUploadModule
   ],
   providers: [
     TableService,

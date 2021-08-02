@@ -2,6 +2,7 @@ import {Status} from './status';
 
 export interface Movie {
   movie_id: number;
+  origin_name: string;
   name: string;
   slug: string;
   description?: string;
@@ -12,6 +13,7 @@ export interface Movie {
   rating?: string;
   release_date?: string;
   runtime?: string;
+  poster?: string;
   seo_title?: string;
   seo_keywords?: string;
   status: Status;

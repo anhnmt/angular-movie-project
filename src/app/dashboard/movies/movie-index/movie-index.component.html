@@ -30,7 +30,12 @@
     <tbody>
     <tr *ngFor="let item of listTable.data; let i=index">
       <td>#{{item.movie_id}}</td>
-      <td>{{item.name}}</td>
+      <td>
+        <div class="d-flex align-items-center">
+          <nz-avatar [nzSize]="60" [nzSrc]="item.poster" nzIcon="picture" nzShape="square"></nz-avatar>
+          <span class="m-l-10">{{item.name}}</span>
+        </div>
+      </td>
       <td>{{item.slug}}</td>
       <td>{{ item.movie_type?.name }}</td>
       <td>

@@ -13,6 +13,7 @@ import {GenreService} from '../../../shared/services/genre.service';
 import {CountryService} from '../../../shared/services/country.service';
 import {Country} from '../../../shared/interfaces/country';
 import {Genre} from '../../../shared/interfaces/genre';
+import {NzUploadFile} from 'ng-zorro-antd/upload';
 
 @Component({
   selector: 'app-movie-create',
@@ -24,11 +25,11 @@ export class MovieCreateComponent implements OnInit, AfterViewInit, OnDestroy {
   isLoading = false;
   visible = false;
   status = GlobalUtils.getDefaultStatus();
+  fileList: NzUploadFile[] = [];
   movieTypes: MovieType[] = [];
   countries: Country[] = [];
   genres: Genre[] = [];
   validateForm: FormGroup;
-
   private onDestroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
@@ -44,9 +45,12 @@ export class MovieCreateComponent implements OnInit, AfterViewInit, OnDestroy {
     const selectedStatus = this.status[0]?.value || null;
 
     this.validateForm = this.formBuilder.group({
+      origin_name: [null],
       name: [null, [Validators.required]],
       slug: [null, [Validators.required]],
+      release_date: [null, [Validators.required]],
       movie_type_id: [null, [Validators.required]],
+      poster: [null],
       country_ids: [null],
       genre_ids: [null],
       status: [selectedStatus, [Validators.required]],
@@ -68,6 +72,15 @@ export class MovieCreateComponent implements OnInit, AfterViewInit, OnDestroy {
         });
       });
   }
+
+  handlePreview = async (file: NzUploadFile) => {
+    const {originFileObj, url, preview} = file;
+
+    if (!url && !preview && originFileObj !== undefined) {
+      file.preview = await HelperUtils.getBase64(originFileObj);
+      file.status = 'done';
+    }
+  };
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -105,9 +118,19 @@ export class MovieCreateComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
-    // console.log(this.validateForm.value);
+    const formData = new FormData();
+    this.fileList.forEach((file: any) => {
+      const {originFileObj, url, preview} = file;
 
-    this.movieService.createMovie(this.validateForm.value).subscribe(() => {
+      if (!url && !preview && originFileObj !== undefined) {
+        formData.append('poster', originFileObj);
+      }
+    });
+
+    // console.log(this.validateForm.value);
+    formData.append('movie', JSON.stringify(this.validateForm.value));
+
+    this.movieService.createMovie(formData).subscribe(() => {
       this.sharedService.emitChange();
       this.close();
       this.nzMessageService.success('Thêm Thành Công');

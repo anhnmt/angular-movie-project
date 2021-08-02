@@ -37,29 +37,14 @@ export class MovieService {
       .get<DefaultResponse<Movie>>(`${this.baseUrl}/${movieId}`);
   }
 
-  createMovie(body: Movie): Observable<DefaultResponse<Movie>> {
+  createMovie(body: any): Observable<DefaultResponse<Movie>> {
     return this.httpClient
-      .post<DefaultResponse<Movie>>(`${this.baseUrl}`, {
-        name: body.name,
-        slug: body.slug,
-        movie_type_id: body.movie_type_id,
-        country_ids: body.country_ids,
-        genre_ids: body.genre_ids,
-        status: body.status
-      });
+      .post<DefaultResponse<Movie>>(`${this.baseUrl}`, body);
   }
 
-  updateMovieByMovieId(movieId: number, body: Movie): Observable<DefaultResponse<Movie>> {
+  updateMovieByMovieId(movieId: number, body: any): Observable<DefaultResponse<Movie>> {
     return this.httpClient
-      .put<DefaultResponse<Movie>>(`${this.baseUrl}/${movieId}`, {
-          name: body.name,
-          slug: body.slug,
-          movie_type_id: body.movie_type_id,
-          country_ids: body.country_ids,
-          genre_ids: body.genre_ids,
-          status: body.status
-        }
-      );
+      .put<DefaultResponse<Movie>>(`${this.baseUrl}/${movieId}`, body);
   }
 
   deleteMovieByMovieId(movieId: number): Observable<DefaultResponse<Movie>> {

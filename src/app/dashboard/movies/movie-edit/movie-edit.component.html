@@ -23,14 +23,16 @@
     </nz-form-item>
 
     <nz-form-item>
-      <nz-form-label nzRequired>Kiểu phim</nz-form-label>
-      <nz-form-control nzErrorTip="Vui lòng chọn kiểu phim">
-        <nz-select formControlName="movie_type_id" nzPlaceHolder="Chọn kiểu phim">
-          <nz-option *ngFor="let option of movieTypes" [nzLabel]="option.name" [nzValue]="option.movie_type_id"
-                     nzCustomContent>
-            {{ option.name }}
-          </nz-option>
-        </nz-select>
+      <nz-form-label>Tên phim gốc</nz-form-label>
+      <nz-form-control nzErrorTip="Vui lòng nhập tên phim gốc">
+        <input formControlName="origin_name" nz-input placeholder="Nhập tên phim gốc"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzRequired>Năm xuất bản</nz-form-label>
+      <nz-form-control nzErrorTip="Vui lòng nhập năm xuất bản">
+        <input formControlName="release_date" nz-input placeholder="Nhập năm xuất bản"/>
       </nz-form-control>
     </nz-form-item>
 
@@ -62,17 +64,58 @@
       </nz-form-control>
     </nz-form-item>
 
+
     <nz-form-item>
-      <nz-form-label>Trạng thái</nz-form-label>
-      <nz-form-control nzErrorTip="Vui lòng chọn trạng thái">
-        <nz-select formControlName="status" nzPlaceHolder="Chọn trạng thái">
-          <nz-option *ngFor="let option of status" [nzLabel]="option.label" [nzValue]="option.value" nzCustomContent>
-            <nz-badge *ngIf="option.badge" [nzStatus]="option.badge"></nz-badge>
-            {{ option.label }}
-          </nz-option>
-        </nz-select>
-      </nz-form-control>
+      <nz-form-label>Poster phim</nz-form-label>
+      <nz-upload
+        [(nzFileList)]="fileList"
+        [nzPreview]="handlePreview"
+        [nzShowButton]="fileList.length < 1"
+        [nzShowUploadList]="{
+          showPreviewIcon: false,
+          showRemoveIcon: true,
+          showDownloadIcon: false
+        }"
+        nzAction="https://jsonplaceholder.typicode.com/posts/"
+        nzListType="picture-card"
+      >
+        <div>
+          <i nz-icon nzType="plus"></i>
+          <div style="margin-top: 8px">Upload</div>
+        </div>
+      </nz-upload>
     </nz-form-item>
+
+    <div [nzGutter]="24" nz-row>
+      <div [nzSpan]="12" nz-col>
+        <nz-form-item>
+          <nz-form-label nzRequired>Kiểu phim</nz-form-label>
+          <nz-form-control nzErrorTip="Vui lòng chọn kiểu phim">
+            <nz-select formControlName="movie_type_id" nzPlaceHolder="Chọn kiểu phim">
+              <nz-option *ngFor="let option of movieTypes" [nzLabel]="option.name" [nzValue]="option.movie_type_id"
+                         nzCustomContent>
+                {{ option.name }}
+              </nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div [nzSpan]="12" nz-col>
+        <nz-form-item>
+          <nz-form-label>Trạng thái</nz-form-label>
+          <nz-form-control nzErrorTip="Vui lòng chọn trạng thái">
+            <nz-select formControlName="status" nzPlaceHolder="Chọn trạng thái">
+              <nz-option *ngFor="let option of status" [nzLabel]="option.label" [nzValue]="option.value"
+                         nzCustomContent>
+                <nz-badge *ngIf="option.badge" [nzStatus]="option.badge"></nz-badge>
+                {{ option.label }}
+              </nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
 
     <button [hidden]="true" nz-button nzType="primary">Submit</button>
   </form>

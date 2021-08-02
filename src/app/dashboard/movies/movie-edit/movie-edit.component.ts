@@ -15,6 +15,7 @@ import {Country} from '../../../shared/interfaces/country';
 import {Genre} from '../../../shared/interfaces/genre';
 import {CountryService} from '../../../shared/services/country.service';
 import {GenreService} from '../../../shared/services/genre.service';
+import {NzUploadFile} from 'ng-zorro-antd/upload';
 
 @Component({
   selector: 'app-movie-edit',
@@ -27,6 +28,7 @@ export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
   visible = false;
   status = GlobalUtils.getDefaultStatus();
   movie: Movie;
+  fileList: NzUploadFile[] = [];
   movieTypes: MovieType[] = [];
   countries: Country[] = [];
   genres: Genre[] = [];
@@ -49,9 +51,12 @@ export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
     const selectedStatus = this.status[0]?.value || null;
 
     this.validateForm = this.formBuilder.group({
+      origin_name: [null],
       name: [null, [Validators.required]],
       slug: [null, [Validators.required]],
+      release_date: [null, [Validators.required]],
       movie_type_id: [null, [Validators.required]],
+      poster: [null],
       country_ids: [null],
       genre_ids: [null],
       status: [selectedStatus, [Validators.required]],
@@ -85,16 +90,37 @@ export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
               name: this.movie.name,
               slug: this.movie.slug,
               movie_type_id: selectedMovieType || defaultMovieType,
+              poster: this.movie.poster,
+              release_date: this.movie.release_date,
               country_ids: this.selectedCountries,
               genre_ids: this.selectedGenres,
               status: this.movie.status
             });
+
+            if (this.movie.poster) {
+              this.fileList = [{
+                uid: '-1',
+                name: 'image.png',
+                url: 'http://localhost:8808' + this.movie.poster
+              }];
+            }
+
+            console.log(this.fileList);
           }, (error) => {
             this.close();
             this.nzMessageService.error(error.error.message);
           });
       });
   }
+
+  handlePreview = async (file: NzUploadFile) => {
+    const {originFileObj, url, preview} = file;
+
+    if (!url && !preview && originFileObj !== undefined) {
+      file.preview = await HelperUtils.getBase64(originFileObj);
+      file.status = 'done';
+    }
+  };
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -132,9 +158,19 @@ export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
-    // console.log(this.validateForm.value);
+    const formData = new FormData();
+    this.fileList.forEach((file: any) => {
+      const {originFileObj, url, preview} = file;
 
-    this.movieService.updateMovieByMovieId(this.movie.movie_id, this.validateForm.value)
+      if (!url && !preview && originFileObj !== undefined) {
+        formData.append('poster', originFileObj);
+      }
+    });
+
+    // console.log(this.validateForm.value);
+    formData.append('movie', JSON.stringify(this.validateForm.value));
+
+    this.movieService.updateMovieByMovieId(this.movie.movie_id, formData)
       .subscribe(() => {
         this.sharedService.emitChange();
         this.close();
