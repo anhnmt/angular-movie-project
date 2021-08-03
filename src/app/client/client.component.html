@@ -94,230 +94,45 @@
               class="fa fa-play"></i></a>
           </div>
           <div class="list-vod row category-tabs-item">
-            <div class="item col-lg-3 col-md-4 col-sm-4 col-6">
-              <a href="https://247phim.com/xemphim/yeu-anh-chang-kieu-ky-22662">
-                <div class="img-4-6">
-                  <div class="inline">
-                    <img alt="Love You My Arrogance (2021)"
-                         src="https://static.247phim.com/162459/conversions/60e67ef330ed0_yeu-190_274.jpg">
-
-                  </div>
-                </div>
-                <h3>Yêu Anh Chàng Kiêu Kỳ</h3>
-                <p class="subtitle">Love You My Arrogance (2021)</p>
-              </a>
-            </div>
-            <div class="item col-lg-3 col-md-4 col-sm-4 col-6">
-              <a href="https://247phim.com/xemphim/yakuza-va-gia-dinh-22671">
-                <div class="img-4-6">
-                  <div class="inline">
-                    <img alt="Yakuza And The Family (2021)"
-                         src="https://static.247phim.com/162464/conversions/60e7c7a48b862_ya-190_274.jpg">
-
-                  </div>
-                </div>
-                <h3>Yakuza Và Gia Đình</h3>
-                <p class="subtitle">Yakuza And The Family (2021)</p>
-              </a>
-            </div>
-            <div class="item col-lg-3 col-md-4 col-sm-4 col-6">
-              <a href="https://247phim.com/xemphim/cuoc-chien-tuong-lai-22629">
-                <div class="img-4-6">
-                  <div class="inline">
-                    <img alt="The Tomorrow War (2021)"
-                         src="https://static.247phim.com/162414/conversions/60e2757adfd2c_5675685214852-190_274.jpg">
-
-                  </div>
-                </div>
-                <h3>Cuộc Chiến Tương Lai</h3>
-                <p class="subtitle">The Tomorrow War (2021)</p>
-              </a>
-            </div>
-            <div class="item col-lg-3 col-md-4 col-sm-4 col-6">
-              <a href="https://247phim.com/xemphim/nhoc-trum-2-noi-nghiep-gia-dinh-22628">
+            <div *ngFor="let data of this.bodyCinemas" class="item col-lg-3 col-md-4 col-sm-4 col-6">
+              <a [href]="'/phim/' + data.slug">
                 <div class="img-4-6">
                   <div class="inline">
                     <img
-                      alt="The Boss Baby: Family Busines (2021)"
-                      src="https://static.247phim.com/162415/conversions/60e27591e8dff_The_Boss_Baby_Family_Business-723266998-large-190_274.jpg">
+                      [alt]="data.name"
+                      [src]="data.poster">
 
                   </div>
                 </div>
-                <h3>Nhóc Trùm 2: Nối Nghiệp Gia Đình</h3>
-                <p class="subtitle">The Boss Baby: Family Busines (2021)</p>
-              </a>
-            </div>
-            <div class="item col-lg-3 col-md-4 col-sm-4 col-6">
-              <a href="https://247phim.com/xemphim/cho-den-chet-22630">
-                <div class="img-4-6">
-                  <div class="inline">
-                    <img alt="Till Death (2021)"
-                         src="https://static.247phim.com/162424/conversions/60e28d15801ca_unnamed-190_274.jpg">
-
-                  </div>
-                </div>
-                <h3>Cho Đến Chết</h3>
-                <p class="subtitle">Till Death (2021)</p>
-              </a>
-            </div>
-            <div class="item col-lg-3 col-md-4 col-sm-4 col-6">
-              <a href="https://247phim.com/xemphim/nhung-ke-di-thuong-22561">
-                <div class="img-4-6">
-                  <div class="inline">
-                    <img alt="The Misfits (2021)"
-                         src="https://static.247phim.com/162274/conversions/60d013003d126_di-190_274.jpg">
-
-                  </div>
-                </div>
-                <h3>Những Kẻ Dị Thường</h3>
-                <p class="subtitle">The Misfits (2021)</p>
-              </a>
-            </div>
-            <div class="item col-lg-3 col-md-4 col-sm-4 col-6">
-              <a href="https://247phim.com/xemphim/ho-dia-nguc-22605">
-                <div class="img-4-6">
-                  <div class="inline">
-                    <img alt="Superdeep (2021)"
-                         src="https://static.247phim.com/162384/conversions/60dbe24b034e7_superdeep-190_274.jpg">
-
-                  </div>
-                </div>
-                <h3>Hố Địa Ngục</h3>
-                <p class="subtitle">Superdeep (2021)</p>
-              </a>
-            </div>
-            <div class="item col-lg-3 col-md-4 col-sm-4 col-6">
-              <a href="https://247phim.com/xemphim/vung-dat-cam-lang-phan-2-22577">
-                <div class="img-4-6">
-                  <div class="inline">
-                    <img alt="A Quiet Place: Part II (2021)"
-                         src="https://static.247phim.com/162300/conversions/60d564ce7055c_vug-190_274.jpg">
-
-                  </div>
-                </div>
-                <h3>Vùng Đất Câm Lặng (Phần 2)</h3>
-                <p class="subtitle">A Quiet Place: Part II (2021)</p>
+                <h3>{{ data.name }}</h3>
+                <p
+                  class="subtitle">{{ data.origin_name }} {{ data.release_date ? '(' + data.release_date + ')' : '' }}</p>
               </a>
             </div>
           </div>
         </div>
         <div class="panel-vod">
           <div class="title-cate">
-            <a href="/phim/phim-18">
-              <h2>Phim 18+</h2>
+            <a href="/phim/phim-le">
+              <h2>Phim lẻ</h2>
             </a>
-            <a class="link-cate-xem-them" href="/phim/phim-18?xem-them=1">Xem thêm <i
+            <a class="link-cate-xem-them" href="/phim/phim-le?xem-them=1">Xem thêm <i
               class="fa fa-play"></i></a>
           </div>
           <div class="list-vod row category-tabs-item">
-            <div class="item col-lg-3 col-md-4 col-sm-4 col-6">
-              <a href="https://247phim.com/xemphim/tinh-duc-va-doi-song-22598">
-                <div class="img-4-6">
-                  <div class="inline">
-                    <img alt="Sex/Life (2021)"
-                         src="https://static.247phim.com/162372/conversions/60d979b13a715_s-190_274.jpg">
-                    <span class="ribbon">
-                                                        8/8
-                                                    </span>
-
-                  </div>
-                </div>
-                <h3>Tình Dục Và Đời Sống</h3>
-                <p class="subtitle">Sex/Life (2021)</p>
-              </a>
-            </div>
-            <div class="item col-lg-3 col-md-4 col-sm-4 col-6">
-              <a href="https://247phim.com/xemphim/noi-dang-so-cua-ngay-tan-the-22615">
-                <div class="img-4-6">
-                  <div class="inline">
-                    <img alt="Paradise Z (2020)"
-                         src="https://static.247phim.com/162447/conversions/60e51d5164836_z-190_274.jpg">
-
-                  </div>
-                </div>
-                <h3>Nỗi Đáng Sợ Của Ngày Tận Thế</h3>
-                <p class="subtitle">Paradise Z (2020)</p>
-              </a>
-            </div>
-            <div class="item col-lg-3 col-md-4 col-sm-4 col-6">
-              <a href="https://247phim.com/xemphim/bien-suong-mu-8545">
+            <div *ngFor="let data of this.bodyMovies" class="item col-lg-3 col-md-4 col-sm-4 col-6">
+              <a [href]="'/phim/' + data.slug">
                 <div class="img-4-6">
                   <div class="inline">
                     <img
-                      alt="Sea Fog (2014)"
-                      src="https://static.247phim.com/133813/conversions/8545_sea-fog-2014_photo_portrait-190_274.jpg">
+                      [alt]="data.name"
+                      [src]="data.poster">
 
                   </div>
                 </div>
-                <h3>Biển Sương Mù</h3>
-                <p class="subtitle">Sea Fog (2014)</p>
-              </a>
-            </div>
-            <div class="item col-lg-3 col-md-4 col-sm-4 col-6">
-              <a href="https://247phim.com/xemphim/noi-dong-bang-22352">
-                <div class="img-4-6">
-                  <div class="inline">
-                    <img alt="Delta (2008)"
-                         src="https://static.247phim.com/161955/conversions/609501738f706_delta-190_274.jpg">
-
-                  </div>
-                </div>
-                <h3>Nơi Đồng Bằng</h3>
-                <p class="subtitle">Delta (2008)</p>
-              </a>
-            </div>
-            <div class="item col-lg-3 col-md-4 col-sm-4 col-6">
-              <a href="https://247phim.com/xemphim/nhung-dua-tre-ngoan-5971">
-                <div class="img-4-6">
-                  <div class="inline">
-                    <img
-                      alt="Good Kids (2016)"
-                      src="https://static.247phim.com/128828/conversions/5971_good-kids-2016_photo_portrait-190_274.jpg">
-
-                  </div>
-                </div>
-                <h3>Những Đứa Trẻ Ngoan</h3>
-                <p class="subtitle">Good Kids (2016)</p>
-              </a>
-            </div>
-            <div class="item col-lg-3 col-md-4 col-sm-4 col-6">
-              <a href="https://247phim.com/xemphim/trao-doi-tinh-ai-22351">
-                <div class="img-4-6">
-                  <div class="inline">
-                    <img alt="Open Marriage (2017)"
-                         src="https://static.247phim.com/161953/conversions/6094fd95a4ee2_trao-190_274.jpg">
-
-                  </div>
-                </div>
-                <h3>Trao Đổi Tình Ái</h3>
-                <p class="subtitle">Open Marriage (2017)</p>
-              </a>
-            </div>
-            <div class="item col-lg-3 col-md-4 col-sm-4 col-6">
-              <a href="https://247phim.com/xemphim/vi-nguoi-phu-nu-ay-22221">
-                <div class="img-4-6">
-                  <div class="inline">
-                    <img alt="Ride Or Die (2021)"
-                         src="https://static.247phim.com/161679/conversions/60796085dee89_coay-d-190_274.jpg">
-
-                  </div>
-                </div>
-                <h3>Vì Người Phụ Nữ Ấy</h3>
-                <p class="subtitle">Ride Or Die (2021)</p>
-              </a>
-            </div>
-            <div class="item col-lg-3 col-md-4 col-sm-4 col-6">
-              <a href="https://247phim.com/xemphim/mau-cua-ao-giac-5653">
-                <div class="img-4-6">
-                  <div class="inline">
-                    <img
-                      alt="Perfect Blue (1997)"
-                      src="https://static.247phim.com/128227/conversions/5653_perfect-blue-1997_photo_portrait-190_274.jpg">
-
-                  </div>
-                </div>
-                <h3>Màu Của Ảo Giác</h3>
-                <p class="subtitle">Perfect Blue (1997)</p>
+                <h3>{{ data.name }}</h3>
+                <p
+                  class="subtitle">{{ data.origin_name }} {{ data.release_date ? '(' + data.release_date + ')' : '' }}</p>
               </a>
             </div>
           </div>
@@ -336,7 +151,7 @@
                       <div class="inline">
                         <img
                           [alt]="data.name"
-                          [src]="'http://localhost:8808' + data.poster">
+                          [src]="data.poster">
                       </div>
                     </div>
                   </div>
@@ -365,11 +180,9 @@
                     <div class="img-4-6">
                       <div class="inline">
                         <img
-                          alt="Detective Investigation Files (1996)"
-                          src="https://static.247phim.com/138093/conversions/11028_detective-investigation-files-2_photo_portrait-190_274.jpg">
-                        <span class="ribbon">
-                                                                40/40
-                                                            </span>
+                          [alt]="data.name"
+                          [src]="data.poster">
+                        <span class="ribbon">40/40</span>
 
                       </div>
                     </div>
@@ -377,8 +190,9 @@
                   <div class="item col-lg-8 col-md-12 col-8">
                     <div class="func row">
                       <div class="col-12">
-                        <h3>Hồ Sơ Trinh Sát (Phần 2)</h3>
-                        <p class="subtitle">Detective Investigation Files (1996)</p>
+                        <h3>{{ data.name }}</h3>
+                        <p
+                          class="subtitle">{{ data.origin_name }} {{ data.release_date ? '(' + data.release_date + ')' : '' }}</p>
                       </div>
                     </div>
                   </div>
@@ -400,109 +214,19 @@
       </div>
       <div class="list-vod row category-tabs-item">
 
-        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
-          <a href="https://247phim.com/xemphim/toi-va-chung-ta-o-ben-nhau-22653">
-            <div class="img-4-6">
-              <div class="inline">
-                <img alt="Be Together (2021)"
-                     src="https://static.247phim.com/162443/conversions/60e408c36a471_1Jp63_4f-190_274.jpg">
-                <span class="ribbon">
-                                                11/36
-                                            </span>
-
-              </div>
-            </div>
-            <h3>Tôi Và Chúng Ta Ở Bên Nhau</h3>
-            <p class="subtitle">Be Together (2021)</p>
-          </a>
-        </div>
-
-        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
-          <a href="https://247phim.com/xemphim/nhat-ky-trinh-sat-hinh-su-22604">
-            <div class="img-4-6">
-              <div class="inline">
-                <img alt="Murder Diary (2021)"
-                     src="https://static.247phim.com/162382/conversions/60dace73eda44_hinhtrinh-190_274.jpg">
-                <span class="ribbon">
-                                                Thuyết minh
-                                                -
-                                                8/25
-                                            </span>
-
-              </div>
-            </div>
-            <h3>Nhật Ký Trinh Sát Hình Sự</h3>
-            <p class="subtitle">Murder Diary (2021)</p>
-          </a>
-        </div>
-
-        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
-          <a
-            href="https://247phim.com/xemphim/chuyen-doi-bac-si-nhung-bac-si-tai-hoa-phan-2-22544">
-            <div class="img-4-6">
-              <div class="inline">
-                <img alt="Hospital Playlist (season 2) (2021)"
-                     src="https://static.247phim.com/162254/conversions/60cc1e6c0f5aa_hop-190_274.jpg">
-                <span class="ribbon">
-                                                4/12
-                                            </span>
-
-              </div>
-            </div>
-            <h3>Chuyện Đời Bác Sĩ / Những Bác Sĩ Tài Hoa (Phần 2)</h3>
-            <p class="subtitle">Hospital Playlist (season 2) (2021)</p>
-          </a>
-        </div>
-
-        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
-          <a href="https://247phim.com/xemphim/loki-than-lua-loc-phan-1-22510">
+        <div *ngFor="let data of this.bodySeries" class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a [href]="'/phim/' + data.slug">
             <div class="img-4-6">
               <div class="inline">
                 <img
-                  alt="Loki (Season 1) (2021)"
-                  src="https://static.247phim.com/162209/conversions/60c039edec5e2_MV5BNTkwOTE1ZDYtODQ3Yy00YTYwLTg0YWQtYmVkNmFjNGZlYmRiXkEyXkFqcGdeQXVyNTc4MjczMTM%40-190_274.jpg">
-                <span class="ribbon">
-                                                5/6
-                                            </span>
+                  [alt]="data.name"
+                  [src]="data.poster">
+                <span class="ribbon">11/36</span>
 
               </div>
             </div>
-            <h3>Loki Thần Lừa Lọc (Phần 1)</h3>
-            <p class="subtitle">Loki (Season 1) (2021)</p>
-          </a>
-        </div>
-
-        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
-          <a href="https://247phim.com/xemphim/am-thanh-toi-pham-phan-4-22563">
-            <div class="img-4-6">
-              <div class="inline">
-                <img alt="Voice (Season 4) (2021)"
-                     src="https://static.247phim.com/162276/conversions/60d016e4cf33f_am-190_274.jpg">
-                <span class="ribbon">
-                                                6/14
-                                            </span>
-
-              </div>
-            </div>
-            <h3>Âm Thanh Tội Phạm (Phần 4)</h3>
-            <p class="subtitle">Voice (Season 4) (2021)</p>
-          </a>
-        </div>
-
-        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
-          <a href="https://247phim.com/xemphim/cuoc-chien-thuong-luu-phan-3-22493">
-            <div class="img-4-6">
-              <div class="inline">
-                <img alt="The Penthouse 3: War in Life (2021)"
-                     src="https://static.247phim.com/162177/conversions/60bacbea4913e_3333-190_274.jpg">
-                <span class="ribbon">
-                                                5/11
-                                            </span>
-
-              </div>
-            </div>
-            <h3>Cuộc Chiến Thượng Lưu (Phần 3)</h3>
-            <p class="subtitle">The Penthouse 3: War in Life (2021)</p>
+            <h3>{{ data.name }}</h3>
+            <p class="subtitle">{{ data.origin_name }} {{ data.release_date ? '(' + data.release_date + ')' : '' }}</p>
           </a>
         </div>
       </div>
@@ -517,107 +241,18 @@
       </div>
       <div class="list-vod row category-tabs-item">
 
-        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
-          <a href="https://247phim.com/xemphim/vung-dat-quy-du-bong-dem-vo-tan-22663">
+        <div *ngFor="let data of this.bodyCartoons" class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a [href]="'/phim/' + data.slug">
             <div class="img-4-6">
               <div class="inline">
                 <img
-                  alt="Resident Evil: Infinite Darkness (2021)"
-                  src="https://static.247phim.com/162463/conversions/60e6bada42100_biohazard_infinite_darkness_tv_series-349452144-large-190_274.jpg">
-                <span class="ribbon">
-                                                4/4
-                                            </span>
-
+                  [alt]="data.name"
+                  [src]="data.poster">
+                <span class="ribbon">4/4</span>
               </div>
             </div>
-            <h3>Vùng Đất Quỷ Dữ: Bóng Đêm Vô Tận</h3>
-            <p class="subtitle">Resident Evil: Infinite Darkness (2021)</p>
-          </a>
-        </div>
-
-        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
-          <a href="https://247phim.com/xemphim/nhoc-trum-2-noi-nghiep-gia-dinh-22628">
-            <div class="img-4-6">
-              <div class="inline">
-                <img
-                  alt="The Boss Baby: Family Busines (2021)"
-                  src="https://static.247phim.com/162415/conversions/60e27591e8dff_The_Boss_Baby_Family_Business-723266998-large-190_274.jpg">
-
-              </div>
-            </div>
-            <h3>Nhóc Trùm 2: Nối Nghiệp Gia Đình</h3>
-            <p class="subtitle">The Boss Baby: Family Busines (2021)</p>
-          </a>
-        </div>
-
-        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
-          <a href="https://247phim.com/xemphim/tho-peter-2-cuoc-tron-chay-22620">
-            <div class="img-4-6">
-              <div class="inline">
-                <img
-                  alt="Peter Rabbit 2: The Runaway (2021)"
-                  src="https://static.247phim.com/162408/conversions/60debb5de94d1_MV5BYjkyMDQyZWQtNGFhYy00NjdmLWEzMjctYzAxMmJkNDkxZmRlXkEyXkFqcGdeQXVyMDA4NzMyOA%40%40._V1_FMjpg_UX1000_-190_274.jpg">
-                <span class="ribbon">
-                                                Engsub
-                                            </span>
-
-              </div>
-            </div>
-            <h3>Thỏ Peter 2: Cuộc Trốn Chạy</h3>
-            <p class="subtitle">Peter Rabbit 2: The Runaway (2021)</p>
-          </a>
-        </div>
-
-        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
-          <a href="https://247phim.com/xemphim/tham-tu-lung-danh-conan-phan-1-22516">
-            <div class="img-4-6">
-              <div class="inline">
-                <img alt="Detective Conan (1996)"
-                     src="https://static.247phim.com/162218/conversions/60c1cb6c93c7c_conan-190_274.jpg">
-                <span class="ribbon">
-                                                195/195
-                                            </span>
-
-              </div>
-            </div>
-            <h3>Thám Tử Lừng Danh Conan (Phần 1)</h3>
-            <p class="subtitle">Detective Conan (1996)</p>
-          </a>
-        </div>
-
-        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
-          <a href="https://247phim.com/xemphim/bay-vien-ngoc-rong-11205">
-            <div class="img-4-6">
-              <div class="inline">
-                <img
-                  alt="Dragon Ball (1986)"
-                  src="https://static.247phim.com/138270/conversions/11205_dragon-ball_photo_portrait-190_274.jpg">
-                <span class="ribbon">
-                                                224/224
-                                            </span>
-
-              </div>
-            </div>
-            <h3>Bảy Viên Ngọc Rồng</h3>
-            <p class="subtitle">Dragon Ball (1986)</p>
-          </a>
-        </div>
-
-        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
-          <a href="https://247phim.com/xemphim/naruto-phan-2-14246">
-            <div class="img-4-6">
-              <div class="inline">
-                <img
-                  alt="Naruto Shippuuden (2007)"
-                  src="https://static.247phim.com/155970/conversions/5f8d38a19d96c_naruto-shippuden-d-190_274.jpg">
-                <span class="ribbon">
-                                                500/500
-                                            </span>
-
-              </div>
-            </div>
-            <h3>Naruto (Phần 2)</h3>
-            <p class="subtitle">Naruto Shippuuden (2007)</p>
+            <h3>{{ data.name }}</h3>
+            <p class="subtitle">{{ data.origin_name }} {{ data.release_date ? '(' + data.release_date + ')' : '' }}</p>
           </a>
         </div>
       </div>

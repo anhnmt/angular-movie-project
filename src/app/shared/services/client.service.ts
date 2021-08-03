@@ -19,4 +19,9 @@ export class ClientService {
     return this.httpClient
       .get<DefaultResponse<{ movies?: Movie[], series?: Movie[] }>>(`${this.baseUrl}/top-movies-sidebar`);
   }
+
+  getAllTopMoviesBody(): Observable<DefaultResponse<{ movies?: Movie[], series?: Movie[], cartoons?: Movie[], cinemas?: Movie[] }>> {
+    return this.httpClient
+      .get<DefaultResponse<{ movies?: Movie[], series?: Movie[], cartoons?: Movie[], cinemas?: Movie[] }>>(`${this.baseUrl}/top-movies-body`);
+  }
 }

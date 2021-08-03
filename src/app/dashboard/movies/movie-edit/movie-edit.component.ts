@@ -87,6 +87,7 @@ export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
             const selectedMovieType = GlobalUtils.mapMovieType(this.movieTypes, this.movie.movie_type_id)?.movie_type_id;
 
             this.validateForm.patchValue({
+              origin_name: this.movie.origin_name,
               name: this.movie.name,
               slug: this.movie.slug,
               movie_type_id: selectedMovieType || defaultMovieType,
@@ -101,7 +102,7 @@ export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
               this.fileList = [{
                 uid: '-1',
                 name: 'image.png',
-                url: 'http://localhost:8808' + this.movie.poster
+                url: this.movie.poster
               }];
             }
 

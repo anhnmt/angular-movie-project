@@ -12,6 +12,11 @@ import {forkJoin} from 'rxjs';
 })
 export class ClientComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  bodyMovies: Movie[] = [];
+  bodySeries: Movie[] = [];
+  bodyCartoons: Movie[] = [];
+  bodyCinemas: Movie[] = [];
+
   topMoviesSidebar: Movie[] = [];
   topSeriesSidebar: Movie[] = [];
 
@@ -19,10 +24,17 @@ export class ClientComponent implements OnInit, AfterViewInit, OnDestroy {
     private clientService: ClientService,
   ) {
     forkJoin([
+      this.clientService.getAllTopMoviesBody(),
       this.clientService.getAllTopMoviesSidebar(),
     ])
-      .subscribe(([sidebar]) => {
-        // console.log(sidebar.data.movies);
+      .subscribe(([body, sidebar]) => {
+        // console.log(body.data);
+
+        this.bodyMovies = body.data?.movies;
+        this.bodySeries = body.data?.series;
+        this.bodyCartoons = body.data?.cartoons;
+        this.bodyCinemas = body.data?.cinemas;
+
         this.topMoviesSidebar = sidebar.data?.movies;
         this.topSeriesSidebar = sidebar.data?.series;
       });
