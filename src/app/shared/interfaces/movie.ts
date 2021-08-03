@@ -6,8 +6,9 @@ export interface Movie {
   name: string;
   slug: string;
   description?: string;
-  movie_type_id: number;
+  movie_type_id?: number;
   movie_type_name?: string;
+  movie_type?: { movie_type_id?: number, name?: string };
   trailer?: string;
   imdb_id?: string;
   rating?: string;

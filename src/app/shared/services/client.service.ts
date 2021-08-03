@@ -22,6 +22,12 @@ export class ClientService {
 
   getAllTopMoviesBody(): Observable<DefaultResponse<{ movies?: Movie[], series?: Movie[], cartoons?: Movie[], cinemas?: Movie[] }>> {
     return this.httpClient
-      .get<DefaultResponse<{ movies?: Movie[], series?: Movie[], cartoons?: Movie[], cinemas?: Movie[] }>>(`${this.baseUrl}/top-movies-body`);
+      .get<DefaultResponse<{ movies?: Movie[], series?: Movie[], cartoons?: Movie[], cinemas?: Movie[] }>>
+      (`${this.baseUrl}/top-movies-body`);
+  }
+
+  getMovieDetail(slug: string): Observable<DefaultResponse<Movie>> {
+    return this.httpClient
+      .get<DefaultResponse<Movie>>(`${this.baseUrl}/find-movie-detail/${slug}`);
   }
 }

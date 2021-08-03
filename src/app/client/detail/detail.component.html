@@ -1,1 +1,314 @@
-<p>detail works!</p>
+<div class="player-section">
+  <div class="container">
+    <div class="mb-5 row mt-3" id="playerDiv" style="display:none">
+
+      <div class="col-12" id="video_container" style="padding:0">
+
+      </div>
+
+    </div>
+
+
+    <div class="mb-5 row mt-3" id="playerSecondary" style="display:none">
+
+      <div class="col-12" id="video_container_secondary" style="padding:0">
+
+      </div>
+
+    </div>
+
+    <div class="mb-5 row mt-3" id="playerTrailer" style="display:none">
+    </div>
+
+
+    <div class="row mt-3" id="detail-meta">
+      <div class="col-md-4 col-12">
+        <div class="item">
+          <div class="img-4-6">
+            <div class="inline">
+              <img
+                alt="Ninja Apocalypse (2014)"
+                src="https://static.247phim.com/121355/conversions/2111_ninja-apocalypse-2014_photo_portrait-435_627.jpg">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8 col-12 detail-vod-left">
+        <div class="detail">
+          <p class="detail-info">
+            <a href="#">{{ movie?.movie_type?.name }}</a>
+            <a href="#">{{ movie?.release_date }}</a>
+          </p>
+          <h2 class="title-vod mt-2">{{ movie?.name }}</h2>
+          <h3
+            class="title-vod mt-2">{{ movie?.origin_name }} {{ movie?.release_date ? '(' + movie?.release_date + ')' : '' }}</h3>
+
+
+          <div class="func mt-2">
+            <a class=""><i aria-hidden="true" class="fa fa-exclamation-triangle" style="color: red"></i> Báo lỗi</a>
+            <a class="trailer">Xem Trailer</a>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-6 col-md-3">
+              <button class="btn-play-small" id="btnPlay">Play</button>
+            </div>
+
+          </div>
+
+          <div class="mt-2"><p>{{ movie?.description }}</p></div>
+
+          <div class="row mt-4">
+            <div class="col-md-6 col-12">
+              <ul class="more-info">
+                <li>
+                  <span>Thời lượng: </span> 84 phút
+                </li>
+                <li><span>Đạo diễn: </span> Lloyd Lee Barnett</li>
+                <li><span>Quốc gia: </span> Mỹ</li>
+                <li><span>Thể loại: </span>
+                  Hành động,
+                  Kiếm hiệp, võ thuật,
+                  Phim lẻ,
+                </li>
+                <li><span>Phát hành: </span> {{ movie?.release_date }}</li>
+                <li><span>IMDB: </span> {{ movie?.release_date }}</li>
+              </ul>
+            </div>
+            <div class="col-md-6 col-12">
+              <ul class="more-info">
+                <li><span>Diễn viên: </span> Christian Oliver, Les Brandt, Cary-Hiroyuki Tagawa</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+</div>
+
+<div class="main-content">
+  <div class="support-func ml-auto"><a class="icon-support" href="#"></a></div>
+  <div class="container">
+
+    <div class="panel-vod">
+      <div class="title-cate"><span>Liên quan</span></div>
+      <div class="list-vod row category-tabs-item">
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/nguoi-doi-dem-halloween-phan-2-22771">
+            <div class="img-4-6">
+              <div class="inline">
+                <img alt="Batman: The Long Halloween Part Two (2021)"
+                     src="https://static.247phim.com/162619/conversions/61076078ef67a_bat-190_274.jpg">
+              </div>
+            </div>
+            <h4>Người Dơi: Đêm Halloween (Phần 2)</h4>
+            <p class="subtitle">Batman: The Long Halloween Part Two (2021)</p>
+          </a>
+          <div class="func">
+
+            <a class="like mr-3" data-video_id="2111" href="javascript:void(0)">0</a>
+            <a class="view" href="#">405</a>
+          </div>
+        </div>
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/ba-hoang-buon-co-22769">
+            <div class="img-4-6">
+              <div class="inline">
+                <img alt="Mama Weed (2020)"
+                     src="https://static.247phim.com/162616/conversions/61074cf31a827_mama-190_274.jpg">
+              </div>
+            </div>
+            <h4>Bà Hoàng Buôn Cỏ</h4>
+            <p class="subtitle">Mama Weed (2020)</p>
+          </a>
+          <div class="func">
+
+            <a class="like mr-3" data-video_id="2111" href="javascript:void(0)">0</a>
+            <a class="view" href="#">293</a>
+          </div>
+        </div>
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/thuy-thu-mat-trang-vinh-hang-phan-1-22768">
+            <div class="img-4-6">
+              <div class="inline">
+                <img alt="Pretty Guardian Sailor Moon Eternal (Season 1) (2021)"
+                     src="https://static.247phim.com/162617/conversions/61074d2ee9fc3_1-190_274.jpg">
+              </div>
+            </div>
+            <h4>Thủy Thủ Mặt Trăng: Vĩnh Hằng (Phần 1)</h4>
+            <p class="subtitle">Pretty Guardian Sailor Moon Eternal (Season 1) (2021)</p>
+          </a>
+          <div class="func">
+
+            <a class="like mr-3" data-video_id="2111" href="javascript:void(0)">0</a>
+            <a class="view" href="#">123</a>
+          </div>
+        </div>
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/thuy-thu-mat-trang-vinh-hang-phan-2-22767">
+            <div class="img-4-6">
+              <div class="inline">
+                <img alt="Pretty Guardian Sailor Moon Eternal (Season 2) (2021)"
+                     src="https://static.247phim.com/162613/conversions/61074a7fb8dee_2-190_274.jpg">
+              </div>
+            </div>
+            <h4>Thủy Thủ Mặt Trăng: Vĩnh Hằng (Phần 2)</h4>
+            <p class="subtitle">Pretty Guardian Sailor Moon Eternal (Season 2) (2021)</p>
+          </a>
+          <div class="func">
+
+            <a class="like mr-3" data-video_id="2111" href="javascript:void(0)">0</a>
+            <a class="view" href="#">111</a>
+          </div>
+        </div>
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/dai-than-hau2020-22766">
+            <div class="img-4-6">
+              <div class="inline">
+                <img alt="Great God Monkey (2020)"
+                     src="https://static.247phim.com/162614/conversions/61074c8c706a1_money-190_274.jpg">
+              </div>
+            </div>
+            <h4>Đại Thần Hầu</h4>
+            <p class="subtitle">Great God Monkey (2020)</p>
+          </a>
+          <div class="func">
+
+            <a class="like mr-3" data-video_id="2111" href="javascript:void(0)">0</a>
+            <a class="view" href="#">406</a>
+          </div>
+        </div>
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/tham-hiem-rung-xanh-22764">
+            <div class="img-4-6">
+              <div class="inline">
+                <img
+                  alt="Jungle Cruise (2021)"
+                  src="https://static.247phim.com/162611/conversions/610500d543718_MV5BNDE1MGRlNTQtZjc4ZC00MTI0LWEwY2MtODk1YTM2NmFmYTNmXkEyXkFqcGdeQXVyODk4OTc3MTY%40._V1_-%281%29-190_274.jpg">
+              </div>
+            </div>
+            <h4>Thám Hiểm Rừng Xanh</h4>
+            <p class="subtitle">Jungle Cruise (2021)</p>
+          </a>
+          <div class="func">
+
+            <a class="like mr-3" data-video_id="2111" href="javascript:void(0)">11</a>
+            <a class="view" href="#">8.7 K</a>
+          </div>
+        </div>
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/lang-khach-kenshin-khoi-dau-phan-2-22763">
+            <div class="img-4-6">
+              <div class="inline">
+                <img
+                  alt="Rurouni Kenshin: The Beginning Part II (2021)"
+                  src="https://static.247phim.com/162612/conversions/610500e377037_Rurouni_Kenshin_Final_Chapter_Part_II_The_Beginning-392224602-large-190_274.jpg">
+              </div>
+            </div>
+            <h4>Lãng Khách Kenshin: Khởi Đầu (Phần 2)</h4>
+            <p class="subtitle">Rurouni Kenshin: The Beginning Part II (2021)</p>
+          </a>
+          <div class="func">
+
+            <a class="like mr-3" data-video_id="2111" href="javascript:void(0)">1</a>
+            <a class="view" href="#">1.4 K</a>
+          </div>
+        </div>
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/chan-troi-do-phan-2-22762">
+            <div class="img-4-6">
+              <div class="inline">
+                <img
+                  alt="Sky Rojo (Season 2) (2021)"
+                  src="https://static.247phim.com/162610/conversions/6104cc98c7efd_sky-rojo-season-2_poster_goldposter_com_2-190_274.jpg">
+              </div>
+            </div>
+            <h4>Chân Trời Đỏ (Phần 2)</h4>
+            <p class="subtitle">Sky Rojo (Season 2) (2021)</p>
+          </a>
+          <div class="func">
+
+            <a class="like mr-3" data-video_id="2111" href="javascript:void(0)">1</a>
+            <a class="view" href="#">313</a>
+          </div>
+        </div>
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/dao-xa-vuong-22761">
+            <div class="img-4-6">
+              <div class="inline">
+                <img alt="King Serpent Island (2021)"
+                     src="https://static.247phim.com/162609/conversions/610497b37ffa7_xa-190_274.jpg">
+              </div>
+            </div>
+            <h4>Đảo Xà Vương</h4>
+            <p class="subtitle">King Serpent Island (2021)</p>
+          </a>
+          <div class="func">
+
+            <a class="like mr-3" data-video_id="2111" href="javascript:void(0)">1</a>
+            <a class="view" href="#">3.3 K</a>
+          </div>
+        </div>
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/linh-danh-thue-cuoi-cung-22760">
+            <div class="img-4-6">
+              <div class="inline">
+                <img alt="The Last Mercenary (2021)"
+                     src="https://static.247phim.com/162608/conversions/610496d7ac59b_danh-190_274.jpg">
+              </div>
+            </div>
+            <h4>Lính Đánh Thuê Cuối Cùng</h4>
+            <p class="subtitle">The Last Mercenary (2021)</p>
+          </a>
+          <div class="func">
+
+            <a class="like mr-3" data-video_id="2111" href="javascript:void(0)">1</a>
+            <a class="view" href="#">3.5 K</a>
+          </div>
+        </div>
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/cau-be-sau-canh-cua-22758">
+            <div class="img-4-6">
+              <div class="inline">
+                <img
+                  alt="The Boy Behind The Door (2021)"
+                  src="https://static.247phim.com/162600/conversions/61038d1b91369_The-Boy-Behind-the-Door-190_274.jpg">
+              </div>
+            </div>
+            <h4>Cậu Bé Sau Cánh Cửa</h4>
+            <p class="subtitle">The Boy Behind The Door (2021)</p>
+          </a>
+          <div class="func">
+
+            <a class="like mr-3" data-video_id="2111" href="javascript:void(0)">1</a>
+            <a class="view" href="#">1.5 K</a>
+          </div>
+        </div>
+        <div class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a href="https://247phim.com/xemphim/qua-nhanh-qua-nguy-hiem-9-huyen-thoai-toc-do-22757">
+            <div class="img-4-6">
+              <div class="inline">
+                <img
+                  alt="Fast &amp; Furious 9: The Fast Saga (2021)"
+                  src="https://static.247phim.com/162599/conversions/61038b5f8201a_MV5BMjI0NmFkYzEtNzU2YS00NTg5LWIwYmMtNmQ1MTU0OGJjOTMxXkEyXkFqcGdeQXVyMjMxOTE0ODA%40._V1_-190_274.jpg">
+              </div>
+            </div>
+            <h4>Quá Nhanh Quá Nguy Hiểm 9: Huyền Thoại Tốc Độ</h4>
+            <p class="subtitle">Fast &amp; Furious 9: The Fast Saga (2021)</p>
+          </a>
+          <div class="func">
+
+            <a class="like mr-3" data-video_id="2111" href="javascript:void(0)">10</a>
+            <a class="view" href="#">28.7 K</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
