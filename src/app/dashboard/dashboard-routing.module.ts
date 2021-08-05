@@ -50,6 +50,13 @@ const routes: Routes = [
     data: {
       title: 'Genre '
     }
+  },
+  {
+    path: 'banners',
+    loadChildren: () => import('./banners/banners.module').then(m => m.BannersModule),
+    data: {
+      title: 'Banner '
+    }
   }
 ];
 

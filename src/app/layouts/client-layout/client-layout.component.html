@@ -18,8 +18,8 @@
     </div>
 
     <ul class="list-unstyled components">
-      <li class="active"><a href="/">Trang chủ</a></li>
-      <li><a href="https://247phim.com/login">Đăng nhập</a></li>
+      <li class="active"><a routerLink="/">Trang chủ</a></li>
+      <li><a routerLink="/login">Đăng nhập</a></li>
       <li class="dropdown-divider"></li>
       <li><a href="https://247phim.com/phim/phim-le/nam/2021">Phim lẻ 2021</a></li>
       <li><a href="https://247phim.com/phim/phim-le/nam/2020">Phim lẻ 2020</a></li>
@@ -140,7 +140,7 @@
     <button class="btn btn-toggler navbar-toggler" id="sidebarCollapse" type="button">
       <i class="fas fa-align-left"></i>
     </button>
-    <a class="navbar-brand" href="/">
+    <a class="navbar-brand" routerLink="/">
       <img alt="247phim.com" src="https://247phim.com/images/logo.svg">
       <h1>Xem Phim Online Miễn Phí - Xem Phim HD</h1>
     </a>
@@ -159,84 +159,82 @@
     <div class="collapse navbar-collapse pc-view" id="navbarNavDropdown">
       <ul class="navbar-nav mr-auto ml-auto main-menu">
         <li class="nav-item">
-          <a class="nav-link"
-             href="#">
+          <a class="nav-link" routerLink="/loai-phim/phim-le">
             Phim lẻ
           </a>
         </li>
 
         <li class="nav-item dropdown">
-          <a class="nav-link"
-             href="#">
+          <a class="nav-link" routerLink="/loai-phim/phim-bo">
             Phim bộ
           </a>
         </li>
 
         <li class="nav-item dropdown">
           <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown"
-             href="#" id="dropdown-mainmenu-quoc-gia" role="button">
+             id="dropdown-mainmenu-quoc-gia" role="button">
             Quốc gia
           </a>
           <div aria-labelledby="dropdown-mainmenu-quoc-gia" class="dropdown-menu">
-            <a class="dropdown-item" href="/phim/quoc-gia/an-do">Ấn Độ</a>
-            <a class="dropdown-item" href="/phim/quoc-gia/anh">Anh</a>
-            <a class="dropdown-item" href="/phim/quoc-gia/canada">Canada</a>
-            <a class="dropdown-item" href="/phim/quoc-gia/chau-a">Châu Á</a>
-            <a class="dropdown-item" href="/phim/quoc-gia/dai-loan">Đài Loan</a>
-            <a class="dropdown-item" href="/phim/quoc-gia/duc">Đức</a>
-            <a class="dropdown-item" href="/phim/quoc-gia/han-quoc">Hàn Quốc</a>
-            <a class="dropdown-item" href="/phim/quoc-gia/hong-kong">Hồng Kông</a>
-            <a class="dropdown-item" href="/phim/quoc-gia/my">Mỹ</a>
-            <a class="dropdown-item" href="/phim/quoc-gia/nga">Nga</a>
-            <a class="dropdown-item" href="/phim/quoc-gia/nhat-ban">Nhật Bản</a>
-            <a class="dropdown-item" href="/phim/quoc-gia/phap">Pháp</a>
-            <a class="dropdown-item" href="/phim/quoc-gia/philippines">Philippines</a>
-            <a class="dropdown-item" href="/phim/quoc-gia/quoc-gia-khac">Quốc gia khác</a>
-            <a class="dropdown-item" href="/phim/quoc-gia/thai-lan">Thái Lan</a>
-            <a class="dropdown-item" href="/phim/quoc-gia/trung-quoc">Trung Quốc</a>
-            <a class="dropdown-item" href="/phim/quoc-gia/uc">Úc</a>
-            <a class="dropdown-item" href="/phim/quoc-gia/viet-nam">Việt Nam</a>
+            <a class="dropdown-item" href="/quoc-gia/an-do">Ấn Độ</a>
+            <a class="dropdown-item" href="/quoc-gia/anh">Anh</a>
+            <a class="dropdown-item" href="/quoc-gia/canada">Canada</a>
+            <a class="dropdown-item" href="/quoc-gia/chau-a">Châu Á</a>
+            <a class="dropdown-item" href="/quoc-gia/dai-loan">Đài Loan</a>
+            <a class="dropdown-item" href="/quoc-gia/duc">Đức</a>
+            <a class="dropdown-item" href="/quoc-gia/han-quoc">Hàn Quốc</a>
+            <a class="dropdown-item" href="/quoc-gia/hong-kong">Hồng Kông</a>
+            <a class="dropdown-item" href="/quoc-gia/my">Mỹ</a>
+            <a class="dropdown-item" href="/quoc-gia/nga">Nga</a>
+            <a class="dropdown-item" href="/quoc-gia/nhat-ban">Nhật Bản</a>
+            <a class="dropdown-item" href="/quoc-gia/phap">Pháp</a>
+            <a class="dropdown-item" href="/quoc-gia/philippines">Philippines</a>
+            <a class="dropdown-item" href="/quoc-gia/quoc-gia-khac">Quốc gia khác</a>
+            <a class="dropdown-item" href="/quoc-gia/thai-lan">Thái Lan</a>
+            <a class="dropdown-item" href="/quoc-gia/trung-quoc">Trung Quốc</a>
+            <a class="dropdown-item" href="/quoc-gia/uc">Úc</a>
+            <a class="dropdown-item" href="/quoc-gia/viet-nam">Việt Nam</a>
           </div>
         </li>
 
         <li class="nav-item dropdown">
           <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown"
-             href="#" id="dropdown-mainmenu" role="button">
+             id="dropdown-mainmenu" role="button">
             Thể loại
           </a>
           <div aria-labelledby="dropdown-mainmenu" class="dropdown-menu">
-            <a class="dropdown-item" href="/phim/phim-chieu-rap">Phim chiếu rạp</a>
-            <a class="dropdown-item" href="/phim/phim-18">Phim 18+</a>
-            <a class="dropdown-item" href="/phim/khong-the-bo-lo">Không Thể Bỏ Lỡ</a>
-            <a class="dropdown-item" href="/phim/phim-moi">Phim mới</a>
-            <a class="dropdown-item" href="/phim/hoat-hinh">Hoạt hình</a>
-            <a class="dropdown-item" href="/phim/sieu-anh-hung">Siêu anh hùng</a>
-            <a class="dropdown-item" href="/phim/phim-chau-a-kinh-dien">Phim Châu Á Kinh Điển</a>
-            <a class="dropdown-item" href="/phim/hanh-dong">Hành động</a>
-            <a class="dropdown-item" href="/phim/phim-lgbtq">LGBTQ+</a>
-            <a class="dropdown-item" href="/phim/tv-shows">TV Shows</a>
-            <a class="dropdown-item" href="/phim/bom-tan">Bom tấn</a>
-            <a class="dropdown-item" href="/phim/phieu-luu">Phiêu lưu</a>
-            <a class="dropdown-item" href="/phim/kich-tinh-hoi-hop">Kịch tính, hồi hộp</a>
-            <a class="dropdown-item" href="/phim/tinh-cam-lang-man">Tình cảm, lãng mạn</a>
-            <a class="dropdown-item" href="/phim/hai-huoc">Hài hước</a>
-            <a class="dropdown-item" href="/phim/vien-tuong">Viễn tưởng</a>
-            <a class="dropdown-item" href="/phim/co-trang">Cổ trang</a>
-            <a class="dropdown-item" href="/phim/than-thoai">Thần thoại</a>
-            <a class="dropdown-item" href="/phim/tam-ly-original">Tâm lý</a>
-            <a class="dropdown-item" href="/phim/anime">Anime</a>
-            <a class="dropdown-item" href="/phim/kiem-hiep-vo-thuat">Kiếm hiệp, võ thuật</a>
-            <a class="dropdown-item" href="/phim/phim-tvb">Phim TVB</a>
-            <a class="dropdown-item" href="/phim/hinh-su">Hình sự</a>
-            <a class="dropdown-item" href="/phim/tham-hoa">Thảm họa</a>
-            <a class="dropdown-item" href="/phim/kinh-di">Kinh dị</a>
-            <a class="dropdown-item" href="/phim/gameshow">Gameshow</a>
-            <a class="dropdown-item" href="/phim/vien-tay">Viễn tây</a>
-            <a class="dropdown-item" href="/phim/chien-tranh">Chiến tranh</a>
-            <a class="dropdown-item" href="/phim/lich-su-original">Lịch sử</a>
-            <a class="dropdown-item" href="/phim/tai-lieu">Tài liệu</a>
-            <a class="dropdown-item" href="/phim/am-nhac-the-thao">Âm nhạc - Thể thao</a>
-            <a class="dropdown-item" href="/phim/clip-ngan">Clip ngắn</a>
+            <a class="dropdown-item" href="/the-loai/phim-chieu-rap">Phim chiếu rạp</a>
+            <a class="dropdown-item" href="/the-loai/phim-18">Phim 18+</a>
+            <a class="dropdown-item" href="/the-loai/khong-the-bo-lo">Không Thể Bỏ Lỡ</a>
+            <a class="dropdown-item" href="/the-loai/phim-moi">Phim mới</a>
+            <a class="dropdown-item" href="/the-loai/hoat-hinh">Hoạt hình</a>
+            <a class="dropdown-item" href="/the-loai/sieu-anh-hung">Siêu anh hùng</a>
+            <a class="dropdown-item" href="/the-loai/phim-chau-a-kinh-dien">Phim Châu Á Kinh Điển</a>
+            <a class="dropdown-item" href="/the-loai/hanh-dong">Hành động</a>
+            <a class="dropdown-item" href="/the-loai/phim-lgbtq">LGBTQ+</a>
+            <a class="dropdown-item" href="/the-loai/tv-shows">TV Shows</a>
+            <a class="dropdown-item" href="/the-loai/bom-tan">Bom tấn</a>
+            <a class="dropdown-item" href="/the-loai/phieu-luu">Phiêu lưu</a>
+            <a class="dropdown-item" href="/the-loai/kich-tinh-hoi-hop">Kịch tính, hồi hộp</a>
+            <a class="dropdown-item" href="/the-loai/tinh-cam-lang-man">Tình cảm, lãng mạn</a>
+            <a class="dropdown-item" href="/the-loai/hai-huoc">Hài hước</a>
+            <a class="dropdown-item" href="/the-loai/vien-tuong">Viễn tưởng</a>
+            <a class="dropdown-item" href="/the-loai/co-trang">Cổ trang</a>
+            <a class="dropdown-item" href="/the-loai/than-thoai">Thần thoại</a>
+            <a class="dropdown-item" href="/the-loai/tam-ly-original">Tâm lý</a>
+            <a class="dropdown-item" href="/the-loai/anime">Anime</a>
+            <a class="dropdown-item" href="/the-loai/kiem-hiep-vo-thuat">Kiếm hiệp, võ thuật</a>
+            <a class="dropdown-item" href="/the-loai/phim-tvb">Phim TVB</a>
+            <a class="dropdown-item" href="/the-loai/hinh-su">Hình sự</a>
+            <a class="dropdown-item" href="/the-loai/tham-hoa">Thảm họa</a>
+            <a class="dropdown-item" href="/the-loai/kinh-di">Kinh dị</a>
+            <a class="dropdown-item" href="/the-loai/gameshow">Gameshow</a>
+            <a class="dropdown-item" href="/the-loai/vien-tay">Viễn tây</a>
+            <a class="dropdown-item" href="/the-loai/chien-tranh">Chiến tranh</a>
+            <a class="dropdown-item" href="/the-loai/lich-su-original">Lịch sử</a>
+            <a class="dropdown-item" href="/the-loai/tai-lieu">Tài liệu</a>
+            <a class="dropdown-item" href="/the-loai/am-nhac-the-thao">Âm nhạc - Thể thao</a>
+            <a class="dropdown-item" href="/the-loai/clip-ngan">Clip ngắn</a>
           </div>
         </li>
       </ul>

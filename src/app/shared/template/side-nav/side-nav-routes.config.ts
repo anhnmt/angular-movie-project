@@ -3,7 +3,7 @@ import {SideNavInterface} from '../../interfaces/side-nav.type';
 export const ROUTES: SideNavInterface[] = [
   {
     path: ['/dashboard'],
-    title: 'Bảng điều khiển',
+    title: 'Dashboard',
     iconType: 'nzIcon',
     iconTheme: 'outline',
     icon: 'dashboard',
@@ -11,7 +11,7 @@ export const ROUTES: SideNavInterface[] = [
   },
   {
     path: '',
-    title: 'Quốc gia',
+    title: 'Countries',
     iconType: 'nzIcon',
     iconTheme: 'outline',
     icon: 'global',
@@ -36,7 +36,7 @@ export const ROUTES: SideNavInterface[] = [
   },
   {
     path: '',
-    title: 'Thể loại',
+    title: 'Genres',
     iconType: 'nzIcon',
     iconTheme: 'outline',
     icon: 'profile',
@@ -61,7 +61,7 @@ export const ROUTES: SideNavInterface[] = [
   },
   {
     path: '',
-    title: 'Phim',
+    title: 'Movies',
     iconType: 'nzIcon',
     iconTheme: 'outline',
     icon: 'video-camera',
@@ -86,7 +86,7 @@ export const ROUTES: SideNavInterface[] = [
   },
   {
     path: '',
-    title: 'Kiểu phim',
+    title: 'Movie Types',
     iconType: 'nzIcon',
     iconTheme: 'outline',
     icon: 'number',
@@ -111,13 +111,13 @@ export const ROUTES: SideNavInterface[] = [
   },
   {
     path: '',
-    title: 'Đạo diễn & Diên viên',
+    title: 'Banners',
     iconType: 'nzIcon',
     iconTheme: 'outline',
     icon: 'team',
     submenu: [
       {
-        path: ['/dashboard', 'peoples'],
+        path: ['/dashboard', 'banners'],
         title: 'Danh sách',
         iconType: '',
         icon: '',
@@ -125,7 +125,7 @@ export const ROUTES: SideNavInterface[] = [
         submenu: []
       },
       {
-        path: ['/dashboard', 'peoples', 'create'],
+        path: ['/dashboard', 'banners', 'create'],
         title: 'Thêm mới',
         iconType: '',
         icon: '',
@@ -136,7 +136,7 @@ export const ROUTES: SideNavInterface[] = [
   },
   {
     path: '',
-    title: 'Quyền & Vai trò',
+    title: 'Roles',
     iconType: 'nzIcon',
     iconTheme: 'outline',
     icon: 'safety-certificate',
@@ -161,7 +161,7 @@ export const ROUTES: SideNavInterface[] = [
   },
   {
     path: '',
-    title: 'Người dùng',
+    title: 'Users',
     iconType: 'nzIcon',
     iconTheme: 'outline',
     icon: 'user',

@@ -27,8 +27,8 @@
           <div class="img-4-6">
             <div class="inline">
               <img
-                alt="Ninja Apocalypse (2014)"
-                src="https://static.247phim.com/121355/conversions/2111_ninja-apocalypse-2014_photo_portrait-435_627.jpg">
+                [alt]="movie?.name + movie?.release_date ? ' (' + movie?.release_date + ')' : ''"
+                [src]="movie?.poster">
             </div>
           </div>
         </div>
