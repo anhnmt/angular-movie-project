@@ -20,9 +20,9 @@ export class GenreService {
       .get<DefaultResponse<Genre[]>>(`${this.baseUrl}`);
   }
 
-  getGenreByGenreId(movieId: number): Observable<DefaultResponse<Genre>> {
+  getGenreByGenreId(genreId: number): Observable<DefaultResponse<Genre>> {
     return this.httpClient
-      .get<DefaultResponse<Genre>>(`${this.baseUrl}/${movieId}`);
+      .get<DefaultResponse<Genre>>(`${this.baseUrl}/${genreId}`);
   }
 
   createGenre(body: Genre): Observable<DefaultResponse<Genre>> {
@@ -34,9 +34,9 @@ export class GenreService {
       });
   }
 
-  updateGenreByGenreId(movieId: number, body: Genre): Observable<DefaultResponse<Genre>> {
+  updateGenreByGenreId(genreId: number, body: Genre): Observable<DefaultResponse<Genre>> {
     return this.httpClient
-      .put<DefaultResponse<Genre>>(`${this.baseUrl}/${movieId}`, {
+      .put<DefaultResponse<Genre>>(`${this.baseUrl}/${genreId}`, {
           name: body.name,
           slug: body.slug,
           status: body.status
@@ -44,8 +44,8 @@ export class GenreService {
       );
   }
 
-  deleteGenreByGenreId(movieId: number): Observable<DefaultResponse<Genre>> {
+  deleteGenreByGenreId(genreId: number): Observable<DefaultResponse<Genre>> {
     return this.httpClient
-      .delete<DefaultResponse<Genre>>(`${this.baseUrl}/${movieId}`);
+      .delete<DefaultResponse<Genre>>(`${this.baseUrl}/${genreId}`);
   }
 }

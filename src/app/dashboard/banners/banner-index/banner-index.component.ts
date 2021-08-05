@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {GlobalUtils} from '../../../shared/utils/globalUtils';
-import {Genre} from '../../../shared/interfaces/genre';
+import {Banner} from '../../../shared/interfaces/banner';
 import {TableService} from '../../../shared/services/table.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {GenreService} from '../../../shared/services/genre.service';
+import {BannerService} from '../../../shared/services/banner.service';
 import {SharedService} from '../../../shared/services/shared.service';
 
 @Component({
@@ -17,24 +17,20 @@ export class BannerIndexComponent implements OnInit {
   searchInput: string | number;
   displayData = [];
 
-  genres: Genre[] = [];
+  banners: Banner[] = [];
 
   orderColumn = [
     {
       title: 'ID',
-      compare: (a: Genre, b: Genre) => a.genre_id - b.genre_id,
-    },
-    {
-      title: 'Thể loại',
-      compare: (a: Genre, b: Genre) => a.name.localeCompare(b.name)
+      compare: (a: Banner, b: Banner) => a.banner_id - b.banner_id,
     },
     {
       title: 'Đường dẫn',
-      compare: (a: Genre, b: Genre) => a.slug.localeCompare(b.slug)
+      compare: (a: Banner, b: Banner) => a.url.localeCompare(b.url)
     },
     {
       title: 'Trạng thái',
-      compare: (a: Genre, b: Genre) => a.status - b.status,
+      compare: (a: Banner, b: Banner) => a.status - b.status,
     },
     {
       title: ''
@@ -44,7 +40,7 @@ export class BannerIndexComponent implements OnInit {
   constructor(
     private tableSvc: TableService,
     private nzMessageService: NzMessageService,
-    private genreService: GenreService,
+    private bannerService: BannerService,
     private sharedService: SharedService,
   ) {
     this.sharedService.changeEmitted$.subscribe(() => {
@@ -57,23 +53,23 @@ export class BannerIndexComponent implements OnInit {
   }
 
   search(): void {
-    const data = this.genres;
+    const data = this.banners;
     this.displayData = this.tableSvc.search(this.searchInput, data);
   }
 
   list(): void {
-    this.genres = [];
+    this.banners = [];
 
-    this.genreService.getAllGenres().subscribe((response) => {
-      this.genres = response.data;
-      console.log(this.genres);
+    this.bannerService.getAllBanners().subscribe((response) => {
+      this.banners = response.data;
+      console.log(this.banners);
 
-      this.displayData = this.genres;
+      this.displayData = this.banners;
     });
   }
 
-  delete(genreId: number): void {
-    this.genreService.deleteGenreByGenreId(genreId).subscribe(() => {
+  delete(bannerId: number): void {
+    this.bannerService.deleteBannerByBannerId(bannerId).subscribe(() => {
       this.list();
       this.nzMessageService.success('Xóa Thành Công');
     });

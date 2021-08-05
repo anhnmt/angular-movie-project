@@ -105,8 +105,6 @@ export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
                 url: this.movie.poster
               }];
             }
-
-            console.log(this.fileList);
           }, (error) => {
             this.close();
             this.nzMessageService.error(error.error.message);
@@ -114,14 +112,14 @@ export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
       });
   }
 
-  handlePreview = async (file: NzUploadFile) => {
+  async handlePreview(file: NzUploadFile): Promise<void> {
     const {originFileObj, url, preview} = file;
 
     if (!url && !preview && originFileObj !== undefined) {
       file.preview = await HelperUtils.getBase64(originFileObj);
       file.status = 'done';
     }
-  };
+  }
 
   ngAfterViewInit(): void {
     setTimeout(() => {

@@ -134,31 +134,31 @@ export const ROUTES: SideNavInterface[] = [
       },
     ]
   },
-  {
-    path: '',
-    title: 'Roles',
-    iconType: 'nzIcon',
-    iconTheme: 'outline',
-    icon: 'safety-certificate',
-    submenu: [
-      {
-        path: ['/dashboard', 'roles'],
-        title: 'Quyền',
-        iconType: '',
-        icon: '',
-        iconTheme: '',
-        submenu: []
-      },
-      {
-        path: ['/dashboard', 'permissions'],
-        title: 'Vai trò',
-        iconType: '',
-        icon: '',
-        iconTheme: '',
-        submenu: []
-      }
-    ]
-  },
+  // {
+  //   path: '',
+  //   title: 'Roles',
+  //   iconType: 'nzIcon',
+  //   iconTheme: 'outline',
+  //   icon: 'safety-certificate',
+  //   submenu: [
+  //     {
+  //       path: ['/dashboard', 'roles'],
+  //       title: 'Danh sách',
+  //       iconType: '',
+  //       icon: '',
+  //       iconTheme: '',
+  //       submenu: []
+  //     },
+  //     {
+  //       path: ['/dashboard', 'roles', 'create'],
+  //       title: 'Thêm mới',
+  //       iconType: '',
+  //       icon: '',
+  //       iconTheme: '',
+  //       submenu: []
+  //     }
+  //   ]
+  // },
   {
     path: '',
     title: 'Users',

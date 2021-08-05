@@ -10,12 +10,17 @@ import {NzPopconfirmModule} from 'ng-zorro-antd/popconfirm';
 import {NzToolTipModule} from 'ng-zorro-antd/tooltip';
 import {NzCardModule} from 'ng-zorro-antd/card';
 import {NzInputModule} from 'ng-zorro-antd/input';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NzIconModule} from 'ng-zorro-antd/icon';
 import {NzTableModule} from 'ng-zorro-antd/table';
 import {NzBadgeModule} from 'ng-zorro-antd/badge';
 import {TableService} from '../../shared/services/table.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
+import {NzAvatarModule} from 'ng-zorro-antd/avatar';
+import {NzFormModule} from 'ng-zorro-antd/form';
+import {NzUploadModule} from 'ng-zorro-antd/upload';
+import {NzDrawerModule} from 'ng-zorro-antd/drawer';
+import {NzSelectModule} from 'ng-zorro-antd/select';
 
 
 @NgModule({
@@ -31,7 +36,13 @@ import {NzMessageService} from 'ng-zorro-antd/message';
     FormsModule,
     NzIconModule,
     NzTableModule,
-    NzBadgeModule
+    NzBadgeModule,
+    NzAvatarModule,
+    NzFormModule,
+    NzUploadModule,
+    NzDrawerModule,
+    ReactiveFormsModule,
+    NzSelectModule
   ],
   providers: [
     TableService,

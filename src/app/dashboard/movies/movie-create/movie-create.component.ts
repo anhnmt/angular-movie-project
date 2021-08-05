@@ -50,7 +50,6 @@ export class MovieCreateComponent implements OnInit, AfterViewInit, OnDestroy {
       slug: [null, [Validators.required]],
       release_date: [null, [Validators.required]],
       movie_type_id: [null, [Validators.required]],
-      poster: [null],
       country_ids: [null],
       genre_ids: [null],
       status: [selectedStatus, [Validators.required]],
@@ -73,14 +72,14 @@ export class MovieCreateComponent implements OnInit, AfterViewInit, OnDestroy {
       });
   }
 
-  handlePreview = async (file: NzUploadFile) => {
+  async handlePreview(file: NzUploadFile): Promise<void> {
     const {originFileObj, url, preview} = file;
 
     if (!url && !preview && originFileObj !== undefined) {
       file.preview = await HelperUtils.getBase64(originFileObj);
       file.status = 'done';
     }
-  };
+  }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
