@@ -2,6 +2,7 @@ import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {ClientService} from '../shared/services/client.service';
 import {Movie} from '../shared/interfaces/movie';
 import {forkJoin} from 'rxjs';
+import {Banner} from '../shared/interfaces/banner';
 
 @Component({
   selector: 'app-client',
@@ -20,14 +21,17 @@ export class ClientComponent implements OnInit, AfterViewInit, OnDestroy {
   topMoviesSidebar: Movie[] = [];
   topSeriesSidebar: Movie[] = [];
 
+  banners: Banner[] = [];
+
   constructor(
     private clientService: ClientService,
   ) {
     forkJoin([
       this.clientService.getAllTopMoviesBody(),
       this.clientService.getAllTopMoviesSidebar(),
+      this.clientService.getAllBanners()
     ])
-      .subscribe(([body, sidebar]) => {
+      .subscribe(([body, sidebar, banners]) => {
         // console.log(body.data);
 
         this.bodyMovies = body.data?.movies;
@@ -37,6 +41,8 @@ export class ClientComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this.topMoviesSidebar = sidebar.data?.movies;
         this.topSeriesSidebar = sidebar.data?.series;
+
+        this.banners = banners.data;
       });
   }
 

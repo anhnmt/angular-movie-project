@@ -1,69 +1,12 @@
 <div class="carousel slide carousel-fade" data-interval="3000" data-ride="carousel"
      id="carouselExampleIndicators">
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <a href="https://247phim.com/xemphim/loki-than-lua-loc-phan-1-22510">
-        <img alt=""
-             src="https://static.247phim.com/162448/conversions/60e5a31cee4c6_loki-ss1-2021-ver6-1920_660.jpg">
+    <div *ngFor="let data of this.banners; let isFirst = first" [class.active]="isFirst" class="carousel-item">
+      <a [href]="data?.url">
+        <img [src]="data?.image" alt="">
         <div class="banner-caption">
           <h4>Loki (Season 1)</h4>
           <h5>Loki Thần Lừa Lọc (Phần 1)</h5>
-        </div>
-        <div class="banner-caption-background"></div>
-      </a>
-    </div>
-    <div class="carousel-item ">
-      <a href="https://247phim.com/xemphim/toi-lo-yeu-muc-tieu-truy-sat-cua-minh-22645">
-        <img
-          alt=""
-          src="https://static.247phim.com/162449/conversions/60e5a339d43a5_Hitman-In-Love-2021-japanese-movie-1920_660.jpg">
-        <div class="banner-caption">
-          <h4>Hitman In Love</h4>
-          <h5>Tôi Lỡ Yêu Mục Tiêu Truy Sát Của Mình</h5>
-        </div>
-        <div class="banner-caption-background"></div>
-      </a>
-    </div>
-    <div class="carousel-item ">
-      <a href="https://247phim.com/xemphim/cuoc-chien-tuong-lai-22629">
-        <img alt=""
-             src="https://static.247phim.com/162450/conversions/60e5a35ec9c5f_The-Tomorrow-War-2021-1920_660.jpg">
-        <div class="banner-caption">
-          <h4>The Tomorrow War</h4>
-          <h5>Cuộc Chiến Tương Lai</h5>
-        </div>
-        <div class="banner-caption-background"></div>
-      </a>
-    </div>
-    <div class="carousel-item ">
-      <a href="https://247phim.com/xemphim/tham-phan-ac-quy-22626">
-        <img alt=""
-             src="https://static.247phim.com/162451/conversions/60e5a36e79b0c_The-Devil-Judge-2021-1920_660.jpg">
-        <div class="banner-caption">
-          <h4>The Devil Judge</h4>
-          <h5>Thẩm Phán Ác Quỷ</h5>
-        </div>
-        <div class="banner-caption-background"></div>
-      </a>
-    </div>
-    <div class="carousel-item ">
-      <a href="https://247phim.com/xemphim/khong-noi-loi-tam-biet-22622">
-        <img alt=""
-             src="https://static.247phim.com/162452/conversions/60e5a3abacf74_Never-Say-Goodbye-2021-1920_660.jpg">
-        <div class="banner-caption">
-          <h4>Never Say Goodbye</h4>
-          <h5>Không Nói Lời Tạm Biệt</h5>
-        </div>
-        <div class="banner-caption-background"></div>
-      </a>
-    </div>
-    <div class="carousel-item ">
-      <a href="https://247phim.com/xemphim/ben-duoi-lan-da-1298">
-        <img alt=""
-             src="https://static.247phim.com/162453/conversions/60e5a3ba3834d_Under-The-Skin-2014-1920_660.jpg">
-        <div class="banner-caption">
-          <h4>Under The Skin</h4>
-          <h5>Bên Dưới Làn Da</h5>
         </div>
         <div class="banner-caption-background"></div>
       </a>

@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {DefaultResponse} from '../interfaces/default-response';
 import {Movie} from '../interfaces/movie';
+import {Banner} from '../interfaces/banner';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +30,10 @@ export class ClientService {
   getMovieDetail(slug: string): Observable<DefaultResponse<Movie>> {
     return this.httpClient
       .get<DefaultResponse<Movie>>(`${this.baseUrl}/find-movie-detail/${slug}`);
+  }
+
+  getAllBanners(): Observable<DefaultResponse<Banner[]>> {
+    return this.httpClient
+      .get<DefaultResponse<Banner[]>>(`${this.baseUrl}/banner`);
   }
 }
