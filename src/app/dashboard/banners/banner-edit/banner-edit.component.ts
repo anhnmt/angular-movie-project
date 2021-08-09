@@ -27,6 +27,7 @@ export class BannerEditComponent implements OnInit, AfterViewInit, OnDestroy {
   status = GlobalUtils.getDefaultStatus();
   fileList: NzUploadFile[] = [];
   banner: Banner;
+  bannerId: number;
   validateForm: FormGroup;
   private onDestroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -49,6 +50,8 @@ export class BannerEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe((params: any) => {
       const {bannerId} = params;
+      this.bannerId = bannerId;
+
       this.bannerService.getBannerByBannerId(bannerId).subscribe((success) => {
         console.log(success);
         this.banner = success.data;
@@ -148,7 +151,7 @@ export class BannerEditComponent implements OnInit, AfterViewInit, OnDestroy {
     // console.log(this.validateForm.value);
     formData.append('banner', JSON.stringify(this.validateForm.value));
 
-    this.bannerService.createBanner(formData).subscribe(() => {
+    this.bannerService.updateBannerByBannerId(this.bannerId, formData).subscribe(() => {
       this.sharedService.emitChange();
       this.close();
       this.nzMessageService.success('Thêm Thành Công');
