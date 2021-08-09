@@ -17,7 +17,7 @@ export interface Movie {
   poster?: string;
   seo_title?: string;
   seo_keywords?: string;
-  status: Status;
+  status?: Status;
   created_at?: string;
   updated_at?: string;
   country_ids?: number[];

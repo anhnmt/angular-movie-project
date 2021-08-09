@@ -9,11 +9,26 @@
 >
   <form (ngSubmit)="submitForm()" [formGroup]="validateForm" [nzLayout]="'vertical'" nz-form>
     <nz-form-item>
-      <nz-form-label nzRequired>Đường dẫn</nz-form-label>
-      <nz-form-control nzErrorTip="Vui lòng nhập đường dẫn">
-        <input formControlName="url" nz-input placeholder="Nhập đường dẫn"/>
+      <nz-form-label nzRequired>Tên phim</nz-form-label>
+      <nz-form-control nzErrorTip="Vui lòng nhập tên phim">
+        <nz-select
+          (nzOnSearch)="onSearch($event)"
+          formControlName="movie_id"
+          nzAllowClear
+          nzPlaceHolder="Chọn tên phim"
+          nzServerSearch
+          nzShowSearch
+        >
+          <ng-container *ngFor="let option of searchMovies">
+            <nz-option *ngIf="!isSearchLoading" [nzLabel]="option.name" [nzValue]="option.movie_id"></nz-option>
+          </ng-container>
+          <nz-option *ngIf="isSearchLoading" nzCustomContent nzDisabled>
+            <i class="loading-icon" nz-icon nzType="loading"></i> Loading Data...
+          </nz-option>
+        </nz-select>
       </nz-form-control>
     </nz-form-item>
+
     <nz-form-item>
       <nz-form-label>Trạng thái</nz-form-label>
       <nz-form-control nzErrorTip="Vui lòng chọn trạng thái">

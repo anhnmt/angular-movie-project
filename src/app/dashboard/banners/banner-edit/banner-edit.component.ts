@@ -8,8 +8,10 @@ import {NzMessageService} from 'ng-zorro-antd/message';
 import {SharedService} from '../../../shared/services/shared.service';
 import {BannerService} from '../../../shared/services/banner.service';
 import {HelperUtils} from '../../../shared/utils/helperUtils';
-import {takeUntil} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, takeUntil} from 'rxjs/operators';
 import {Banner} from '../../../shared/interfaces/banner';
+import {ClientService} from '../../../shared/services/client.service';
+import {Movie} from '../../../shared/interfaces/movie';
 
 @Component({
   selector: 'app-banner-edit',
@@ -18,6 +20,8 @@ import {Banner} from '../../../shared/interfaces/banner';
 })
 export class BannerEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  searchMovies: Movie[] = [];
+  isSearchLoading = false;
   isLoading = false;
   visible = false;
   status = GlobalUtils.getDefaultStatus();
@@ -33,27 +37,31 @@ export class BannerEditComponent implements OnInit, AfterViewInit, OnDestroy {
     private nzMessageService: NzMessageService,
     private sharedService: SharedService,
     private bannerService: BannerService,
+    private clientService: ClientService,
   ) {
     const selectedStatus = this.status[0]?.value || null;
 
     this.validateForm = this.formBuilder.group({
-      url: [null, [Validators.required]],
+      movie_id: [null, [Validators.required]],
       image: [null],
       status: [selectedStatus, [Validators.required]],
     });
 
     this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe((params: any) => {
-      console.log(params);
       const {bannerId} = params;
       this.bannerService.getBannerByBannerId(bannerId).subscribe((success) => {
         console.log(success);
         this.banner = success.data;
 
         this.validateForm.patchValue({
-          url: this.banner.url,
+          movie_id: this.banner.movie?.movie_id,
           image: this.banner.image,
           status: this.banner.status
         });
+
+        if (this.banner.movie) {
+          this.searchMovies = [this.banner.movie];
+        }
 
         if (this.banner.image) {
           this.fileList = [{
@@ -99,6 +107,22 @@ export class BannerEditComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.onDestroy$.next(true);
     this.onDestroy$.complete();
+  }
+
+  onSearch(value: string): void {
+    this.isSearchLoading = true;
+
+    this.clientService.getMovieByName(value)
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged()
+      ).subscribe((success) => {
+      // console.log(success);
+      this.searchMovies = success.data;
+      this.isSearchLoading = false;
+    }, (error) => {
+      this.isSearchLoading = false;
+    });
   }
 
   submitForm(): void {

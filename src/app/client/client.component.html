@@ -2,11 +2,11 @@
      id="carouselExampleIndicators">
   <div class="carousel-inner">
     <div *ngFor="let data of this.banners; let isFirst = first" [class.active]="isFirst" class="carousel-item">
-      <a [href]="data?.url">
-        <img [src]="data?.image" alt="">
+      <a [href]="'/phim/' + data?.movie?.slug">
+        <img [alt]="data?.movie?.name" [src]="data?.image">
         <div class="banner-caption">
-          <h4>Loki (Season 1)</h4>
-          <h5>Loki Thần Lừa Lọc (Phần 1)</h5>
+          <h4>{{ data?.movie?.name }}</h4>
+          <h5>{{ data?.movie?.origin_name }} {{ data?.movie?.release_date ? '(' + data?.movie?.release_date + ')' : '' }}</h5>
         </div>
         <div class="banner-caption-background"></div>
       </a>

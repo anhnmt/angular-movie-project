@@ -25,8 +25,12 @@ export class BannerIndexComponent implements OnInit {
       compare: (a: Banner, b: Banner) => a.banner_id - b.banner_id,
     },
     {
+      title: 'Tên phim',
+      compare: (a: Banner, b: Banner) => a?.movie?.name.localeCompare(b?.movie?.name)
+    },
+    {
       title: 'Đường dẫn',
-      compare: (a: Banner, b: Banner) => a.url.localeCompare(b.url)
+      compare: (a: Banner, b: Banner) => a?.movie?.slug.localeCompare(b?.movie?.slug)
     },
     {
       title: 'Trạng thái',

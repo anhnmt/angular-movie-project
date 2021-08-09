@@ -8,6 +8,9 @@ import {NzMessageService} from 'ng-zorro-antd/message';
 import {SharedService} from '../../../shared/services/shared.service';
 import {HelperUtils} from '../../../shared/utils/helperUtils';
 import {BannerService} from '../../../shared/services/banner.service';
+import {Movie} from '../../../shared/interfaces/movie';
+import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
+import {ClientService} from '../../../shared/services/client.service';
 
 @Component({
   selector: 'app-banner-create',
@@ -16,6 +19,8 @@ import {BannerService} from '../../../shared/services/banner.service';
 })
 export class BannerCreateComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  searchMovies: Movie[] = [];
+  isSearchLoading = false;
   isLoading = false;
   visible = false;
   status = GlobalUtils.getDefaultStatus();
@@ -29,11 +34,12 @@ export class BannerCreateComponent implements OnInit, AfterViewInit, OnDestroy {
     private nzMessageService: NzMessageService,
     private sharedService: SharedService,
     private bannerService: BannerService,
+    private clientService: ClientService,
   ) {
     const selectedStatus = this.status[0]?.value || null;
 
     this.validateForm = this.formBuilder.group({
-      url: [null, [Validators.required]],
+      movie_id: [null, [Validators.required]],
       status: [selectedStatus, [Validators.required]],
     });
   }
@@ -68,6 +74,22 @@ export class BannerCreateComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.onDestroy$.next(true);
     this.onDestroy$.complete();
+  }
+
+  onSearch(value: string): void {
+    this.isSearchLoading = true;
+
+    this.clientService.getMovieByName(value)
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged()
+      ).subscribe((success) => {
+      // console.log(success);
+      this.searchMovies = success.data;
+      this.isSearchLoading = false;
+    }, (error) => {
+      this.isSearchLoading = false;
+    });
   }
 
   submitForm(): void {

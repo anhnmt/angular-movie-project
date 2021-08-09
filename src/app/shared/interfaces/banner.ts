@@ -1,6 +1,9 @@
+import {Movie} from './movie';
+
 export interface Banner {
   banner_id: number;
+  movie_id?: number;
   image: string;
-  url: string;
   status: number;
+  movie?: Movie;
 }

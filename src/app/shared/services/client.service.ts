@@ -32,8 +32,13 @@ export class ClientService {
       .get<DefaultResponse<Movie>>(`${this.baseUrl}/find-movie-detail/${slug}`);
   }
 
+  getMovieByName(name: string): Observable<DefaultResponse<Movie[]>> {
+    return this.httpClient
+      .get<DefaultResponse<Movie[]>>(`${this.baseUrl}/find-movie-name/${name}`);
+  }
+
   getAllBanners(): Observable<DefaultResponse<Banner[]>> {
     return this.httpClient
-      .get<DefaultResponse<Banner[]>>(`${this.baseUrl}/banner`);
+      .get<DefaultResponse<Banner[]>>(`${this.baseUrl}/banners`);
   }
 }

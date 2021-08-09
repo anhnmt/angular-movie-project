@@ -34,14 +34,17 @@
       <td>
         <div class="d-flex align-items-center">
           <nz-avatar [nzSize]="60" [nzSrc]="item.image" nzIcon="picture" nzShape="square"></nz-avatar>
-          <span class="m-l-10">{{item.url}}</span>
+          <span class="m-l-10">{{item?.movie?.name}}</span>
         </div>
       </td>
-      
+
+      <td>{{item?.movie?.slug}}</td>
+
       <td>
         <nz-badge [nzStatus]="mapDefaultStatus(item.status)?.badge"></nz-badge>
         <span class="text-capitalize">{{ mapDefaultStatus(item.status)?.label }}</span>
       </td>
+      
       <td class="text-md-right">
         <a [routerLink]="['/dashboard', 'banners', item.banner_id, 'edit']" class="m-r-5" nz-button nz-tooltip
            nzShape="circle"
