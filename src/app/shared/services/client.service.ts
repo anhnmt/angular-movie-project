@@ -5,6 +5,8 @@ import {Observable} from 'rxjs';
 import {DefaultResponse} from '../interfaces/default-response';
 import {Movie} from '../interfaces/movie';
 import {Banner} from '../interfaces/banner';
+import {Country} from '../interfaces/country';
+import {Genre} from '../interfaces/genre';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +34,21 @@ export class ClientService {
       .get<DefaultResponse<Movie>>(`${this.baseUrl}/find-movie-detail/${slug}`);
   }
 
+  getMovieType(slug: string): Observable<DefaultResponse<Movie[]>> {
+    return this.httpClient
+      .get<DefaultResponse<Movie[]>>(`${this.baseUrl}/find-movie-type/${slug}`);
+  }
+
+  getMovieGenre(slug: string): Observable<DefaultResponse<Movie[]>> {
+    return this.httpClient
+      .get<DefaultResponse<Movie[]>>(`${this.baseUrl}/find-movie-genre/${slug}`);
+  }
+
+  getMovieCountry(slug: string): Observable<DefaultResponse<Movie[]>> {
+    return this.httpClient
+      .get<DefaultResponse<Movie[]>>(`${this.baseUrl}/find-movie-country/${slug}`);
+  }
+
   getMovieByName(name: string): Observable<DefaultResponse<Movie[]>> {
     return this.httpClient
       .get<DefaultResponse<Movie[]>>(`${this.baseUrl}/find-movie-name/${name}`);
@@ -40,5 +57,15 @@ export class ClientService {
   getAllBanners(): Observable<DefaultResponse<Banner[]>> {
     return this.httpClient
       .get<DefaultResponse<Banner[]>>(`${this.baseUrl}/banners`);
+  }
+
+  getAllGenres(): Observable<DefaultResponse<Genre[]>> {
+    return this.httpClient
+      .get<DefaultResponse<Genre[]>>(`${this.baseUrl}/genres`);
+  }
+
+  getAllCountries(): Observable<DefaultResponse<Country[]>> {
+    return this.httpClient
+      .get<DefaultResponse<Country[]>>(`${this.baseUrl}/countries`);
   }
 }

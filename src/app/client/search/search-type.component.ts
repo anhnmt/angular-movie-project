@@ -1,18 +1,18 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
-import {Movie} from '../../shared/interfaces/movie';
-import {Subject} from 'rxjs';
-import {ActivatedRoute} from '@angular/router';
 import {ClientService} from '../../shared/services/client.service';
+import {ActivatedRoute} from '@angular/router';
 import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {Movie} from 'src/app/shared/interfaces/movie';
 
 @Component({
-  selector: 'app-search',
+  selector: 'app-search-type',
   templateUrl: './search.component.html',
   styleUrls: [
     './search.component.css',
   ]
 })
-export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
+export class SearchTypeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   movies: Movie[] = [];
 

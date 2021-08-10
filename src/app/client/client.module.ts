@@ -6,9 +6,12 @@ import {ClientComponent} from './client.component';
 import {DetailComponent} from './detail/detail.component';
 import {SearchComponent} from './search/search.component';
 import {SharedModule} from '../shared/shared.module';
+import {SearchTypeComponent} from './search/search-type.component';
+import {SearchGenreComponent} from './search/search-genre.component';
+import {SearchCountryComponent} from './search/search-country.component';
 
 @NgModule({
-  declarations: [ClientComponent, DetailComponent, SearchComponent],
+  declarations: [ClientComponent, DetailComponent, SearchComponent, SearchTypeComponent, SearchGenreComponent, SearchCountryComponent],
   imports: [
     CommonModule,
     ClientRoutingModule,
