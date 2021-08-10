@@ -1,0 +1,44 @@
+<nz-drawer
+  (nzOnClose)="close()"
+  [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom': '53px' }"
+  [nzFooter]="footerTpl"
+  [nzMaskClosable]="false"
+  [nzVisible]="visible"
+  [nzWidth]="720"
+  nzTitle="Cập nhật kiểu phim"
+>
+  <form (ngSubmit)="submitForm()" [formGroup]="validateForm" [nzLayout]="'vertical'" nz-form>
+    <nz-form-item>
+      <nz-form-label nzRequired>Kiểu phim</nz-form-label>
+      <nz-form-control nzErrorTip="Vui lòng nhập kiểu phim">
+        <input formControlName="name" nz-input placeholder="Nhập kiểu phim"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzRequired>Đường dẫn</nz-form-label>
+      <nz-form-control nzErrorTip="Vui lòng nhập đường dẫn">
+        <input formControlName="slug" nz-input placeholder="Nhập đường dẫn"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label>Trạng thái</nz-form-label>
+      <nz-form-control nzErrorTip="Vui lòng chọn trạng thái">
+        <nz-select formControlName="status" nzPlaceHolder="Chọn trạng thái">
+          <nz-option *ngFor="let option of status" [nzLabel]="option.label" [nzValue]="option.value" nzCustomContent>
+            <nz-badge *ngIf="option.badge" [nzStatus]="option.badge"></nz-badge>
+            {{ option.label }}
+          </nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <button [hidden]="true" nz-button nzType="primary">Submit</button>
+  </form>
+
+  <ng-template #footerTpl>
+    <div style="float: right">
+      <button (click)="close()" nz-button style="margin-right: 8px;">Huỷ</button>
+      <button (click)="submitForm()" [nzLoading]="isLoading" nz-button nzType="primary">Cập nhật</button>
+    </div>
+  </ng-template>
+</nz-drawer>

@@ -1,0 +1,206 @@
+<div class="carousel slide carousel-fade" data-interval="3000" data-ride="carousel"
+     id="carouselExampleIndicators">
+  <div class="carousel-inner">
+    <div *ngFor="let data of this.banners; let isFirst = first" [class.active]="isFirst" class="carousel-item">
+      <a [routerLink]="['/phim', data?.movie?.slug]">
+        <img [alt]="data?.movie?.name" data-src="{{data?.image}}" loading="lazy">
+        <div class="banner-caption">
+          <h4>{{ data?.movie?.name }}</h4>
+          <h5>{{ data?.movie?.origin_name }} {{ data?.movie?.release_date ? '(' + data?.movie?.release_date + ')' : '' }}</h5>
+        </div>
+        <div class="banner-caption-background"></div>
+      </a>
+    </div>
+  </div>
+
+  <a class="carousel-control-prev" data-slide="prev" href="#carouselExampleIndicators" role="button">
+    <span aria-hidden="true" class="carousel-control-prev-icon"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" data-slide="next" href="#carouselExampleIndicators" role="button">
+    <span aria-hidden="true" class="carousel-control-next-icon"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+<div class="main-content">
+  <div class="support-func ml-auto"><a class="icon-support"></a></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8 col-12">
+        <div class="panel-vod">
+          <div class="title-cate">
+            <a [routerLink]="['/the-loai', 'phim-chieu-rap']">
+              <h2>Phim chiếu rạp</h2>
+            </a>
+            <a [routerLink]="['/the-loai', 'phim-chieu-rap']" class="link-cate-xem-them">Xem thêm <i
+              class="fa fa-play"></i></a>
+          </div>
+          <div class="list-vod row category-tabs-item">
+            <div *ngFor="let data of this.bodyCinemas" class="item col-lg-3 col-md-4 col-sm-4 col-6">
+              <a [routerLink]="['/phim', data.slug]">
+                <div class="img-4-6">
+                  <div class="inline">
+                    <img
+                      [alt]="data.name"
+                      data-src="{{data.poster}}" loading="lazy">
+
+                  </div>
+                </div>
+                <h3>{{ data.name }}</h3>
+                <p
+                  class="subtitle">{{ data.origin_name }} {{ data.release_date ? '(' + data.release_date + ')' : '' }}</p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="panel-vod">
+          <div class="title-cate">
+            <a [routerLink]="['/kieu-phim', 'phim-le']">
+              <h2>Phim lẻ</h2>
+            </a>
+            <a [routerLink]="['/kieu-phim', 'phim-le']" class="link-cate-xem-them">Xem thêm <i
+              class="fa fa-play"></i></a>
+          </div>
+          <div class="list-vod row category-tabs-item">
+            <div *ngFor="let data of this.bodyMovies" class="item col-lg-3 col-md-4 col-sm-4 col-6">
+              <a [routerLink]="['/phim', data.slug]">
+                <div class="img-4-6">
+                  <div class="inline">
+                    <img
+                      [alt]="data.name"
+                      data-src="{{data.poster}}" loading="lazy">
+
+                  </div>
+                </div>
+                <h3>{{ data.name }}</h3>
+                <p
+                  class="subtitle">{{ data.origin_name }} {{ data.release_date ? '(' + data.release_date + ')' : '' }}</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4 col-12 mt-2">
+        <div><img alt="Phim lẻ hot" data-src="assets/images/head_phim_le_hot.png" loading="lazy" style="width:100%">
+        </div>
+        <div class="hot-panel">
+          <div class="scrollbar-inner">
+            <div class="list-vod category-tabs-item">
+              <a *ngFor="let data of this.topMoviesSidebar" [routerLink]="['/phim', data.slug]">
+                <div class="row">
+                  <div class="item col-lg-4 col-md-12 col-4">
+                    <div class="img-4-6">
+                      <div class="inline">
+                        <img
+                          [alt]="data.name"
+                          data-src="{{data.poster}}" loading="lazy">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item col-lg-8 col-md-12 col-8">
+                    <div class="func row">
+                      <div class="col-12">
+                        <h3>{{ data.name }}</h3>
+                        <p
+                          class="subtitle">{{ data.origin_name }} {{ data.release_date ? '(' + data.release_date + ')' : '' }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-5"><img data-src="assets/images/head_phim_bo_hot.png" loading="lazy" style="width:100%"></div>
+        <div class="hot-panel">
+          <div class="scrollbar-inner">
+            <div class="list-vod category-tabs-item">
+              <a *ngFor="let data of this.topSeriesSidebar" [routerLink]="['/phim', data.slug]">
+                <div class="row">
+                  <div class="item col-lg-4 col-md-12 col-4">
+                    <div class="img-4-6">
+                      <div class="inline">
+                        <img
+                          [alt]="data.name"
+                          data-src="{{data.poster}}" loading="lazy">
+                        <span class="ribbon">40/40</span>
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item col-lg-8 col-md-12 col-8">
+                    <div class="func row">
+                      <div class="col-12">
+                        <h3>{{ data.name }}</h3>
+                        <p
+                          class="subtitle">{{ data.origin_name }} {{ data.release_date ? '(' + data.release_date + ')' : '' }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-vod">
+      <div class="title-cate">
+        <a [routerLink]="['/kieu-phim', 'phim-bo']">
+          <h2>Phim bộ</h2>
+        </a>
+        <a [routerLink]="['/kieu-phim', 'phim-bo']" class="link-cate-xem-them">Xem thêm <i
+          class="fa fa-play"></i></a>
+      </div>
+      <div class="list-vod row category-tabs-item">
+
+        <div *ngFor="let data of this.bodySeries" class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a [routerLink]="['/phim', data.slug]">
+            <div class="img-4-6">
+              <div class="inline">
+                <img
+                  [alt]="data.name"
+                  data-src="{{data.poster}}" loading="lazy">
+                <span class="ribbon">11/36</span>
+
+              </div>
+            </div>
+            <h3>{{ data.name }}</h3>
+            <p class="subtitle">{{ data.origin_name }} {{ data.release_date ? '(' + data.release_date + ')' : '' }}</p>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="panel-vod">
+      <div class="title-cate">
+        <a [routerLink]="['/the-loai', 'hoat-hinh']">
+          <h2>Hoạt hình</h2>
+        </a>
+        <a [routerLink]="['/the-loai', 'hoat-hinh']" class="link-cate-xem-them">Xem thêm <i
+          class="fa fa-play"></i></a>
+      </div>
+      <div class="list-vod row category-tabs-item">
+
+        <div *ngFor="let data of this.bodyCartoons" class="item col-lg-2 col-md-3 col-sm-4 col-6">
+          <a [routerLink]="['/phim', data.slug]">
+            <div class="img-4-6">
+              <div class="inline">
+                <img
+                  [alt]="data.name"
+                  data-src="{{data.poster}}" loading="lazy">
+                <span class="ribbon">4/4</span>
+              </div>
+            </div>
+            <h3>{{ data.name }}</h3>
+            <p class="subtitle">{{ data.origin_name }} {{ data.release_date ? '(' + data.release_date + ')' : '' }}</p>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,61 @@
+<nz-card>
+  <div class="row m-b-30">
+    <div class="col-lg-8">
+      <div class="d-md-flex">
+        <div class="m-b-10 m-r-20">
+          <nz-input-group [nzPrefix]="prefixTemplate">
+            <input (ngModelChange)="search()" [(ngModel)]="searchInput" nz-input placeholder="Search Project"
+                   type="text">
+          </nz-input-group>
+          <ng-template #prefixTemplate>
+            <i class="opacity-05" nz-icon nzType="search"></i>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 text-right">
+      <a [routerLink]="['/dashboard', 'movies', 'types', 'create']" nz-button nzType="primary">
+        <i nz-icon nzType="plus-circle" theme="outline"></i>
+        <span>Thêm kiểu phim</span>
+      </a>
+    </div>
+  </div>
+  <nz-table #listTable [nzData]="displayData">
+    <thead>
+    <tr>
+      <th *ngFor="let column of orderColumn" [nzSortFn]="column.compare">{{ column.title }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of listTable.data; let i=index">
+      <td>#{{item.movie_type_id}}</td>
+      <td>{{item.name}}</td>
+      <td>{{item.slug}}</td>
+      <td>
+        <nz-badge [nzStatus]="mapDefaultStatus(item.status)?.badge"></nz-badge>
+        <span class="text-capitalize">{{ mapDefaultStatus(item.status)?.label }}</span>
+      </td>
+      <td class="text-md-right">
+        <a [routerLink]="['/dashboard', 'movies', 'types', item.movie_type_id, 'edit']" class="m-r-5" nz-button
+           nz-tooltip
+           nzShape="circle"
+           nzTooltipTitle="Sửa" nzType="default">
+          <i nz-icon nzType="edit" theme="outline"></i>
+        </a>
+
+        <button (nzOnConfirm)="delete(item.movie_type_id)" nz-button nz-popconfirm nz-tooltip
+                nzPopconfirmPlacement="bottom"
+                nzPopconfirmTitle="Xác nhận xoá?"
+                nzShape="circle"
+                nzTooltipTitle="Xoá"
+                nzType="default">
+          <i nz-icon nzType="delete" theme="outline"></i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+</nz-card>
+
+<router-outlet></router-outlet>

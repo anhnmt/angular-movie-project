@@ -1,0 +1,75 @@
+<nz-drawer
+  (nzOnClose)="close()"
+  [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom': '53px' }"
+  [nzFooter]="footerTpl"
+  [nzMaskClosable]="false"
+  [nzVisible]="visible"
+  [nzWidth]="720"
+  nzTitle="Thêm mới banner"
+>
+  <form (ngSubmit)="submitForm()" [formGroup]="validateForm" [nzLayout]="'vertical'" nz-form>
+    <nz-form-item>
+      <nz-form-label nzRequired>Tên phim</nz-form-label>
+      <nz-form-control nzErrorTip="Vui lòng nhập tên phim">
+        <nz-select
+          (nzOnSearch)="onSearch($event)"
+          formControlName="movie_id"
+          nzAllowClear
+          nzPlaceHolder="Chọn tên phim"
+          nzServerSearch
+          nzShowSearch
+        >
+          <ng-container *ngFor="let option of searchMovies">
+            <nz-option *ngIf="!isSearchLoading" [nzLabel]="option.name" [nzValue]="option.movie_id"></nz-option>
+          </ng-container>
+          <nz-option *ngIf="isSearchLoading" nzCustomContent nzDisabled>
+            <i class="loading-icon" nz-icon nzType="loading"></i> Loading Data...
+          </nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label>Trạng thái</nz-form-label>
+      <nz-form-control nzErrorTip="Vui lòng chọn trạng thái">
+        <nz-select formControlName="status" nzPlaceHolder="Chọn trạng thái">
+          <nz-option *ngFor="let option of status" [nzLabel]="option.label" [nzValue]="option.value"
+                     nzCustomContent>
+            <nz-badge *ngIf="option.badge" [nzStatus]="option.badge"></nz-badge>
+            {{ option.label }}
+          </nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label>Banner</nz-form-label>
+      <nz-upload
+        [(nzFileList)]="fileList"
+        [nzPreview]="handlePreview"
+        [nzShowButton]="fileList.length < 1"
+        [nzShowUploadList]="{
+          showPreviewIcon: false,
+          showRemoveIcon: true,
+          showDownloadIcon: false
+        }"
+        nzAction="/api"
+        nzListType="picture-card"
+      >
+        <div>
+          <i nz-icon nzType="plus"></i>
+          <div style="margin-top: 8px">Upload</div>
+        </div>
+      </nz-upload>
+    </nz-form-item>
+
+    <button [hidden]="true" nz-button nzType="primary">Submit</button>
+  </form>
+
+  <ng-template #footerTpl>
+    <div style="float: right">
+      <button (click)="close()" nz-button style="margin-right: 8px;">Huỷ</button>
+      <button (click)="submitForm()" [nzLoading]="isLoading" nz-button nzType="primary">Thêm</button>
+    </div>
+  </ng-template>
+</nz-drawer>

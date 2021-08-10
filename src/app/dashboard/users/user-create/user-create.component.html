@@ -1,0 +1,45 @@
+<nz-drawer
+  (nzOnClose)="close()"
+  [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom': '53px' }"
+  [nzFooter]="footerTpl"
+  [nzMaskClosable]="false"
+  [nzVisible]="visible"
+  [nzWidth]="720"
+  nzTitle="Thêm mới người dùng"
+>
+  <form (ngSubmit)="submitForm()" [formGroup]="validateForm" [nzLayout]="'vertical'" nz-form>
+    <nz-form-item>
+      <nz-form-label nzRequired>Tên người dùng</nz-form-label>
+      <nz-form-control nzErrorTip="Vui lòng nhập tên người dùng">
+        <input formControlName="name" nz-input placeholder="Nhập tên người dùng"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzRequired>Tài khoản</nz-form-label>
+      <nz-form-control nzErrorTip="Vui lòng nhập tài khoản">
+        <input formControlName="username" nz-input placeholder="Nhập tài khoản"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label>Giới tính</nz-form-label>
+      <nz-form-control>
+        <nz-select nzPlaceHolder="Chọn giới tính"></nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label>Quyền</nz-form-label>
+      <nz-form-control>
+        <nz-select nzPlaceHolder="Chọn quyền"></nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <button [hidden]="true" nz-button nzType="primary">Submit</button>
+  </form>
+
+  <ng-template #footerTpl>
+    <div style="float: right">
+      <button (click)="close()" nz-button style="margin-right: 8px;">Huỷ</button>
+      <button (click)="submitForm()" nz-button nzType="primary">Thêm</button>
+    </div>
+  </ng-template>
+</nz-drawer>

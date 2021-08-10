@@ -1,0 +1,93 @@
+<nz-drawer
+  (nzOnClose)="close()"
+  [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto' }"
+  [nzFooter]="footerTpl"
+  [nzMaskClosable]="false"
+  [nzVisible]="visible"
+  [nzWidth]="'50%'"
+  nzTitle="Sửa tập phim"
+>
+  <form (ngSubmit)="submitForm()" [formGroup]="validateForm" [nzLayout]="'vertical'" nz-form>
+    <nz-form-item>
+      <nz-form-label nzRequired>Tập phim</nz-form-label>
+      <nz-form-control nzErrorTip="Vui lòng nhập tập phim">
+        <input formControlName="name" nz-input placeholder="Nhập tập phim"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label>Trạng thái</nz-form-label>
+      <nz-form-control nzErrorTip="Vui lòng chọn trạng thái">
+        <nz-select formControlName="status" nzPlaceHolder="Chọn trạng thái">
+          <nz-option *ngFor="let option of status" [nzLabel]="option.label" [nzValue]="option.value" nzCustomContent>
+            <nz-badge *ngIf="option.badge" [nzStatus]="option.badge"></nz-badge>
+            {{ option.label }}
+          </nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <button [hidden]="true" nz-button nzType="primary">Submit</button>
+  </form>
+
+  <div class="row m-b-10">
+    <div class="col-lg-8">
+      <div class="d-md-flex">
+        <div class="m-r-20">
+          <nz-input-group [nzPrefix]="prefixTemplate">
+            <input nz-input placeholder="Search Project" type="text">
+          </nz-input-group>
+          <ng-template #prefixTemplate>
+            <i class="opacity-05" nz-icon nzType="search"></i>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 text-right">
+      <a (click)="create()" nz-button nzType="primary">
+        <i nz-icon nzType="plus-circle" theme="outline"></i>
+        <span>Thêm server phim</span>
+      </a>
+    </div>
+  </div>
+
+  <nz-table #basicTable [nzData]="episodeDetails">
+    <thead>
+    <tr>
+      <th *ngFor="let column of orderColumn" [nzSortFn]="column.compare">{{ column.title }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>#{{data.episode_detail_id}}</td>
+      <td>{{data.name}}</td>
+      <td>
+        <nz-badge [nzStatus]="mapDefaultStatus(data.status)?.badge"></nz-badge>
+        <span class="text-capitalize">{{ mapDefaultStatus(data.status)?.label }}</span>
+      </td>
+      <td class="text-md-right">
+        <button (click)="edit(data.episode_detail_id)" class="m-r-5" nz-button nz-tooltip
+                nzShape="circle"
+                nzTooltipTitle="Sửa" nzType="default" type="button">
+          <i nz-icon nzType="edit" theme="outline"></i>
+        </button>
+
+        <button (nzOnConfirm)="delete(data.episode_detail_id)" nz-button nz-popconfirm nz-tooltip
+                nzPopconfirmPlacement="bottom"
+                nzPopconfirmTitle="Xác nhận xoá?"
+                nzShape="circle"
+                nzTooltipTitle="Xoá" nzType="default" type="button">
+          <i nz-icon nzType="delete" theme="outline"></i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+
+  <ng-template #footerTpl>
+    <div style="float: right">
+      <button (click)="close()" nz-button style="margin-right: 8px;">Huỷ</button>
+      <button (click)="submitForm()" [nzLoading]="isLoading" nz-button nzType="primary">Cập nhật</button>
+    </div>
+  </ng-template>
+</nz-drawer>

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "enlink": {
+    "angular-base-project": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/enlink",
+            "outputPath": "dist/angular-base-project",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -29,11 +29,13 @@
               }
             ],
             "styles": [
-              "src/styles.scss" 
+              "src/styles.scss"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
-              "src/assets/lib/hljs/highlight.pack.js"
+              "src/assets/lib/hljs/highlight.pack.js",
+              "node_modules/popper.js/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           },
           "configurations": {
@@ -47,9 +49,10 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "namedChunks": false,
+              "namedChunks": true,
+              "aot": true,
               "extractLicenses": true,
-              "vendorChunk": false,
+              "vendorChunk": true,
               "buildOptimizer": true,
               "budgets": [
                 {
@@ -59,8 +62,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
+                  "maximumWarning": "500kb",
+                  "maximumError": "500kb"
                 }
               ]
             }
@@ -69,18 +72,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "enlink:build"
+            "browserTarget": "angular-base-project:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "enlink:build:production"
+              "browserTarget": "angular-base-project:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "enlink:build"
+            "browserTarget": "angular-base-project:build"
           }
         },
         "test": {
@@ -117,16 +120,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "enlink:serve"
+            "devServerTarget": "angular-base-project:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "enlink:serve:production"
+              "devServerTarget": "angular-base-project:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "enlink"
+  "defaultProject": "angular-base-project"
 }

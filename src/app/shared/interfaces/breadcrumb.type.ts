@@ -1,4 +1,4 @@
 export interface IBreadcrumb {
-    label: string;
-    url: string;
+  label: string;
+  url: string;
 }
