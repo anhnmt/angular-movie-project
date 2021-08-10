@@ -22,4 +22,5 @@ export interface Movie {
   updated_at?: string;
   country_ids?: number[];
   genre_ids?: number[];
+  movie_related?: Movie[];
 }

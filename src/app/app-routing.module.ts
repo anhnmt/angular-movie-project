@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 
 import {FullLayoutComponent} from './layouts/full-layout/full-layout.component';
 import {DashboardLayoutComponent} from './layouts/dashboard-layout/dashboard-layout.component';
@@ -41,7 +41,7 @@ const appRoutes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(appRoutes, {
-      preloadingStrategy: PreloadAllModules,
+      // preloadingStrategy: PreloadAllModules,
       anchorScrolling: 'enabled',
       scrollPositionRestoration: 'enabled'
     })

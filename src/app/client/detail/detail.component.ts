@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
+import {forkJoin, Subject} from 'rxjs';
 import {ClientService} from '../../shared/services/client.service';
 import {Movie} from '../../shared/interfaces/movie';
 
@@ -13,6 +13,7 @@ import {Movie} from '../../shared/interfaces/movie';
 export class DetailComponent implements OnInit, AfterViewInit, OnDestroy {
 
   movie: Movie;
+  movieRelated: Movie[] = [];
   private onDestroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
@@ -22,13 +23,18 @@ export class DetailComponent implements OnInit, AfterViewInit, OnDestroy {
     this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe((params: any) => {
       const {movieSlug} = params;
 
-      this.clientService.getMovieDetail(movieSlug).subscribe((success) => {
-        this.movie = success.data;
-        console.log(this.movie);
-        
-      }, (error) => {
-        console.log(error);
-      });
+      forkJoin([
+        this.clientService.getMovieDetail(movieSlug)
+      ])
+        .subscribe(([detail]) => {
+          this.movie = detail.data;
+
+          this.movieRelated = this.movie?.movie_related;
+          console.log(this.movieRelated);
+
+        }, (error) => {
+          console.log(error);
+        });
     });
   }
 
