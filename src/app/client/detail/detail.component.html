@@ -19,8 +19,8 @@
           <div class="img-4-6">
             <div class="inline">
               <img
-                [alt]="movie?.name + movie?.release_date ? ' (' + movie?.release_date + ')' : ''"
-                [src]="movie?.poster">
+                [alt]="movie?.name + movie?.release_date ? ' (' + movie?.release_date + ')' : ''" data-src="{{movie?.poster}}"
+                loading="lazy">
             </div>
           </div>
         </div>
@@ -91,7 +91,7 @@
               <div class="inline">
                 <img
                   [alt]="data.name"
-                  [src]="data.poster">
+                  data-src="{{data.poster}}" loading="lazy">
               </div>
             </div>
             <h3>{{ data.name }}</h3>

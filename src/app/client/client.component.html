@@ -3,7 +3,7 @@
   <div class="carousel-inner">
     <div *ngFor="let data of this.banners; let isFirst = first" [class.active]="isFirst" class="carousel-item">
       <a [routerLink]="['/phim', data?.movie?.slug]">
-        <img [alt]="data?.movie?.name" [src]="data?.image">
+        <img [alt]="data?.movie?.name" data-src="{{data?.image}}" loading="lazy">
         <div class="banner-caption">
           <h4>{{ data?.movie?.name }}</h4>
           <h5>{{ data?.movie?.origin_name }} {{ data?.movie?.release_date ? '(' + data?.movie?.release_date + ')' : '' }}</h5>
@@ -43,7 +43,7 @@
                   <div class="inline">
                     <img
                       [alt]="data.name"
-                      [src]="data.poster">
+                      data-src="{{data.poster}}" loading="lazy">
 
                   </div>
                 </div>
@@ -69,7 +69,7 @@
                   <div class="inline">
                     <img
                       [alt]="data.name"
-                      [src]="data.poster">
+                      data-src="{{data.poster}}" loading="lazy">
 
                   </div>
                 </div>
@@ -83,7 +83,8 @@
       </div>
 
       <div class="col-sm-4 col-12 mt-2">
-        <div><img alt="Phim lẻ hot" src="assets/images/head_phim_le_hot.png" style="width:100%"></div>
+        <div><img alt="Phim lẻ hot" data-src="assets/images/head_phim_le_hot.png" loading="lazy" style="width:100%">
+        </div>
         <div class="hot-panel">
           <div class="scrollbar-inner">
             <div class="list-vod category-tabs-item">
@@ -94,7 +95,7 @@
                       <div class="inline">
                         <img
                           [alt]="data.name"
-                          [src]="data.poster">
+                          data-src="{{data.poster}}" loading="lazy">
                       </div>
                     </div>
                   </div>
@@ -113,7 +114,7 @@
           </div>
         </div>
 
-        <div class="mt-5"><img src="assets/images/head_phim_bo_hot.png" style="width:100%"></div>
+        <div class="mt-5"><img data-src="assets/images/head_phim_bo_hot.png" loading="lazy" style="width:100%"></div>
         <div class="hot-panel">
           <div class="scrollbar-inner">
             <div class="list-vod category-tabs-item">
@@ -124,7 +125,7 @@
                       <div class="inline">
                         <img
                           [alt]="data.name"
-                          [src]="data.poster">
+                          data-src="{{data.poster}}" loading="lazy">
                         <span class="ribbon">40/40</span>
 
                       </div>
@@ -163,7 +164,7 @@
               <div class="inline">
                 <img
                   [alt]="data.name"
-                  [src]="data.poster">
+                  data-src="{{data.poster}}" loading="lazy">
                 <span class="ribbon">11/36</span>
 
               </div>
@@ -190,7 +191,7 @@
               <div class="inline">
                 <img
                   [alt]="data.name"
-                  [src]="data.poster">
+                  data-src="{{data.poster}}" loading="lazy">
                 <span class="ribbon">4/4</span>
               </div>
             </div>

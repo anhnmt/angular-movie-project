@@ -55,7 +55,8 @@ registerLocaleData(en);
     NzSelectModule,
     ReactiveFormsModule,
     NzBadgeModule,
-    NzModalModule
+    NzModalModule,
+    SharedModule
   ],
   providers: [
     {
