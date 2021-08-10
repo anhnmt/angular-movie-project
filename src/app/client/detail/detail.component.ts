@@ -30,7 +30,7 @@ export class DetailComponent implements OnInit, AfterViewInit, OnDestroy {
           this.movie = detail.data;
 
           this.movieRelated = this.movie?.movie_related;
-          console.log(this.movieRelated);
+          // console.log(this.movieRelated);
 
         }, (error) => {
           console.log(error);
