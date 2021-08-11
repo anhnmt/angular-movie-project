@@ -3,7 +3,7 @@ import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {DefaultResponse} from '../interfaces/default-response';
-import {MovieEpisode} from '../interfaces/movie-episode';
+import {Episode} from '../interfaces/episode';
 import {EpisodeDetail} from '../interfaces/episode-detail';
 
 @Injectable({
@@ -16,9 +16,9 @@ export class EpisodeService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getEpisodeDetail(episodeId: number): Observable<DefaultResponse<MovieEpisode>> {
+  getEpisodeDetail(episodeId: number): Observable<DefaultResponse<Episode>> {
     return this.httpClient
-      .get<DefaultResponse<MovieEpisode>>(`${this.baseUrl}/${episodeId}`);
+      .get<DefaultResponse<Episode>>(`${this.baseUrl}/${episodeId}`);
   }
 
   createEpisodeDetail(episodeId: number, body: EpisodeDetail): Observable<DefaultResponse<EpisodeDetail>> {
@@ -31,17 +31,17 @@ export class EpisodeService {
       });
   }
 
-  updateEpisode(episodeId: number, body: MovieEpisode): Observable<DefaultResponse<MovieEpisode>> {
+  updateEpisode(episodeId: number, body: Episode): Observable<DefaultResponse<Episode>> {
     return this.httpClient
-      .put<DefaultResponse<MovieEpisode>>(`${this.baseUrl}/${episodeId}`, {
+      .put<DefaultResponse<Episode>>(`${this.baseUrl}/${episodeId}`, {
         name: body.name,
         status: body.status
       });
   }
 
-  deleteEpisode(episodeId: number): Observable<DefaultResponse<MovieEpisode>> {
+  deleteEpisode(episodeId: number): Observable<DefaultResponse<Episode>> {
     return this.httpClient
-      .delete<DefaultResponse<MovieEpisode>>(`${this.baseUrl}/${episodeId}`);
+      .delete<DefaultResponse<Episode>>(`${this.baseUrl}/${episodeId}`);
   }
 
   deleteEpisodeDetail(episodeId: number, episodeDetailId: number): Observable<DefaultResponse<EpisodeDetail>> {

@@ -7,6 +7,7 @@ import {Movie} from '../interfaces/movie';
 import {Banner} from '../interfaces/banner';
 import {Country} from '../interfaces/country';
 import {Genre} from '../interfaces/genre';
+import {Episode} from '../interfaces/episode';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,11 @@ export class ClientService {
   getMovieDetail(slug: string): Observable<DefaultResponse<Movie>> {
     return this.httpClient
       .get<DefaultResponse<Movie>>(`${this.baseUrl}/find-movie-detail/${slug}`);
+  }
+
+  getMovieEpisodes(movieId: number): Observable<DefaultResponse<Episode[]>> {
+    return this.httpClient
+      .get<DefaultResponse<Episode[]>>(`${this.baseUrl}/find-episodes/${movieId}`);
   }
 
   getMovieType(slug: string): Observable<DefaultResponse<Movie[]>> {

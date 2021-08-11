@@ -6,7 +6,7 @@ import {HelperUtils} from '../../../shared/utils/helperUtils';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {GlobalUtils} from '../../../shared/utils/globalUtils';
 import {MovieEpisodeService} from '../../../shared/services/movie-episode.service';
-import {MovieEpisode} from '../../../shared/interfaces/movie-episode';
+import {Episode} from '../../../shared/interfaces/episode';
 import {EpisodeDetail} from '../../../shared/interfaces/episode-detail';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {NzModalService} from 'ng-zorro-antd/modal';
@@ -29,7 +29,7 @@ export class MovieEpisodeEditComponent implements OnInit, AfterViewInit, OnDestr
   status = GlobalUtils.getDefaultStatus();
   mapDefaultStatus = GlobalUtils.mapDefaultStatus;
   validateForm: FormGroup;
-  movieEpisode: MovieEpisode;
+  movieEpisode: Episode;
   episodeDetails: EpisodeDetail[] = [];
 
   orderColumn = [

@@ -4,6 +4,7 @@ import {takeUntil} from 'rxjs/operators';
 import {forkJoin, Subject} from 'rxjs';
 import {ClientService} from '../../shared/services/client.service';
 import {Movie} from '../../shared/interfaces/movie';
+import {Episode} from 'src/app/shared/interfaces/episode';
 
 @Component({
   selector: 'app-detail',
@@ -12,8 +13,11 @@ import {Movie} from '../../shared/interfaces/movie';
 })
 export class DetailComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  disablePlay = false;
+  movieId: number;
   movie: Movie;
   movieRelated: Movie[] = [];
+  episodes: Episode[] = [];
   private onDestroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
@@ -28,6 +32,7 @@ export class DetailComponent implements OnInit, AfterViewInit, OnDestroy {
       ])
         .subscribe(([detail]) => {
           this.movie = detail.data;
+          this.movieId = this.movie?.movie_id;
 
           this.movieRelated = this.movie?.movie_related;
           // console.log(this.movieRelated);
@@ -47,6 +52,21 @@ export class DetailComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
+  }
+
+  playMovie(): void {
+    this.disablePlay = true;
+    console.log('play movie');
+
+    this.clientService.getMovieEpisodes(this.movieId)
+      .subscribe((episodes) => {
+        this.episodes = episodes.data;
+
+        console.log(this.episodes);
+
+      }, (error) => {
+        console.log(error);
+      });
   }
 
 }
