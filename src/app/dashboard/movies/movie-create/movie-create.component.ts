@@ -52,6 +52,7 @@ export class MovieCreateComponent implements OnInit, AfterViewInit, OnDestroy {
       movie_type_id: [null, [Validators.required]],
       country_ids: [null],
       genre_ids: [null],
+      description: [null],
       status: [selectedStatus, [Validators.required]],
     });
 

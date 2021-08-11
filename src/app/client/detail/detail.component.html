@@ -19,7 +19,8 @@
           <div class="img-4-6">
             <div class="inline">
               <img
-                [alt]="movie?.name + movie?.release_date ? ' (' + movie?.release_date + ')' : ''" data-src="{{movie?.poster}}"
+                [alt]="movie?.name + movie?.release_date ? ' (' + movie?.release_date + ')' : ''"
+                data-src="{{movie?.poster}}"
                 loading="lazy">
             </div>
           </div>
@@ -46,28 +47,28 @@
             </div>
           </div>
 
-          <div class="mt-2"><p>{{ movie?.description }}</p></div>
+          <div class="mt-2"><p class="text-white">{{ movie?.description }}</p></div>
 
           <div class="row mt-4">
             <div class="col-md-6 col-12">
               <ul class="more-info">
-                <li>
-                  <span>Thời lượng: </span> 84 phút
+                <li *ngIf="movie?.runtime">
+                  <span>Thời lượng: </span> {{ movie?.runtime }}
                 </li>
                 <li><span>Đạo diễn: </span> Lloyd Lee Barnett</li>
                 <li><span>Quốc gia: </span> Mỹ</li>
-                <li><span>Thể loại: </span>
-                  Hành động,
-                  Kiếm hiệp, võ thuật,
-                  Phim lẻ,
-                </li>
                 <li><span>Phát hành: </span> {{ movie?.release_date }}</li>
-                <li><span>IMDB: </span> {{ movie?.release_date }}</li>
+                <li><span>IMDB: </span> {{ movie?.imdb_id ?? 'Đang cập nhật' }}</li>
               </ul>
             </div>
             <div class="col-md-6 col-12">
               <ul class="more-info">
                 <li><span>Diễn viên: </span> Christian Oliver, Les Brandt, Cary-Hiroyuki Tagawa</li>
+                <li><span>Thể loại: </span>
+                  Hành động,
+                  Kiếm hiệp, võ thuật,
+                  Phim lẻ,
+                </li>
               </ul>
             </div>
           </div>
