@@ -88,7 +88,7 @@ export class MovieEpisodeEditComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   list(): void {
-    this.episodeService.getEpisodeDetail(this.episodeId)
+    this.episodeService.getEpisodeDetails(this.episodeId)
       .subscribe((movieEpisode) => {
         this.movieEpisode = movieEpisode.data;
         this.episodeDetails = this.movieEpisode.episode_details;

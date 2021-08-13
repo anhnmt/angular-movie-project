@@ -66,7 +66,6 @@ export class CountryIndexComponent implements OnInit {
 
     this.countryService.getAllCountries().subscribe((response) => {
       this.countries = response.data;
-      console.log(this.countries);
 
       this.displayData = this.countries;
     });

@@ -127,7 +127,6 @@ export class MovieCreateComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
 
-    // console.log(this.validateForm.value);
     formData.append('movie', JSON.stringify(this.validateForm.value));
 
     this.movieService.createMovie(formData).subscribe(() => {

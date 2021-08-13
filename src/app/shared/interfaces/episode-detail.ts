@@ -5,6 +5,6 @@ export interface EpisodeDetail {
   name: string;
   link?: string;
   episode_id: number;
-  episode_type_id: number;
+  episode_type_id?: number;
   status: Status;
 }

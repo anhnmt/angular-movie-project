@@ -32,7 +32,6 @@ export class ClientComponent implements OnInit, AfterViewInit, OnDestroy {
       this.clientService.getAllBanners()
     ])
       .subscribe(([body, sidebar, banners]) => {
-        // console.log(body.data);
 
         this.bodyMovies = body.data?.movies;
         this.bodySeries = body.data?.series;

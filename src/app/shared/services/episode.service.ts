@@ -16,19 +16,24 @@ export class EpisodeService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getEpisodeDetail(episodeId: number): Observable<DefaultResponse<Episode>> {
+  getEpisodeDetails(episodeId: number): Observable<DefaultResponse<Episode>> {
     return this.httpClient
       .get<DefaultResponse<Episode>>(`${this.baseUrl}/${episodeId}`);
   }
 
+  getEpisodeDetailById(episodeId: number, episodeDetailId: number): Observable<DefaultResponse<Episode>> {
+    return this.httpClient
+      .get<DefaultResponse<Episode>>(`${this.baseUrl}/${episodeId}/details/${episodeDetailId}`);
+  }
+
   createEpisodeDetail(episodeId: number, body: EpisodeDetail): Observable<DefaultResponse<EpisodeDetail>> {
     return this.httpClient
-      .post<DefaultResponse<EpisodeDetail>>(`${this.baseUrl}/${episodeId}`, {
-        episode_type_id: body.episode_type_id,
-        link: body.link,
-        name: body.name,
-        status: body.status,
-      });
+      .post<DefaultResponse<EpisodeDetail>>(`${this.baseUrl}/${episodeId}`, body);
+  }
+
+  updateEpisodeDetail(episodeId: number, episodeDetailId: number, body: EpisodeDetail): Observable<DefaultResponse<EpisodeDetail>> {
+    return this.httpClient
+      .put<DefaultResponse<EpisodeDetail>>(`${this.baseUrl}/${episodeId}/details/${episodeDetailId}`, body);
   }
 
   updateEpisode(episodeId: number, body: Episode): Observable<DefaultResponse<Episode>> {

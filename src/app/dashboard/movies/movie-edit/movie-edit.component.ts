@@ -168,7 +168,6 @@ export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
 
-    // console.log(this.validateForm.value);
     formData.append('movie', JSON.stringify(this.validateForm.value));
 
     this.movieService.updateMovieByMovieId(this.movie.movie_id, formData)

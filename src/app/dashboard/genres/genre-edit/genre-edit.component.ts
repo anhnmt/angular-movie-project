@@ -41,10 +41,9 @@ export class GenreEditComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe((params: any) => {
-      console.log(params);
+
       const {genreId} = params;
       this.genreService.getGenreByGenreId(genreId).subscribe((success) => {
-        console.log(success);
         this.genre = success.data;
 
         this.validateForm.patchValue({

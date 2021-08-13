@@ -53,7 +53,6 @@ export class BannerEditComponent implements OnInit, AfterViewInit, OnDestroy {
       this.bannerId = bannerId;
 
       this.bannerService.getBannerByBannerId(bannerId).subscribe((success) => {
-        console.log(success);
         this.banner = success.data;
 
         this.validateForm.patchValue({
@@ -120,7 +119,6 @@ export class BannerEditComponent implements OnInit, AfterViewInit, OnDestroy {
         debounceTime(500),
         distinctUntilChanged()
       ).subscribe((success) => {
-      // console.log(success);
       this.searchMovies = success.data;
       this.isSearchLoading = false;
     }, (error) => {
@@ -148,7 +146,6 @@ export class BannerEditComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
 
-    // console.log(this.validateForm.value);
     formData.append('banner', JSON.stringify(this.validateForm.value));
 
     this.bannerService.updateBannerByBannerId(this.bannerId, formData).subscribe(() => {

@@ -78,26 +78,42 @@
 <div class="main-content">
   <div class="support-func ml-auto"><a class="icon-support"></a></div>
   <div class="container">
-    <div class="movie-episodes">
+    <div [hidden]="disableEpisodeDetail" class="movie-episodes">
       <ul class="nav nav-tabs category-tabs justify-content-md-center">
         <li class="nav-item">
           <a aria-controls="profile" aria-selected="false" class="nav-link active" data-toggle="tab"
              id="profile-tab"
-             role="tab">Tập phim</a>
+             role="tab">Server phim</a>
         </li>
       </ul>
 
       <div aria-labelledby="profile-tab" class="tab-pane fade show active">
 
         <ul class="list-episodes row">
-          <li class="episode-item col-3 col-md-2 col-lg-1 episode-item-0">
-            <a href="javascript:void(0);">Tập 1</a>
+          <li class="episode-item col-3 col-md-2 episode-item-0" *ngFor="let data of episodeDetails; let isFirst = first" [class.active]="isFirst">
+            <a (click)="changeServer(data)">{{ data.name }}</a>
           </li>
+        </ul>
+      </div>
 
-          <li class="episode-item col-3 col-md-2 col-lg-1 episode-item-1 active">
-            <a href="javascript:void(0);">Tập 2</a>
+      <div class="d-none d-lg-block d-xl-block zone-banner my-2"></div>
+    </div>
+
+    <div [hidden]="disableEpisode" class="movie-episodes">
+      <ul class="nav nav-tabs category-tabs justify-content-md-center">
+        <li class="nav-item">
+          <a aria-controls="profile" aria-selected="false" class="nav-link active" data-toggle="tab"
+             id="episode-tab"
+             role="tab">Tập phim</a>
+        </li>
+      </ul>
+
+      <div aria-labelledby="episode-tab" class="tab-pane fade show active">
+
+        <ul class="list-episodes row">
+          <li class="episode-item col-3 col-md-2 col-lg-1 episode-item-0" *ngFor="let data of episodes; let isFirst = first" [class.active]="isFirst">
+            <a (click)="playEpisode(data)">{{ data.name }}</a>
           </li>
-
         </ul>
       </div>
 

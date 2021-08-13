@@ -41,10 +41,9 @@ export class CountryEditComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe((params: any) => {
-      console.log(params);
       const {countryId} = params;
       this.countryService.getCountryByCountryId(countryId).subscribe((success) => {
-        console.log(success);
+
         this.country = success.data;
 
         this.validateForm.patchValue({
