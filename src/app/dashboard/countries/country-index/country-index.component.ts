@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {TableService} from '../../../shared/services/table.service';
+import {TableService} from '@/app/shared/services/table.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {SharedService} from '../../../shared/services/shared.service';
-import {Country} from '../../../shared/interfaces/country';
-import {CountryService} from '../../../shared/services/country.service';
-import {GlobalUtils} from '../../../shared/utils/globalUtils';
+import {SharedService} from '@/app/shared/services/shared.service';
+import {Country} from '@/app/shared/interfaces/country';
+import {CountryService} from '@/app/shared/services/country.service';
+import {GlobalUtils} from '@/app/shared/utils/globalUtils';
 
 @Component({
   selector: 'app-country-index',

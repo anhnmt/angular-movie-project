@@ -78,7 +78,7 @@
 <div class="main-content">
   <div class="support-func ml-auto"><a class="icon-support"></a></div>
   <div class="container">
-    <div [hidden]="disableEpisodeDetail" class="movie-episodes">
+    <div [hidden]="!disablePlay" class="movie-episodes">
       <ul class="nav nav-tabs category-tabs justify-content-md-center">
         <li class="nav-item">
           <a aria-controls="profile" aria-selected="false" class="nav-link active" data-toggle="tab"
@@ -90,7 +90,9 @@
       <div aria-labelledby="profile-tab" class="tab-pane fade show active">
 
         <ul class="list-episodes row">
-          <li class="episode-item col-3 col-md-2 episode-item-0" *ngFor="let data of episodeDetails; let isFirst = first" [class.active]="isFirst">
+          <li *ngFor="let data of episodeDetails"
+              [class.active]="data.episode_detail_id === selectedEpisodeDetail?.episode_detail_id"
+              class="episode-item col-3 col-md-2 episode-item-0">
             <a (click)="changeServer(data)">{{ data.name }}</a>
           </li>
         </ul>
@@ -99,7 +101,7 @@
       <div class="d-none d-lg-block d-xl-block zone-banner my-2"></div>
     </div>
 
-    <div [hidden]="disableEpisode" class="movie-episodes">
+    <div [hidden]="!disablePlay" class="movie-episodes">
       <ul class="nav nav-tabs category-tabs justify-content-md-center">
         <li class="nav-item">
           <a aria-controls="profile" aria-selected="false" class="nav-link active" data-toggle="tab"
@@ -111,7 +113,9 @@
       <div aria-labelledby="episode-tab" class="tab-pane fade show active">
 
         <ul class="list-episodes row">
-          <li class="episode-item col-3 col-md-2 col-lg-1 episode-item-0" *ngFor="let data of episodes; let isFirst = first" [class.active]="isFirst">
+          <li *ngFor="let data of episodes"
+              [class.active]="data.episode_id === selectedEpisode?.episode_id"
+              class="episode-item col-3 col-md-2 col-lg-1 episode-item-0">
             <a (click)="playEpisode(data)">{{ data.name }}</a>
           </li>
         </ul>

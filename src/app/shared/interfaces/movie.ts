@@ -1,5 +1,3 @@
-import {Status} from './status';
-
 export interface Movie {
   movie_id: number;
   origin_name: string;
@@ -17,7 +15,7 @@ export interface Movie {
   poster?: string;
   seo_title?: string;
   seo_keywords?: string;
-  status?: Status;
+  status?: number;
   created_at?: string;
   updated_at?: string;
   country_ids?: number[];

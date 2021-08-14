@@ -1,8 +1,8 @@
 import {Component, ElementRef, OnInit, Renderer2, ViewEncapsulation} from '@angular/core';
-import {Country} from '../../shared/interfaces/country';
-import {Genre} from '../../shared/interfaces/genre';
+import {Country} from '@/app/shared/interfaces/country';
+import {Genre} from '@/app/shared/interfaces/genre';
 import {forkJoin} from 'rxjs';
-import {ClientService} from '../../shared/services/client.service';
+import {ClientService} from '@/app/shared/services/client.service';
 
 @Component({
   selector: 'app-client-layout',

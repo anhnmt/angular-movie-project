@@ -33,7 +33,7 @@ export class MovieEpisodeIndexComponent implements OnInit, AfterViewInit, OnDest
     },
     {
       title: 'Trạng thái',
-      compare: (a: Episode, b: Episode) => a.status?.value - b.status?.value,
+      compare: (a: Episode, b: Episode) => a?.status - b?.status,
     },
     {
       title: ''

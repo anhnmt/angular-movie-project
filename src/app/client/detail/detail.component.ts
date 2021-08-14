@@ -15,13 +15,15 @@ import {EpisodeDetail} from '../../shared/interfaces/episode-detail';
 export class DetailComponent implements OnInit, AfterViewInit, OnDestroy {
 
   disableEpisode = true;
-  disableEpisodeDetail = true;
   disablePlay = false;
   movieId: number;
   movie: Movie;
   movieRelated: Movie[] = [];
   episodes: Episode[] = [];
   episodeDetails: EpisodeDetail[] = [];
+
+  selectedEpisode: Episode;
+  selectedEpisodeDetail: EpisodeDetail;
   private onDestroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
@@ -59,13 +61,20 @@ export class DetailComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   playMovie(): void {
-    this.disablePlay = true;
-
     this.clientService.getMovieEpisodes(this.movieId)
       .subscribe((episodes) => {
         this.episodes = episodes.data;
 
         this.disableEpisode = false;
+        this.disablePlay = true;
+
+        this.selectedEpisode = this.episodes[0] || null;
+        // console.log(this.selectedEpisode);
+
+        this.episodeDetails = this.selectedEpisode?.episode_details;
+        // console.log(this.episodeDetails);
+
+        this.selectedEpisodeDetail = this.episodeDetails[0] || null;
 
       }, (error) => {
         console.log(error);
@@ -73,18 +82,19 @@ export class DetailComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   playEpisode(episode: Episode): void {
-    this.episodeDetails = episode?.episode_details;
+    this.selectedEpisode = episode;
 
-    this.disableEpisodeDetail = false;
+    this.episodeDetails = this.selectedEpisode.episode_details;
   }
 
   changeServer(episodeDetail: EpisodeDetail): void {
     console.log(episodeDetail);
+
+    this.selectedEpisodeDetail = episodeDetail;
   }
 
   resetPlay(): void {
     this.disableEpisode = true;
-    this.disableEpisodeDetail = true;
     this.disablePlay = false;
   }
 

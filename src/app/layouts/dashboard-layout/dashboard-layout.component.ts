@@ -2,8 +2,8 @@ import {Component, ElementRef, OnInit, Renderer2, ViewEncapsulation} from '@angu
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {distinctUntilChanged, filter, map, startWith} from 'rxjs/operators';
-import {IBreadcrumb} from '../../shared/interfaces/breadcrumb.type';
-import {ThemeConstantService} from '../../shared/services/theme-constant.service';
+import {IBreadcrumb} from '@/app/shared/interfaces/breadcrumb.type';
+import {ThemeConstantService} from '@/app/shared/services/theme-constant.service';
 
 @Component({
   selector: 'app-common-layout',

@@ -9,6 +9,7 @@ import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 import {ThemeConstantService} from './services/theme-constant.service';
 import {SearchPipe} from './pipes/search.pipe';
 import {LazyloadModule} from './lazyload/lazyload.module';
+import { SafePipe } from './pipes/safe.pipe';
 
 @NgModule({
   exports: [
@@ -31,6 +32,7 @@ import {LazyloadModule} from './lazyload/lazyload.module';
   ],
   declarations: [
     SearchPipe,
+    SafePipe,
   ],
   providers: [
     ThemeConstantService

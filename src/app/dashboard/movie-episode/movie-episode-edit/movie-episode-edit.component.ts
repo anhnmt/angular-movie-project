@@ -35,15 +35,15 @@ export class MovieEpisodeEditComponent implements OnInit, AfterViewInit, OnDestr
   orderColumn = [
     {
       title: 'ID',
-      compare: (a: EpisodeDetail, b: EpisodeDetail) => a.episode_id - b.episode_id,
+      compare: (a: EpisodeDetail, b: EpisodeDetail) => a?.episode_id - b?.episode_id,
     },
     {
       title: 'Server phim',
-      compare: (a: EpisodeDetail, b: EpisodeDetail) => a.name.localeCompare(b.name)
+      compare: (a: EpisodeDetail, b: EpisodeDetail) => a?.name.localeCompare(b?.name)
     },
     {
       title: 'Trạng thái',
-      compare: (a: EpisodeDetail, b: EpisodeDetail) => a.status?.value - b.status?.value,
+      compare: (a: EpisodeDetail, b: EpisodeDetail) => a?.status - b?.status,
     },
     {
       title: ''
