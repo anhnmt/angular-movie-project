@@ -54,7 +54,7 @@ export class MovieEpisodeCreateComponent implements OnInit, AfterViewInit, OnDes
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.visible = true;
-      
+
       HelperUtils.formChangedTitle(this.validateForm);
     }, 1);
   }

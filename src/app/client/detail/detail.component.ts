@@ -6,6 +6,7 @@ import {ClientService} from '../../shared/services/client.service';
 import {Movie} from '../../shared/interfaces/movie';
 import {Episode} from 'src/app/shared/interfaces/episode';
 import {EpisodeDetail} from '../../shared/interfaces/episode-detail';
+import {GlobalUtils} from '@/app/shared/utils/globalUtils';
 
 @Component({
   selector: 'app-detail',
@@ -14,8 +15,7 @@ import {EpisodeDetail} from '../../shared/interfaces/episode-detail';
 })
 export class DetailComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  disableEpisode = true;
-  disablePlay = false;
+  showPlay = true;
   movieId: number;
   movie: Movie;
   movieRelated: Movie[] = [];
@@ -24,6 +24,9 @@ export class DetailComponent implements OnInit, AfterViewInit, OnDestroy {
 
   selectedEpisode: Episode;
   selectedEpisodeDetail: EpisodeDetail;
+
+  embedUrl: string;
+
   private onDestroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
@@ -65,16 +68,15 @@ export class DetailComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe((episodes) => {
         this.episodes = episodes.data;
 
-        this.disableEpisode = false;
-        this.disablePlay = true;
+        this.showPlay = false;
 
         this.selectedEpisode = this.episodes[0] || null;
-        // console.log(this.selectedEpisode);
 
         this.episodeDetails = this.selectedEpisode?.episode_details;
-        // console.log(this.episodeDetails);
 
         this.selectedEpisodeDetail = this.episodeDetails[0] || null;
+
+        this.embedUrl = GlobalUtils.mapEpisodeServerLink(this.selectedEpisodeDetail?.link);
 
       }, (error) => {
         console.log(error);
@@ -94,8 +96,7 @@ export class DetailComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   resetPlay(): void {
-    this.disableEpisode = true;
-    this.disablePlay = false;
+    this.showPlay = true;
   }
 
 }

@@ -1,14 +1,14 @@
 <div class="player-section">
   <div class="container">
-    <div class="mb-5 row mt-3" id="playerDiv" style="display:none">
-      <div class="col-12" id="video_container" style="padding:0">
+    <div *ngIf="!showPlay" class="mt-3" id="playerDiv">
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe [src]="embedUrl | safe:'resourceUrl'"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen class="embed-responsive-item" frameborder="0" title="YouTube video player"></iframe>
       </div>
     </div>
 
-    <div class="mb-5 row mt-3" id="playerTrailer" style="display:none">
-    </div>
-
-    <div class="row mt-3" id="detail-meta">
+    <div *ngIf="showPlay" class="row mt-3" id="detail-meta">
       <div class="col-md-4 col-12">
         <div class="item">
           <div class="img-4-6">
@@ -39,7 +39,7 @@
 
           <div class="row mt-2">
             <div class="col-6 col-md-3">
-              <button (click)="playMovie()" [disabled]="disablePlay" class="btn-play-small">Play</button>
+              <button (click)="playMovie()" class="btn-play-small">Play</button>
             </div>
           </div>
 
@@ -77,8 +77,8 @@
 
 <div class="main-content">
   <div class="support-func ml-auto"><a class="icon-support"></a></div>
-  <div class="container">
-    <div [hidden]="!disablePlay" class="movie-episodes">
+  <div class="container py-3">
+    <div *ngIf="episodeDetails?.length > 1" class="movie-episodes">
       <ul class="nav nav-tabs category-tabs justify-content-md-center">
         <li class="nav-item">
           <a aria-controls="profile" aria-selected="false" class="nav-link active" data-toggle="tab"
@@ -88,7 +88,6 @@
       </ul>
 
       <div aria-labelledby="profile-tab" class="tab-pane fade show active">
-
         <ul class="list-episodes row">
           <li *ngFor="let data of episodeDetails"
               [class.active]="data.episode_detail_id === selectedEpisodeDetail?.episode_detail_id"
@@ -101,7 +100,9 @@
       <div class="d-none d-lg-block d-xl-block zone-banner my-2"></div>
     </div>
 
-    <div [hidden]="!disablePlay" class="movie-episodes">
+    <div
+      *ngIf="(movie?.movie_type?.movie_type_id === 1 && episodes?.length > 1) || (movie?.movie_type?.movie_type_id === 2 && episodes?.length > 0) "
+      class="movie-episodes">
       <ul class="nav nav-tabs category-tabs justify-content-md-center">
         <li class="nav-item">
           <a aria-controls="profile" aria-selected="false" class="nav-link active" data-toggle="tab"
