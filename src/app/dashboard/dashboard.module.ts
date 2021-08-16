@@ -5,6 +5,9 @@ import {DashboardComponent} from './dashboard.component';
 
 /** Import any ng-zorro components as the module required except icon module */
 import {NzButtonModule} from 'ng-zorro-antd/button';
+import {HTTP_INTERCEPTORS} from '~/@angular/common/http';
+import {JwtInterceptor} from '@/app/shared/interceptor/token.interceptor';
+import {AuthService} from '@/app/shared/services/auth.service';
 
 /* Assign all ng-zorro modules to this array */
 const antdModule = [
@@ -20,6 +23,14 @@ const antdModule = [
   exports: [],
   declarations: [
     DashboardComponent
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    },
+    AuthService
   ]
 })
 export class DashboardModule {

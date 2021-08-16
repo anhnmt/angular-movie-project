@@ -4,15 +4,16 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 import {User} from '../interfaces/user';
-
-const USER_AUTH_API_URL = '/api-url';
+import {environment} from '@/environments/environment';
+import {DefaultResponse} from '@/app/shared/interfaces/default-response';
 
 @Injectable()
 export class AuthService {
   public currentUser: Observable<User>;
   private currentUserSubject: BehaviorSubject<User>;
+  private baseUrl = environment.api + '/oauth/token';
 
-  constructor(private http: HttpClient) {
+  constructor(private httpClient: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -21,18 +22,22 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
-  login(username: string, password: string) {
-    return this.http.post<any>(USER_AUTH_API_URL, {username, password})
+  login(body: User): Observable<DefaultResponse<User>> {
+    return this.httpClient.post<DefaultResponse<User>>(this.baseUrl, {
+      username: body.username,
+      password: body.password
+    })
       .pipe(map(user => {
-        if (user && user.token) {
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          this.currentUserSubject.next(user);
+        if (user && user.data) {
+          localStorage.setItem('currentUser', JSON.stringify(user.data));
+          this.currentUserSubject.next(user.data);
         }
+
         return user;
       }));
   }
 
-  logout() {
+  logout(): void {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }

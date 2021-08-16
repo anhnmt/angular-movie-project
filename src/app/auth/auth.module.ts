@@ -14,6 +14,7 @@ import {LoginComponent} from './login/login.component';
 import {SignUpComponent} from './sign-up/sign-up.component';
 import {Error1Component} from './error-1/error-1.component';
 import {Error2Component} from './error-2/error-2.component';
+import {AuthService} from '@/app/shared/services/auth.service';
 
 const antdModule = [
   NzFormModule,
@@ -36,6 +37,9 @@ const antdModule = [
     SignUpComponent,
     Error1Component,
     Error2Component
+  ],
+  providers: [
+    AuthService
   ]
 })
 
