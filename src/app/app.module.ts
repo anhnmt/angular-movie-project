@@ -28,6 +28,9 @@ import {NzSelectModule} from 'ng-zorro-antd/select';
 import {ReactiveFormsModule} from '@angular/forms';
 import {NzBadgeModule} from 'ng-zorro-antd/badge';
 import {NzModalModule} from 'ng-zorro-antd/modal';
+import {AuthService} from '@/app/shared/services/auth.service';
+import {HTTP_INTERCEPTORS} from '~/@angular/common/http';
+import {JwtInterceptor} from '@/app/shared/interceptor/token.interceptor';
 
 registerLocaleData(en);
 
@@ -67,6 +70,12 @@ registerLocaleData(en);
       provide: LocationStrategy,
       useClass: PathLocationStrategy
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    },
+    AuthService,
     ThemeConstantService
   ],
   bootstrap: [AppComponent]

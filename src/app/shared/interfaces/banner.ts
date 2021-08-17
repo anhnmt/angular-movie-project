@@ -4,6 +4,6 @@ export interface Banner {
   banner_id: number;
   movie_id?: number;
   image: string;
-  status: number;
+  status?: number;
   movie?: Movie;
 }

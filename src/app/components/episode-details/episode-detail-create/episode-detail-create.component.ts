@@ -69,8 +69,6 @@ export class EpisodeDetailCreateComponent implements OnInit, AfterViewInit, OnDe
       return;
     }
 
-    console.log(this.validateForm.value);
-
     this.episodeService.createEpisodeDetail(this.episodeId, this.validateForm.value).subscribe(() => {
       this.close();
       this.nzMessageService.success('Thêm Thành Công');

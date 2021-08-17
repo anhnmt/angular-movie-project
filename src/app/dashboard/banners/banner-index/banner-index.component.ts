@@ -66,7 +66,6 @@ export class BannerIndexComponent implements OnInit {
 
     this.bannerService.getAllBanners().subscribe((response) => {
       this.banners = response.data;
-      console.log(this.banners);
 
       this.displayData = this.banners;
     });

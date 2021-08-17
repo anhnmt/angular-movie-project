@@ -2,13 +2,13 @@ import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
-import {CountryService} from '../../../shared/services/country.service';
+import {CountryService} from '@/app/shared/services/country.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {SharedService} from '../../../shared/services/shared.service';
+import {SharedService} from '@/app/shared/services/shared.service';
 import {takeUntil} from 'rxjs/operators';
-import {Country} from '../../../shared/interfaces/country';
-import {GlobalUtils} from '../../../shared/utils/globalUtils';
-import {HelperUtils} from '../../../shared/utils/helperUtils';
+import {Country} from '@/app/shared/interfaces/country';
+import {GlobalUtils} from '@/app/shared/utils/globalUtils';
+import {HelperUtils} from '@/app/shared/utils/helperUtils';
 
 @Component({
   selector: 'app-country-edit',
@@ -41,10 +41,9 @@ export class CountryEditComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe((params: any) => {
-      console.log(params);
       const {countryId} = params;
       this.countryService.getCountryByCountryId(countryId).subscribe((success) => {
-        console.log(success);
+
         this.country = success.data;
 
         this.validateForm.patchValue({

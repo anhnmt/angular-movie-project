@@ -14,7 +14,9 @@ export class SideNavComponent implements OnInit {
   isSideNavDark: boolean;
   isExpand: boolean;
 
-  constructor(private themeService: ThemeConstantService) {
+  constructor(
+    private themeService: ThemeConstantService
+  ) {
   }
 
   ngOnInit(): void {

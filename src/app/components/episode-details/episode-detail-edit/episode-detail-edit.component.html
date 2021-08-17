@@ -1,11 +1,48 @@
 <div>
-  <p>Modal Content</p>
-  <p>Modal Content</p>
-  <p>Modal Content</p>
-  <p>Modal Content</p>
-  <p>Modal Content</p>
+  <form (ngSubmit)="submitForm()" [formGroup]="validateForm" nz-form nzLayout="vertical">
+    <nz-form-item>
+      <nz-form-label nzRequired>Server phim</nz-form-label>
+      <nz-form-control nzErrorTip="Vui lòng nhập server phim">
+        <input formControlName="name" nz-input placeholder="Nhập server phim"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzRequired>Đường dẫn</nz-form-label>
+      <nz-form-control nzErrorTip="Vui lòng nhập đường dẫn">
+        <input formControlName="link" nz-input placeholder="Nhập đường dẫn"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <!--  <nz-form-item>-->
+    <!--    <nz-form-label nzRequired>Kiểu phim</nz-form-label>-->
+    <!--    <nz-form-control nzErrorTip="Vui lòng chọn kiểu phim">-->
+    <!--      <nz-select formControlName="episode_type_id" nzPlaceHolder="Chọn kiểu phim">-->
+    <!--        <nz-option *ngFor="let option of movieTypes" [nzLabel]="option.name" [nzValue]="option.movie_type_id"-->
+    <!--                   nzCustomContent>-->
+    <!--          {{ option.name }}-->
+    <!--        </nz-option>-->
+    <!--      </nz-select>-->
+    <!--    </nz-form-control>-->
+    <!--  </nz-form-item>-->
+
+    <nz-form-item>
+      <nz-form-label>Trạng thái</nz-form-label>
+      <nz-form-control nzErrorTip="Vui lòng chọn trạng thái">
+        <nz-select formControlName="status" nzPlaceHolder="Chọn trạng thái">
+          <nz-option *ngFor="let option of status" [nzLabel]="option.label" [nzValue]="option.value" nzCustomContent>
+            <nz-badge *ngIf="option.badge" [nzStatus]="option.badge"></nz-badge>
+            {{ option.label }}
+          </nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <button [hidden]="true" nz-button nzType="primary">Submit</button>
+  </form>
 </div>
+
 <div *nzModalFooter>
-  <button (click)="destroyModal()" nz-button nzType="default">Custom Callback</button>
-  <button (click)="destroyModal()" nz-button nzType="primary">Custom Submit</button>
+  <button (click)="close()" nz-button nzType="default">Huỷ</button>
+  <button (click)="submitForm()" nz-button nzType="primary">Cập nhật</button>
 </div>

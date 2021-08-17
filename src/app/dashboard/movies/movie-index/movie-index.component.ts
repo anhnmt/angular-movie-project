@@ -35,7 +35,7 @@ export class MovieIndexComponent implements OnInit {
     },
     {
       title: 'Trạng thái',
-      compare: (a: Movie, b: Movie) => a.status?.value - b.status?.value,
+      compare: (a: Movie, b: Movie) => a?.status - b?.status,
     },
     {
       title: ''

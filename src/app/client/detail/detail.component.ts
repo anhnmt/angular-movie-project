@@ -4,6 +4,9 @@ import {takeUntil} from 'rxjs/operators';
 import {forkJoin, Subject} from 'rxjs';
 import {ClientService} from '../../shared/services/client.service';
 import {Movie} from '../../shared/interfaces/movie';
+import {Episode} from 'src/app/shared/interfaces/episode';
+import {EpisodeDetail} from '../../shared/interfaces/episode-detail';
+import {GlobalUtils} from '@/app/shared/utils/globalUtils';
 
 @Component({
   selector: 'app-detail',
@@ -12,8 +15,18 @@ import {Movie} from '../../shared/interfaces/movie';
 })
 export class DetailComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  showPlay = true;
+  movieId: number;
   movie: Movie;
   movieRelated: Movie[] = [];
+  episodes: Episode[] = [];
+  episodeDetails: EpisodeDetail[] = [];
+
+  selectedEpisode: Episode;
+  selectedEpisodeDetail: EpisodeDetail;
+
+  embedUrl: string;
+
   private onDestroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
@@ -22,15 +35,16 @@ export class DetailComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {
     this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe((params: any) => {
       const {movieSlug} = params;
+      this.resetPlay();
 
       forkJoin([
         this.clientService.getMovieDetail(movieSlug)
       ])
         .subscribe(([detail]) => {
           this.movie = detail.data;
+          this.movieId = this.movie?.movie_id;
 
           this.movieRelated = this.movie?.movie_related;
-          // console.log(this.movieRelated);
 
         }, (error) => {
           console.log(error);
@@ -47,6 +61,39 @@ export class DetailComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
+  }
+
+  playMovie(): void {
+    this.clientService.getMovieEpisodes(this.movieId)
+      .subscribe((episodes) => {
+        this.episodes = episodes.data;
+        this.playEpisode(GlobalUtils.getFirst(this.episodes));
+        this.changeServer(GlobalUtils.getFirst(this.episodeDetails));
+      }, (error) => {
+        console.log(error);
+      });
+  }
+
+  playEpisode(episode: Episode): void {
+    this.selectedEpisode = episode;
+    this.episodeDetails = this.selectedEpisode?.episode_details;
+    this.changeServer(GlobalUtils.getFirst(this.episodeDetails));
+  }
+
+  changeServer(episodeDetail: EpisodeDetail): void {
+    console.log(episodeDetail);
+    this.selectedEpisodeDetail = episodeDetail;
+
+    if (this.selectedEpisodeDetail?.link) {
+      this.embedUrl = GlobalUtils.mapEpisodeServerLink(this.selectedEpisodeDetail?.link);
+      this.showPlay = false;
+    }
+  }
+
+  resetPlay(): void {
+    this.showPlay = true;
+    this.selectedEpisode = null;
+    this.selectedEpisodeDetail = null;
   }
 
 }

@@ -33,10 +33,8 @@ export class UserEditComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe((params: any) => {
-      console.log(params);
       const {userId} = params;
       this.userService.getUserByUserId(userId).subscribe((success) => {
-        console.log(success);
         this.user = success.data;
 
         this.validateForm.patchValue({

@@ -6,13 +6,13 @@ import {ClientService} from '../../shared/services/client.service';
 import {takeUntil} from 'rxjs/operators';
 
 @Component({
-  selector: 'app-search',
+  selector: 'app-search-genre',
   templateUrl: './search.component.html',
   styleUrls: [
     './search.component.css',
   ]
 })
-export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
+export class SearchGenreComponent implements OnInit, AfterViewInit, OnDestroy {
 
   movies: Movie[] = [];
 
@@ -23,9 +23,9 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
     private clientService: ClientService,
   ) {
     this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe((params: any) => {
-      const {movieType} = params;
+      const {movieGenre} = params;
 
-      this.clientService.getMovieType(movieType)
+      this.clientService.getMovieGenre(movieGenre)
         .subscribe((movies) => {
           this.movies = movies.data;
         }, (error) => {
@@ -46,3 +46,4 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
 }
+

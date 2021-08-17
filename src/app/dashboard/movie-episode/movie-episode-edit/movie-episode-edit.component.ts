@@ -6,7 +6,7 @@ import {HelperUtils} from '../../../shared/utils/helperUtils';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {GlobalUtils} from '../../../shared/utils/globalUtils';
 import {MovieEpisodeService} from '../../../shared/services/movie-episode.service';
-import {MovieEpisode} from '../../../shared/interfaces/movie-episode';
+import {Episode} from '../../../shared/interfaces/episode';
 import {EpisodeDetail} from '../../../shared/interfaces/episode-detail';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {NzModalService} from 'ng-zorro-antd/modal';
@@ -29,21 +29,21 @@ export class MovieEpisodeEditComponent implements OnInit, AfterViewInit, OnDestr
   status = GlobalUtils.getDefaultStatus();
   mapDefaultStatus = GlobalUtils.mapDefaultStatus;
   validateForm: FormGroup;
-  movieEpisode: MovieEpisode;
+  movieEpisode: Episode;
   episodeDetails: EpisodeDetail[] = [];
 
   orderColumn = [
     {
       title: 'ID',
-      compare: (a: EpisodeDetail, b: EpisodeDetail) => a.episode_id - b.episode_id,
+      compare: (a: EpisodeDetail, b: EpisodeDetail) => a?.episode_id - b?.episode_id,
     },
     {
       title: 'Server phim',
-      compare: (a: EpisodeDetail, b: EpisodeDetail) => a.name.localeCompare(b.name)
+      compare: (a: EpisodeDetail, b: EpisodeDetail) => a?.name.localeCompare(b?.name)
     },
     {
       title: 'Trạng thái',
-      compare: (a: EpisodeDetail, b: EpisodeDetail) => a.status?.value - b.status?.value,
+      compare: (a: EpisodeDetail, b: EpisodeDetail) => a?.status - b?.status,
     },
     {
       title: ''
@@ -88,7 +88,7 @@ export class MovieEpisodeEditComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   list(): void {
-    this.episodeService.getEpisodeDetail(this.episodeId)
+    this.episodeService.getEpisodeDetails(this.episodeId)
       .subscribe((movieEpisode) => {
         this.movieEpisode = movieEpisode.data;
         this.episodeDetails = this.movieEpisode.episode_details;

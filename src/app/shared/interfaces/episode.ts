@@ -1,10 +1,9 @@
-import {Status} from './status';
 import {EpisodeDetail} from './episode-detail';
 
-export interface MovieEpisode {
+export interface Episode {
   episode_id: number;
   name: string;
   movie_id: number;
-  status: Status;
+  status?: number;
   episode_details?: EpisodeDetail[];
 }

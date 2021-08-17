@@ -59,6 +59,7 @@ export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
       poster: [null],
       country_ids: [null],
       genre_ids: [null],
+      description: [null],
       status: [selectedStatus, [Validators.required]],
     });
 
@@ -84,17 +85,18 @@ export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
             this.selectedGenres = selectedGenres.data.map((item: any) => item.genre_id);
 
             const defaultMovieType = this.movieTypes[0]?.movie_type_id || null;
-            const selectedMovieType = GlobalUtils.mapMovieType(this.movieTypes, this.movie.movie_type_id)?.movie_type_id;
+            const selectedMovieType = this.movie?.movie_type?.movie_type_id || defaultMovieType;
 
             this.validateForm.patchValue({
               origin_name: this.movie.origin_name,
               name: this.movie.name,
               slug: this.movie.slug,
-              movie_type_id: selectedMovieType || defaultMovieType,
+              movie_type_id: selectedMovieType,
               poster: this.movie.poster,
               release_date: this.movie.release_date,
               country_ids: this.selectedCountries,
               genre_ids: this.selectedGenres,
+              description: this.movie.description,
               status: this.movie.status
             });
 
@@ -166,7 +168,6 @@ export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
 
-    // console.log(this.validateForm.value);
     formData.append('movie', JSON.stringify(this.validateForm.value));
 
     this.movieService.updateMovieByMovieId(this.movie.movie_id, formData)

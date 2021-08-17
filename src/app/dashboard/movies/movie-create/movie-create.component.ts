@@ -52,6 +52,7 @@ export class MovieCreateComponent implements OnInit, AfterViewInit, OnDestroy {
       movie_type_id: [null, [Validators.required]],
       country_ids: [null],
       genre_ids: [null],
+      description: [null],
       status: [selectedStatus, [Validators.required]],
     });
 
@@ -126,7 +127,6 @@ export class MovieCreateComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
 
-    // console.log(this.validateForm.value);
     formData.append('movie', JSON.stringify(this.validateForm.value));
 
     this.movieService.createMovie(formData).subscribe(() => {

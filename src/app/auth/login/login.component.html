@@ -9,31 +9,31 @@
               <img alt="" class="img-fluid" src="assets/images/logo/logo.png">
               <h2 class="m-b-0">Sign In</h2>
             </div>
-            <form (ngSubmit)="submitForm()" [formGroup]="loginForm" class="login-form" nz-form nzLayout="vertical">
+            <form (ngSubmit)="submitForm()" [formGroup]="validateForm" class="login-form" nz-form nzLayout="vertical">
               <nz-form-item>
-                <nz-form-label nzFor="userName" nzRequired>Username</nz-form-label>
-                <nz-form-control nzErrorTip="Please input your username!">
+                <nz-form-label nzFor="username" nzRequired>Tài khoản</nz-form-label>
+                <nz-form-control nzErrorTip="Tài khoản không được để trống">
                   <nz-input-group [nzPrefix]="prefixUser">
-                    <input formControlName="userName" nz-input placeholder="Username" type="text">
+                    <input formControlName="username" nz-input placeholder="Vui lòng nhập tài khoản" type="text">
                   </nz-input-group>
                 </nz-form-control>
               </nz-form-item>
               <nz-form-item class="relative">
-                <nz-form-label nzFor="password" nzRequired>Password</nz-form-label>
-                <a [routerLink]="['/auth/reset-password']" class="float-right font-size-13 text-muted"
-                   style="position:absolute; right: 0">Forget Password?</a>
-                <nz-form-control nzErrorTip="Please input your Password!">
+                <nz-form-label nzFor="password" nzRequired>Mật khẩu</nz-form-label>
+                <!--                <a [routerLink]="['/auth/reset-password']" class="float-right font-size-13 text-muted"-->
+                <!--                   style="position:absolute; right: 0">Forget Password?</a>-->
+                <nz-form-control nzErrorTip="Mật khẩu không được để trống">
                   <nz-input-group [nzPrefix]="prefixLock">
-                    <input formControlName="password" nz-input placeholder="Password" type="password">
+                    <input formControlName="password" nz-input placeholder="Vui lòng nhập mật khẩu" type="password">
                   </nz-input-group>
                 </nz-form-control>
               </nz-form-item>
               <nz-form-item>
                 <nz-form-control>
                   <div class="d-flex align-items-center justify-content-between">
-                    <span class="font-size-13 text-muted">Don't have an account? <a [routerLink]="['/auth/sign-up']"
-                                                                                    class="small"> Signup</a></span>
-                    <button [nzType]="'primary'" class="login-form-button" nz-button>Sign In</button>
+                    <!--                    <span class="font-size-13 text-muted">Don't have an account? <a [routerLink]="['/auth/sign-up']"-->
+                    <!--                                                                                    class="small"> Signup</a></span>-->
+                    <button [nzType]="'primary'" class="login-form-button" nz-button>Đăng nhập</button>
                   </div>
                 </nz-form-control>
               </nz-form-item>

@@ -63,7 +63,6 @@ export class UserIndexComponent implements OnInit {
 
     this.userService.getAllUsers().subscribe((response) => {
       this.users = response.data;
-      console.log(this.users);
 
       this.displayData = this.users;
     });

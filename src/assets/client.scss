@@ -4,7 +4,7 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-@import url('../../node_modules/bootstrap/dist/css/bootstrap.min.css');
+@import url('~bootstrap/dist/css/bootstrap.min.css');
 
 .easy-autocomplete {
   position: relative
@@ -2373,7 +2373,7 @@ footer .copyright {
 .category-tabs.nav-tabs {
   border-bottom: 0;
   font-size: 18px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   margin-top: 15px
 }
 
@@ -2586,7 +2586,6 @@ ul.more-info {
 }
 
 .list-episodes {
-  margin-left: 0;
   list-style-type: none
 }
 
@@ -3659,7 +3658,7 @@ ul.more-info {
 }
 
 .hot-panel > div {
-  max-height: 510px;
+  max-height: 500px;
   overflow: auto
 }
 

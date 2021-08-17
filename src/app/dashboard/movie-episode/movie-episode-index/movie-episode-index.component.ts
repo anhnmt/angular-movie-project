@@ -3,7 +3,7 @@ import {Subject} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SharedService} from '../../../shared/services/shared.service';
 import {MovieEpisodeService} from '../../../shared/services/movie-episode.service';
-import {MovieEpisode} from '../../../shared/interfaces/movie-episode';
+import {Episode} from '../../../shared/interfaces/episode';
 import {takeUntil} from 'rxjs/operators';
 import {GlobalUtils} from '../../../shared/utils/globalUtils';
 import {NzMessageService} from 'ng-zorro-antd/message';
@@ -21,19 +21,19 @@ export class MovieEpisodeIndexComponent implements OnInit, AfterViewInit, OnDest
   visible = false;
   movieId: number;
   displayData = [];
-  movieEpisodes: MovieEpisode[] = [];
+  movieEpisodes: Episode[] = [];
   orderColumn = [
     {
       title: 'ID',
-      compare: (a: MovieEpisode, b: MovieEpisode) => a.episode_id - b.episode_id,
+      compare: (a: Episode, b: Episode) => a.episode_id - b.episode_id,
     },
     {
       title: 'Tập phim',
-      compare: (a: MovieEpisode, b: MovieEpisode) => a.name.localeCompare(b.name)
+      compare: (a: Episode, b: Episode) => a.name.localeCompare(b.name)
     },
     {
       title: 'Trạng thái',
-      compare: (a: MovieEpisode, b: MovieEpisode) => a.status?.value - b.status?.value,
+      compare: (a: Episode, b: Episode) => a?.status - b?.status,
     },
     {
       title: ''

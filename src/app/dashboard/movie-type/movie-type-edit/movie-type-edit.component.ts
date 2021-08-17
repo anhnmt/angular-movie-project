@@ -41,10 +41,8 @@ export class MovieTypeEditComponent implements OnInit, AfterViewInit, OnDestroy 
     });
 
     this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe((params: any) => {
-      console.log(params);
       const {movieTypeId} = params;
       this.movieTypeService.getMovieTypeByMovieTypeId(movieTypeId).subscribe((success) => {
-        console.log(success);
         this.movieType = success.data;
 
         this.validateForm.patchValue({

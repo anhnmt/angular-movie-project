@@ -66,7 +66,6 @@ export class GenreIndexComponent implements OnInit {
 
     this.genreService.getAllGenres().subscribe((response) => {
       this.genres = response.data;
-      console.log(this.genres);
 
       this.displayData = this.genres;
     });

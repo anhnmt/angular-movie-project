@@ -84,7 +84,6 @@ export class BannerCreateComponent implements OnInit, AfterViewInit, OnDestroy {
         debounceTime(500),
         distinctUntilChanged()
       ).subscribe((success) => {
-      // console.log(success);
       this.searchMovies = success.data;
       this.isSearchLoading = false;
     }, (error) => {
@@ -112,7 +111,6 @@ export class BannerCreateComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
 
-    // console.log(this.validateForm.value);
     formData.append('banner', JSON.stringify(this.validateForm.value));
 
     this.bannerService.createBanner(formData).subscribe(() => {

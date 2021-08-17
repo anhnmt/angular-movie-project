@@ -3,7 +3,7 @@ import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {DefaultResponse} from '../interfaces/default-response';
-import {MovieEpisode} from '../interfaces/movie-episode';
+import {Episode} from '../interfaces/episode';
 
 @Injectable({
   providedIn: 'root'
@@ -15,14 +15,14 @@ export class MovieEpisodeService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getAllMovieEpisodes(movieId: number): Observable<DefaultResponse<MovieEpisode[]>> {
+  getAllMovieEpisodes(movieId: number): Observable<DefaultResponse<Episode[]>> {
     return this.httpClient
-      .get<DefaultResponse<MovieEpisode[]>>(`${this.baseUrl}/${movieId}/episodes`);
+      .get<DefaultResponse<Episode[]>>(`${this.baseUrl}/${movieId}/episodes`);
   }
 
-  createMovieEpisode(movieId: number, body: MovieEpisode): Observable<DefaultResponse<MovieEpisode>> {
+  createMovieEpisode(movieId: number, body: Episode): Observable<DefaultResponse<Episode>> {
     return this.httpClient
-      .post<DefaultResponse<MovieEpisode>>(`${this.baseUrl}/${movieId}/episodes`, {
+      .post<DefaultResponse<Episode>>(`${this.baseUrl}/${movieId}/episodes`, {
         name: body.name,
         status: body.status
       });

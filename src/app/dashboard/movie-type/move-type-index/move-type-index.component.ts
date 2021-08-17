@@ -66,7 +66,6 @@ export class MoveTypeIndexComponent implements OnInit {
 
     this.movieTypeService.getAllMovieTypes().subscribe((response) => {
       this.movieTypes = response.data;
-      console.log(this.movieTypes);
 
       this.displayData = this.movieTypes;
     });

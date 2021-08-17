@@ -17,7 +17,7 @@ import {NzFormModule} from 'ng-zorro-antd/form';
 import {NzDrawerModule} from 'ng-zorro-antd/drawer';
 import {NzDatePickerModule} from 'ng-zorro-antd/date-picker';
 import {NzPopconfirmModule} from 'ng-zorro-antd/popconfirm';
-import {TableService} from '../../shared/services/table.service';
+import {TableService} from '@/app/shared/services/table.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {CountryCreateComponent} from './country-create/country-create.component';
 import {CountryEditComponent} from './country-edit/country-edit.component';
