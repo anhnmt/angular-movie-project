@@ -67,17 +67,8 @@ export class DetailComponent implements OnInit, AfterViewInit, OnDestroy {
     this.clientService.getMovieEpisodes(this.movieId)
       .subscribe((episodes) => {
         this.episodes = episodes.data;
-
-        this.showPlay = false;
-
-        this.selectedEpisode = this.episodes[0] || null;
-
-        this.episodeDetails = this.selectedEpisode?.episode_details;
-
-        this.selectedEpisodeDetail = this.episodeDetails[0] || null;
-
-        this.embedUrl = GlobalUtils.mapEpisodeServerLink(this.selectedEpisodeDetail?.link);
-
+        this.playEpisode(GlobalUtils.getFirst(this.episodes));
+        this.changeServer(GlobalUtils.getFirst(this.episodeDetails));
       }, (error) => {
         console.log(error);
       });
@@ -85,18 +76,24 @@ export class DetailComponent implements OnInit, AfterViewInit, OnDestroy {
 
   playEpisode(episode: Episode): void {
     this.selectedEpisode = episode;
-
-    this.episodeDetails = this.selectedEpisode.episode_details;
+    this.episodeDetails = this.selectedEpisode?.episode_details;
+    this.changeServer(GlobalUtils.getFirst(this.episodeDetails));
   }
 
   changeServer(episodeDetail: EpisodeDetail): void {
     console.log(episodeDetail);
-
     this.selectedEpisodeDetail = episodeDetail;
+
+    if (this.selectedEpisodeDetail?.link) {
+      this.embedUrl = GlobalUtils.mapEpisodeServerLink(this.selectedEpisodeDetail?.link);
+      this.showPlay = false;
+    }
   }
 
   resetPlay(): void {
     this.showPlay = true;
+    this.selectedEpisode = null;
+    this.selectedEpisodeDetail = null;
   }
 
 }

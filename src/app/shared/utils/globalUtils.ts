@@ -19,15 +19,28 @@ export class GlobalUtils {
     return lists.find(obj => obj.value === status) || null;
   }
 
+  static getFirst(array: any[]): any {
+    if (array && array.length > 0) {
+      return array[0] ?? null;
+    }
+
+    return null;
+  }
+
   static mapEpisodeServerLink(link: string): string {
     const REGEX_YOUTUBE = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((?:\w|-){11})(?:&list=(\S+))?$/ig;
 
-    if (link.match(REGEX_YOUTUBE)) {
-      link = link.replace(REGEX_YOUTUBE, 'https://www.youtube.com/embed/$1');
-      console.log(link);
+    if (link) {
+      if (link.match(REGEX_YOUTUBE)) {
+        link = link.replace(REGEX_YOUTUBE, 'https://www.youtube.com/embed/$1');
+        console.log(link);
+      }
+
+      return link;
+
     }
 
-    return link;
+    return null;
   }
 
 }
