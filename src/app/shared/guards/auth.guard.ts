@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, NgZone} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
 import {AuthService} from '@/app/shared/services/auth.service';
@@ -10,20 +10,23 @@ export class AuthGuard implements CanActivate {
   constructor(
     private authService: AuthService,
     private router: Router,
+    private ngZone: NgZone,
   ) {
   }
 
-  canActivate(
+  public canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
-    if (this.authService.currentUserValue) {
+    const currentUser = this.authService.currentUserValue;
+    if (currentUser) {
+      // authorised so return true
       return true;
     }
 
-    // Navigate to the login page with extras
-    this.router.navigate(['/dashboard', 'login']);
-
+    // not logged in so redirect to login page with the return url
+    this.ngZone.run(() => {
+      this.router.navigate(['/dashboard', 'login'], {queryParams: {returnUrl: state.url}});
+    });
     return false;
   }
 

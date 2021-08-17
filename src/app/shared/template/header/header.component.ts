@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ThemeConstantService} from '../../services/theme-constant.service';
+import {AuthService} from '@/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -34,7 +35,10 @@ export class HeaderComponent implements OnInit {
     }
   ];
 
-  constructor(private themeService: ThemeConstantService) {
+  constructor(
+    private themeService: ThemeConstantService,
+    public authService: AuthService,
+  ) {
   }
 
   ngOnInit(): void {
@@ -60,5 +64,9 @@ export class HeaderComponent implements OnInit {
 
   quickViewToggle(): void {
     this.quickViewVisible = !this.quickViewVisible;
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 }
