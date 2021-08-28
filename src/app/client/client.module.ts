@@ -9,13 +9,15 @@ import {SharedModule} from '../shared/shared.module';
 import {SearchTypeComponent} from './search/search-type.component';
 import {SearchGenreComponent} from './search/search-genre.component';
 import {SearchCountryComponent} from './search/search-country.component';
+import {NzPaginationModule} from '~/ng-zorro-antd/pagination';
 
 @NgModule({
   declarations: [ClientComponent, DetailComponent, SearchComponent, SearchTypeComponent, SearchGenreComponent, SearchCountryComponent],
   imports: [
     CommonModule,
     ClientRoutingModule,
-    SharedModule
+    SharedModule,
+    NzPaginationModule
   ]
 })
 export class ClientModule {
