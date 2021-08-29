@@ -119,7 +119,7 @@ export class BannerEditComponent implements OnInit, AfterViewInit, OnDestroy {
         debounceTime(500),
         distinctUntilChanged()
       ).subscribe((success) => {
-      this.searchMovies = success.data;
+      this.searchMovies = success.data?.result;
       this.isSearchLoading = false;
     }, (error) => {
       this.isSearchLoading = false;
