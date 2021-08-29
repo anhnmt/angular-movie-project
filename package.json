@@ -1,7 +1,7 @@
 {
-  "name": "angular-base-project",
+  "name": "angular-movie-project",
   "version": "1.0.0",
-  "docker_local": "ghcr.io/xdorro",
+  "docker_local": "registry.gitlab.com/xdorro/registry",
   "scripts": {
     "ng": "ng",
     "serve": "ng serve",

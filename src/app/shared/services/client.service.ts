@@ -8,6 +8,7 @@ import {Banner} from '../interfaces/banner';
 import {Country} from '../interfaces/country';
 import {Genre} from '../interfaces/genre';
 import {Episode} from '../interfaces/episode';
+import {PaginateResponse} from '@/app/shared/interfaces/paginate-response';
 
 @Injectable({
   providedIn: 'root'
@@ -40,24 +41,24 @@ export class ClientService {
       .get<DefaultResponse<Episode[]>>(`${this.baseUrl}/find-episodes/${movieId}`);
   }
 
-  getMovieType(slug: string): Observable<DefaultResponse<Movie[]>> {
+  getMovieType(slug: string, page: number = 1, pageSize = 18): Observable<DefaultResponse<PaginateResponse<Movie[]>>> {
     return this.httpClient
-      .get<DefaultResponse<Movie[]>>(`${this.baseUrl}/find-movie-type/${slug}`);
+      .get<DefaultResponse<PaginateResponse<Movie[]>>>(`${this.baseUrl}/find-movie-type/${slug}?page=${page}&page_size=${pageSize}`);
   }
 
-  getMovieGenre(slug: string): Observable<DefaultResponse<Movie[]>> {
+  getMovieGenre(slug: string, page: number = 1, pageSize = 18): Observable<DefaultResponse<PaginateResponse<Movie[]>>> {
     return this.httpClient
-      .get<DefaultResponse<Movie[]>>(`${this.baseUrl}/find-movie-genre/${slug}`);
+      .get<DefaultResponse<PaginateResponse<Movie[]>>>(`${this.baseUrl}/find-movie-genre/${slug}?page=${page}&page_size=${pageSize}`);
   }
 
-  getMovieCountry(slug: string): Observable<DefaultResponse<Movie[]>> {
+  getMovieCountry(slug: string, page: number = 1, pageSize = 18): Observable<DefaultResponse<PaginateResponse<Movie[]>>> {
     return this.httpClient
-      .get<DefaultResponse<Movie[]>>(`${this.baseUrl}/find-movie-country/${slug}`);
+      .get<DefaultResponse<PaginateResponse<Movie[]>>>(`${this.baseUrl}/find-movie-country/${slug}?page=${page}&page_size=${pageSize}`);
   }
 
-  getMovieByName(name: string): Observable<DefaultResponse<Movie[]>> {
+  getMovieByName(name: string, page: number = 1, pageSize = 18): Observable<DefaultResponse<PaginateResponse<Movie[]>>> {
     return this.httpClient
-      .get<DefaultResponse<Movie[]>>(`${this.baseUrl}/find-movie-name/${name}`);
+      .get<DefaultResponse<PaginateResponse<Movie[]>>>(`${this.baseUrl}/find-movie-name/${name}?page=${page}&page_size=${pageSize}`);
   }
 
   getAllBanners(): Observable<DefaultResponse<Banner[]>> {

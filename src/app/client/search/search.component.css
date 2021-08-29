@@ -1,0 +1,22 @@
+::ng-deep .ant-pagination-item, ::ng-deep .ant-pagination-item-link {
+  /*background-color: #0c0c0c;*/
+}
+
+::ng-deep .ant-pagination-item a {
+  border-color: #212529;
+  border-radius: 50px;
+  color: #febb00;
+  background-color: #0c0c0c;
+}
+
+::ng-deep .ant-pagination-item a:hover {
+  background-color: #febb00;
+  border-color: #febb00;
+  color: #0c0c0c;
+}
+
+::ng-deep .ant-pagination-item-active a, ::ng-deep .ant-pagination-item-active a:hover {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #0c0c0c;
+}
