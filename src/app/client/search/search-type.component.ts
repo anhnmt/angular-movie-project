@@ -14,7 +14,10 @@ import {Movie} from 'src/app/shared/interfaces/movie';
 })
 export class SearchTypeComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  movieType: string;
   movies: Movie[] = [];
+  total = 0;
+  page = 1;
 
   private onDestroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -24,10 +27,13 @@ export class SearchTypeComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {
     this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe((params: any) => {
       const {movieType} = params;
+      this.movieType = movieType;
 
-      this.clientService.getMovieType(movieType)
+      this.clientService.getMovieType(this.movieType)
         .subscribe((movies) => {
-          this.movies = movies.data;
+          this.movies = movies.data?.result;
+          this.total = movies.data?.total;
+          this.page = movies.data?.page;
         }, (error) => {
           console.log(error);
         });
@@ -43,6 +49,17 @@ export class SearchTypeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
+  }
+
+  changePageIndex(event): void {
+    this.clientService.getMovieType(this.movieType, event)
+      .subscribe((movies) => {
+        this.movies = movies.data?.result;
+        this.total = movies.data?.total;
+        this.page = movies.data?.page;
+      }, (error) => {
+        console.log(error);
+      });
   }
 
 }

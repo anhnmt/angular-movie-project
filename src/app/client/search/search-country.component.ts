@@ -14,7 +14,10 @@ import {takeUntil} from 'rxjs/operators';
 })
 export class SearchCountryComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  movieCountry: string;
   movies: Movie[] = [];
+  total = 0;
+  page = 1;
 
   private onDestroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -24,10 +27,13 @@ export class SearchCountryComponent implements OnInit, AfterViewInit, OnDestroy 
   ) {
     this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe((params: any) => {
       const {movieCountry} = params;
+      this.movieCountry = movieCountry;
 
-      this.clientService.getMovieCountry(movieCountry)
+      this.clientService.getMovieCountry(this.movieCountry)
         .subscribe((movies) => {
-          this.movies = movies.data;
+          this.movies = movies.data?.result;
+          this.total = movies.data?.total;
+          this.page = movies.data?.page;
         }, (error) => {
           console.log(error);
         });
@@ -43,6 +49,17 @@ export class SearchCountryComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   ngAfterViewInit(): void {
+  }
+
+  changePageIndex(event): void {
+    this.clientService.getMovieCountry(this.movieCountry, event)
+      .subscribe((movies) => {
+        this.movies = movies.data?.result;
+        this.total = movies.data?.total;
+        this.page = movies.data?.page;
+      }, (error) => {
+        console.log(error);
+      });
   }
 
 }
