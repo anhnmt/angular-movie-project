@@ -10,8 +10,7 @@ import {Router} from '~/@angular/router';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
-  public currentUser: Observable<User>;
-  public currentUserSubject: BehaviorSubject<User>;
+  public currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
   private baseUrl = environment.api + '/oauth/token';
 
   constructor(
@@ -19,8 +18,6 @@ export class AuthService {
     private router: Router,
     private ngZone: NgZone,
   ) {
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
-    this.currentUser = this.currentUserSubject.asObservable();
   }
 
   public get currentUserValue(): User {
@@ -36,6 +33,7 @@ export class AuthService {
         if (user && user.data) {
           localStorage.setItem('currentUser', JSON.stringify(user.data));
           this.currentUserSubject.next(user.data);
+          this.router.navigate(['/dashboard', 'home']);
         }
 
         return user;
@@ -45,12 +43,7 @@ export class AuthService {
   logout(): void {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
-    this.currentUserSubject.next(null);
-
-    this.currentUser.subscribe(() => {
-      this.ngZone.run(() => {
-        this.router.navigate(['/dashboard', 'login']);
-      });
-    });
+    // this.currentUserSubject.next('Hoàng Văn Việt');
+    this.router.navigate(['dashboard', 'login']);
   }
 }

@@ -6,8 +6,6 @@ import {NzBreadCrumbModule} from 'ng-zorro-antd/breadcrumb';
 
 import {LocationStrategy, PathLocationStrategy, registerLocaleData} from '@angular/common';
 import en from '@angular/common/locales/en';
-
-import {AppRoutingModule} from './app-routing.module';
 import {TemplateModule} from './shared/template/template.module';
 import {SharedModule} from './shared/shared.module';
 
@@ -31,6 +29,8 @@ import {NzModalModule} from 'ng-zorro-antd/modal';
 import {AuthService} from '@/app/shared/services/auth.service';
 import {HTTP_INTERCEPTORS} from '~/@angular/common/http';
 import {JwtInterceptor} from '@/app/shared/interceptor/token.interceptor';
+import {RouterModule} from '@angular/router';
+import {routes} from '@/app/app-routing.module';
 
 registerLocaleData(en);
 
@@ -46,7 +46,7 @@ registerLocaleData(en);
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
+    RouterModule.forRoot(routes),
     NzBreadCrumbModule,
     TemplateModule,
     SharedModule,

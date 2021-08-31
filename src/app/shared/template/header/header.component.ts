@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private themeService: ThemeConstantService,
-    public authService: AuthService,
+    private authService: AuthService,
   ) {
   }
 
