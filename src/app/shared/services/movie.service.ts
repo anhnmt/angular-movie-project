@@ -51,4 +51,9 @@ export class MovieService {
     return this.httpClient
       .delete<DefaultResponse<Movie>>(`${this.baseUrl}/${movieId}`);
   }
+
+  checkIsExistSlug(slug: string, id: number = null): Observable<DefaultResponse<boolean>> {
+    return this.httpClient
+      .get<DefaultResponse<boolean>>(`${this.baseUrl}/check_slug?slug=${slug}&movie_id=${id}`);
+  }
 }

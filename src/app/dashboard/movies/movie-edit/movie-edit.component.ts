@@ -1,12 +1,12 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {Movie} from '../../../shared/interfaces/movie';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {forkJoin, Subject} from 'rxjs';
+import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {forkJoin, Observable, Subject, timer} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MovieService} from '../../../shared/services/movie.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {SharedService} from '../../../shared/services/shared.service';
-import {takeUntil} from 'rxjs/operators';
+import {map, takeUntil} from 'rxjs/operators';
 import {MovieType} from '../../../shared/interfaces/movie-type';
 import {MovieTypeService} from '../../../shared/services/movie-type.service';
 import {GlobalUtils} from '../../../shared/utils/globalUtils';
@@ -16,6 +16,7 @@ import {Genre} from '../../../shared/interfaces/genre';
 import {CountryService} from '../../../shared/services/country.service';
 import {GenreService} from '../../../shared/services/genre.service';
 import {NzUploadFile} from 'ng-zorro-antd/upload';
+import {switchMap} from '~/rxjs/internal/operators';
 
 @Component({
   selector: 'app-movie-edit',
@@ -53,7 +54,7 @@ export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
     this.validateForm = this.formBuilder.group({
       origin_name: [null],
       name: [null, [Validators.required]],
-      slug: [null, [Validators.required]],
+      slug: [null, [Validators.required], [this.slugAsyncValidator.bind(this)]],
       release_date: [null, [Validators.required]],
       movie_type_id: [null, [Validators.required]],
       poster: [null],
@@ -146,6 +147,28 @@ export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.onDestroy$.next(true);
     this.onDestroy$.complete();
+  }
+
+  slugAsyncValidator(
+    control: AbstractControl
+  ): Observable<ValidationErrors | null> {
+    return timer(300).pipe(
+      switchMap(() =>
+        this.movieService.checkIsExistSlug(control.value, this.movie?.movie_id).pipe(
+          map(response => {
+            // console.log(response);
+
+            if (response.data) {
+              return {
+                duplicated: true
+              };
+            }
+
+            return null;
+          })
+        )
+      )
+    );
   }
 
   submitForm(): void {

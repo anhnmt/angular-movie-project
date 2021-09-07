@@ -1,4 +1,4 @@
-export interface Status {
+export interface Option {
   label: string;
   value: number;
   badge?: string;

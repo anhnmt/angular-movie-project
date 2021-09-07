@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ThemeConstantService} from '../../services/theme-constant.service';
 import {AuthService} from '@/app/shared/services/auth.service';
+import {User} from '@/app/shared/interfaces/user';
 
 @Component({
   selector: 'app-header',
@@ -9,41 +10,24 @@ import {AuthService} from '@/app/shared/services/auth.service';
 
 export class HeaderComponent implements OnInit {
 
+  user: User;
   searchVisible = false;
   quickViewVisible = false;
   isFolded: boolean;
   isExpand: boolean;
 
-  notificationList = [
-    {
-      title: 'You received a new message',
-      time: '8 min',
-      icon: 'mail',
-      color: 'ant-avatar-' + 'blue'
-    },
-    {
-      title: 'New user registered',
-      time: '7 hours',
-      icon: 'user-add',
-      color: 'ant-avatar-' + 'cyan'
-    },
-    {
-      title: 'You have a new update',
-      time: '2 days',
-      icon: 'sync',
-      color: 'ant-avatar-' + 'gold'
-    }
-  ];
-
   constructor(
     private themeService: ThemeConstantService,
-    public authService: AuthService,
+    private authService: AuthService,
   ) {
   }
 
   ngOnInit(): void {
     this.themeService.isMenuFoldedChanges.subscribe(isFolded => this.isFolded = isFolded);
     this.themeService.isExpandChanges.subscribe(isExpand => this.isExpand = isExpand);
+
+    this.user = this.authService.currentUserValue;
+    console.log(this.user);
   }
 
   toggleFold(): void {

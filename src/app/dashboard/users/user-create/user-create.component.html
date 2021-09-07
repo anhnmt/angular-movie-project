@@ -10,28 +10,61 @@
   <form (ngSubmit)="submitForm()" [formGroup]="validateForm" [nzLayout]="'vertical'" nz-form>
     <nz-form-item>
       <nz-form-label nzRequired>Tên người dùng</nz-form-label>
-      <nz-form-control nzErrorTip="Vui lòng nhập tên người dùng">
+      <nz-form-control nzErrorTip="Vui lòng nhập tên người dùng" nzHasFeedback>
         <input formControlName="name" nz-input placeholder="Nhập tên người dùng"/>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label nzRequired>Tài khoản</nz-form-label>
-      <nz-form-control nzErrorTip="Vui lòng nhập tài khoản">
+      <nz-form-control [nzErrorTip]="usernameErrorTpl"
+                       nzErrorTip="Vui lòng nhập tài khoản"
+                       nzHasFeedback
+                       nzValidatingTip="Validating...">
         <input formControlName="username" nz-input placeholder="Nhập tài khoản"/>
+        <ng-template #usernameErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">Vui lòng nhập tài khoản!
+          </ng-container>
+          <ng-container *ngIf="control.hasError('duplicated')">Tài khoản đã tồn tại!
+          </ng-container>
+        </ng-template>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-      <nz-form-label>Giới tính</nz-form-label>
-      <nz-form-control>
-        <nz-select nzPlaceHolder="Chọn giới tính"></nz-select>
+      <nz-form-label nzRequired>Mật khẩu</nz-form-label>
+      <nz-form-control nzErrorTip="Vui lòng nhập mật khẩu" nzHasFeedback>
+        <input (ngModelChange)="validateConfirmPassword()" formControlName="password" nz-input
+               placeholder="Nhập mật khẩu"
+               type="password"/>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-      <nz-form-label>Quyền</nz-form-label>
-      <nz-form-control>
-        <nz-select nzPlaceHolder="Chọn quyền"></nz-select>
+      <nz-form-label nzRequired>Nhập lại mật khẩu</nz-form-label>
+      <nz-form-control [nzErrorTip]="passwordErrorTpl" nzHasFeedback>
+        <input formControlName="confirm" nz-input placeholder="Nhập lại mật khẩu" type="password"/>
+        <ng-template #passwordErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">Vui lòng xác nhận mật khẩu!</ng-container>
+          <ng-container *ngIf="control.hasError('confirm')">Xác nhận mật khẩu không trùng khớp!</ng-container>
+        </ng-template>
       </nz-form-control>
     </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzRequired>Giới tính</nz-form-label>
+      <nz-form-control nzErrorTip="Vui lòng chọn giới tính">
+        <nz-select formControlName="gender" nzPlaceHolder="Chọn giới tính">
+          <nz-option *ngFor="let option of gender" [nzLabel]="option.label" [nzValue]="option.value"
+                     nzCustomContent>
+            <nz-badge *ngIf="option.badge" [nzStatus]="option.badge"></nz-badge>
+            {{ option.label }}
+          </nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <!--    <nz-form-item>-->
+    <!--      <nz-form-label>Quyền</nz-form-label>-->
+    <!--      <nz-form-control>-->
+    <!--        <nz-select nzPlaceHolder="Chọn quyền"></nz-select>-->
+    <!--      </nz-form-control>-->
+    <!--    </nz-form-item>-->
 
     <button [hidden]="true" nz-button nzType="primary">Submit</button>
   </form>
@@ -39,7 +72,9 @@
   <ng-template #footerTpl>
     <div style="float: right">
       <button (click)="close()" nz-button style="margin-right: 8px;">Huỷ</button>
-      <button (click)="submitForm()" nz-button nzType="primary">Thêm</button>
+      <button (click)="submitForm()" [disabled]="!validateForm.valid" [nzLoading]="isLoading" nz-button
+              nzType="primary">Thêm
+      </button>
     </div>
   </ng-template>
 </nz-drawer>

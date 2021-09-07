@@ -92,6 +92,8 @@ export class DetailComponent implements OnInit, AfterViewInit, OnDestroy {
 
   resetPlay(): void {
     this.showPlay = true;
+    this.episodes = [];
+    this.episodeDetails = [];
     this.selectedEpisode = null;
     this.selectedEpisodeDetail = null;
   }
