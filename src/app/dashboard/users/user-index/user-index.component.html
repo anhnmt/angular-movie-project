@@ -33,9 +33,8 @@
       <td>{{item.name}}</td>
       <td>{{item.username}}</td>
       <td>
-        <nz-badge *ngIf="item.gender == '1'" nzStatus="success"></nz-badge>
-        <nz-badge *ngIf="item.gender == '0'" nzStatus="error"></nz-badge>
-        <span class="text-capitalize">{{item.gender ? 'Nam' : 'Nữ'}}</span>
+        <nz-badge [nzStatus]="mapDefaultGender(item.gender)?.badge"></nz-badge>
+        <span class="text-capitalize">{{ mapDefaultGender(item.gender)?.label }}</span>
       </td>
       <td class="text-md-right">
         <a [routerLink]="['/dashboard', 'users', item.user_id, 'edit']" class="m-r-5" nz-button nz-tooltip

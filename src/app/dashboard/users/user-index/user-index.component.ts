@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {TableService} from '../../../shared/services/table.service';
+import {TableService} from '@/app/shared/services/table.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {UserService} from '../../../shared/services/user.service';
-import {User} from '../../../shared/interfaces/user';
-import {SharedService} from '../../../shared/services/shared.service';
+import {UserService} from '@/app/shared/services/user.service';
+import {User} from '@/app/shared/interfaces/user';
+import {SharedService} from '@/app/shared/services/shared.service';
+import {GlobalUtils} from '@/app/shared/utils/globalUtils';
 
 @Component({
   selector: 'app-user-index',
@@ -11,6 +12,8 @@ import {SharedService} from '../../../shared/services/shared.service';
   styleUrls: ['./user-index.component.css']
 })
 export class UserIndexComponent implements OnInit {
+
+  mapDefaultGender = GlobalUtils.mapDefaultGender;
   searchInput: string | number;
   displayData = [];
 

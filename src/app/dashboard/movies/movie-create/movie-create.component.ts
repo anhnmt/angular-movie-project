@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {forkJoin, Subject} from 'rxjs';
+import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {forkJoin, Observable, Subject, timer} from 'rxjs';
 import {Router} from '@angular/router';
 import {MovieService} from '@/app/shared/services/movie.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
@@ -14,6 +14,8 @@ import {CountryService} from '@/app/shared/services/country.service';
 import {Country} from '@/app/shared/interfaces/country';
 import {Genre} from '@/app/shared/interfaces/genre';
 import {NzUploadFile} from 'ng-zorro-antd/upload';
+import {switchMap} from '~/rxjs/internal/operators';
+import {map} from '~/rxjs/operators';
 
 @Component({
   selector: 'app-movie-create',
@@ -47,7 +49,7 @@ export class MovieCreateComponent implements OnInit, AfterViewInit, OnDestroy {
     this.validateForm = this.formBuilder.group({
       origin_name: [null],
       name: [null, [Validators.required]],
-      slug: [null, [Validators.required]],
+      slug: [null, [Validators.required], [this.slugAsyncValidator.bind(this)]],
       release_date: [null, [Validators.required]],
       movie_type_id: [null, [Validators.required]],
       country_ids: [null],
@@ -107,6 +109,28 @@ export class MovieCreateComponent implements OnInit, AfterViewInit, OnDestroy {
     this.onDestroy$.complete();
   }
 
+  slugAsyncValidator(
+    control: AbstractControl
+  ): Observable<ValidationErrors | null> {
+    return timer(300).pipe(
+      switchMap(() =>
+        this.movieService.checkIsExistSlug(control.value).pipe(
+          map(response => {
+            // console.log(response);
+
+            if (response.data) {
+              return {
+                duplicated: true
+              };
+            }
+
+            return null;
+          })
+        )
+      )
+    );
+  }
+
   submitForm(): void {
     this.isLoading = true;
 
@@ -129,13 +153,13 @@ export class MovieCreateComponent implements OnInit, AfterViewInit, OnDestroy {
 
     formData.append('movie', JSON.stringify(this.validateForm.value));
 
-    this.movieService.createMovie(formData).subscribe(() => {
-      this.sharedService.emitChange();
-      this.close();
-      this.nzMessageService.success('Thêm Thành Công');
-    }, (error) => {
-      this.nzMessageService.error(error.error?.message);
-      this.isLoading = false;
-    });
+    // this.movieService.createMovie(formData).subscribe(() => {
+    //   this.sharedService.emitChange();
+    //   this.close();
+    //   this.nzMessageService.success('Thêm Thành Công');
+    // }, (error) => {
+    //   this.nzMessageService.error(error.error?.message);
+    this.isLoading = false;
+    // });
   }
 }

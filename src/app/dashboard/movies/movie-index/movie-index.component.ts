@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Movie} from '../../../shared/interfaces/movie';
-import {TableService} from '../../../shared/services/table.service';
+import {Movie} from '@/app/shared/interfaces/movie';
+import {TableService} from '@/app/shared/services/table.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {SharedService} from '../../../shared/services/shared.service';
-import {MovieService} from '../../../shared/services/movie.service';
-import {GlobalUtils} from '../../../shared/utils/globalUtils';
+import {SharedService} from '@/app/shared/services/shared.service';
+import {MovieService} from '@/app/shared/services/movie.service';
+import {GlobalUtils} from '@/app/shared/utils/globalUtils';
 
 @Component({
   selector: 'app-movie-index',
