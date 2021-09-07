@@ -38,10 +38,12 @@ export class HelperUtils {
     });
   }
 
-  static formValidator(validateForm: FormGroup): void {
+  static formValidator(validateForm: FormGroup, keys = []): void {
     for (const key of Object.keys(validateForm.controls)) {
-      validateForm.controls[key].markAsDirty();
-      validateForm.controls[key].updateValueAndValidity();
+      if (!keys.includes(key)) {
+        validateForm.controls[key].markAsDirty();
+        validateForm.controls[key].updateValueAndValidity();
+      }
     }
   }
 

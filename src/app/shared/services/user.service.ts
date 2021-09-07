@@ -45,4 +45,9 @@ export class UserService {
       .delete<DefaultResponse<User>>(`${this.baseUrl}/${userId}`);
   }
 
+  checkIsExistUsername(username: string, userId: number = null): Observable<DefaultResponse<boolean>> {
+    return this.httpClient
+      .get<DefaultResponse<boolean>>(`${this.baseUrl}/check_username?username=${username}&user_id=${userId}`);
+  }
+
 }

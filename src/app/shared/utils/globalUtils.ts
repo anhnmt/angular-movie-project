@@ -1,4 +1,4 @@
-import {Status} from '../interfaces/status';
+import {Option} from '../interfaces/option';
 import {MovieType} from '../interfaces/movie-type';
 
 export class GlobalUtils {
@@ -7,16 +7,28 @@ export class GlobalUtils {
     return movieTypes.find(obj => obj.movie_type_id === movieTypeId) || null;
   }
 
-  static getDefaultStatus(): Status[] {
+  static getDefaultStatus(): Option[] {
     return [
       {label: 'Hoạt động', value: 1, badge: 'success'},
       {label: 'Bản nháp', value: 2, badge: 'warning'}
     ];
   }
 
-  static mapDefaultStatus(status: number): Status {
+  static mapDefaultStatus(status: number): Option {
     const lists = GlobalUtils.getDefaultStatus();
     return lists.find(obj => obj.value === status) || null;
+  }
+
+  static getDefaultGender(): Option[] {
+    return [
+      {label: 'Nam', value: 1, badge: 'success'},
+      {label: 'Nữ', value: 0, badge: 'warning'}
+    ];
+  }
+
+  static mapDefaultGender(gender: number): Option {
+    const lists = GlobalUtils.getDefaultGender();
+    return lists.find(obj => obj.value === gender) || null;
   }
 
   static getFirst(array: any[]): any {

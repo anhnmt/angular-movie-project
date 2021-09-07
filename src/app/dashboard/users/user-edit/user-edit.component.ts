@@ -1,12 +1,15 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {takeUntil} from 'rxjs/operators';
-import {User} from '../../../shared/interfaces/user';
-import {Subject} from 'rxjs';
-import {UserService} from '../../../shared/services/user.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {map, takeUntil} from 'rxjs/operators';
+import {User} from '@/app/shared/interfaces/user';
+import {Observable, Subject, timer} from 'rxjs';
+import {UserService} from '@/app/shared/services/user.service';
+import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {SharedService} from '../../../shared/services/shared.service';
+import {SharedService} from '@/app/shared/services/shared.service';
+import {GlobalUtils} from '@/app/shared/utils/globalUtils';
+import {switchMap} from '~/rxjs/internal/operators';
+import {HelperUtils} from '@/app/shared/utils/helperUtils';
 
 @Component({
   selector: 'app-user-edit',
@@ -14,6 +17,9 @@ import {SharedService} from '../../../shared/services/shared.service';
   styleUrls: ['./user-edit.component.css']
 })
 export class UserEditComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  isLoading = false;
+  gender = GlobalUtils.getDefaultGender();
   visible = false;
   user: User;
   validateForm: FormGroup;
@@ -27,9 +33,12 @@ export class UserEditComponent implements OnInit, AfterViewInit, OnDestroy {
     private nzMessageService: NzMessageService,
     private sharedService: SharedService,
   ) {
+    const selectedGender = this.gender[0]?.value || null;
+
     this.validateForm = this.formBuilder.group({
       name: [null, [Validators.required]],
-      username: [null, [Validators.required]]
+      username: [null, [Validators.required], [this.userNameAsyncValidator.bind(this)]],
+      gender: [selectedGender, [Validators.required]]
     });
 
     this.route.params.pipe(takeUntil(this.onDestroy$)).subscribe((params: any) => {
@@ -39,7 +48,8 @@ export class UserEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this.validateForm.patchValue({
           name: this.user.name,
-          username: this.user.username
+          username: this.user.username,
+          gender: this.user.gender,
         });
       }, (error) => {
         this.close();
@@ -71,14 +81,36 @@ export class UserEditComponent implements OnInit, AfterViewInit, OnDestroy {
     this.onDestroy$.complete();
   }
 
+  userNameAsyncValidator(
+    control: AbstractControl
+  ): Observable<ValidationErrors | null> {
+    return timer(300).pipe(
+      switchMap(() =>
+        this.userService.checkIsExistUsername(control.value, this.user?.user_id).pipe(
+          map(response => {
+            // console.log(response);
+
+            if (response.data) {
+              return {
+                duplicated: true
+              };
+            }
+
+            return null;
+          })
+        )
+      )
+    );
+  }
+
   submitForm(): void {
-    for (const key of Object.keys(this.validateForm.controls)) {
-      this.validateForm.controls[key].markAsDirty();
-      this.validateForm.controls[key].updateValueAndValidity();
-    }
+    this.isLoading = true;
+
+    HelperUtils.formValidator(this.validateForm);
 
     // stop here if form is invalid
     if (this.validateForm.invalid) {
+      this.isLoading = false;
       return;
     }
 
@@ -88,6 +120,7 @@ export class UserEditComponent implements OnInit, AfterViewInit, OnDestroy {
       this.nzMessageService.success('Cập nhật Thành Công');
     }, (error) => {
       this.nzMessageService.error(error.message);
+      this.isLoading = false;
     });
   }
 

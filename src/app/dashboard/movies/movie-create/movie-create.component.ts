@@ -2,17 +2,17 @@ import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {forkJoin, Subject} from 'rxjs';
 import {Router} from '@angular/router';
-import {MovieService} from '../../../shared/services/movie.service';
+import {MovieService} from '@/app/shared/services/movie.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {SharedService} from '../../../shared/services/shared.service';
-import {MovieTypeService} from '../../../shared/services/movie-type.service';
-import {MovieType} from '../../../shared/interfaces/movie-type';
-import {GlobalUtils} from '../../../shared/utils/globalUtils';
-import {HelperUtils} from '../../../shared/utils/helperUtils';
-import {GenreService} from '../../../shared/services/genre.service';
-import {CountryService} from '../../../shared/services/country.service';
-import {Country} from '../../../shared/interfaces/country';
-import {Genre} from '../../../shared/interfaces/genre';
+import {SharedService} from '@/app/shared/services/shared.service';
+import {MovieTypeService} from '@/app/shared/services/movie-type.service';
+import {MovieType} from '@/app/shared/interfaces/movie-type';
+import {GlobalUtils} from '@/app/shared/utils/globalUtils';
+import {HelperUtils} from '@/app/shared/utils/helperUtils';
+import {GenreService} from '@/app/shared/services/genre.service';
+import {CountryService} from '@/app/shared/services/country.service';
+import {Country} from '@/app/shared/interfaces/country';
+import {Genre} from '@/app/shared/interfaces/genre';
 import {NzUploadFile} from 'ng-zorro-antd/upload';
 
 @Component({
