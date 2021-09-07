@@ -8,9 +8,10 @@ import {environment} from '@/environments/environment';
 import {DefaultResponse} from '@/app/shared/interfaces/default-response';
 import {Router} from '~/@angular/router';
 
-@Injectable({providedIn: 'root'})
+@Injectable()
 export class AuthService {
-  public currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
+  public currentUser: Observable<User>;
+  private currentUserSubject: BehaviorSubject<User>;
   private baseUrl = environment.api + '/oauth/token';
 
   constructor(
@@ -18,10 +19,12 @@ export class AuthService {
     private router: Router,
     private ngZone: NgZone,
   ) {
+    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+    this.currentUser = this.currentUserSubject.asObservable();
   }
 
   public get currentUserValue(): User {
-    return this.currentUserSubject.getValue();
+    return this.currentUserSubject.value;
   }
 
   login(body: User): Observable<DefaultResponse<User>> {
@@ -31,11 +34,12 @@ export class AuthService {
     })
       .pipe(map(user => {
         if (user && user.data) {
+          console.log('run');
           localStorage.setItem('currentUser', JSON.stringify(user.data));
           this.currentUserSubject.next(user.data);
+          console.log(this.currentUserValue);
           this.router.navigate(['/dashboard', 'home']);
         }
-
         return user;
       }));
   }

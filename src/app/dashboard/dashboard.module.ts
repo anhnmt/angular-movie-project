@@ -15,6 +15,17 @@ import {NzCardModule} from '~/ng-zorro-antd/card';
 import {NgChartjsModule} from '~/ng-chartjs';
 import {NzRateModule} from '~/ng-zorro-antd/rate';
 import {NzTableModule} from '~/ng-zorro-antd/table';
+import {ProfileComponent} from './profile/profile.component';
+import {NzListModule} from '~/ng-zorro-antd/list';
+import {NzSwitchModule} from '~/ng-zorro-antd/switch';
+import {NzTabsModule} from '~/ng-zorro-antd/tabs';
+import {NzFormModule} from '~/ng-zorro-antd/form';
+import {NzSelectModule} from '~/ng-zorro-antd/select';
+import {ReactiveFormsModule} from '~/@angular/forms';
+import {NzDatePickerModule} from '~/ng-zorro-antd/date-picker';
+import {NzUploadModule} from '~/ng-zorro-antd/upload';
+import {NzInputModule} from '~/ng-zorro-antd/input';
+import {NzMessageService} from '~/ng-zorro-antd/message';
 
 /* Assign all ng-zorro modules to this array */
 const antdModule = [
@@ -32,13 +43,24 @@ const antdModule = [
     NzCardModule,
     NgChartjsModule,
     NzRateModule,
-    NzTableModule
+    NzTableModule,
+    NzListModule,
+    NzSwitchModule,
+    NzTabsModule,
+    NzFormModule,
+    NzSelectModule,
+    ReactiveFormsModule,
+    NzDatePickerModule,
+    NzUploadModule,
+    NzInputModule
   ],
   exports: [],
   declarations: [
-    DashboardComponent
+    DashboardComponent,
+    ProfileComponent
   ],
   providers: [
+    NzMessageService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,

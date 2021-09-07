@@ -23,6 +23,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private router: Router,
     private ngZone: NgZone,
   ) {
+    // get return url from route parameters or default to '/'
+    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/dashboard/home';
   }
 
   submitForm(): void {
@@ -45,20 +47,15 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     console.log('Login init');
-    this.authService.currentUserSubject
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((value: any) => {
-        console.log(value);
-        // tslint:disable-next-line:no-unused-expression
-        !!value && this.router.navigate(['/dashboard', 'home']);
-      });
+    const currentUser = this.authService.currentUserValue;
+    if (currentUser) {
+      this.router.navigate([this.returnUrl]);
+    }
 
     this.validateForm = this.formBuilder.group({
       username: [null, [Validators.required]],
       password: [null, [Validators.required]]
     });
-    // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/dashboard/home';
   }
 
   ngOnDestroy(): void {

@@ -10,6 +10,8 @@ import {ThemeConstantService} from './services/theme-constant.service';
 import {SearchPipe} from './pipes/search.pipe';
 import {LazyloadModule} from './lazyload/lazyload.module';
 import {SafePipe} from './pipes/safe.pipe';
+import {AuthService} from '@/app/shared/services/auth.service';
+import {AuthGuard} from '@/app/shared/guards/auth.guard';
 
 @NgModule({
   exports: [
@@ -36,7 +38,9 @@ import {SafePipe} from './pipes/safe.pipe';
     SafePipe,
   ],
   providers: [
-    ThemeConstantService
+    ThemeConstantService,
+    AuthService,
+    AuthGuard
   ]
 })
 
