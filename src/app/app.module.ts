@@ -46,7 +46,9 @@ registerLocaleData(en);
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled'
+    }),
     NzBreadCrumbModule,
     TemplateModule,
     SharedModule,
