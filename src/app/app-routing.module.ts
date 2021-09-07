@@ -2,6 +2,7 @@ import {FullLayoutComponent} from './layouts/full-layout/full-layout.component';
 import {DashboardLayoutComponent} from './layouts/dashboard-layout/dashboard-layout.component';
 import {ClientLayoutComponent} from './layouts/client-layout/client-layout.component';
 import {Routes} from '@angular/router';
+import {AuthGuard} from '@/app/shared/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -23,8 +24,7 @@ export const routes: Routes = [
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
       }
     ],
-    // canActivate: [AuthGuard],
-    // canLoad: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: '',

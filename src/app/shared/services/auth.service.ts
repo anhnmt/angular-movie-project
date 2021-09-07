@@ -43,7 +43,7 @@ export class AuthService {
   logout(): void {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
-    // this.currentUserSubject.next('Hoàng Văn Việt');
+    this.currentUserSubject.next(null);
     this.router.navigate(['dashboard', 'login']);
   }
 }
