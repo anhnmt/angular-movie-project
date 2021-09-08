@@ -6,7 +6,7 @@
     <div class="container">
       <nz-card nzTitle="Basic Infomation">
         <div class="media align-items-center">
-          <nz-avatar  [nzSize]="80" nzIcon="user" [nzSrc]="avatarUrl"></nz-avatar>
+          <nz-avatar [nzSize]="80" [nzSrc]="avatarUrl" nzIcon="user"></nz-avatar>
           <div class="m-l-20 m-r-20">
             <h5 class="m-b-5 font-size-18">Change Avatar</h5>
             <p class="opacity-07 font-size-13 m-b-0">
@@ -15,9 +15,9 @@
             </p>
           </div>
           <nz-upload
-            nzName="avatar"
+            (nzChange)="handleChange($event)"
             [nzShowUploadList]="false"
-            (nzChange)="handleChange($event)">
+            nzName="avatar">
             <button nz-button nzType="primary">
               <span>Upload</span>
             </button>
@@ -47,7 +47,7 @@
             <nz-form-item>
               <nz-form-label>Phone Number</nz-form-label>
               <nz-form-control>
-                <input nz-input placeholder="Phone Number" >
+                <input nz-input placeholder="Phone Number">
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -63,11 +63,11 @@
             <nz-form-item>
               <nz-form-label>Language</nz-form-label>
               <nz-form-control>
-                <nz-select class="w-100" [(ngModel)]="selectedLanguage" nzPlaceHolder="Language">
-                  <nz-option nzValue="US" nzLabel="United Stata"></nz-option>
-                  <nz-option nzValue="UK" nzLabel="United Kingdom"></nz-option>
-                  <nz-option nzValue="FR" nzLabel="France"></nz-option>
-                  <nz-option nzValue="DE" nzLabel="German"></nz-option>
+                <nz-select [(ngModel)]="selectedLanguage" class="w-100" nzPlaceHolder="Language">
+                  <nz-option nzLabel="United Stata" nzValue="US"></nz-option>
+                  <nz-option nzLabel="United Kingdom" nzValue="UK"></nz-option>
+                  <nz-option nzLabel="France" nzValue="FR"></nz-option>
+                  <nz-option nzLabel="German" nzValue="DE"></nz-option>
                 </nz-select>
               </nz-form-control>
             </nz-form-item>
@@ -75,13 +75,13 @@
         </div>
       </nz-card>
       <nz-card nzTitle="Change Password">
-        <form nz-form [formGroup]="changePWForm" (ngSubmit)="submitForm()">
+        <form (ngSubmit)="submitForm()" [formGroup]="changePWForm" nz-form>
           <div class="row">
             <div class="col-md-3">
               <nz-form-item>
                 <nz-form-label nzFor="oldPassword">Old Password</nz-form-label>
                 <nz-form-control nzErrorTip="Please input your old password!">
-                  <input formControlName="oldPassword" nz-input type="password" placeholder="Old Password">
+                  <input formControlName="oldPassword" nz-input placeholder="Old Password" type="password">
                 </nz-form-control>
               </nz-form-item>
             </div>
@@ -89,7 +89,7 @@
               <nz-form-item>
                 <nz-form-label nzFor="newPassword">New Password</nz-form-label>
                 <nz-form-control nzErrorTip="Please input your New Password!">
-                  <input formControlName="newPassword" nz-input type="password" placeholder="New Password">
+                  <input formControlName="newPassword" nz-input placeholder="New Password" type="password">
                 </nz-form-control>
               </nz-form-item>
             </div>
@@ -97,14 +97,14 @@
               <nz-form-item>
                 <nz-form-label nzFor="confirmPassword">Confirm</nz-form-label>
                 <nz-form-control nzErrorTip="Please confirm your New Password!">
-                  <input formControlName="confirmPassword" nz-input type="password" placeholder="Confirm Password">
+                  <input formControlName="confirmPassword" nz-input placeholder="Confirm Password" type="password">
                 </nz-form-control>
               </nz-form-item>
             </div>
             <div class="col-md-3">
               <nz-form-item>
                 <nz-form-control>
-                  <button  nz-button nzType="primary" [disabled]="!changePWForm.valid">Change</button>
+                  <button [disabled]="!changePWForm.valid" nz-button nzType="primary">Change</button>
                 </nz-form-control>
               </nz-form-item>
             </div>
@@ -135,11 +135,11 @@
             <nz-form-item>
               <nz-form-label>Country</nz-form-label>
               <nz-form-control>
-                <nz-select class="w-100" [(ngModel)]="selectedCountry" nzPlaceHolder="Country">
-                  <nz-option nzValue="US" nzLabel="United Stata"></nz-option>
-                  <nz-option nzValue="UK" nzLabel="United Kingdom"></nz-option>
-                  <nz-option nzValue="FR" nzLabel="France"></nz-option>
-                  <nz-option nzValue="DE" nzLabel="German"></nz-option>
+                <nz-select [(ngModel)]="selectedCountry" class="w-100" nzPlaceHolder="Country">
+                  <nz-option nzLabel="United Stata" nzValue="US"></nz-option>
+                  <nz-option nzLabel="United Kingdom" nzValue="UK"></nz-option>
+                  <nz-option nzLabel="France" nzValue="FR"></nz-option>
+                  <nz-option nzLabel="German" nzValue="DE"></nz-option>
                 </nz-select>
               </nz-form-control>
             </nz-form-item>
@@ -153,20 +153,22 @@
       <div class="row">
         <div class="col-md-8 mx-auto">
           <nz-card nzTitle="Network Integration">
-            <nz-list [nzDataSource]="networkList" [nzRenderItem]="network" [nzItemLayout]="'horizontal'">
+            <nz-list [nzDataSource]="networkList" [nzItemLayout]="'horizontal'" [nzRenderItem]="network">
               <ng-template #network let-item>
                 <nz-list-item [nzActions]="[moreAction]">
                   <ng-template #moreAction>
-                    <span class="m-r-10 text-gray" *ngIf="item.status">{{item.link}}</span>
-                    <nz-switch [ngModel]="item.status" [nzCheckedChildren]="checkedTemplate" [nzUnCheckedChildren]="unCheckedTemplate"></nz-switch>
+                    <span *ngIf="item.status" class="m-r-10 text-gray">{{item.link}}</span>
+                    <nz-switch [ngModel]="item.status" [nzCheckedChildren]="checkedTemplate"
+                               [nzUnCheckedChildren]="unCheckedTemplate"></nz-switch>
                     <ng-template #checkedTemplate><i class="font-size-12" nz-icon nzType="check"></i></ng-template>
                     <ng-template #unCheckedTemplate><i class="font-size-12" nz-icon nzType="close"></i></ng-template>
                   </ng-template>
                   <nz-list-item-meta
-                    [nzTitle]="networkName"
-                    [nzAvatar]="networkIcon">
+                    [nzAvatar]="networkIcon"
+                    [nzTitle]="networkName">
                     <ng-template #networkIcon>
-                      <nz-avatar [nzIcon]="item.icon" [ngStyle]="{'color': item.avatarColor, 'background': item.avatarBg}"></nz-avatar>
+                      <nz-avatar [ngStyle]="{'color': item.avatarColor, 'background': item.avatarBg}"
+                                 [nzIcon]="item.icon"></nz-avatar>
                     </ng-template>
                     <ng-template #networkName>
                       <div class="font-size-15 font-weight-semibold m-t-10">{{item.name}}</div>
@@ -185,19 +187,21 @@
       <div class="row">
         <div class="col-md-8 mx-auto">
           <nz-card nzTitle="Notification Config">
-            <nz-list [nzDataSource]="notificationConfigList" [nzRenderItem]="notification" [nzItemLayout]="'horizontal'">
+            <nz-list [nzDataSource]="notificationConfigList" [nzItemLayout]="'horizontal'"
+                     [nzRenderItem]="notification">
               <ng-template #notification let-item>
                 <nz-list-item [nzActions]="[configStatus]">
                   <ng-template #configStatus>
-                    <nz-switch [ngModel]="item.status" [nzCheckedChildren]="checkedTemplate2nd" [nzUnCheckedChildren]="unCheckedTemplate2nd"></nz-switch>
+                    <nz-switch [ngModel]="item.status" [nzCheckedChildren]="checkedTemplate2nd"
+                               [nzUnCheckedChildren]="unCheckedTemplate2nd"></nz-switch>
                     <ng-template #checkedTemplate2nd><i class="font-size-12" nz-icon nzType="check"></i></ng-template>
                     <ng-template #unCheckedTemplate2nd><i class="font-size-12" nz-icon nzType="close"></i></ng-template>
                   </ng-template>
                   <nz-list-item-meta
-                    [nzTitle]="notificationTitle"
-                    [nzAvatar]="notificationIcon">
+                    [nzAvatar]="notificationIcon"
+                    [nzTitle]="notificationTitle">
                     <ng-template #notificationIcon>
-                      <nz-avatar [nzIcon]="item.icon" [ngClass]="item.color" class="m-t-5"></nz-avatar>
+                      <nz-avatar [ngClass]="item.color" [nzIcon]="item.icon" class="m-t-5"></nz-avatar>
                     </ng-template>
                     <ng-template #notificationTitle>
                       <h5 class="font-weight-semibold m-b-0">{{item.title}}</h5>

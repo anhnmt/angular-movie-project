@@ -88,7 +88,7 @@ export class MovieTypeEditComponent implements OnInit, AfterViewInit, OnDestroy 
   ): Observable<ValidationErrors | null> {
     return timer(300).pipe(
       switchMap(() =>
-        this.movieTypeService.checkIsExistSlug(control.value).pipe(
+        this.movieTypeService.checkIsExistSlug(control.value, this.movieType?.movie_type_id).pipe(
           map(response => {
             // console.log(response);
 

@@ -89,7 +89,7 @@ export class CountryEditComponent implements OnInit, AfterViewInit, OnDestroy {
   ): Observable<ValidationErrors | null> {
     return timer(300).pipe(
       switchMap(() =>
-        this.countryService.checkIsExistSlug(control.value).pipe(
+        this.countryService.checkIsExistSlug(control.value, this.country?.country_id).pipe(
           map(response => {
             // console.log(response);
 

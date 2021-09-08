@@ -2,11 +2,11 @@ import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {Observable, Subject, timer} from 'rxjs';
 import {Router} from '@angular/router';
-import {MovieTypeService} from '../../../shared/services/movie-type.service';
+import {MovieTypeService} from '@/app/shared/services/movie-type.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {SharedService} from '../../../shared/services/shared.service';
-import {GlobalUtils} from '../../../shared/utils/globalUtils';
-import {HelperUtils} from '../../../shared/utils/helperUtils';
+import {SharedService} from '@/app/shared/services/shared.service';
+import {GlobalUtils} from '@/app/shared/utils/globalUtils';
+import {HelperUtils} from '@/app/shared/utils/helperUtils';
 import {switchMap} from '~/rxjs/internal/operators';
 import {map} from '~/rxjs/operators';
 

@@ -7,7 +7,7 @@ import {ThemeConstantService} from '@/app/shared/services/theme-constant.service
 })
 
 export class DashboardComponent implements OnInit {
-  
+
   themeColors = this.colorConfig.get().colors;
   blue = this.themeColors.blue;
   blueLight = this.themeColors.blueLight;

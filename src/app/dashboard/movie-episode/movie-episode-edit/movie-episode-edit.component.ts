@@ -2,18 +2,18 @@ import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
-import {HelperUtils} from '../../../shared/utils/helperUtils';
+import {HelperUtils} from '@/app/shared/utils/helperUtils';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {GlobalUtils} from '../../../shared/utils/globalUtils';
-import {MovieEpisodeService} from '../../../shared/services/movie-episode.service';
-import {Episode} from '../../../shared/interfaces/episode';
-import {EpisodeDetail} from '../../../shared/interfaces/episode-detail';
+import {GlobalUtils} from '@/app/shared/utils/globalUtils';
+import {MovieEpisodeService} from '@/app/shared/services/movie-episode.service';
+import {Episode} from '@/app/shared/interfaces/episode';
+import {EpisodeDetail} from '@/app/shared/interfaces/episode-detail';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {NzModalService} from 'ng-zorro-antd/modal';
-import {EpisodeDetailEditComponent} from '../../../components/episode-details/episode-detail-edit/episode-detail-edit.component';
-import {EpisodeDetailCreateComponent} from '../../../components/episode-details/episode-detail-create/episode-detail-create.component';
-import {EpisodeService} from '../../../shared/services/episode.service';
-import {SharedService} from '../../../shared/services/shared.service';
+import {EpisodeDetailEditComponent} from '@/app/components/episode-details/episode-detail-edit/episode-detail-edit.component';
+import {EpisodeDetailCreateComponent} from '@/app/components/episode-details/episode-detail-create/episode-detail-create.component';
+import {EpisodeService} from '@/app/shared/services/episode.service';
+import {SharedService} from '@/app/shared/services/shared.service';
 
 @Component({
   selector: 'app-movie-episode-edit',

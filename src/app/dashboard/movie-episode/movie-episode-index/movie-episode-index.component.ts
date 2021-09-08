@@ -1,13 +1,13 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
-import {SharedService} from '../../../shared/services/shared.service';
-import {MovieEpisodeService} from '../../../shared/services/movie-episode.service';
-import {Episode} from '../../../shared/interfaces/episode';
+import {SharedService} from '@/app/shared/services/shared.service';
+import {MovieEpisodeService} from '@/app/shared/services/movie-episode.service';
+import {Episode} from '@/app/shared/interfaces/episode';
 import {takeUntil} from 'rxjs/operators';
-import {GlobalUtils} from '../../../shared/utils/globalUtils';
+import {GlobalUtils} from '@/app/shared/utils/globalUtils';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {EpisodeService} from '../../../shared/services/episode.service';
+import {EpisodeService} from '@/app/shared/services/episode.service';
 
 @Component({
   selector: 'app-movie-episode-index',

@@ -89,7 +89,7 @@ export class GenreEditComponent implements OnInit, AfterViewInit, OnDestroy {
   ): Observable<ValidationErrors | null> {
     return timer(300).pipe(
       switchMap(() =>
-        this.genreService.checkIsExistSlug(control.value).pipe(
+        this.genreService.checkIsExistSlug(control.value, this.genre?.genre_id).pipe(
           map(response => {
             // console.log(response);
 
