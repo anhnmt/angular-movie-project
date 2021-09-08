@@ -1,219 +1,97 @@
 <div class="page-header has-tab">
-  <h2 class="font-weight-normal">Setting</h2>
+  <h2 class="font-weight-normal">Account Setting</h2>
 </div>
 <nz-tabset class="page-header-tab">
   <nz-tab nzTitle="Account">
     <div class="container">
-      <nz-card nzTitle="Basic Infomation">
-        <div class="media align-items-center">
-          <nz-avatar [nzSize]="80" [nzSrc]="avatarUrl" nzIcon="user"></nz-avatar>
-          <div class="m-l-20 m-r-20">
-            <h5 class="m-b-5 font-size-18">Change Avatar</h5>
-            <p class="opacity-07 font-size-13 m-b-0">
-              Recommended Dimensions: <br>
-              120x120 Max fil size: 5MB
-            </p>
-          </div>
-          <nz-upload
-            (nzChange)="handleChange($event)"
-            [nzShowUploadList]="false"
-            nzName="avatar">
-            <button nz-button nzType="primary">
-              <span>Upload</span>
-            </button>
-          </nz-upload>
-        </div>
-        <hr class="m-v-25">
-        <div class="row">
-          <div class="col-md-6">
-            <nz-form-item>
-              <nz-form-label>User Name</nz-form-label>
-              <nz-form-control>
-                <input nz-input placeholder="Username" value="Marshall Nichols">
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-          <div class="col-md-6">
-            <nz-form-item>
-              <nz-form-label>Email</nz-form-label>
-              <nz-form-control>
-                <input nz-input placeholder="Username" type="email" value="@marshallnich">
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <nz-form-item>
-              <nz-form-label>Phone Number</nz-form-label>
-              <nz-form-control>
-                <input nz-input placeholder="Phone Number">
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-          <div class="col-md-4">
-            <nz-form-item>
-              <nz-form-label>Date of Birth</nz-form-label>
-              <nz-form-control>
-                <nz-date-picker class="w-100" nzFormat="yyyy/MM/dd" nzPlaceHolder="Date of Birth"></nz-date-picker>
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-          <div class="col-md-4">
-            <nz-form-item>
-              <nz-form-label>Language</nz-form-label>
-              <nz-form-control>
-                <nz-select [(ngModel)]="selectedLanguage" class="w-100" nzPlaceHolder="Language">
-                  <nz-option nzLabel="United Stata" nzValue="US"></nz-option>
-                  <nz-option nzLabel="United Kingdom" nzValue="UK"></nz-option>
-                  <nz-option nzLabel="France" nzValue="FR"></nz-option>
-                  <nz-option nzLabel="German" nzValue="DE"></nz-option>
-                </nz-select>
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-        </div>
-      </nz-card>
-      <nz-card nzTitle="Change Password">
-        <form (ngSubmit)="submitForm()" [formGroup]="changePWForm" nz-form>
-          <div class="row">
-            <div class="col-md-3">
-              <nz-form-item>
-                <nz-form-label nzFor="oldPassword">Old Password</nz-form-label>
-                <nz-form-control nzErrorTip="Please input your old password!">
-                  <input formControlName="oldPassword" nz-input placeholder="Old Password" type="password">
-                </nz-form-control>
-              </nz-form-item>
-            </div>
-            <div class="col-md-3">
-              <nz-form-item>
-                <nz-form-label nzFor="newPassword">New Password</nz-form-label>
-                <nz-form-control nzErrorTip="Please input your New Password!">
-                  <input formControlName="newPassword" nz-input placeholder="New Password" type="password">
-                </nz-form-control>
-              </nz-form-item>
-            </div>
-            <div class="col-md-3">
-              <nz-form-item>
-                <nz-form-label nzFor="confirmPassword">Confirm</nz-form-label>
-                <nz-form-control nzErrorTip="Please confirm your New Password!">
-                  <input formControlName="confirmPassword" nz-input placeholder="Confirm Password" type="password">
-                </nz-form-control>
-              </nz-form-item>
-            </div>
-            <div class="col-md-3">
-              <nz-form-item>
-                <nz-form-control>
-                  <button [disabled]="!changePWForm.valid" nz-button nzType="primary">Change</button>
-                </nz-form-control>
-              </nz-form-item>
-            </div>
-          </div>
+      <nz-card nzTitle="Thông tin tài khoản">
+        <form (ngSubmit)="submitInfoForm()" [formGroup]="changeInfoForm" nz-form nzLayout="vertical">
+          <nz-form-item>
+            <nz-form-label nzRequired>Tên người dùng</nz-form-label>
+            <nz-form-control nzErrorTip="Vui lòng nhập tên người dùng" nzHasFeedback>
+              <input formControlName="name" nz-input placeholder="Nhập tên người dùng"/>
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-label nzRequired>Tài khoản</nz-form-label>
+            <nz-form-control [nzErrorTip]="usernameErrorTpl"
+                             nzErrorTip="Vui lòng nhập tài khoản"
+                             nzHasFeedback
+                             nzValidatingTip="Validating...">
+              <input formControlName="username" nz-input placeholder="Nhập tài khoản"/>
+              <ng-template #usernameErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">Vui lòng nhập tài khoản!
+                </ng-container>
+                <ng-container *ngIf="control.hasError('duplicated')">Tài khoản đã tồn tại!
+                </ng-container>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-label nzRequired>Giới tính</nz-form-label>
+            <nz-form-control nzErrorTip="Vui lòng chọn giới tính">
+              <nz-select formControlName="gender" nzPlaceHolder="Chọn giới tính">
+                <nz-option *ngFor="let option of gender" [nzLabel]="option.label" [nzValue]="option.value"
+                           nzCustomContent>
+                  <nz-badge *ngIf="option.badge" [nzStatus]="option.badge"></nz-badge>
+                  {{ option.label }}
+                </nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-control>
+              <button [disabled]="!changeInfoForm.valid" [nzLoading]="isInfoLoading" nz-button nzType="primary">Cập
+                nhật
+              </button>
+            </nz-form-control>
+          </nz-form-item>
         </form>
       </nz-card>
-      <nz-card nzTitle="Address Details">
-        <div class="row">
-          <div class="col-md-12">
-            <nz-form-item>
-              <nz-form-label>Full Address</nz-form-label>
-              <nz-form-control>
-                <input nz-input placeholder="Address">
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <nz-form-item>
-              <nz-form-label>State & City</nz-form-label>
-              <nz-form-control>
-                <input nz-input placeholder="State & City">
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-          <div class="col-md-6">
-            <nz-form-item>
-              <nz-form-label>Country</nz-form-label>
-              <nz-form-control>
-                <nz-select [(ngModel)]="selectedCountry" class="w-100" nzPlaceHolder="Country">
-                  <nz-option nzLabel="United Stata" nzValue="US"></nz-option>
-                  <nz-option nzLabel="United Kingdom" nzValue="UK"></nz-option>
-                  <nz-option nzLabel="France" nzValue="FR"></nz-option>
-                  <nz-option nzLabel="German" nzValue="DE"></nz-option>
-                </nz-select>
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-        </div>
+
+
+      <nz-card nzTitle="Đổi mật khẩu">
+        <form (ngSubmit)="submitPWForm()" [formGroup]="changePWForm" nz-form nzLayout="vertical">
+          <nz-form-item>
+            <nz-form-label nzRequired>Mật khẩu cũ</nz-form-label>
+            <nz-form-control nzErrorTip="Vui lòng nhập mật khẩu cũ" nzHasFeedback>
+              <input formControlName="old_password" nz-input
+                     placeholder="Nhập mật khẩu"
+                     type="password"/>
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-label nzRequired>Mật khẩu mới</nz-form-label>
+            <nz-form-control nzErrorTip="Vui lòng nhập mật khẩu mới" nzHasFeedback>
+              <input (ngModelChange)="validateConfirmPassword()" formControlName="new_password" nz-input
+                     placeholder="Nhập mật khẩu"
+                     type="password"/>
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-label nzRequired>Nhập lại mật khẩu mới</nz-form-label>
+            <nz-form-control [nzErrorTip]="passwordErrorTpl" nzHasFeedback>
+              <input formControlName="confirm_password" nz-input placeholder="Nhập lại mật khẩu mới" type="password"/>
+              <ng-template #passwordErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">Vui lòng xác nhận mật khẩu mới!</ng-container>
+                <ng-container *ngIf="control.hasError('confirm')">Xác nhận mật khẩu mới không trùng khớp!</ng-container>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-control>
+              <button [disabled]="!changePWForm.valid" [nzLoading]="isPWLoading" nz-button nzType="primary">Cập nhật
+              </button>
+            </nz-form-control>
+          </nz-form-item>
+        </form>
       </nz-card>
-    </div>
-  </nz-tab>
-  <nz-tab nzTitle="Network">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 mx-auto">
-          <nz-card nzTitle="Network Integration">
-            <nz-list [nzDataSource]="networkList" [nzItemLayout]="'horizontal'" [nzRenderItem]="network">
-              <ng-template #network let-item>
-                <nz-list-item [nzActions]="[moreAction]">
-                  <ng-template #moreAction>
-                    <span *ngIf="item.status" class="m-r-10 text-gray">{{item.link}}</span>
-                    <nz-switch [ngModel]="item.status" [nzCheckedChildren]="checkedTemplate"
-                               [nzUnCheckedChildren]="unCheckedTemplate"></nz-switch>
-                    <ng-template #checkedTemplate><i class="font-size-12" nz-icon nzType="check"></i></ng-template>
-                    <ng-template #unCheckedTemplate><i class="font-size-12" nz-icon nzType="close"></i></ng-template>
-                  </ng-template>
-                  <nz-list-item-meta
-                    [nzAvatar]="networkIcon"
-                    [nzTitle]="networkName">
-                    <ng-template #networkIcon>
-                      <nz-avatar [ngStyle]="{'color': item.avatarColor, 'background': item.avatarBg}"
-                                 [nzIcon]="item.icon"></nz-avatar>
-                    </ng-template>
-                    <ng-template #networkName>
-                      <div class="font-size-15 font-weight-semibold m-t-10">{{item.name}}</div>
-                    </ng-template>
-                  </nz-list-item-meta>
-                </nz-list-item>
-              </ng-template>
-            </nz-list>
-          </nz-card>
-        </div>
-      </div>
-    </div>
-  </nz-tab>
-  <nz-tab nzTitle="Notification">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 mx-auto">
-          <nz-card nzTitle="Notification Config">
-            <nz-list [nzDataSource]="notificationConfigList" [nzItemLayout]="'horizontal'"
-                     [nzRenderItem]="notification">
-              <ng-template #notification let-item>
-                <nz-list-item [nzActions]="[configStatus]">
-                  <ng-template #configStatus>
-                    <nz-switch [ngModel]="item.status" [nzCheckedChildren]="checkedTemplate2nd"
-                               [nzUnCheckedChildren]="unCheckedTemplate2nd"></nz-switch>
-                    <ng-template #checkedTemplate2nd><i class="font-size-12" nz-icon nzType="check"></i></ng-template>
-                    <ng-template #unCheckedTemplate2nd><i class="font-size-12" nz-icon nzType="close"></i></ng-template>
-                  </ng-template>
-                  <nz-list-item-meta
-                    [nzAvatar]="notificationIcon"
-                    [nzTitle]="notificationTitle">
-                    <ng-template #notificationIcon>
-                      <nz-avatar [ngClass]="item.color" [nzIcon]="item.icon" class="m-t-5"></nz-avatar>
-                    </ng-template>
-                    <ng-template #notificationTitle>
-                      <h5 class="font-weight-semibold m-b-0">{{item.title}}</h5>
-                      <p class="m-b-0 font-weight-normal">{{item.desc}}</p>
-                    </ng-template>
-                  </nz-list-item-meta>
-                </nz-list-item>
-              </ng-template>
-            </nz-list>
-          </nz-card>
-        </div>
-      </div>
     </div>
   </nz-tab>
 </nz-tabset>

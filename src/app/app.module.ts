@@ -31,6 +31,7 @@ import {HTTP_INTERCEPTORS} from '~/@angular/common/http';
 import {JwtInterceptor} from '@/app/shared/interceptor/token.interceptor';
 import {RouterModule} from '@angular/router';
 import {routes} from '@/app/app-routing.module';
+import {NzCardModule} from '~/ng-zorro-antd/card';
 
 registerLocaleData(en);
 
@@ -41,7 +42,7 @@ registerLocaleData(en);
     FullLayoutComponent,
     ClientLayoutComponent,
     EpisodeDetailCreateComponent,
-    EpisodeDetailEditComponent
+    EpisodeDetailEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +62,8 @@ registerLocaleData(en);
     ReactiveFormsModule,
     NzBadgeModule,
     NzModalModule,
-    SharedModule
+    SharedModule,
+    NzCardModule
   ],
   providers: [
     {

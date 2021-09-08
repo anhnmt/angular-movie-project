@@ -39,6 +39,7 @@ export class HelperUtils {
   }
 
   static formValidator(validateForm: FormGroup, keys = []): void {
+    console.log('check');
     for (const key of Object.keys(validateForm.controls)) {
       if (!keys.includes(key)) {
         validateForm.controls[key].markAsDirty();

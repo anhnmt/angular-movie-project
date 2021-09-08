@@ -1,168 +1,138 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {NzModalService} from 'ng-zorro-antd/modal';
-import {NzMessageService} from 'ng-zorro-antd/message';
-import {NzUploadFile} from 'ng-zorro-antd/upload';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {Observable, Subject, timer} from '~/rxjs';
+import {switchMap} from '~/rxjs/internal/operators';
+import {map} from '~/rxjs/operators';
+import {UserService} from '@/app/shared/services/user.service';
+import {GlobalUtils} from '@/app/shared/utils/globalUtils';
+import {AuthService} from '@/app/shared/services/auth.service';
+import {User} from '@/app/shared/interfaces/user';
+import {NzMessageService} from '~/ng-zorro-antd/message';
+import {HelperUtils} from '@/app/shared/utils/helperUtils';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html'
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
 
+  isInfoLoading = false;
+  isPWLoading = false;
+  user: User;
+  gender = GlobalUtils.getDefaultGender();
+  changeInfoForm: FormGroup;
   changePWForm: FormGroup;
-  avatarUrl: string = 'http://www.themenate.net/applicator/dist/assets/images/avatars/thumb-13.jpg';
-  selectedCountry: any;
-  selectedLanguage: any;
+  private onDestroy$: Subject<boolean> = new Subject<boolean>();
 
-  networkList = [
-    {
-      name: 'Facebook',
-      icon: 'facebook',
-      avatarColor: '#4267b1',
-      avatarBg: 'rgba(66, 103, 177, 0.1)',
-      status: true,
-      link: 'https://facebook.com'
-    },
-    {
-      name: 'Instagram',
-      icon: 'instagram',
-      avatarColor: '#fff',
-      avatarBg: 'radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%)',
-      status: false,
-      link: 'https://instagram.com'
-    },
-    {
-      name: 'Twitter',
-      icon: 'twitter',
-      avatarColor: '#1ca1f2',
-      avatarBg: 'rgba(28, 161, 242, 0.1)',
-      status: true,
-      link: 'https://twitter.com'
-    },
-    {
-      name: 'Dribbble',
-      icon: 'dribbble',
-      avatarColor: '#d8487e',
-      avatarBg: 'rgba(216, 72, 126, 0.1)',
-      status: false,
-      link: 'https://dribbble.com'
-    },
-    {
-      name: 'Github',
-      icon: 'github',
-      avatarColor: '#323131',
-      avatarBg: 'rgba(50, 49, 49, 0.1)',
-      status: true,
-      link: 'https://github.com'
-    },
-    {
-      name: 'Linkedin',
-      icon: 'linkedin',
-      avatarColor: '#0174af',
-      avatarBg: 'rgba(1, 116, 175, 0.1)',
-      status: true,
-      link: 'https://linkedin.com'
-    },
-    {
-      name: 'Dropbox',
-      icon: 'dropbox',
-      avatarColor: '#005ef7',
-      avatarBg: 'rgba(0, 94, 247, 0.1)',
-      status: false,
-      link: 'https://dropbox.com'
-    }
-  ];
+  constructor(
+    private userService: UserService,
+    private authService: AuthService,
+    private formBuilder: FormBuilder,
+    private formBuilder2: FormBuilder,
+    private nzMessageService: NzMessageService,
+  ) {
+    const selectedGender = this.gender[0]?.value || null;
 
-  notificationConfigList = [
-    {
-      title: 'Everyone can look me up',
-      desc: 'Allow people found on your public.',
-      icon: 'user',
-      color: 'ant-avatar-blue',
-      status: true
-    },
-    {
-      title: 'Everyone can contact me',
-      desc: 'Allow any peole to contact.',
-      icon: 'mobile',
-      color: 'ant-avatar-cyan',
-      status: true
-    },
-    {
-      title: 'Show my location',
-      desc: 'Turning on Location lets you explore what\'s around you.',
-      icon: 'environment',
-      color: 'ant-avatar-gold',
-      status: false
-    },
-    {
-      title: 'Email Notifications',
-      desc: 'Receive daily email notifications.',
-      icon: 'mail',
-      color: 'ant-avatar-purple',
-      status: true
-    },
-    {
-      title: 'Unknow Source ',
-      desc: 'Allow all downloads from unknow source.',
-      icon: 'question',
-      color: 'ant-avatar-red',
-      status: false
-    },
-    {
-      title: 'Data Synchronization',
-      desc: 'Allow data synchronize with cloud server',
-      icon: 'swap',
-      color: 'ant-avatar-green',
-      status: true
-    },
-    {
-      title: 'Groups Invitation',
-      desc: 'Allow any groups invitation',
-      icon: 'usergroup-add',
-      color: 'ant-avatar-orange',
-      status: true
-    },
-  ];
+    this.changeInfoForm = this.formBuilder.group({
+      name: [null, [Validators.required]],
+      username: [null, [Validators.required], [this.userNameAsyncValidator.bind(this)]],
+      gender: [selectedGender, [Validators.required]],
+    });
 
-  constructor(private fb: FormBuilder, private modalService: NzModalService, private message: NzMessageService) {
+    this.changePWForm = this.formBuilder2.group({
+      old_password: [null, [Validators.required]],
+      new_password: [null, [Validators.required]],
+      confirm_password: [null, [this.confirmValidator]]
+    });
   }
 
   ngOnInit(): void {
-    this.changePWForm = this.fb.group({
-      oldPassword: [null, [Validators.required]],
-      newPassword: [null, [Validators.required]],
-      confirmPassword: [null, [Validators.required]]
+    this.authService.currentUserInfo().subscribe((success) => {
+      this.user = success.data;
+
+      this.changeInfoForm.patchValue({
+        name: this.user.name,
+        username: this.user.username,
+        gender: this.user.gender,
+      });
+
+      this.changeInfoForm.controls.username.markAsDirty();
+      this.changeInfoForm.controls.username.updateValueAndValidity();
+    }, (error) => {
+      this.nzMessageService.error(error.error.message);
     });
   }
 
-  showConfirm(): void {
-    this.modalService.confirm({
-      nzTitle: '<i>Do you want to change your password?</i>',
-      nzOnOk: () => this.message.success('Password Change Successfully')
-    });
+  ngOnDestroy(): void {
+    this.onDestroy$.next(true);
+    this.onDestroy$.complete();
   }
 
-  submitForm(): void {
-    for (const i in this.changePWForm.controls) {
-      this.changePWForm.controls[i].markAsDirty();
-      this.changePWForm.controls[i].updateValueAndValidity();
+  userNameAsyncValidator(
+    control: AbstractControl
+  ): Observable<ValidationErrors | null> {
+    return timer(300).pipe(
+      switchMap(() =>
+        this.userService.checkIsExistUsername(control.value, this.user?.user_id).pipe(
+          map(response => {
+            // console.log(response);
+
+            if (response.data) {
+              return {
+                duplicated: true
+              };
+            }
+
+            return null;
+          })
+        )
+      )
+    );
+  }
+
+  validateConfirmPassword(): void {
+    setTimeout(() => this.changePWForm.controls.confirm_password.updateValueAndValidity());
+  }
+
+  confirmValidator(control: FormControl): { [s: string]: boolean } {
+    if (!control.value) {
+      return {error: true, required: true};
     }
 
-    this.showConfirm();
+    if (control.value !== this.changePWForm.get('new_password')?.value) {
+      return {confirm: true, error: true};
+    }
+    return {};
   }
 
-  handleChange(info: { file: NzUploadFile }): void {
-    this.getBase64(info.file.originFileObj, (img: string) => {
-      this.avatarUrl = img;
+  submitInfoForm(): void {
+    this.isInfoLoading = true;
+
+    HelperUtils.formValidator(this.changeInfoForm, ['username']);
+
+    this.authService.updateCurrentUserInfo(this.changeInfoForm.value).subscribe((success) => {
+      this.nzMessageService.success('Cập nhật Thành Công');
+      this.isInfoLoading = false;
+    }, (error) => {
+      this.nzMessageService.error(error.message);
+      this.isInfoLoading = false;
     });
   }
 
-  private getBase64(img: File, callback: (img: {}) => void): void {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => callback(reader.result));
-    reader.readAsDataURL(img);
-  }
+  submitPWForm(): void {
+    this.isPWLoading = true;
 
+    HelperUtils.formValidator(this.changePWForm);
+
+    this.authService.updateCurrentUserPassword(
+      this.changePWForm.get('old_password')?.value,
+      this.changePWForm.get('new_password')?.value
+    ).subscribe((success) => {
+      this.nzMessageService.success('Cập nhật Thành Công');
+      this.isPWLoading = false;
+    }, (error) => {
+      this.nzMessageService.error(error.message);
+      this.isPWLoading = false;
+    });
+  }
 }

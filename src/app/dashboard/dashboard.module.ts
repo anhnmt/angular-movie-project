@@ -52,12 +52,11 @@ const antdModule = [
     ReactiveFormsModule,
     NzDatePickerModule,
     NzUploadModule,
-    NzInputModule
+    NzInputModule,
   ],
-  exports: [],
   declarations: [
     DashboardComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
   providers: [
     NzMessageService,
