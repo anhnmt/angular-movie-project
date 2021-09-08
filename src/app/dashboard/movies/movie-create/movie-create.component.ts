@@ -153,13 +153,13 @@ export class MovieCreateComponent implements OnInit, AfterViewInit, OnDestroy {
 
     formData.append('movie', JSON.stringify(this.validateForm.value));
 
-    // this.movieService.createMovie(formData).subscribe(() => {
-    //   this.sharedService.emitChange();
-    //   this.close();
-    //   this.nzMessageService.success('Thêm Thành Công');
-    // }, (error) => {
-    //   this.nzMessageService.error(error.error?.message);
-    this.isLoading = false;
-    // });
+    this.movieService.createMovie(formData).subscribe(() => {
+      this.sharedService.emitChange();
+      this.close();
+      this.nzMessageService.success('Thêm Thành Công');
+    }, (error) => {
+      this.nzMessageService.error(error.error?.message);
+      this.isLoading = false;
+    });
   }
 }

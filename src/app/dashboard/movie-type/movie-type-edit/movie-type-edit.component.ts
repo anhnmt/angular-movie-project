@@ -1,14 +1,15 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {MovieType} from '../../../shared/interfaces/movie-type';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Subject} from 'rxjs';
+import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {Observable, Subject, timer} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MovieTypeService} from '../../../shared/services/movie-type.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {SharedService} from '../../../shared/services/shared.service';
-import {takeUntil} from 'rxjs/operators';
+import {map, takeUntil} from 'rxjs/operators';
 import {GlobalUtils} from '../../../shared/utils/globalUtils';
 import {HelperUtils} from '../../../shared/utils/helperUtils';
+import {switchMap} from '~/rxjs/internal/operators';
 
 @Component({
   selector: 'app-movie-type-edit',
@@ -36,7 +37,7 @@ export class MovieTypeEditComponent implements OnInit, AfterViewInit, OnDestroy 
 
     this.validateForm = this.formBuilder.group({
       name: [null, [Validators.required]],
-      slug: [null, [Validators.required]],
+      slug: [null, [Validators.required], [this.slugAsyncValidator.bind(this)]],
       status: [selectedStatus, [Validators.required]],
     });
 
@@ -80,6 +81,28 @@ export class MovieTypeEditComponent implements OnInit, AfterViewInit, OnDestroy 
   ngOnDestroy(): void {
     this.onDestroy$.next(true);
     this.onDestroy$.complete();
+  }
+
+  slugAsyncValidator(
+    control: AbstractControl
+  ): Observable<ValidationErrors | null> {
+    return timer(300).pipe(
+      switchMap(() =>
+        this.movieTypeService.checkIsExistSlug(control.value).pipe(
+          map(response => {
+            // console.log(response);
+
+            if (response.data) {
+              return {
+                duplicated: true
+              };
+            }
+
+            return null;
+          })
+        )
+      )
+    );
   }
 
   submitForm(): void {

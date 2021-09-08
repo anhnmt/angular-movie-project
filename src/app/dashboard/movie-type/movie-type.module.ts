@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
 import {MovieTypeRoutingModule} from './movie-type-routing.module';
-import {MoveTypeIndexComponent} from './move-type-index/move-type-index.component';
+import {MovieTypeIndexComponent} from './movie-type-index/movie-type-index.component';
 import {MovieTypeCreateComponent} from './movie-type-create/movie-type-create.component';
 import {MovieTypeEditComponent} from './movie-type-edit/movie-type-edit.component';
 import {NzButtonModule} from 'ng-zorro-antd/button';
@@ -24,7 +24,7 @@ import {NzMessageService} from 'ng-zorro-antd/message';
 
 
 @NgModule({
-  declarations: [MoveTypeIndexComponent, MovieTypeCreateComponent, MovieTypeEditComponent],
+  declarations: [MovieTypeIndexComponent, MovieTypeCreateComponent, MovieTypeEditComponent],
   imports: [
     CommonModule,
     MovieTypeRoutingModule,
