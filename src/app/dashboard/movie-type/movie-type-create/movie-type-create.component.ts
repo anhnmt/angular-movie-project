@@ -43,7 +43,7 @@ export class MovieTypeCreateComponent implements OnInit, AfterViewInit, OnDestro
     setTimeout(() => {
       this.visible = true;
 
-      HelperUtils.formChangedTitleToSlug(this.validateForm);
+      HelperUtils.formChangedTitleToSlug(this.validateForm, this.onDestroy$);
     }, 1);
   }
 

@@ -8,7 +8,7 @@ import {GenreService} from '../../../shared/services/genre.service';
 import {GlobalUtils} from '../../../shared/utils/globalUtils';
 import {HelperUtils} from '../../../shared/utils/helperUtils';
 import {switchMap} from '~/rxjs/internal/operators';
-import {map} from '~/rxjs/operators';
+import {map, takeUntil} from '~/rxjs/operators';
 
 @Component({
   selector: 'app-genre-create',
@@ -42,8 +42,6 @@ export class GenreCreateComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.visible = true;
-
-      HelperUtils.formChangedTitleToSlug(this.validateForm);
     }, 1);
   }
 
@@ -57,9 +55,11 @@ export class GenreCreateComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    HelperUtils.formChangedTitleToSlug(this.validateForm, this.onDestroy$);
   }
 
   ngOnDestroy(): void {
+    console.log('Destroy');
     this.onDestroy$.next(true);
     this.onDestroy$.complete();
   }
@@ -68,6 +68,7 @@ export class GenreCreateComponent implements OnInit, AfterViewInit, OnDestroy {
     control: AbstractControl
   ): Observable<ValidationErrors | null> {
     return timer(300).pipe(
+      takeUntil(this.onDestroy$),
       switchMap(() =>
         this.genreService.checkIsExistSlug(control.value).pipe(
           map(response => {

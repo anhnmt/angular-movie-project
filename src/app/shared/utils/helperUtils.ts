@@ -1,6 +1,7 @@
 import {FormGroup} from '@angular/forms';
-import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, takeUntil} from 'rxjs/operators';
 import {StringUtils} from './stringUtils';
+import {skipWhile} from '~/rxjs/internal/operators';
 
 export class HelperUtils {
   static formChangedTitle(validateForm: FormGroup): void {
@@ -15,26 +16,25 @@ export class HelperUtils {
     });
   }
 
-  static formChangedTitleToSlug(validateForm: FormGroup): void {
+  static formChangedTitleToSlug(validateForm: FormGroup, onDestroy$): void {
     validateForm.get('name').valueChanges
       .pipe(
+        takeUntil(onDestroy$),
         debounceTime(500),
         distinctUntilChanged()
       ).subscribe((value: string) => {
-      validateForm.patchValue({
-        name: StringUtils.convertToTitleCase(value),
-        slug: StringUtils.convertToSlug(value)
-      });
+      validateForm.get('slug').patchValue(StringUtils.convertToSlug(value));
+      validateForm.controls.slug.markAsDirty();
     });
 
     validateForm.get('slug').valueChanges
       .pipe(
+        takeUntil(onDestroy$),
+        skipWhile(() => validateForm.get('slug').untouched),
         debounceTime(500),
         distinctUntilChanged()
       ).subscribe((value: string) => {
-      validateForm.patchValue({
-        slug: StringUtils.convertToSlug(value)
-      });
+      validateForm.get('slug').patchValue(StringUtils.convertToSlug(value));
     });
   }
 

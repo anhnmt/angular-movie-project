@@ -62,7 +62,7 @@ export class MovieTypeEditComponent implements OnInit, AfterViewInit, OnDestroy 
     setTimeout(() => {
       this.visible = true;
 
-      HelperUtils.formChangedTitleToSlug(this.validateForm);
+      HelperUtils.formChangedTitleToSlug(this.validateForm, this.onDestroy$);
     }, 1);
   }
 
@@ -87,6 +87,7 @@ export class MovieTypeEditComponent implements OnInit, AfterViewInit, OnDestroy 
     control: AbstractControl
   ): Observable<ValidationErrors | null> {
     return timer(300).pipe(
+      takeUntil(this.onDestroy$),
       switchMap(() =>
         this.movieTypeService.checkIsExistSlug(control.value, this.movieType?.movie_type_id).pipe(
           map(response => {
