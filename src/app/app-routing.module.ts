@@ -3,6 +3,7 @@ import {DashboardLayoutComponent} from './layouts/dashboard-layout/dashboard-lay
 import {ClientLayoutComponent} from './layouts/client-layout/client-layout.component';
 import {Routes} from '@angular/router';
 import {AuthGuard} from '@/app/shared/guards/auth.guard';
+import {ErrorComponent} from '@/app/auth/error/error.component';
 
 export const routes: Routes = [
   {
@@ -35,5 +36,6 @@ export const routes: Routes = [
         loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
       }
     ]
-  }
+  },
+  {path: '**', component: ErrorComponent},
 ];

@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import {LoginComponent} from './login/login.component';
-import {Error1Component} from './error-1/error-1.component';
 
 const routes: Routes = [
   {
@@ -24,20 +23,6 @@ const routes: Routes = [
   //     title: 'Sign Up'
   //   }
   // },
-  {
-    path: '**',
-    component: Error1Component,
-    data: {
-      title: 'Error 1'
-    }
-  },
-  // {
-  //   path: 'error-2',
-  //   component: Error2Component,
-  //   data: {
-  //     title: 'Error 2'
-  //   }
-  // }
 ];
 
 @NgModule({

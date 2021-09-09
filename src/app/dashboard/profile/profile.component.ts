@@ -46,6 +46,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.user = null;
+
     this.authService.currentUserInfo().subscribe((success) => {
       this.user = success.data;
 

@@ -5,8 +5,6 @@ import {DashboardComponent} from './dashboard.component';
 
 /** Import any ng-zorro components as the module required except icon module */
 import {NzButtonModule} from 'ng-zorro-antd/button';
-import {HTTP_INTERCEPTORS} from '~/@angular/common/http';
-import {JwtInterceptor} from '@/app/shared/interceptor/token.interceptor';
 import {AuthService} from '@/app/shared/services/auth.service';
 import {NzAvatarModule} from '~/ng-zorro-antd/avatar';
 import {NzBadgeModule} from '~/ng-zorro-antd/badge';
@@ -25,7 +23,6 @@ import {ReactiveFormsModule} from '~/@angular/forms';
 import {NzDatePickerModule} from '~/ng-zorro-antd/date-picker';
 import {NzUploadModule} from '~/ng-zorro-antd/upload';
 import {NzInputModule} from '~/ng-zorro-antd/input';
-import {NzMessageService} from '~/ng-zorro-antd/message';
 
 /* Assign all ng-zorro modules to this array */
 const antdModule = [
@@ -59,12 +56,6 @@ const antdModule = [
     ProfileComponent,
   ],
   providers: [
-    NzMessageService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: JwtInterceptor,
-      multi: true
-    },
     AuthService
   ]
 })

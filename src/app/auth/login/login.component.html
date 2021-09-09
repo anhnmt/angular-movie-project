@@ -18,21 +18,25 @@
                   </nz-input-group>
                 </nz-form-control>
               </nz-form-item>
+
               <nz-form-item class="relative">
                 <nz-form-label nzFor="password" nzRequired>Mật khẩu</nz-form-label>
-                <!--                <a [routerLink]="['/auth/reset-password']" class="float-right font-size-13 text-muted"-->
-                <!--                   style="position:absolute; right: 0">Forget Password?</a>-->
-                <nz-form-control nzErrorTip="Mật khẩu không được để trống">
+                <nz-form-control [nzErrorTip]="passwordErrorTpl" nzHasFeedback>
                   <nz-input-group [nzPrefix]="prefixLock">
                     <input formControlName="password" nz-input placeholder="Vui lòng nhập mật khẩu" type="password">
+                    <ng-template #passwordErrorTpl let-control>
+                      <ng-container *ngIf="control.hasError('required')">Vui lòng nhập mật khẩu!</ng-container>
+                      <ng-container *ngIf="control.hasError('custom')">{{ control.getError('custom') }}
+                      </ng-container>
+                    </ng-template>
                   </nz-input-group>
                 </nz-form-control>
+
               </nz-form-item>
+
               <nz-form-item>
                 <nz-form-control>
                   <div class="d-flex align-items-center justify-content-between">
-                    <!--                    <span class="font-size-13 text-muted">Don't have an account? <a [routerLink]="['/auth/sign-up']"-->
-                    <!--                                                                                    class="small"> Signup</a></span>-->
                     <button [nzType]="'primary'" class="login-form-button" nz-button>Đăng nhập</button>
                   </div>
                 </nz-form-control>

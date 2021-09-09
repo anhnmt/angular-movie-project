@@ -11,8 +11,7 @@ import {NzCheckboxModule} from 'ng-zorro-antd/checkbox';
 
 import {LoginComponent} from './login/login.component';
 import {SignUpComponent} from './sign-up/sign-up.component';
-import {Error1Component} from './error-1/error-1.component';
-import {Error2Component} from './error-2/error-2.component';
+import {ErrorComponent} from './error/error.component';
 
 const antdModule = [
   NzFormModule,
@@ -32,8 +31,7 @@ const antdModule = [
   declarations: [
     LoginComponent,
     SignUpComponent,
-    Error1Component,
-    Error2Component
+    ErrorComponent,
   ]
 })
 
