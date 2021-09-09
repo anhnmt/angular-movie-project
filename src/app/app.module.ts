@@ -27,8 +27,6 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {NzBadgeModule} from 'ng-zorro-antd/badge';
 import {NzModalModule} from 'ng-zorro-antd/modal';
 import {AuthService} from '@/app/shared/services/auth.service';
-import {HTTP_INTERCEPTORS} from '~/@angular/common/http';
-import {JwtInterceptor} from '@/app/shared/interceptor/token.interceptor';
 import {RouterModule} from '@angular/router';
 import {routes} from '@/app/app-routing.module';
 import {NzCardModule} from '~/ng-zorro-antd/card';
@@ -73,11 +71,6 @@ registerLocaleData(en);
     {
       provide: LocationStrategy,
       useClass: PathLocationStrategy
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: JwtInterceptor,
-      multi: true
     },
     AuthService,
     ThemeConstantService

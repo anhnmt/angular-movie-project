@@ -41,7 +41,11 @@ export class LoginComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(_ => {
       }, (error) => {
-        console.log(error);
+        console.log(error.error.message);
+
+        this.validateForm.get('password').setErrors({
+          custom: error.error.message
+        });
       });
   }
 

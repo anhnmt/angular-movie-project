@@ -12,7 +12,7 @@ import {HelperUtils} from '@/app/shared/utils/helperUtils';
 
 @Component({
   selector: 'app-profile',
-  templateUrl: './profile.component.html'
+  templateUrl: './profile.component.html',
 })
 export class ProfileComponent implements OnInit, OnDestroy {
 
@@ -46,6 +46,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.user = null;
+
     this.authService.currentUserInfo().subscribe((success) => {
       this.user = success.data;
 

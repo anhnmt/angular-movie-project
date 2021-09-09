@@ -3,8 +3,8 @@ import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest}
 import {Observable, throwError} from 'rxjs';
 
 import {AuthService} from '../services/auth.service';
-import {catchError} from '~/rxjs/internal/operators';
 import {Router} from '~/@angular/router';
+import {catchError} from '~/rxjs/internal/operators';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
@@ -15,17 +15,16 @@ export class JwtInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    let authReq = request;
     const currentUser = this.authService.currentUserValue;
 
+    console.log(currentUser);
+
     if (currentUser && currentUser.token) {
-      request = request.clone({
-        setHeaders: {
-          Authorization: `Bearer ${currentUser.token}`
-        }
-      });
+      authReq = request.clone({headers: request.headers.set('Authorization', `Bearer ${currentUser.token}`)});
     }
 
-    return next.handle(request).pipe(catchError((error: HttpErrorResponse) => {
+    return next.handle(authReq).pipe(catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
           this.authService.logout();
           return [];
