@@ -1,11 +1,9 @@
 import {NgModule} from '@angular/core';
-import {SharedModule} from '../shared/shared.module';
 import {DashboardRoutingModule} from './dashboard-routing.module';
 import {DashboardComponent} from './dashboard.component';
 
 /** Import any ng-zorro components as the module required except icon module */
 import {NzButtonModule} from 'ng-zorro-antd/button';
-import {AuthService} from '@/app/shared/services/auth.service';
 import {NzAvatarModule} from '~/ng-zorro-antd/avatar';
 import {NzBadgeModule} from '~/ng-zorro-antd/badge';
 import {NzProgressModule} from '~/ng-zorro-antd/progress';
@@ -31,7 +29,7 @@ const antdModule = [
 
 @NgModule({
   imports: [
-    SharedModule,
+    // SharedModule,
     DashboardRoutingModule,
     ...antdModule,
     NzAvatarModule,
@@ -55,9 +53,6 @@ const antdModule = [
     DashboardComponent,
     ProfileComponent,
   ],
-  providers: [
-    AuthService
-  ]
 })
 export class DashboardModule {
 }
