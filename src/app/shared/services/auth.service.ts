@@ -1,4 +1,4 @@
-import {Injectable, NgZone} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -12,12 +12,11 @@ import {Router} from '~/@angular/router';
 export class AuthService {
   public currentUser: Observable<User>;
   private currentUserSubject: BehaviorSubject<User>;
-  private baseUrl = environment.api + '/oauth/token';
+  private baseUrl = environment.api + '/oauth';
 
   constructor(
     private httpClient: HttpClient,
     private router: Router,
-    private ngZone: NgZone,
   ) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
@@ -28,16 +27,14 @@ export class AuthService {
   }
 
   login(body: User): Observable<DefaultResponse<User>> {
-    return this.httpClient.post<DefaultResponse<User>>(this.baseUrl, {
+    return this.httpClient.post<DefaultResponse<User>>(`${this.baseUrl}/token`, {
       username: body.username,
       password: body.password
     })
       .pipe(map(user => {
         if (user && user.data) {
-          console.log('run');
           localStorage.setItem('currentUser', JSON.stringify(user.data));
           this.currentUserSubject.next(user.data);
-          console.log(this.currentUserValue);
           this.router.navigate(['/dashboard', 'home']);
         }
         return user;
@@ -48,6 +45,25 @@ export class AuthService {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
-    this.router.navigate(['dashboard', 'login']);
+    this.router.navigate(['/dashboard', 'login']);
+  }
+
+  currentUserInfo(): Observable<DefaultResponse<User>> {
+    return this.httpClient.get<DefaultResponse<User>>(`${this.baseUrl}/current_user`);
+  }
+
+  updateCurrentUserInfo(body: User): Observable<DefaultResponse<any>> {
+    return this.httpClient.post<DefaultResponse<any>>(`${this.baseUrl}/update_profile`, {
+      name: body.name,
+      username: body.username,
+      gender: body.gender
+    });
+  }
+
+  updateCurrentUserPassword(oldPassword: string, newPassword: string): Observable<DefaultResponse<any>> {
+    return this.httpClient.post<DefaultResponse<any>>(`${this.baseUrl}/change_password`, {
+      old_password: oldPassword,
+      new_password: newPassword
+    });
   }
 }

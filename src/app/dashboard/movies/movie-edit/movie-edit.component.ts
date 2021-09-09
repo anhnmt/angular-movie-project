@@ -128,7 +128,7 @@ export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
     setTimeout(() => {
       this.visible = true;
 
-      HelperUtils.formChangedTitleToSlug(this.validateForm);
+      HelperUtils.formChangedTitleToSlug(this.validateForm, this.onDestroy$);
     }, 1);
   }
 

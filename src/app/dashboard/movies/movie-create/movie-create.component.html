@@ -21,7 +21,7 @@
                        nzErrorTip="Vui lòng nhập đường dẫn"
                        nzHasFeedback
                        nzValidatingTip="Validating...">
-        <input formControlName="slug" nz-input placeholder="Nhập đường dẫn"/>
+        <input appSlugTransform formControlName="slug" nz-input placeholder="Nhập đường dẫn"/>
         <ng-template #slugErrorTpl let-control>
           <ng-container *ngIf="control.hasError('required')">Vui lòng nhập đường dẫn!
           </ng-container>

@@ -12,6 +12,7 @@ import {LazyloadModule} from './lazyload/lazyload.module';
 import {SafePipe} from './pipes/safe.pipe';
 import {AuthService} from '@/app/shared/services/auth.service';
 import {AuthGuard} from '@/app/shared/guards/auth.guard';
+import {SlugTransformDirective} from './directives/slug-transform.directive';
 
 @NgModule({
   exports: [
@@ -23,7 +24,8 @@ import {AuthGuard} from '@/app/shared/guards/auth.guard';
     PerfectScrollbarModule,
     SearchPipe,
     LazyloadModule,
-    SafePipe
+    SafePipe,
+    SlugTransformDirective,
   ],
   imports: [
     RouterModule,
@@ -36,6 +38,7 @@ import {AuthGuard} from '@/app/shared/guards/auth.guard';
   declarations: [
     SearchPipe,
     SafePipe,
+    SlugTransformDirective,
   ],
   providers: [
     ThemeConstantService,

@@ -3,13 +3,20 @@ export class StringUtils {
     return str?.trim().replace(/(^|\s)\S/g, (t) => t.toUpperCase()) || null;
   }
 
-  static convertToSlug(str: string): string {
-    if (str == null || str === '') {
-      return str;
+  static convertToSlug(value: string): string {
+    let text = value.toLowerCase();
+    if (text.charAt(0) === ' ') {
+      text = text.trim();
+    }
+    if (text.charAt(text.length - 1) === '-') {
+      // text = (text.replace(/-/g, ''));
     }
 
-    str = str.replace(/^\s+|\s+$/g, ''); // trim
-    str = str.toLowerCase();
+    text = text.replace(/ +/g, '-');
+    text = text.replace(/--/g, '-');
+
+    // Note: Normalize('NFKD') used to normalize special alphabets like óã to oa
+    text = text.normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
 
     // remove accents, swap ñ for n, etc
     const swaps = {
@@ -129,15 +136,14 @@ export class StringUtils {
 
     Object.keys(swaps).forEach((swap) => {
       swaps[swap].forEach(s => {
-        str = str.replace(new RegExp(s, 'g'), swap);
+        text = text.replace(new RegExp(s, 'g'), swap);
       });
     });
 
-    return str
-      .replace(/[^a-z0-9 -]/g, '') // remove invalid chars
-      .replace(/\s+/g, '-') // collapse whitespace and replace by -
-      .replace(/-+/g, '-') // collapse dashes
-      .replace(/^-+/, '') // trim - from start of text
-      .replace(/-+$/, '');
+    text = text.replace(/[^a-zA-Z0-9 -]/g, '') // remove invalid chars
+      .replace(/\s+/g, '-'); // collapse whitespace and replace by -
+
+    return text;
   }
+
 }

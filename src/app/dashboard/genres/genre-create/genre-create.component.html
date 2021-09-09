@@ -14,12 +14,23 @@
         <input formControlName="name" nz-input placeholder="Nhập thể loại"/>
       </nz-form-control>
     </nz-form-item>
+
     <nz-form-item>
       <nz-form-label nzRequired>Đường dẫn</nz-form-label>
-      <nz-form-control nzErrorTip="Vui lòng nhập đường dẫn">
-        <input formControlName="slug" nz-input placeholder="Nhập đường dẫn"/>
+      <nz-form-control [nzErrorTip]="slugErrorTpl"
+                       nzErrorTip="Vui lòng nhập đường dẫn"
+                       nzHasFeedback
+                       nzValidatingTip="Validating...">
+        <input appSlugTransform formControlName="slug" nz-input placeholder="Nhập đường dẫn"/>
+        <ng-template #slugErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">Vui lòng nhập đường dẫn!
+          </ng-container>
+          <ng-container *ngIf="control.hasError('duplicated')">Đường dẫn đã tồn tại!
+          </ng-container>
+        </ng-template>
       </nz-form-control>
     </nz-form-item>
+
     <nz-form-item>
       <nz-form-label>Trạng thái</nz-form-label>
       <nz-form-control nzErrorTip="Vui lòng chọn trạng thái">
@@ -38,7 +49,9 @@
   <ng-template #footerTpl>
     <div style="float: right">
       <button (click)="close()" nz-button style="margin-right: 8px;">Huỷ</button>
-      <button (click)="submitForm()" [nzLoading]="isLoading" nz-button nzType="primary">Thêm</button>
+      <button (click)="submitForm()" [disabled]="!validateForm.valid" [nzLoading]="isLoading" nz-button
+              nzType="primary">Thêm
+      </button>
     </div>
   </ng-template>
 </nz-drawer>

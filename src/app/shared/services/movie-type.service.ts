@@ -47,4 +47,9 @@ export class MovieTypeService {
     return this.httpClient
       .delete<DefaultResponse<MovieType>>(`${this.baseUrl}/${movieTypeId}`);
   }
+
+  checkIsExistSlug(slug: string, id: number = null): Observable<DefaultResponse<boolean>> {
+    return this.httpClient
+      .get<DefaultResponse<boolean>>(`${this.baseUrl}/check_slug?slug=${slug}&movie_type_id=${id}`);
+  }
 }

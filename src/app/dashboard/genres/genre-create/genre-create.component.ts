@@ -1,17 +1,18 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Subject} from 'rxjs';
+import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {Observable, Subject, timer} from 'rxjs';
 import {Router} from '@angular/router';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {SharedService} from '../../../shared/services/shared.service';
-import {GenreService} from '../../../shared/services/genre.service';
-import {GlobalUtils} from '../../../shared/utils/globalUtils';
-import {HelperUtils} from '../../../shared/utils/helperUtils';
+import {SharedService} from '@/app/shared/services/shared.service';
+import {GenreService} from '@/app/shared/services/genre.service';
+import {GlobalUtils} from '@/app/shared/utils/globalUtils';
+import {HelperUtils} from '@/app/shared/utils/helperUtils';
+import {switchMap} from '~/rxjs/internal/operators';
+import {map, takeUntil} from '~/rxjs/operators';
 
 @Component({
   selector: 'app-genre-create',
   templateUrl: './genre-create.component.html',
-  styleUrls: ['./genre-create.component.css']
 })
 export class GenreCreateComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -32,7 +33,7 @@ export class GenreCreateComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.validateForm = this.formBuilder.group({
       name: [null, [Validators.required]],
-      slug: [null, [Validators.required]],
+      slug: [null, [Validators.required], [this.slugAsyncValidator.bind(this)]],
       status: [selectedStatus, [Validators.required]],
     });
   }
@@ -40,8 +41,6 @@ export class GenreCreateComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.visible = true;
-
-      HelperUtils.formChangedTitleToSlug(this.validateForm);
     }, 1);
   }
 
@@ -55,11 +54,36 @@ export class GenreCreateComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    HelperUtils.formChangedTitleToSlug(this.validateForm, this.onDestroy$);
   }
 
   ngOnDestroy(): void {
+    console.log('Destroy');
     this.onDestroy$.next(true);
     this.onDestroy$.complete();
+  }
+
+  slugAsyncValidator(
+    control: AbstractControl
+  ): Observable<ValidationErrors | null> {
+    return timer(300).pipe(
+      takeUntil(this.onDestroy$),
+      switchMap(() =>
+          control.value !== '' && this.genreService.checkIsExistSlug(control.value).pipe(
+            map(response => {
+              // console.log(response);
+
+              if (response.data) {
+                return {
+                  duplicated: true
+                };
+              }
+
+              return null;
+            })
+          )
+      )
+    );
   }
 
   submitForm(): void {

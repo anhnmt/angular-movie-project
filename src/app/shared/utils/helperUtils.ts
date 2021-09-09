@@ -1,5 +1,5 @@
 import {FormGroup} from '@angular/forms';
-import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, takeUntil} from 'rxjs/operators';
 import {StringUtils} from './stringUtils';
 
 export class HelperUtils {
@@ -15,30 +15,20 @@ export class HelperUtils {
     });
   }
 
-  static formChangedTitleToSlug(validateForm: FormGroup): void {
+  static formChangedTitleToSlug(validateForm: FormGroup, onDestroy$): void {
     validateForm.get('name').valueChanges
       .pipe(
         debounceTime(500),
+        takeUntil(onDestroy$),
         distinctUntilChanged()
-      ).subscribe((value: string) => {
-      validateForm.patchValue({
-        name: StringUtils.convertToTitleCase(value),
-        slug: StringUtils.convertToSlug(value)
+      )
+      .subscribe((value: string) => {
+        validateForm.get('slug').patchValue(value);
       });
-    });
-
-    validateForm.get('slug').valueChanges
-      .pipe(
-        debounceTime(500),
-        distinctUntilChanged()
-      ).subscribe((value: string) => {
-      validateForm.patchValue({
-        slug: StringUtils.convertToSlug(value)
-      });
-    });
   }
 
   static formValidator(validateForm: FormGroup, keys = []): void {
+    console.log('check');
     for (const key of Object.keys(validateForm.controls)) {
       if (!keys.includes(key)) {
         validateForm.controls[key].markAsDirty();

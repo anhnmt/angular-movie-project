@@ -1,17 +1,17 @@
 import {Component, OnInit} from '@angular/core';
-import {MovieType} from '../../../shared/interfaces/movie-type';
-import {TableService} from '../../../shared/services/table.service';
+import {MovieType} from '@/app/shared/interfaces/movie-type';
+import {TableService} from '@/app/shared/services/table.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {MovieTypeService} from '../../../shared/services/movie-type.service';
-import {SharedService} from '../../../shared/services/shared.service';
-import {GlobalUtils} from '../../../shared/utils/globalUtils';
+import {MovieTypeService} from '@/app/shared/services/movie-type.service';
+import {SharedService} from '@/app/shared/services/shared.service';
+import {GlobalUtils} from '@/app/shared/utils/globalUtils';
 
 @Component({
-  selector: 'app-move-type-index',
-  templateUrl: './move-type-index.component.html',
-  styleUrls: ['./move-type-index.component.css']
+  selector: 'app-movie-type-index',
+  templateUrl: './movie-type-index.component.html',
+  styleUrls: ['./movie-type-index.component.css']
 })
-export class MoveTypeIndexComponent implements OnInit {
+export class MovieTypeIndexComponent implements OnInit {
   mapDefaultStatus = GlobalUtils.mapDefaultStatus;
 
   searchInput: string | number;

@@ -3,12 +3,12 @@
     <nz-card>
       <div class="d-flex justify-content-between align-items-center">
         <div>
-          <p class="m-b-0">Net Revenue</p>
+          <p class="m-b-0">Movie</p>
           <h2 class="m-b-0">
-            <span>$14,966</span>
+            <span>{{countMovie}}</span>
           </h2>
         </div>
-        <nz-avatar [nzSize]="50" class="ant-avatar-blue" nzIcon="dollar"></nz-avatar>
+        <nz-avatar [nzSize]="50" class="ant-avatar-blue" nzIcon="video-camera"></nz-avatar>
       </div>
     </nz-card>
   </div>
@@ -16,12 +16,12 @@
     <nz-card>
       <div class="d-flex justify-content-between align-items-center">
         <div>
-          <p class="m-b-0">Bounce Rate</p>
+          <p class="m-b-0">Genre</p>
           <h2 class="m-b-0">
-            <span>26.80%</span>
+            <span>{{countGenre}}</span>
           </h2>
         </div>
-        <nz-avatar [nzSize]="50" class="ant-avatar-cyan" nzIcon="bar-chart"></nz-avatar>
+        <nz-avatar [nzSize]="50" class="ant-avatar-cyan" nzIcon="profile"></nz-avatar>
       </div>
     </nz-card>
   </div>
@@ -29,12 +29,12 @@
     <nz-card>
       <div class="d-flex justify-content-between align-items-center">
         <div>
-          <p class="m-b-0">Orders</p>
+          <p class="m-b-0">Country</p>
           <h2 class="m-b-0">
-            <span>3057</span>
+            <span>{{countCountry}}</span>
           </h2>
         </div>
-        <nz-avatar [nzSize]="50" class="ant-avatar-red" nzIcon="profile"></nz-avatar>
+        <nz-avatar [nzSize]="50" class="ant-avatar-red" nzIcon="global"></nz-avatar>
       </div>
     </nz-card>
   </div>
@@ -42,12 +42,12 @@
     <nz-card>
       <div class="d-flex justify-content-between align-items-center">
         <div>
-          <p class="m-b-0">Total Expense</p>
+          <p class="m-b-0">Banner</p>
           <h2 class="m-b-0">
-            <span>$6,138</span>
+            <span>{{countBanner}}</span>
           </h2>
         </div>
-        <nz-avatar [nzSize]="50" class="ant-avatar-gold" nzIcon="bar-chart"></nz-avatar>
+        <nz-avatar [nzSize]="50" class="ant-avatar-gold" nzIcon="team"></nz-avatar>
       </div>
     </nz-card>
   </div>
@@ -57,9 +57,10 @@
   <div class="col-md-12">
     <nz-card>
       <div class="d-flex justify-content-between align-items-center">
-        <h5>Latest Transactions</h5>
+        <h5>Latest Movies</h5>
         <div>
-          <a nz-button nzSize="small" nzType="default">View All</a>
+          <a [routerLink]="['/dashboard', 'movies']" class="d-flex align-items-center" nz-button nzSize="small"
+             nzType="primary">View All</a>
         </div>
       </div>
       <div class="m-t-30">

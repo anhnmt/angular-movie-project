@@ -48,4 +48,9 @@ export class GenreService {
     return this.httpClient
       .delete<DefaultResponse<Genre>>(`${this.baseUrl}/${genreId}`);
   }
+
+  checkIsExistSlug(slug: string, id: number = null): Observable<DefaultResponse<boolean>> {
+    return this.httpClient
+      .get<DefaultResponse<boolean>>(`${this.baseUrl}/check_slug?slug=${slug}&genre_id=${id}`);
+  }
 }

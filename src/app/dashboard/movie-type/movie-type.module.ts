@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
 import {MovieTypeRoutingModule} from './movie-type-routing.module';
-import {MoveTypeIndexComponent} from './move-type-index/move-type-index.component';
+import {MovieTypeIndexComponent} from './movie-type-index/movie-type-index.component';
 import {MovieTypeCreateComponent} from './movie-type-create/movie-type-create.component';
 import {MovieTypeEditComponent} from './movie-type-edit/movie-type-edit.component';
 import {NzButtonModule} from 'ng-zorro-antd/button';
@@ -21,29 +21,31 @@ import {NzDatePickerModule} from 'ng-zorro-antd/date-picker';
 import {NzPopconfirmModule} from 'ng-zorro-antd/popconfirm';
 import {TableService} from '../../shared/services/table.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
+import {SharedModule} from '@/app/shared/shared.module';
 
 
 @NgModule({
-  declarations: [MoveTypeIndexComponent, MovieTypeCreateComponent, MovieTypeEditComponent],
-  imports: [
-    CommonModule,
-    MovieTypeRoutingModule,
-    NzButtonModule,
-    NzToolTipModule,
-    NzTableModule,
-    NzAvatarModule,
-    NzSelectModule,
-    NzInputModule,
-    NzCardModule,
-    NzBadgeModule,
-    FormsModule,
-    NzIconModule,
-    NzFormModule,
-    NzDrawerModule,
-    NzDatePickerModule,
-    NzPopconfirmModule,
-    ReactiveFormsModule
-  ],
+  declarations: [MovieTypeIndexComponent, MovieTypeCreateComponent, MovieTypeEditComponent],
+    imports: [
+        CommonModule,
+        MovieTypeRoutingModule,
+        NzButtonModule,
+        NzToolTipModule,
+        NzTableModule,
+        NzAvatarModule,
+        NzSelectModule,
+        NzInputModule,
+        NzCardModule,
+        NzBadgeModule,
+        FormsModule,
+        NzIconModule,
+        NzFormModule,
+        NzDrawerModule,
+        NzDatePickerModule,
+        NzPopconfirmModule,
+        ReactiveFormsModule,
+        SharedModule
+    ],
   providers: [
     TableService,
     NzMessageService

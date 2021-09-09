@@ -48,4 +48,9 @@ export class CountryService {
     return this.httpClient
       .delete<DefaultResponse<Country>>(`${this.baseUrl}/${countryId}`);
   }
+
+  checkIsExistSlug(slug: string, id: number = null): Observable<DefaultResponse<boolean>> {
+    return this.httpClient
+      .get<DefaultResponse<boolean>>(`${this.baseUrl}/check_slug?slug=${slug}&country_id=${id}`);
+  }
 }
