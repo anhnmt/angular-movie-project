@@ -23,30 +23,32 @@ import {MovieCreateComponent} from './movie-create/movie-create.component';
 import {MovieEditComponent} from './movie-edit/movie-edit.component';
 import {NzDropDownModule} from 'ng-zorro-antd/dropdown';
 import {NzUploadModule} from 'ng-zorro-antd/upload';
+import {SharedModule} from '@/app/shared/shared.module';
 
 @NgModule({
   declarations: [MovieIndexComponent, MovieCreateComponent, MovieEditComponent],
-  imports: [
-    CommonModule,
-    MoviesRoutingModule,
-    NzButtonModule,
-    NzToolTipModule,
-    NzTableModule,
-    NzAvatarModule,
-    NzSelectModule,
-    NzInputModule,
-    NzCardModule,
-    NzBadgeModule,
-    FormsModule,
-    NzIconModule,
-    NzFormModule,
-    NzDrawerModule,
-    NzDatePickerModule,
-    NzPopconfirmModule,
-    ReactiveFormsModule,
-    NzDropDownModule,
-    NzUploadModule
-  ],
+    imports: [
+        CommonModule,
+        MoviesRoutingModule,
+        NzButtonModule,
+        NzToolTipModule,
+        NzTableModule,
+        NzAvatarModule,
+        NzSelectModule,
+        NzInputModule,
+        NzCardModule,
+        NzBadgeModule,
+        FormsModule,
+        NzIconModule,
+        NzFormModule,
+        NzDrawerModule,
+        NzDatePickerModule,
+        NzPopconfirmModule,
+        ReactiveFormsModule,
+        NzDropDownModule,
+        NzUploadModule,
+        SharedModule
+    ],
   providers: [
     TableService,
     NzMessageService

@@ -3,17 +3,16 @@ import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} f
 import {Observable, Subject, timer} from 'rxjs';
 import {Router} from '@angular/router';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {SharedService} from '../../../shared/services/shared.service';
-import {GenreService} from '../../../shared/services/genre.service';
-import {GlobalUtils} from '../../../shared/utils/globalUtils';
-import {HelperUtils} from '../../../shared/utils/helperUtils';
+import {SharedService} from '@/app/shared/services/shared.service';
+import {GenreService} from '@/app/shared/services/genre.service';
+import {GlobalUtils} from '@/app/shared/utils/globalUtils';
+import {HelperUtils} from '@/app/shared/utils/helperUtils';
 import {switchMap} from '~/rxjs/internal/operators';
 import {map, takeUntil} from '~/rxjs/operators';
 
 @Component({
   selector: 'app-genre-create',
   templateUrl: './genre-create.component.html',
-  styleUrls: ['./genre-create.component.css']
 })
 export class GenreCreateComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -70,19 +69,19 @@ export class GenreCreateComponent implements OnInit, AfterViewInit, OnDestroy {
     return timer(300).pipe(
       takeUntil(this.onDestroy$),
       switchMap(() =>
-        this.genreService.checkIsExistSlug(control.value).pipe(
-          map(response => {
-            // console.log(response);
+          control.value !== '' && this.genreService.checkIsExistSlug(control.value).pipe(
+            map(response => {
+              // console.log(response);
 
-            if (response.data) {
-              return {
-                duplicated: true
-              };
-            }
+              if (response.data) {
+                return {
+                  duplicated: true
+                };
+              }
 
-            return null;
-          })
-        )
+              return null;
+            })
+          )
       )
     );
   }

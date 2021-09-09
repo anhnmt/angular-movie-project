@@ -21,28 +21,30 @@ import {TableService} from '@/app/shared/services/table.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {CountryCreateComponent} from './country-create/country-create.component';
 import {CountryEditComponent} from './country-edit/country-edit.component';
+import {SharedModule} from '@/app/shared/shared.module';
 
 @NgModule({
   declarations: [CountryIndexComponent, CountryCreateComponent, CountryEditComponent],
-  imports: [
-    CommonModule,
-    CountriesRoutingModule,
-    NzButtonModule,
-    NzToolTipModule,
-    NzTableModule,
-    NzAvatarModule,
-    NzSelectModule,
-    NzInputModule,
-    NzCardModule,
-    NzBadgeModule,
-    FormsModule,
-    NzIconModule,
-    NzFormModule,
-    NzDrawerModule,
-    NzDatePickerModule,
-    NzPopconfirmModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        CommonModule,
+        CountriesRoutingModule,
+        NzButtonModule,
+        NzToolTipModule,
+        NzTableModule,
+        NzAvatarModule,
+        NzSelectModule,
+        NzInputModule,
+        NzCardModule,
+        NzBadgeModule,
+        FormsModule,
+        NzIconModule,
+        NzFormModule,
+        NzDrawerModule,
+        NzDatePickerModule,
+        NzPopconfirmModule,
+        ReactiveFormsModule,
+        SharedModule
+    ],
   providers: [
     TableService,
     NzMessageService

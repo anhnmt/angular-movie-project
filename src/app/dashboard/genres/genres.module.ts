@@ -21,29 +21,31 @@ import {NzDatePickerModule} from 'ng-zorro-antd/date-picker';
 import {NzPopconfirmModule} from 'ng-zorro-antd/popconfirm';
 import {TableService} from '../../shared/services/table.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
+import {SharedModule} from '@/app/shared/shared.module';
 
 
 @NgModule({
   declarations: [GenreIndexComponent, GenreCreateComponent, GenreEditComponent],
-  imports: [
-    CommonModule,
-    GenresRoutingModule,
-    NzButtonModule,
-    NzToolTipModule,
-    NzTableModule,
-    NzAvatarModule,
-    NzSelectModule,
-    NzInputModule,
-    NzCardModule,
-    NzBadgeModule,
-    FormsModule,
-    NzIconModule,
-    NzFormModule,
-    NzDrawerModule,
-    NzDatePickerModule,
-    NzPopconfirmModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        CommonModule,
+        GenresRoutingModule,
+        NzButtonModule,
+        NzToolTipModule,
+        NzTableModule,
+        NzAvatarModule,
+        NzSelectModule,
+        NzInputModule,
+        NzCardModule,
+        NzBadgeModule,
+        FormsModule,
+        NzIconModule,
+        NzFormModule,
+        NzDrawerModule,
+        NzDatePickerModule,
+        NzPopconfirmModule,
+        ReactiveFormsModule,
+        SharedModule
+    ],
   providers: [
     TableService,
     NzMessageService

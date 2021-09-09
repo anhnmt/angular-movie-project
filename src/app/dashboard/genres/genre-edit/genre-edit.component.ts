@@ -3,18 +3,17 @@ import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} f
 import {Observable, Subject, timer} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {SharedService} from '../../../shared/services/shared.service';
+import {SharedService} from '@/app/shared/services/shared.service';
 import {map, takeUntil} from 'rxjs/operators';
-import {Genre} from '../../../shared/interfaces/genre';
-import {GenreService} from '../../../shared/services/genre.service';
-import {GlobalUtils} from '../../../shared/utils/globalUtils';
-import {HelperUtils} from '../../../shared/utils/helperUtils';
+import {Genre} from '@/app/shared/interfaces/genre';
+import {GenreService} from '@/app/shared/services/genre.service';
+import {GlobalUtils} from '@/app/shared/utils/globalUtils';
+import {HelperUtils} from '@/app/shared/utils/helperUtils';
 import {switchMap} from '~/rxjs/internal/operators';
 
 @Component({
   selector: 'app-genre-edit',
   templateUrl: './genre-edit.component.html',
-  styleUrls: ['./genre-edit.component.css']
 })
 export class GenreEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
