@@ -28,7 +28,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private authService: AuthService,
     private formBuilder: FormBuilder,
-    private formBuilder2: FormBuilder,
     private nzMessageService: NzMessageService,
   ) {
     const selectedGender = this.gender[0]?.value || null;
@@ -39,7 +38,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       gender: [selectedGender, [Validators.required]],
     });
 
-    this.changePWForm = this.formBuilder2.group({
+    this.changePWForm = this.formBuilder.group({
       old_password: [null, [Validators.required]],
       new_password: [null, [Validators.required]],
       confirm_password: [null, [this.confirmValidator]]
@@ -98,8 +97,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     if (!control.value) {
       return {error: true, required: true};
     }
-
-    if (control.value !== this.changePWForm.get('new_password')?.value) {
+    if (control.value !== this.changePWForm.get('new_password').value) {
       return {confirm: true, error: true};
     }
     return {};
