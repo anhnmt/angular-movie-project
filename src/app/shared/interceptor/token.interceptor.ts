@@ -3,8 +3,8 @@ import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest}
 import {Observable, throwError} from 'rxjs';
 
 import {AuthService} from '../services/auth.service';
-import {catchError} from '~/rxjs/internal/operators';
 import {Router} from '~/@angular/router';
+import {catchError} from '~/rxjs/internal/operators';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {

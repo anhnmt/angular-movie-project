@@ -21,6 +21,8 @@ import {ReactiveFormsModule} from '~/@angular/forms';
 import {NzDatePickerModule} from '~/ng-zorro-antd/date-picker';
 import {NzUploadModule} from '~/ng-zorro-antd/upload';
 import {NzInputModule} from '~/ng-zorro-antd/input';
+import {SharedModule} from '@/app/shared/shared.module';
+import {NzToolTipModule} from '~/ng-zorro-antd/tooltip';
 
 /* Assign all ng-zorro modules to this array */
 const antdModule = [
@@ -48,6 +50,8 @@ const antdModule = [
     NzDatePickerModule,
     NzUploadModule,
     NzInputModule,
+    SharedModule,
+    NzToolTipModule,
   ],
   declarations: [
     DashboardComponent,

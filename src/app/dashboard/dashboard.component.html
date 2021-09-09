@@ -64,32 +64,26 @@
         </div>
       </div>
       <div class="m-t-30">
-        <nz-table #ordersListTable [nzData]="ordersList" [nzShowPagination]="false" class="no-border-last">
+        <nz-table #listTable [nzData]="displayData" [nzShowPagination]="false">
           <thead>
           <tr>
-            <th>ID</th>
-            <th>Customer</th>
-            <th>Date</th>
-            <th>Amount</th>
-            <th>Option</th>
+            <th *ngFor="let column of orderColumn" [nzSortFn]="column.compare">{{ column.title }}</th>
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let item of ordersListTable.data">
-            <td>#{{item.id}}</td>
+          <tr *ngFor="let item of listTable.data; let i=index">
+            <td>#{{item.movie_id}}</td>
             <td>
               <div class="d-flex align-items-center">
-                <nz-avatar [nzSize]="30" [nzSrc]="item.avatar" nzIcon="user"></nz-avatar>
-                <h6 class="m-l-10 m-b-0">{{item.name}}</h6>
+                <nz-avatar [nzSize]="60" [nzSrc]="item.poster" nzIcon="picture" nzShape="square"></nz-avatar>
+                <span class="m-l-10">{{item.name}}</span>
               </div>
             </td>
-            <td>{{item.date}}</td>
-            <td>${{item.amount | number:'3.2-5'}}</td>
+            <td>{{item.slug}}</td>
+            <td>{{ item.movie_type?.name }}</td>
             <td>
-              <nz-badge *ngIf="item.status == 'approved'" nzStatus="success"></nz-badge>
-              <nz-badge *ngIf="item.status == 'rejected'" nzStatus="error"></nz-badge>
-              <nz-badge *ngIf="item.status == 'pending'" nzStatus="processing"></nz-badge>
-              <span class="text-capitalize">{{item.status}}</span>
+              <nz-badge [nzStatus]="mapDefaultStatus(item.status)?.badge"></nz-badge>
+              <span class="text-capitalize">{{ mapDefaultStatus(item.status)?.label }}</span>
             </td>
           </tr>
           </tbody>
