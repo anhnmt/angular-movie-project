@@ -1,20 +1,20 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
-import {Movie} from '../../../shared/interfaces/movie';
+import {Movie} from '@/app/shared/interfaces/movie';
 import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {forkJoin, Observable, Subject, timer} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
-import {MovieService} from '../../../shared/services/movie.service';
+import {MovieService} from '@/app/shared/services/movie.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
-import {SharedService} from '../../../shared/services/shared.service';
+import {SharedService} from '@/app/shared/services/shared.service';
 import {map, takeUntil} from 'rxjs/operators';
-import {MovieType} from '../../../shared/interfaces/movie-type';
-import {MovieTypeService} from '../../../shared/services/movie-type.service';
-import {GlobalUtils} from '../../../shared/utils/globalUtils';
-import {HelperUtils} from '../../../shared/utils/helperUtils';
-import {Country} from '../../../shared/interfaces/country';
-import {Genre} from '../../../shared/interfaces/genre';
-import {CountryService} from '../../../shared/services/country.service';
-import {GenreService} from '../../../shared/services/genre.service';
+import {MovieType} from '@/app/shared/interfaces/movie-type';
+import {MovieTypeService} from '@/app/shared/services/movie-type.service';
+import {GlobalUtils} from '@/app/shared/utils/globalUtils';
+import {HelperUtils} from '@/app/shared/utils/helperUtils';
+import {Country} from '@/app/shared/interfaces/country';
+import {Genre} from '@/app/shared/interfaces/genre';
+import {CountryService} from '@/app/shared/services/country.service';
+import {GenreService} from '@/app/shared/services/genre.service';
 import {NzUploadFile} from 'ng-zorro-antd/upload';
 import {switchMap} from '~/rxjs/internal/operators';
 
@@ -127,8 +127,6 @@ export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.visible = true;
-
-      HelperUtils.formChangedTitleToSlug(this.validateForm, this.onDestroy$);
     }, 1);
   }
 
@@ -142,6 +140,7 @@ export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    HelperUtils.formChangedTitleToSlug(this.validateForm, this.onDestroy$);
   }
 
   ngOnDestroy(): void {
@@ -156,14 +155,11 @@ export class MovieEditComponent implements OnInit, AfterViewInit, OnDestroy {
       switchMap(() =>
         this.movieService.checkIsExistSlug(control.value, this.movie?.movie_id).pipe(
           map(response => {
-            // console.log(response);
-
             if (response.data) {
               return {
                 duplicated: true
               };
             }
-
             return null;
           })
         )

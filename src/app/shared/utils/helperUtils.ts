@@ -18,12 +18,14 @@ export class HelperUtils {
   static formChangedTitleToSlug(validateForm: FormGroup, onDestroy$): void {
     validateForm.get('name').valueChanges
       .pipe(
-        debounceTime(500),
+        debounceTime(300),
         takeUntil(onDestroy$),
         distinctUntilChanged()
       )
       .subscribe((value: string) => {
-        validateForm.get('slug').patchValue(value);
+        validateForm.get('slug').patchValue(
+          StringUtils.convertToSlug(value)
+        );
       });
   }
 
